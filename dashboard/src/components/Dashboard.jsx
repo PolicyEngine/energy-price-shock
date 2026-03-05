@@ -254,7 +254,7 @@ function BaselineSection() {
       })),
       format: (v) => `${v}%`,
       title: "Energy spend as % of net income, by decile",
-      subtitle: "decile 1 = poorest 10% of households, decile 10 = richest 10%",
+      subtitle: "decile 1 = lowest income, decile 10 = highest income",
     },
     energy_spend: {
       label: "Energy spend (£/yr)",
@@ -283,13 +283,6 @@ function BaselineSection() {
   return (
     <section className="section" id="baseline">
       <h2 className="section-title">Baseline energy burden</h2>
-      <p className="section-description">
-        The poorest 10% of households spend over 10% of their net income on
-        energy, while the richest 10% spend 2.2%. Energy spending is
-        relatively flat across the distribution (£1,900–£2,700). The
-        difference in burden is driven by income, not consumption. The
-        following chart shows this breakdown by income decile.
-      </p>
 
       <div className="kpi-row">
         <KpiCard
@@ -314,25 +307,31 @@ function BaselineSection() {
       </div>
 
       <p className="section-description">
-        Decile 1 is the poorest 10% of households; decile 10 is the richest.
-        Toggle between energy as a share of income, absolute energy spend,
-        and net income.
+        Decile 1 households spend over 10% of their net income on energy,
+        while decile 10 households spend 2.2%. Energy spending is relatively
+        flat across the distribution (£1,900–£2,700). The difference in
+        burden is driven by income, not consumption. The following chart
+        shows this breakdown by income decile.
       </p>
 
       <div className="chart-wrapper">
-        <div className="chart-mode-toggle">
-          {Object.entries(views).map(([key, v]) => (
-            <button
-              key={key}
-              className={`scenario-pill${baselineView === key ? " active" : ""}`}
-              onClick={() => setBaselineView(key)}
-            >
-              {v.label}
-            </button>
-          ))}
+        <div className="chart-header">
+          <div>
+            <div className="chart-title">{current.title}</div>
+            <div className="chart-subtitle">{current.subtitle}</div>
+          </div>
+          <div className="scenario-pills">
+            {Object.entries(views).map(([key, v]) => (
+              <button
+                key={key}
+                className={`scenario-pill scenario-pill-sm${baselineView === key ? " active" : ""}`}
+                onClick={() => setBaselineView(key)}
+              >
+                {v.label}
+              </button>
+            ))}
+          </div>
         </div>
-        <div className="chart-title">{current.title}</div>
-        <div className="chart-subtitle">{current.subtitle}</div>
         <ColumnChart
           data={current.data}
           maxValue={Math.max(...current.data.map((d) => d.value)) * 1.15}
@@ -389,12 +388,12 @@ function ShockSection() {
         the initial impact of the 2022 crisis, raising the cap to £2,752.{" "}
         <strong>2022-level</strong> matches the October 2022 peak of £3,764,
         when wholesale gas prices reached record highs.{" "}
-        <strong>Extreme (4500)</strong> models a worst-case scenario at £4,500,
-        above any cap level previously seen.
+        <strong>Extreme (4500)</strong> models a scenario at £4,500, above any
+        cap level previously seen.
       </p>
       <p className="section-description">
-        Under a severe (+60%) shock, the poorest 10% of households lose 6.5%
-        of their income to the extra cost, compared with 1.3% for the richest.
+        Under a severe (+60%) shock, decile 1 households lose 6.5% of their
+        income to the extra cost, compared with 1.3% for decile 10.
       </p>
 
       <div className="scenario-pills">
@@ -635,7 +634,7 @@ function PolicySection() {
     "ct_rebate",
     "winter_fuel",
   ];
-  const [selectedPolicy, setSelectedPolicy] = useState("flat_transfer");
+  const [selectedPolicy, setSelectedPolicy] = useState("epg");
   const [chartMode, setChartMode] = useState("payment");
 
   const policy = policies[selectedPolicy];
@@ -707,12 +706,12 @@ function PolicySection() {
         {hasShockOffset && (
           <>
             <KpiCard
-              label="Shock offset (D1, poorest)"
+              label="Shock offset (D1)"
               value={`${policy.deciles[0].shock_offset_pct}%`}
               color="teal"
             />
             <KpiCard
-              label="Shock offset (D10, richest)"
+              label="Shock offset (D10)"
               value={`${policy.deciles[9].shock_offset_pct}%`}
             />
           </>
