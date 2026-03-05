@@ -5,6 +5,7 @@ CURRENT_CAP = 1_720
 
 # Price shock scenarios to test
 PRICE_SCENARIOS = {
+    "Mild (+10%)": int(CURRENT_CAP * 1.10),
     "Moderate (+30%)": int(CURRENT_CAP * 1.30),
     "Severe (+60%)": int(CURRENT_CAP * 1.60),
     "2022-level": 3_764,

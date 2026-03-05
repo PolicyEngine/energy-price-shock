@@ -10,7 +10,6 @@ const POLICY_COLORS = {
   flat_transfer: "#2dd4bf",
   ct_rebate: "#5eead4",
   winter_fuel: "#14b8a6",
-  combined: "#319795",
 };
 
 const POLICY_META = {
@@ -18,38 +17,31 @@ const POLICY_META = {
     letter: "A",
     fullName: "Energy Price Guarantee (EPG)",
     description:
-      "The 2022 approach. The government sets a guarantee level (e.g. £2,500/year for a typical household) and subsidises the difference between the actual market price cap and this target. The subsidy is proportional to each household's energy consumption and uses a monthly seasonal model (higher subsidies in winter). In this scenario, the gap is modest: cap at £2,752 vs guarantee at £2,500, so the subsidy only covers ~9% of each household's bill.",
-    targeting: "Proportional to energy spend — higher spenders get more £",
+      "Government caps bills at £2,500/yr and subsidises the difference. Proportional to consumption, so higher users get more. Covers ~9% of each household's bill in this scenario.",
+    targeting: "Proportional to energy spend; higher spenders get more £",
   },
   flat_transfer: {
     letter: "B",
     fullName: "Flat transfer (£400 per household)",
     description:
-      "The simplest possible intervention: give every household the same flat amount, credited to their energy bill. This was part of the 2022 Energy Bills Rebate (£200 credit, later topped up to £400). A flat transfer is progressive in percentage terms — £400 offsets a larger share of the shock for low-income households. But it's expensive (£12.8bn for 31.9m households) and untargeted — billionaires get the same as pensioners on pension credit.",
-    targeting: "Universal — same amount regardless of income or usage",
+      "£400 credited to every household's energy bill. Progressive in percentage terms but untargeted. Costs £12.8bn for 31.9m households.",
+    targeting: "Universal, same amount regardless of income or usage",
   },
   ct_rebate: {
     letter: "C",
     fullName: "Council tax band rebate (£300 for bands A–D)",
     description:
-      "A £300 payment to households in council tax bands A through D (the lower half of the 8-band system). This uses property value as a proxy for wealth — households in cheaper properties are more likely to be lower-income. More targeted than a flat transfer, but council tax bands are a crude proxy — some low-income households live in high-band properties (e.g. asset-rich, income-poor pensioners).",
+      "£300 payment to households in council tax bands A through D. Uses property value as a proxy for income. More targeted than a flat transfer but an imprecise proxy.",
     targeting:
-      "Property value proxy — lower bands correlate with lower wealth",
+      "Property value proxy; lower bands correlate with lower wealth",
   },
   winter_fuel: {
     letter: "D",
     fullName: "Expanded Winter Fuel Allowance",
     description:
-      "The Winter Fuel Allowance is currently means-tested (restricted to pensioners on pension credit). We model removing the means test (making it universal for all pensioner households) and increasing the amounts from £200/£300 to £350/£500. This is cheap (£1.5bn extra) and well-targeted at a vulnerable group, but it only reaches pensioner households — working-age families on low incomes get nothing.",
+      "Remove means test and increase payments to £350/£500 for all pensioner households. Costs £1.5bn extra. Does not cover working-age households.",
     targeting:
       "Age-targeted; means test removed to reach all pensioner households",
-  },
-  combined: {
-    letter: "E",
-    fullName: "Combined package",
-    description:
-      "All four policies activated together: EPG subsidy capping bills at £2,500, £400 flat transfer to every household, £300 council tax rebate for bands A–D, and expanded winter fuel (universal, £350/£500). This represents a comprehensive response package with multiple targeting mechanisms layered together.",
-    targeting: "Multiple targeting mechanisms layered together",
   },
 };
 
@@ -101,7 +93,7 @@ function niceTicks(maxValue, count = 5) {
   return ticks;
 }
 
-function ColumnChart({ data, maxValue, color, formatValue, colorFn, yLabel }) {
+function ColumnChart({ data, maxValue, color, formatValue, colorFn, yLabel, xLabel }) {
   const ticks = niceTicks(maxValue);
   const topTick = ticks[ticks.length - 1] || maxValue;
   const effectiveMax = Math.max(maxValue, topTick);
@@ -133,11 +125,10 @@ function ColumnChart({ data, maxValue, color, formatValue, colorFn, yLabel }) {
             {data.map((d, i) => {
               const pct = (d.value / effectiveMax) * 100;
               const bg = colorFn ? colorFn(d, i) : undefined;
+              const tooltipText = d.tooltip || (formatValue ? formatValue(d.value) : d.value);
               return (
-                <div className="col-chart-col" key={i} title={d.tooltip || (formatValue ? `${d.label}: ${formatValue(d.value)}` : `${d.label}: ${d.value}`)}>
-                  <div className="col-chart-val">
-                    {formatValue ? formatValue(d.value) : d.value}
-                  </div>
+                <div className="col-chart-col" key={i}>
+                  <div className="col-chart-tooltip">{tooltipText}</div>
                   <div className="col-chart-track">
                     <div
                       className={`col-chart-fill ${color || ""}`}
@@ -154,6 +145,7 @@ function ColumnChart({ data, maxValue, color, formatValue, colorFn, yLabel }) {
           </div>
         </div>
       </div>
+      {xLabel && <div className="col-chart-x-label">{xLabel}</div>}
     </div>
   );
 }
@@ -207,6 +199,18 @@ function CompareColumnChart({ deciles, policyKeys, policies }) {
                   className="col-chart-col col-chart-col-grouped"
                   key={decile}
                 >
+                  <div className="col-chart-tooltip col-chart-tooltip-grouped">
+                    <strong>Decile {decile}</strong>
+                    {policyKeys.map((key) => {
+                      const val = policies[key].deciles[decile - 1].shock_offset_pct ?? 0;
+                      return (
+                        <div key={key} className="tooltip-row">
+                          <span className="tooltip-dot" style={{ background: POLICY_COLORS[key] }} />
+                          {policies[key].name}: {val}%
+                        </div>
+                      );
+                    })}
+                  </div>
                   <div className="col-chart-group">
                     {policyKeys.map((key) => {
                       const val =
@@ -220,19 +224,19 @@ function CompareColumnChart({ deciles, policyKeys, policies }) {
                               height: `${pct}%`,
                               background: POLICY_COLORS[key],
                             }}
-                            title={`${POLICY_META[key].letter}: ${val}%`}
                           />
                         </div>
                       );
                     })}
                   </div>
-                  <div className="col-chart-label">D{decile}</div>
+                  <div className="col-chart-label">{decile}</div>
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
+      <div className="col-chart-x-label">Decile</div>
     </div>
   );
 }
@@ -245,7 +249,7 @@ function BaselineSection() {
     energy_share: {
       label: "Energy / income (%)",
       data: baseline.deciles.map((d) => ({
-        label: `D${d.decile}`,
+        label: `${d.decile}`,
         value: d.energy_share_pct,
       })),
       format: (v) => `${v}%`,
@@ -255,7 +259,7 @@ function BaselineSection() {
     energy_spend: {
       label: "Energy spend (£/yr)",
       data: baseline.deciles.map((d) => ({
-        label: `D${d.decile}`,
+        label: `${d.decile}`,
         value: d.energy_spend,
       })),
       format: (v) => fmt(v),
@@ -265,7 +269,7 @@ function BaselineSection() {
     net_income: {
       label: "Net income (£/yr)",
       data: baseline.deciles.map((d) => ({
-        label: `D${d.decile}`,
+        label: `${d.decile}`,
         value: d.net_income,
       })),
       format: (v) => fmt(v),
@@ -278,15 +282,13 @@ function BaselineSection() {
 
   return (
     <section className="section" id="baseline">
-      <h2 className="section-title">Baseline: who spends what on energy?</h2>
+      <h2 className="section-title">Baseline energy burden</h2>
       <p className="section-description">
-        Energy costs are deeply regressive. The poorest 10% of households spend
-        over 10% of their net income on energy — already at the fuel poverty
-        threshold — while the richest 10% spend just 2.2%. Energy spending is
-        relatively flat across the distribution (£1,900–£2,700). It's the
-        denominator — income — that drives the regressivity. This means any
-        price shock hits low-income households hardest as a share of their
-        budget.
+        The poorest 10% of households spend over 10% of their net income on
+        energy, while the richest 10% spend 2.2%. Energy spending is
+        relatively flat across the distribution (£1,900–£2,700). The
+        difference in burden is driven by income, not consumption. The
+        following chart shows this breakdown by income decile.
       </p>
 
       <div className="kpi-row">
@@ -311,6 +313,12 @@ function BaselineSection() {
         />
       </div>
 
+      <p className="section-description">
+        Decile 1 is the poorest 10% of households; decile 10 is the richest.
+        Toggle between energy as a share of income, absolute energy spend,
+        and net income.
+      </p>
+
       <div className="chart-wrapper">
         <div className="chart-mode-toggle">
           {Object.entries(views).map(([key, v]) => (
@@ -330,39 +338,63 @@ function BaselineSection() {
           maxValue={Math.max(...current.data.map((d) => d.value)) * 1.15}
           color="teal"
           formatValue={current.format}
+          xLabel="Decile"
         />
       </div>
+
+      <p className="section-description">
+        Households already spending 10% or more of income on energy are at
+        the fuel poverty threshold. Any further price increase pushes them
+        above it.
+      </p>
     </section>
   );
 }
 
 function ShockSection() {
-  const [selected, setSelected] = useState(1);
-  const [shockView, setShockView] = useState("chart");
+  const [selected, setSelected] = useState(2);
+  const [shockMetric, setShockMetric] = useState("pct_of_income");
+  const [scenarioMetric, setScenarioMetric] = useState("avg_hh_hit_yr");
   const scenario = results.shock_scenarios[selected];
 
   const barData = scenario.deciles.map((d) => ({
-    label: `D${d.decile}`,
-    value: d.pct_of_income,
+    label: `${d.decile}`,
+    value: shockMetric === "pct_of_income" ? d.pct_of_income : d.extra_cost,
   }));
 
   return (
     <section className="section" id="shocks">
-      <h2 className="section-title">
-        Price shock scenarios — no policy response
-      </h2>
+      <h2 className="section-title">Price shock scenarios</h2>
       <p className="section-description">
-        We model four price cap increases, from a moderate +30% to an extreme
-        £4,500 cap (higher than the October 2022 peak of £3,764). The
-        assumption is that households don't reduce consumption when prices rise
-        — energy demand is highly inelastic in the short run. You can't
-        insulate your house overnight, and people won't stop heating their
-        homes.
+        The UK is particularly{" "}
+        <a href="https://www.ft.com/content/13f5e566-83c0-4d94-9338-9d418053c290" target="_blank" rel="noopener noreferrer">
+          exposed
+        </a>{" "}
+        to gas price shocks. Gas makes up 35% of total energy demand and
+        gas-fired power stations set electricity prices. The Resolution Foundation{" "}
+        <a href="https://www.theguardian.com/business/2026/mar/04/war-in-middle-east-could-wipe-out-growth-in-uk-living-standards" target="_blank" rel="noopener noreferrer">
+          estimates
+        </a>{" "}
+        a persistent rise could add £500 to typical annual energy bills.
+        The following chart and table show five scenarios, from a mild +10%
+        to an extreme £4,500 cap.
       </p>
       <p className="section-description">
-        Any price shock hits low-income households hardest as a share of their
-        budget. Under a severe (+60%) shock, decile 1 faces a ~6.5% income hit
-        vs ~1.3% for decile 10.
+        <strong>Mild (+10%)</strong> represents a short-lived supply disruption
+        or moderate market uncertainty, raising the cap to £1,892.{" "}
+        <strong>Moderate (+30%)</strong> corresponds to a sustained disruption,
+        such as extended conflict affecting gas shipping routes, with a cap
+        of £2,236.{" "}
+        <strong>Severe (+60%)</strong> models a major escalation comparable to
+        the initial impact of the 2022 crisis, raising the cap to £2,752.{" "}
+        <strong>2022-level</strong> matches the October 2022 peak of £3,764,
+        when wholesale gas prices reached record highs.{" "}
+        <strong>Extreme (4500)</strong> models a worst-case scenario at £4,500,
+        above any cap level previously seen.
+      </p>
+      <p className="section-description">
+        Under a severe (+60%) shock, the poorest 10% of households lose 6.5%
+        of their income to the extra cost, compared with 1.3% for the richest.
       </p>
 
       <div className="scenario-pills">
@@ -402,77 +434,117 @@ function ShockSection() {
         />
       </div>
 
+      <p className="section-description">
+        Select a scenario above to see its distributional impact. The
+        following chart shows what share of each decile's income is consumed
+        by the extra energy cost.
+      </p>
+
       <div className="chart-wrapper">
         <div className="chart-header">
           <div>
             <div className="chart-title">
-              Extra energy cost as % of income, by decile — {scenario.name.toLowerCase()}
+              {shockMetric === "pct_of_income"
+                ? `Extra energy cost as % of income, by decile: ${scenario.name.toLowerCase()}`
+                : `Extra energy cost (£/yr), by decile: ${scenario.name.toLowerCase()}`}
             </div>
             <div className="chart-subtitle">
-              Shows how much of each decile's income is eaten by the price rise
+              {shockMetric === "pct_of_income"
+                ? "Share of each decile's income consumed by the price increase"
+                : "Annual extra cost per household by income decile"}
             </div>
           </div>
-          <ViewToggle view={shockView} setView={setShockView} />
+          <div className="scenario-pills">
+            <button
+              className={`scenario-pill scenario-pill-sm${shockMetric === "pct_of_income" ? " active" : ""}`}
+              onClick={() => setShockMetric("pct_of_income")}
+            >
+              % of income
+            </button>
+            <button
+              className={`scenario-pill scenario-pill-sm${shockMetric === "extra_cost" ? " active" : ""}`}
+              onClick={() => setShockMetric("extra_cost")}
+            >
+              Extra cost (£/yr)
+            </button>
+          </div>
         </div>
-        {shockView === "chart" ? (
-          <ColumnChart
-            data={barData}
-            maxValue={Math.max(...barData.map((d) => d.value)) * 1.15}
-            color="teal"
-            formatValue={(v) => `${v}%`}
-          />
-        ) : (
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Decile</th>
-                <th>Extra cost (£/yr)</th>
-                <th>% of income</th>
-              </tr>
-            </thead>
-            <tbody>
-              {scenario.deciles.map((d) => (
-                <tr key={d.decile}>
-                  <td>Decile {d.decile}</td>
-                  <td>{fmt(d.extra_cost)}</td>
-                  <td>{d.pct_of_income}%</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+        <ColumnChart
+          data={barData}
+          maxValue={Math.max(...barData.map((d) => d.value)) * 1.15}
+          color="teal"
+          formatValue={shockMetric === "pct_of_income" ? (v) => `${v}%` : (v) => fmt(v)}
+          xLabel="Decile"
+        />
       </div>
 
-      <div className="data-table-wrapper">
-        <div className="data-table-title">All scenarios at a glance</div>
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Scenario</th>
-              <th>New cap</th>
-              <th>Increase</th>
-              <th>Avg HH hit (£/yr)</th>
-              <th>Avg HH hit (£/mo)</th>
-              <th>Total cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.shock_scenarios.map((s, i) => (
-              <tr
-                key={i}
-                style={i === selected ? { background: "#f0fdfa" } : {}}
+      <p className="section-description">
+        The pattern is consistent across all scenarios: extra costs take a
+        larger share of income from lower-income households. The following
+        chart compares the average household cost across all five scenarios.
+      </p>
+
+      <div className="chart-wrapper">
+        <div className="chart-header">
+          <div>
+            <div className="chart-title">All scenarios at a glance</div>
+            <div className="chart-subtitle">
+              {{ new_cap: "New Ofgem price cap by scenario",
+                 increase: "Percentage increase from current cap",
+                 avg_hh_hit_yr: "Average household hit per year, by scenario",
+                 total_cost: "Total cost to all UK households",
+              }[scenarioMetric]}
+            </div>
+          </div>
+          <div className="scenario-pills">
+            {[
+              { key: "new_cap", label: "New cap" },
+              { key: "increase", label: "Increase" },
+              { key: "avg_hh_hit_yr", label: "Avg HH hit (£/yr)" },
+              { key: "total_cost", label: "Total cost" },
+            ].map((m) => (
+              <button
+                key={m.key}
+                className={`scenario-pill scenario-pill-sm${scenarioMetric === m.key ? " active" : ""}`}
+                onClick={() => setScenarioMetric(m.key)}
               >
-                <td>{s.name}</td>
-                <td>{fmt(s.new_cap)}</td>
-                <td>+{s.price_increase_pct}%</td>
-                <td>{fmt(s.avg_hh_hit_yr)}</td>
-                <td>{fmt(s.avg_hh_hit_mo)}</td>
-                <td>{fmtBn(s.total_cost_bn)}</td>
-              </tr>
+                {m.label}
+              </button>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
+        <ColumnChart
+          data={results.shock_scenarios.map((s) => ({
+            label: s.name,
+            value: {
+              new_cap: s.new_cap,
+              increase: s.price_increase_pct,
+              avg_hh_hit_yr: s.avg_hh_hit_yr,
+              total_cost: s.total_cost_bn,
+            }[scenarioMetric],
+          }))}
+          maxValue={Math.max(...results.shock_scenarios.map((s) => ({
+            new_cap: s.new_cap,
+            increase: s.price_increase_pct,
+            avg_hh_hit_yr: s.avg_hh_hit_yr,
+            avg_hh_hit_mo: s.avg_hh_hit_mo,
+            total_cost: s.total_cost_bn,
+          })[scenarioMetric])) * 1.15}
+          color="teal"
+          formatValue={{
+            new_cap: (v) => fmt(v),
+            increase: (v) => `+${v}%`,
+            avg_hh_hit_yr: (v) => fmt(v),
+            total_cost: (v) => fmtBn(v),
+          }[scenarioMetric]}
+        />
       </div>
+
+      <p className="section-description">
+        Even the mild scenario adds £19/month to the average bill. At the
+        severe end, households face an extra £113/month. At the 2022-level,
+        the extra cost rises to £223/month per household.
+      </p>
     </section>
   );
 }
@@ -480,79 +552,77 @@ function ShockSection() {
 function FuelPovertySection() {
   const fp = results.fuel_poverty;
   const baseline = fp[0];
-  const [fpView, setFpView] = useState("chart");
+  const [fpMetric, setFpMetric] = useState("rate");
 
   const barData = fp.map((r) => ({
     label: r.scenario.split("(")[0].trim(),
-    value: r.fuel_poverty_rate_pct,
+    value: fpMetric === "rate" ? r.fuel_poverty_rate_pct : r.households_m,
   }));
 
   return (
     <section className="section" id="fuel-poverty">
-      <h2 className="section-title">Fuel poverty</h2>
+      <h2 className="section-title">Fuel poverty impact</h2>
       <p className="section-description">
-        Fuel poverty means a household has to spend a disproportionate share of
-        its income to maintain adequate heating. In this analysis, a household
-        is classified as fuel poor if it spends more than 10% of its net income
-        on energy. This is a commonly used threshold — the official UK measure
-        (Low Income Low Energy Efficiency, or LILEE) is more complex, factoring
-        in housing energy efficiency ratings, but the 10% rule captures the
-        core dynamic: when energy costs consume too large a share of income,
-        households face impossible trade-offs between heating, eating, and other
-        essentials.
+        We define a household as fuel poor if it spends more than 10% of its
+        net income on energy. At current prices, {baseline.households_m}m
+        households ({baseline.fuel_poverty_rate_pct}%) are fuel poor by this
+        measure. Under a severe shock, this nearly doubles to 27.3%. Under
+        a 2022-level shock, 39.8% of all UK households would be fuel poor.
       </p>
+
       <p className="section-description">
-        Even at current prices, {baseline.households_m}m households (
-        {baseline.fuel_poverty_rate_pct}% of all households) are already fuel
-        poor. Under a severe shock, fuel poverty nearly doubles. Under a
-        2022-level shock, almost half of all households would be fuel poor.
+        The following chart shows how the fuel poverty rate changes with
+        each scenario. The 10% threshold is a simplification. The official UK
+        definition ({" "}
+        <a href="https://www.gov.uk/government/collections/fuel-poverty-statistics" target="_blank" rel="noopener noreferrer">
+          LILEE
+        </a>
+        ) is more complex, but the 10% measure captures the same underlying
+        dynamic.
       </p>
 
       <div className="chart-wrapper">
         <div className="chart-header">
           <div>
-            <div className="chart-title">Fuel poverty rate by scenario</div>
+            <div className="chart-title">
+              {fpMetric === "rate"
+                ? "Fuel poverty rate by scenario"
+                : "Fuel poor households by scenario"}
+            </div>
             <div className="chart-subtitle">
-              Percentage of all UK households spending &gt;10% of net income on
-              energy
+              {fpMetric === "rate"
+                ? "Percentage of all UK households spending >10% of net income on energy"
+                : "Millions of UK households spending >10% of net income on energy"}
             </div>
           </div>
-          <ViewToggle view={fpView} setView={setFpView} />
+          <div className="scenario-pills">
+            <button
+              className={`scenario-pill scenario-pill-sm${fpMetric === "rate" ? " active" : ""}`}
+              onClick={() => setFpMetric("rate")}
+            >
+              Rate
+            </button>
+            <button
+              className={`scenario-pill scenario-pill-sm${fpMetric === "households" ? " active" : ""}`}
+              onClick={() => setFpMetric("households")}
+            >
+              Households
+            </button>
+          </div>
         </div>
-        {fpView === "chart" ? (
-          <ColumnChart
-            data={barData}
-            maxValue={55}
-            color="teal"
-            formatValue={(v) => `${v}%`}
-          />
-        ) : (
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Scenario</th>
-                <th>Rate</th>
-                <th>Households</th>
-                <th>Extra households</th>
-              </tr>
-            </thead>
-            <tbody>
-              {fp.map((r, i) => (
-                <tr key={i}>
-                  <td>{r.scenario}</td>
-                  <td>{r.fuel_poverty_rate_pct}%</td>
-                  <td>{r.households_m}m</td>
-                  <td>
-                    {r.extra_households_m > 0
-                      ? `+${r.extra_households_m}m`
-                      : "—"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+        <ColumnChart
+          data={barData}
+          maxValue={fpMetric === "rate" ? 55 : Math.max(...fp.map((r) => r.households_m)) * 1.15}
+          color="teal"
+          formatValue={fpMetric === "rate" ? (v) => `${v}%` : (v) => `${v}m`}
+        />
       </div>
+
+      <p className="section-description">
+        At the 2022-level scenario, an additional 8.1m households fall into
+        fuel poverty. At the extreme, the total reaches 15.1m, nearly half
+        of all UK households.
+      </p>
     </section>
   );
 }
@@ -564,338 +634,177 @@ function PolicySection() {
     "flat_transfer",
     "ct_rebate",
     "winter_fuel",
-    "combined",
   ];
   const [selectedPolicy, setSelectedPolicy] = useState("flat_transfer");
-  const [chartMode, setChartMode] = useState("shock_offset");
+  const [chartMode, setChartMode] = useState("payment");
 
   const policy = policies[selectedPolicy];
   const meta = POLICY_META[selectedPolicy];
   const color = POLICY_COLORS[selectedPolicy];
 
   const hasShockOffset = policy.deciles[0].shock_offset_pct !== undefined;
-  const hasNetChange = policy.deciles[0].net_income_change !== undefined;
 
-  const comparisonPolicies = policyKeys.filter((k) => k !== "combined");
+  const handlePolicyChange = (key) => {
+    setSelectedPolicy(key);
+    const newPolicy = policies[key];
+    const newHasOffset = newPolicy.deciles[0].shock_offset_pct !== undefined;
+    if (!newHasOffset && chartMode === "shock_offset") {
+      setChartMode("payment");
+    }
+  };
 
   return (
     <section className="section" id="policies">
       <h2 className="section-title">Policy responses</h2>
       <p className="section-description">
-        Five policy responses to a severe (+60%) shock (cap rises from £1,720
-        to £2,752). This shock adds ~£1,350/year to the average household bill
-        and costs households ~£43bn in aggregate. Each policy uses existing
-        PolicyEngine UK variables — we change parameter values to activate
-        them.
-      </p>
-      <p className="section-description">
-        The key metric is shock offset: what percentage of the extra energy cost
-        (caused by the price shock) is covered by a given policy. 100% means
-        fully compensated. A higher shock offset for lower deciles means the
-        policy is progressive.
+        The government has roughly four months before the next price cap
+        change to prepare a response (Bangham,{" "}
+        <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another?r=8zbi3" target="_blank" rel="noopener noreferrer">
+          2026
+        </a>
+        ). We model four policy tools against a severe (+60%) shock
+        (cap rises to £2,752, adding £1,350/yr per household). The key
+        metric is <strong>shock offset</strong>: what share of the extra
+        cost each policy covers.
       </p>
 
+      <ul className="policy-bullet-list">
+        {policyKeys.map((key) => (
+          <li key={key}>
+            <strong>{POLICY_META[key].letter}. {POLICY_META[key].fullName}</strong>{" "}
+            {POLICY_META[key].description}
+          </li>
+        ))}
+      </ul>
+
       {/* Policy switcher */}
-      <div className="policy-switcher">
+      <div className="scenario-pills" style={{ marginTop: 8 }}>
         {policyKeys.map((key) => (
           <button
             key={key}
             className={`scenario-pill${
               selectedPolicy === key ? " active" : ""
             }`}
-            onClick={() => setSelectedPolicy(key)}
+            onClick={() => handlePolicyChange(key)}
           >
             {POLICY_META[key].letter}. {policies[key].name}
           </button>
         ))}
       </div>
 
-      {/* Active policy detail card */}
-      <div className="policy-detail-card" style={{ borderTopColor: color }}>
-        <div className="policy-detail-header">
-          <div>
-            <div className="policy-detail-name">
-              {meta.letter}. {meta.fullName}
-            </div>
-            <div className="policy-detail-targeting">{meta.targeting}</div>
-          </div>
-          <div className="policy-detail-cost" style={{ color }}>
-            {fmtBn(policy.exchequer_cost_bn)}
-          </div>
-        </div>
-        <p className="policy-detail-desc">{meta.description}</p>
-
-        <div className="policy-detail-kpis">
-          <div className="policy-detail-kpi">
-            <div className="kpi-label">Exchequer cost</div>
-            <div className="kpi-value" style={{ color }}>
-              {fmtBn(policy.exchequer_cost_bn)}
-            </div>
-          </div>
-          <div className="policy-detail-kpi">
-            <div className="kpi-label">
-              {hasNetChange ? "Avg net income change" : "Avg HH benefit"}
-            </div>
-            <div className="kpi-value" style={{ color }}>
-              {fmt(
-                hasNetChange
-                  ? policy.avg_net_income_change
-                  : policy.avg_hh_benefit
-              )}
-              <span className="kpi-unit">/yr</span>
-            </div>
-          </div>
-          {hasShockOffset && (
-            <>
-              <div className="policy-detail-kpi">
-                <div className="kpi-label">Shock offset (D1, poorest)</div>
-                <div className="kpi-value" style={{ color }}>
-                  {policy.deciles[0].shock_offset_pct}%
-                </div>
-              </div>
-              <div className="policy-detail-kpi">
-                <div className="kpi-label">Shock offset (D10, richest)</div>
-                <div className="kpi-value">
-                  {policy.deciles[9].shock_offset_pct}%
-                </div>
-              </div>
-            </>
-          )}
-          {hasNetChange && (
-            <>
-              <div className="policy-detail-kpi">
-                <div className="kpi-label">Income boost (D1)</div>
-                <div className="kpi-value" style={{ color }}>
-                  +{policy.deciles[0].pct_change}%
-                </div>
-              </div>
-              <div className="policy-detail-kpi">
-                <div className="kpi-label">Income boost (D10)</div>
-                <div className="kpi-value">
-                  +{policy.deciles[9].pct_change}%
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-
-        {/* Chart mode toggle */}
-        <div className="chart-mode-toggle">
-          {hasShockOffset && (
-            <button
-              className={`scenario-pill${
-                chartMode === "shock_offset" ? " active" : ""
-              }`}
-              onClick={() => setChartMode("shock_offset")}
-            >
-              Shock offset (%)
-            </button>
-          )}
-          {(hasShockOffset || policy.deciles[0].payment !== undefined) && (
-            <button
-              className={`scenario-pill${
-                chartMode === "payment" ? " active" : ""
-              }`}
-              onClick={() => setChartMode("payment")}
-            >
-              Payment (£)
-            </button>
-          )}
-          {hasNetChange && (
-            <button
-              className={`scenario-pill${
-                chartMode === "net_change" ? " active" : ""
-              }`}
-              onClick={() => setChartMode("net_change")}
-            >
-              Net income change
-            </button>
-          )}
-          <button
-            className={`scenario-pill${
-              chartMode === "compare_all" ? " active" : ""
-            }`}
-            onClick={() => setChartMode("compare_all")}
-          >
-            Compare all policies
-          </button>
-        </div>
-
-        {/* Charts */}
-        <div className="chart-wrapper chart-wrapper-inner">
-          {chartMode === "shock_offset" && hasShockOffset && (
-            <>
-              <div className="chart-title">
-                Shock offset by decile — {meta.fullName}
-              </div>
-              <div className="chart-subtitle">
-                % of the extra energy cost covered by this policy
-              </div>
-              <ColumnChart
-                data={policy.deciles.map((d) => ({
-                  label: `D${d.decile}`,
-                  value: d.shock_offset_pct,
-                }))}
-                maxValue={
-                  Math.max(
-                    ...policy.deciles.map((d) => d.shock_offset_pct)
-                  ) * 1.2 || 10
-                }
-                color="custom"
-                colorFn={() => color}
-                formatValue={(v) => `${v}%`}
-              />
-            </>
-          )}
-
-          {chartMode === "payment" &&
-            policy.deciles[0].payment !== undefined && (
-              <>
-                <div className="chart-title">
-                  Payment by decile — {meta.fullName}
-                </div>
-                <div className="chart-subtitle">
-                  Annual £ received per household
-                </div>
-                <ColumnChart
-                  data={policy.deciles.map((d) => ({
-                    label: `D${d.decile}`,
-                    value: d.payment,
-                  }))}
-                  maxValue={
-                    Math.max(...policy.deciles.map((d) => d.payment)) * 1.2
-                  }
-                  color="custom"
-                  colorFn={() => color}
-                  formatValue={(v) => fmt(v)}
-                />
-              </>
-            )}
-
-          {chartMode === "net_change" && hasNetChange && (
-            <>
-              <div className="chart-title">
-                Net income change by decile — combined package
-              </div>
-              <div className="chart-subtitle">
-                % change in household net income
-              </div>
-              <ColumnChart
-                data={policy.deciles.map((d) => ({
-                  label: `D${d.decile}`,
-                  value: d.pct_change,
-                }))}
-                maxValue={
-                  Math.max(...policy.deciles.map((d) => d.pct_change)) * 1.2
-                }
-                color="custom"
-                colorFn={() => color}
-                formatValue={(v) => `+${v}%`}
-              />
-            </>
-          )}
-
-          {chartMode === "compare_all" && (
-            <>
-              <div className="chart-title">
-                Shock offset by decile — all policies compared
-              </div>
-              <div className="chart-subtitle">
-                % of extra energy cost covered, by income decile
-              </div>
-              <CompareColumnChart
-                deciles={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-                policyKeys={comparisonPolicies}
-                policies={policies}
-              />
-            </>
-          )}
-        </div>
-
-        {/* Decile table */}
-        <div className="data-table-wrapper">
-          <div className="data-table-title">
-            Decile breakdown — {meta.fullName}
-          </div>
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Decile</th>
-                {policy.deciles[0].payment !== undefined && (
-                  <th>Payment (£/yr)</th>
-                )}
-                {hasShockOffset && <th>Shock offset</th>}
-                {policy.deciles[0].extra_vs_baseline !== undefined && (
-                  <th>Extra vs baseline</th>
-                )}
-                {hasNetChange && <th>Net income change</th>}
-                {hasNetChange && <th>% change</th>}
-              </tr>
-            </thead>
-            <tbody>
-              {policy.deciles.map((d) => (
-                <tr key={d.decile}>
-                  <td>Decile {d.decile}</td>
-                  {d.payment !== undefined && <td>{fmt(d.payment)}</td>}
-                  {hasShockOffset && <td>{d.shock_offset_pct}%</td>}
-                  {d.extra_vs_baseline !== undefined && (
-                    <td>+{fmt(d.extra_vs_baseline)}</td>
-                  )}
-                  {hasNetChange && <td>+{fmt(d.net_income_change)}</td>}
-                  {hasNetChange && <td>+{d.pct_change}%</td>}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      <div className="kpi-row">
+        <KpiCard
+          label="Exchequer cost"
+          value={fmtBn(policy.exchequer_cost_bn)}
+          color="teal"
+        />
+        <KpiCard
+          label="Avg HH benefit"
+          value={fmt(policy.avg_hh_benefit)}
+          unit="/yr"
+          color="teal"
+        />
+        {hasShockOffset && (
+          <>
+            <KpiCard
+              label="Shock offset (D1, poorest)"
+              value={`${policy.deciles[0].shock_offset_pct}%`}
+              color="teal"
+            />
+            <KpiCard
+              label="Shock offset (D10, richest)"
+              value={`${policy.deciles[9].shock_offset_pct}%`}
+            />
+          </>
+        )}
       </div>
 
-      {selectedPolicy === "combined" && (
-        <div className="data-table-wrapper">
-          <div className="data-table-title">
-            Combined package — component costs
+      <p className="section-description">
+        The following chart compares policies by shock offset (what share of
+        the extra cost they cover). Toggle between payment amounts, shock
+        offset, or a side-by-side comparison of all four.
+      </p>
+
+      <div className="chart-wrapper">
+        <div className="chart-header">
+          <div>
+            {chartMode === "shock_offset" && hasShockOffset && (
+              <>
+                <div className="chart-title">Shock offset by decile: {meta.fullName}</div>
+                <div className="chart-subtitle">% of the extra energy cost covered by this policy</div>
+              </>
+            )}
+            {chartMode === "payment" && (
+              <>
+                <div className="chart-title">Payment by decile: {meta.fullName}</div>
+                <div className="chart-subtitle">Annual £ received per household</div>
+              </>
+            )}
           </div>
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Component</th>
-                <th>Cost</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>EPG subsidy</td>
-                <td>{fmtBn(policies.combined.component_costs_bn.epg)}</td>
-              </tr>
-              <tr>
-                <td>Flat transfer</td>
-                <td>
-                  {fmtBn(policies.combined.component_costs_bn.flat_transfer)}
-                </td>
-              </tr>
-              <tr>
-                <td>CT band rebate</td>
-                <td>
-                  {fmtBn(policies.combined.component_costs_bn.ct_rebate)}
-                </td>
-              </tr>
-              <tr>
-                <td>Extra winter fuel</td>
-                <td>
-                  {fmtBn(policies.combined.component_costs_bn.extra_wfa)}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="scenario-pills">
+            {policy.deciles[0].payment !== undefined && (
+              <button
+                className={`scenario-pill scenario-pill-sm${chartMode === "payment" ? " active" : ""}`}
+                onClick={() => setChartMode("payment")}
+              >
+                Payment (£/yr)
+              </button>
+            )}
+            {hasShockOffset && (
+              <button
+                className={`scenario-pill scenario-pill-sm${chartMode === "shock_offset" ? " active" : ""}`}
+                onClick={() => setChartMode("shock_offset")}
+              >
+                Shock offset
+              </button>
+            )}
+          </div>
         </div>
-      )}
+
+        {chartMode === "shock_offset" && hasShockOffset ? (
+          <ColumnChart
+            data={policy.deciles.map((d) => ({
+              label: `${d.decile}`,
+              value: d.shock_offset_pct,
+            }))}
+            maxValue={
+              Math.max(
+                ...policy.deciles.map((d) => d.shock_offset_pct)
+              ) * 1.2 || 10
+            }
+            color="teal"
+            formatValue={(v) => `${v}%`}
+            xLabel="Decile"
+          />
+        ) : (
+          <ColumnChart
+            data={policy.deciles.map((d) => ({
+              label: `${d.decile}`,
+              value: d.payment,
+            }))}
+            maxValue={
+              Math.max(...policy.deciles.map((d) => d.payment)) * 1.2
+            }
+            color="teal"
+            formatValue={(v) => fmt(v)}
+            xLabel="Decile"
+          />
+        )}
+      </div>
+
+      <p className="section-description">
+        The EPG costs £0.8bn but covers only ~2% of the shock. The flat
+        transfer reaches all households at £12.8bn. Council tax rebates
+        cost £7.7bn and cover 17–23% of the shock for lower bands. Winter
+        fuel expansion costs £1.5bn and reaches pensioner households only.
+        In 2022, layering multiple policies brought the total cost to £35bn.
+      </p>
     </section>
   );
 }
 
 function SummarySection() {
   const { policies } = results;
-  const [summaryView, setSummaryView] = useState("chart");
   const [summaryMetric, setSummaryMetric] = useState("cost");
 
   const rows = [
@@ -903,11 +812,10 @@ function SummarySection() {
     { key: "flat_transfer", name: "Flat transfer", ...policies.flat_transfer },
     { key: "ct_rebate", name: "CT band rebate", ...policies.ct_rebate },
     { key: "winter_fuel", name: "Expanded winter fuel", ...policies.winter_fuel },
-    { key: "combined", name: "Combined package", ...policies.combined },
   ];
 
   const costSorted = [...rows].sort((a, b) => b.exchequer_cost_bn - a.exchequer_cost_bn);
-  const benefitSorted = [...rows].sort((a, b) => (b.avg_hh_benefit || b.avg_net_income_change || 0) - (a.avg_hh_benefit || a.avg_net_income_change || 0));
+  const benefitSorted = [...rows].sort((a, b) => (b.avg_hh_benefit || 0) - (a.avg_hh_benefit || a.avg_net_income_change || 0));
 
   const chartData = summaryMetric === "cost"
     ? costSorted.map((r) => ({
@@ -917,8 +825,8 @@ function SummarySection() {
       }))
     : benefitSorted.map((r) => ({
         label: r.name,
-        value: r.avg_hh_benefit || r.avg_net_income_change || 0,
-        tooltip: `${r.name}: ${fmt(r.avg_hh_benefit || r.avg_net_income_change || 0)}/yr`,
+        value: r.avg_hh_benefit || 0,
+        tooltip: `${r.name}: ${fmt(r.avg_hh_benefit || 0)}/yr`,
       }));
 
   const chartMax = Math.max(...chartData.map((d) => d.value)) * 1.15;
@@ -928,14 +836,21 @@ function SummarySection() {
 
   return (
     <section className="section" id="summary">
-      <h2 className="section-title">Summary comparison</h2>
+      <h2 className="section-title">Policy cost comparison</h2>
       <p className="section-description">
-        The key trade-off is between fiscal cost and targeting. Flat transfers
-        are easy to deliver but expensive and poorly targeted. Council tax
-        rebates are moderately targeted but still blunt. EPG subsidies scale
-        with consumption but are regressive in absolute terms. Winter fuel
-        expansion is well-targeted but narrow. Combined packages layer multiple
-        mechanisms but compound costs.
+        The 2022 energy support package cost £35bn in total. The four
+        policies modelled here range from £0.8bn (EPG) to £12.8bn (flat
+        transfer). The Resolution Foundation{" "}
+        <a href="https://www.theguardian.com/business/2026/mar/04/war-in-middle-east-could-wipe-out-growth-in-uk-living-standards" target="_blank" rel="noopener noreferrer">
+          estimates
+        </a>{" "}
+        a persistent rise could add £500 to typical annual energy bills and
+        offset the £300 rise in living standards expected this year.
+      </p>
+
+      <p className="section-description">
+        The following chart compares the four policies on fiscal cost and
+        average household benefit. Toggle between the two metrics.
       </p>
 
       <div className="chart-wrapper">
@@ -944,54 +859,37 @@ function SummarySection() {
             <div className="chart-title">{chartTitle}</div>
             <div className="chart-subtitle">{chartSubtitle}</div>
           </div>
-          <ViewToggle view={summaryView} setView={setSummaryView} />
+          <div className="scenario-pills">
+            <button
+              className={`scenario-pill scenario-pill-sm${summaryMetric === "cost" ? " active" : ""}`}
+              onClick={() => setSummaryMetric("cost")}
+            >
+              Exchequer cost
+            </button>
+            <button
+              className={`scenario-pill scenario-pill-sm${summaryMetric === "benefit" ? " active" : ""}`}
+              onClick={() => setSummaryMetric("benefit")}
+            >
+              Avg HH benefit
+            </button>
+          </div>
         </div>
 
-        <div className="chart-mode-toggle">
-          <button
-            className={`scenario-pill${summaryMetric === "cost" ? " active" : ""}`}
-            onClick={() => setSummaryMetric("cost")}
-          >
-            Exchequer cost
-          </button>
-          <button
-            className={`scenario-pill${summaryMetric === "benefit" ? " active" : ""}`}
-            onClick={() => setSummaryMetric("benefit")}
-          >
-            Avg HH benefit
-          </button>
-        </div>
-
-        {summaryView === "chart" ? (
-          <ColumnChart
-            data={chartData}
-            maxValue={chartMax}
-            color="teal"
-            formatValue={chartFormat}
-          />
-        ) : (
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Policy</th>
-                <th>Exchequer cost</th>
-                <th>Avg HH benefit (£/yr)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((r, i) => (
-                <tr key={i}>
-                  <td>{r.name}</td>
-                  <td>{fmtBn(r.exchequer_cost_bn)}</td>
-                  <td>
-                    {fmt(r.avg_hh_benefit || r.avg_net_income_change || 0)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+        <ColumnChart
+          data={chartData}
+          maxValue={chartMax}
+          color="teal"
+          formatValue={chartFormat}
+        />
       </div>
+
+      <p className="section-description">
+        The next price cap change takes effect on 1 July 2026. Bangham{" "}
+        <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another?r=8zbi3" target="_blank" rel="noopener noreferrer">
+          notes
+        </a>{" "}
+        this gives the government roughly four months to prepare.
+      </p>
     </section>
   );
 }
@@ -1000,12 +898,25 @@ export default function Dashboard() {
   return (
     <div className="narrative-container">
       <header className="narrative-hero">
-        <h1>Energy price shock: budget impact analysis</h1>
+        <h1>Energy price shock: distributional impact and policy options</h1>
         <p className="narrative-lead">
-          How an energy price spike hits UK households, who suffers most, and
-          what <strong>five policy responses</strong> would cost the Exchequer.
-          Built on <strong>PolicyEngine UK</strong> microsimulation of{" "}
-          {results.baseline.n_households_m}m households.
+          The Iran war could trigger an energy price{" "}
+          <a href="https://www.ft.com/content/13f5e566-83c0-4d94-9338-9d418053c290" target="_blank" rel="noopener noreferrer">
+            shock
+          </a>{" "}
+          that the Resolution Foundation{" "}
+          <a href="https://www.theguardian.com/business/2026/mar/04/war-in-middle-east-could-wipe-out-growth-in-uk-living-standards" target="_blank" rel="noopener noreferrer">
+            estimates
+          </a>{" "}
+          could wipe out growth in UK living standards. George
+          Bangham{" "}
+          <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another?r=8zbi3" target="_blank" rel="noopener noreferrer">
+            notes
+          </a>{" "}
+          the Treasury has roughly four months to prepare. This
+          analysis uses <strong>PolicyEngine UK</strong> microsimulation
+          of {results.baseline.n_households_m}m households to model the
+          distributional impact and evaluate <strong>four policy responses</strong>.
         </p>
       </header>
 
