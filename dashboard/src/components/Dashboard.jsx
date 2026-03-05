@@ -5,13 +5,6 @@ import "./Dashboard.css";
 const fmt = (v) => `£${v.toLocaleString("en-GB")}`;
 const fmtBn = (v) => `£${v}bn`;
 
-const POLICY_COLORS = {
-  epg: "#0d9488",
-  flat_transfer: "#2dd4bf",
-  ct_rebate: "#5eead4",
-  winter_fuel: "#14b8a6",
-};
-
 const POLICY_META = {
   epg: {
     letter: "A",
@@ -44,25 +37,6 @@ const POLICY_META = {
       "Age-targeted; means test removed to reach all pensioner households",
   },
 };
-
-function ViewToggle({ view, setView }) {
-  return (
-    <div className="scenario-pills">
-      <button
-        className={`scenario-pill scenario-pill-sm${view === "chart" ? " active" : ""}`}
-        onClick={() => setView("chart")}
-      >
-        Chart
-      </button>
-      <button
-        className={`scenario-pill scenario-pill-sm${view === "table" ? " active" : ""}`}
-        onClick={() => setView("table")}
-      >
-        Table
-      </button>
-    </div>
-  );
-}
 
 function KpiCard({ label, value, unit, color }) {
   return (
@@ -150,97 +124,6 @@ function ColumnChart({ data, maxValue, color, formatValue, colorFn, yLabel, xLab
   );
 }
 
-function CompareColumnChart({ deciles, policyKeys, policies }) {
-  const rawMax = Math.max(
-    ...policyKeys.flatMap((k) =>
-      policies[k].deciles.map((d) => d.shock_offset_pct ?? 0)
-    )
-  );
-  const ticks = niceTicks(rawMax * 1.15);
-  const effectiveMax = ticks[ticks.length - 1] || rawMax * 1.15;
-
-  return (
-    <div>
-      <div className="compare-legend">
-        {policyKeys.map((key) => (
-          <div className="legend-item" key={key}>
-            <span
-              className="legend-dot"
-              style={{ background: POLICY_COLORS[key] }}
-            />
-            {POLICY_META[key].letter}. {policies[key].name}
-          </div>
-        ))}
-      </div>
-      <div className="col-chart">
-        <div className="col-chart-body">
-          <div className="col-chart-y-axis">
-            {[...ticks].reverse().map((t, i) => (
-              <div
-                className="col-chart-y-tick"
-                key={i}
-                style={{ bottom: `${(t / effectiveMax) * 100}%` }}
-              >
-                {t}%
-              </div>
-            ))}
-          </div>
-          <div className="col-chart-area">
-            {ticks.map((t, i) => (
-              <div
-                className="col-chart-gridline"
-                key={i}
-                style={{ bottom: `${(t / effectiveMax) * 100}%` }}
-              />
-            ))}
-            <div className="col-chart-bars">
-              {deciles.map((decile) => (
-                <div
-                  className="col-chart-col col-chart-col-grouped"
-                  key={decile}
-                >
-                  <div className="col-chart-tooltip col-chart-tooltip-grouped">
-                    <strong>Decile {decile}</strong>
-                    {policyKeys.map((key) => {
-                      const val = policies[key].deciles[decile - 1].shock_offset_pct ?? 0;
-                      return (
-                        <div key={key} className="tooltip-row">
-                          <span className="tooltip-dot" style={{ background: POLICY_COLORS[key] }} />
-                          {policies[key].name}: {val}%
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div className="col-chart-group">
-                    {policyKeys.map((key) => {
-                      const val =
-                        policies[key].deciles[decile - 1].shock_offset_pct ?? 0;
-                      const pct = (val / effectiveMax) * 100;
-                      return (
-                        <div className="col-chart-group-bar" key={key}>
-                          <div
-                            className="col-chart-group-fill"
-                            style={{
-                              height: `${pct}%`,
-                              background: POLICY_COLORS[key],
-                            }}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div className="col-chart-label">{decile}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="col-chart-x-label">Decile</div>
-    </div>
-  );
-}
-
 function BaselineSection() {
   const { baseline } = results;
   const [baselineView, setBaselineView] = useState("energy_share");
@@ -310,8 +193,7 @@ function BaselineSection() {
         Decile 1 households spend over 10% of their net income on energy,
         while decile 10 households spend 2.2%. Energy spending is relatively
         flat across the distribution (£1,900–£2,700). The difference in
-        burden is driven by income, not consumption. The following chart
-        shows this breakdown by income decile.
+        burden is driven by income, not consumption.
       </p>
 
       <div className="chart-wrapper">
@@ -375,8 +257,8 @@ function ShockSection() {
           estimates
         </a>{" "}
         a persistent rise could add £500 to typical annual energy bills.
-        The following chart and table show five scenarios, from a mild +10%
-        to an extreme £4,500 cap.
+        We model five scenarios below, from a mild +10% to an extreme
+        £4,500 cap.
       </p>
       <p className="section-description">
         <strong>Mild (+10%)</strong> represents a short-lived supply disruption
@@ -434,9 +316,7 @@ function ShockSection() {
       </div>
 
       <p className="section-description">
-        Select a scenario above to see its distributional impact. The
-        following chart shows what share of each decile's income is consumed
-        by the extra energy cost.
+        Select a scenario above to see its distributional impact by decile.
       </p>
 
       <div className="chart-wrapper">
@@ -478,9 +358,8 @@ function ShockSection() {
       </div>
 
       <p className="section-description">
-        The pattern is consistent across all scenarios: extra costs take a
-        larger share of income from lower-income households. The following
-        chart compares the average household cost across all five scenarios.
+        Extra costs take a larger share of income from lower-income
+        households across all scenarios.
       </p>
 
       <div className="chart-wrapper">
@@ -526,7 +405,6 @@ function ShockSection() {
             new_cap: s.new_cap,
             increase: s.price_increase_pct,
             avg_hh_hit_yr: s.avg_hh_hit_yr,
-            avg_hh_hit_mo: s.avg_hh_hit_mo,
             total_cost: s.total_cost_bn,
           })[scenarioMetric])) * 1.15}
           color="teal"
@@ -570,8 +448,7 @@ function FuelPovertySection() {
       </p>
 
       <p className="section-description">
-        The following chart shows how the fuel poverty rate changes with
-        each scenario. The 10% threshold is a simplification. The official UK
+        The 10% threshold is a simplification. The official UK
         definition ({" "}
         <a href="https://www.gov.uk/government/collections/fuel-poverty-statistics" target="_blank" rel="noopener noreferrer">
           LILEE
@@ -639,7 +516,6 @@ function PolicySection() {
 
   const policy = policies[selectedPolicy];
   const meta = POLICY_META[selectedPolicy];
-  const color = POLICY_COLORS[selectedPolicy];
 
   const hasShockOffset = policy.deciles[0].shock_offset_pct !== undefined;
 
@@ -656,15 +532,10 @@ function PolicySection() {
     <section className="section" id="policies">
       <h2 className="section-title">Policy responses</h2>
       <p className="section-description">
-        The government has roughly four months before the next price cap
-        change to prepare a response (Bangham,{" "}
-        <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another?r=8zbi3" target="_blank" rel="noopener noreferrer">
-          2026
-        </a>
-        ). We model four policy tools against a severe (+60%) shock
-        (cap rises to £2,752, adding £1,350/yr per household). The key
-        metric is <strong>shock offset</strong>: what share of the extra
-        cost each policy covers.
+        We model four policy tools against a severe (+60%) shock (cap rises
+        to £2,752, adding £1,350/yr per household). The key metric is{" "}
+        <strong>shock offset</strong>: what share of the extra cost each
+        policy covers.
       </p>
 
       <ul className="policy-bullet-list">
@@ -719,9 +590,8 @@ function PolicySection() {
       </div>
 
       <p className="section-description">
-        The following chart compares policies by shock offset (what share of
-        the extra cost they cover). Toggle between payment amounts, shock
-        offset, or a side-by-side comparison of all four.
+        Toggle between payment amounts and shock offset (what share of
+        the extra cost each policy covers).
       </p>
 
       <div className="chart-wrapper">
@@ -839,17 +709,8 @@ function SummarySection() {
       <p className="section-description">
         The 2022 energy support package cost £35bn in total. The four
         policies modelled here range from £0.8bn (EPG) to £12.8bn (flat
-        transfer). The Resolution Foundation{" "}
-        <a href="https://www.theguardian.com/business/2026/mar/04/war-in-middle-east-could-wipe-out-growth-in-uk-living-standards" target="_blank" rel="noopener noreferrer">
-          estimates
-        </a>{" "}
-        a persistent rise could add £500 to typical annual energy bills and
-        offset the £300 rise in living standards expected this year.
-      </p>
-
-      <p className="section-description">
-        The following chart compares the four policies on fiscal cost and
-        average household benefit. Toggle between the two metrics.
+        transfer). The following chart compares them on fiscal cost and
+        average household benefit.
       </p>
 
       <div className="chart-wrapper">
@@ -883,11 +744,13 @@ function SummarySection() {
       </div>
 
       <p className="section-description">
-        The next price cap change takes effect on 1 July 2026. Bangham{" "}
+        Bangham{" "}
         <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another?r=8zbi3" target="_blank" rel="noopener noreferrer">
-          notes
+          argues
         </a>{" "}
-        this gives the government roughly four months to prepare.
+        the government should use the window before the next price cap change
+        on 1 July to join data across Ofgem, DWP and HMRC, enabling more
+        targeted support than the 2022 response.
       </p>
     </section>
   );
@@ -907,12 +770,13 @@ export default function Dashboard() {
           <a href="https://www.theguardian.com/business/2026/mar/04/war-in-middle-east-could-wipe-out-growth-in-uk-living-standards" target="_blank" rel="noopener noreferrer">
             estimates
           </a>{" "}
-          could wipe out growth in UK living standards. George
-          Bangham{" "}
+          could wipe out growth in UK living standards. The price cap
+          system means bills would not rise until the end of June at the
+          earliest, giving the government time to{" "}
           <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another?r=8zbi3" target="_blank" rel="noopener noreferrer">
-            notes
-          </a>{" "}
-          the Treasury has roughly four months to prepare. This
+            prepare
+          </a>
+          . This
           analysis{" "}
           <a href="https://github.com/PolicyEngine/energy-price-shock" target="_blank" rel="noopener noreferrer">
             uses
