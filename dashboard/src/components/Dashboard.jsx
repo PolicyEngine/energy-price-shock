@@ -914,8 +914,11 @@ export default function Dashboard() {
             notes
           </a>{" "}
           the Treasury has roughly four months to prepare. This
-          analysis uses <strong>PolicyEngine UK</strong> microsimulation
-          of {results.baseline.n_households_m}m households to model the
+          analysis{" "}
+          <a href="https://github.com/PolicyEngine/energy-price-shock" target="_blank" rel="noopener noreferrer">
+            uses
+          </a>{" "}
+          <strong>PolicyEngine UK</strong> microsimulation to model the
           distributional impact and evaluate <strong>four policy responses</strong>.
         </p>
       </header>
