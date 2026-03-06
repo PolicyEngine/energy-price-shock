@@ -424,8 +424,9 @@ function ShockSection() {
       </div>
 
       <p className="section-description">
-        Under a +60% shock, decile 1 households lose 6.2% of income to
-        the extra cost. Decile 10 households lose 1.3%.
+        Under the {scenario.name} scenario, decile 1 households lose{" "}
+        {scenario.deciles[0].pct_of_income}% of income to the extra cost.
+        Decile 10 households lose {scenario.deciles[9].pct_of_income}%.
       </p>
 
       <div className="chart-wrapper">
@@ -978,7 +979,7 @@ function PolicyNetSection() {
     bn_epg: "F. BN EPG",
   };
   const [selectedNet, setSelectedNet] = useState("flat_transfer");
-  const [selectedScenario, setSelectedScenario] = useState(3); // default +60%
+  const [selectedScenario, setSelectedScenario] = useState(0); // default +10%
 
   const scenario = results.shock_scenarios[selectedScenario];
   const behav = results.behavioral[selectedScenario];
@@ -1180,7 +1181,7 @@ function SummarySection() {
   const EPG_REF_CAP = 2625;
   const nHH = results.baseline.n_households_m;
   const [summaryMetric, setSummaryMetric] = useState("cost");
-  const [selectedScenario, setSelectedScenario] = useState(3); // default +60%
+  const [selectedScenario, setSelectedScenario] = useState(0); // default +10%
 
   const scenario = results.shock_scenarios[selectedScenario];
   const behav = results.behavioral[selectedScenario];
