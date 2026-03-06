@@ -190,10 +190,9 @@ function BaselineSection() {
       </div>
 
       <p className="section-description">
-        Decile 1 households spend over 10% of their net income on energy,
-        while decile 10 households spend 2.2%. Energy spending is relatively
-        flat across the distribution (£1,900–£2,700). The difference in
-        burden is driven by income, not consumption.
+        The chart below shows how energy costs relate to income across the
+        ten income deciles. Toggle between energy as a share of income,
+        absolute energy spend, and net income.
       </p>
 
       <div className="chart-wrapper">
@@ -224,9 +223,10 @@ function BaselineSection() {
       </div>
 
       <p className="section-description">
-        Households already spending 10% or more of income on energy are at
-        the fuel poverty threshold. Any further price increase pushes them
-        above it.
+        Decile 1 households spend 10.8% of net income on energy. Decile 10
+        households spend 2.2%. Energy spending ranges from £1,926 to £2,690
+        across deciles: the variation in burden is driven by income, not
+        consumption.
       </p>
     </section>
   );
@@ -274,8 +274,9 @@ function ShockSection() {
         cap level previously seen.
       </p>
       <p className="section-description">
-        Under a severe (+60%) shock, decile 1 households lose 6.5% of their
-        income to the extra cost, compared with 1.3% for decile 10.
+        Select a scenario above to see its distributional impact. The chart
+        below shows the extra cost per decile, toggled as a percentage of
+        income or in pounds.
       </p>
 
       <div className="scenario-pills">
@@ -316,7 +317,8 @@ function ShockSection() {
       </div>
 
       <p className="section-description">
-        Select a scenario above to see its distributional impact by decile.
+        Under a severe (+60%) shock, decile 1 households lose 6.5% of
+        income to the extra cost. Decile 10 households lose 1.3%.
       </p>
 
       <div className="chart-wrapper">
@@ -358,8 +360,9 @@ function ShockSection() {
       </div>
 
       <p className="section-description">
-        Extra costs take a larger share of income from lower-income
-        households across all scenarios.
+        The chart below compares all five scenarios side by side. Toggle
+        between the new cap level, percentage increase, average household
+        hit, and total cost.
       </p>
 
       <div className="chart-wrapper">
@@ -418,9 +421,9 @@ function ShockSection() {
       </div>
 
       <p className="section-description">
-        Even the mild scenario adds £19/month to the average bill. At the
-        severe end, households face an extra £113/month. At the 2022-level,
-        the extra cost rises to £223/month per household.
+        The mild scenario adds £225/yr (£19/month) to the average bill. The
+        severe scenario adds £1,350/yr (£113/month). At the 2022-level, the
+        total cost to all households is £85.3bn.
       </p>
     </section>
   );
@@ -440,21 +443,14 @@ function FuelPovertySection() {
     <section className="section" id="fuel-poverty">
       <h2 className="section-title">Fuel poverty impact</h2>
       <p className="section-description">
-        We define a household as fuel poor if it spends more than 10% of its
-        net income on energy. At current prices, {baseline.households_m}m
-        households ({baseline.fuel_poverty_rate_pct}%) are fuel poor by this
-        measure. Under a severe shock, this nearly doubles to 27.3%. Under
-        a 2022-level shock, 39.8% of all UK households would be fuel poor.
-      </p>
-
-      <p className="section-description">
-        The 10% threshold is a simplification. The official UK
-        definition ({" "}
+        A household is fuel poor if it spends more than 10% of its net
+        income on energy. The official UK{" "}
         <a href="https://www.gov.uk/government/collections/fuel-poverty-statistics" target="_blank" rel="noopener noreferrer">
-          LILEE
-        </a>
-        ) is more complex, but the 10% measure captures the same underlying
-        dynamic.
+          definition
+        </a>{" "}
+        (LILEE) is more complex, but the 10% threshold captures the same
+        dynamic. The chart below shows the fuel poverty rate and number of
+        affected households under each scenario.
       </p>
 
       <div className="chart-wrapper">
@@ -495,9 +491,9 @@ function FuelPovertySection() {
       </div>
 
       <p className="section-description">
-        At the 2022-level scenario, an additional 8.1m households fall into
-        fuel poverty. At the extreme, the total reaches 15.1m, nearly half
-        of all UK households.
+        At current prices, {baseline.households_m}m households ({baseline.fuel_poverty_rate_pct}%)
+        are fuel poor. Under a severe shock, this rises to 8.7m (27.3%).
+        At the 2022-level, 12.7m households (39.8%) are fuel poor.
       </p>
     </section>
   );
@@ -590,8 +586,9 @@ function PolicySection() {
       </div>
 
       <p className="section-description">
-        Toggle between payment amounts and shock offset (what share of
-        the extra cost each policy covers).
+        The chart below shows the payment each decile receives under the
+        selected policy. Toggle to shock offset to see what share of the
+        extra cost the policy covers.
       </p>
 
       <div className="chart-wrapper">
@@ -662,11 +659,10 @@ function PolicySection() {
       </div>
 
       <p className="section-description">
-        The EPG costs £0.8bn but covers only ~2% of the shock. The flat
-        transfer reaches all households at £12.8bn. Council tax rebates
-        cost £7.7bn and cover 17–23% of the shock for lower bands. Winter
-        fuel expansion costs £1.5bn and reaches pensioner households only.
-        In 2022, layering multiple policies brought the total cost to £35bn.
+        The EPG costs £0.8bn and offsets ~2% of the shock. The flat transfer
+        costs £12.8bn and offsets 25–35%. The CT rebate costs £7.7bn and
+        offsets 11–23%. Winter fuel expansion costs £1.5bn and covers
+        pensioner households only.
       </p>
     </section>
   );
@@ -707,10 +703,8 @@ function SummarySection() {
     <section className="section" id="summary">
       <h2 className="section-title">Policy cost comparison</h2>
       <p className="section-description">
-        The 2022 energy support package cost £35bn in total. The four
-        policies modelled here range from £0.8bn (EPG) to £12.8bn (flat
-        transfer). The following chart compares them on fiscal cost and
-        average household benefit.
+        The chart below compares the four policies on exchequer cost and
+        average household benefit. Toggle between the two metrics.
       </p>
 
       <div className="chart-wrapper">
@@ -744,13 +738,10 @@ function SummarySection() {
       </div>
 
       <p className="section-description">
-        Bangham{" "}
-        <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another?r=8zbi3" target="_blank" rel="noopener noreferrer">
-          argues
-        </a>{" "}
-        the government should use the window before the next price cap change
-        on 1 July to join data across Ofgem, DWP and HMRC, enabling more
-        targeted support than the 2022 response.
+        The flat transfer provides the largest average benefit (£400/yr) at
+        £12.8bn. The EPG is the cheapest (£0.8bn) but provides only £24/yr
+        on average. The CT rebate falls in between at £7.7bn and £240/yr.
+        Winter fuel expansion costs £1.5bn and averages £104/yr.
       </p>
     </section>
   );
@@ -770,7 +761,8 @@ export default function Dashboard() {
           <a href="https://www.theguardian.com/business/2026/mar/04/war-in-middle-east-could-wipe-out-growth-in-uk-living-standards" target="_blank" rel="noopener noreferrer">
             estimates
           </a>{" "}
-          could wipe out growth in UK living standards. The price cap
+          could add £500 to typical annual energy bills and offset the
+          £300 rise in living standards expected this year. The price cap
           system means bills would not rise until the end of June at the
           earliest, giving the government time to{" "}
           <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another?r=8zbi3" target="_blank" rel="noopener noreferrer">
