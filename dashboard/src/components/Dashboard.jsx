@@ -533,11 +533,12 @@ function ShockSection() {
       </div>
 
       <p className="section-description">
-        Under a +60% shock, demand response reduces the average extra cost
-        from £1,345/yr to £1,023/yr, a saving of £323/yr. At the
-        2022-level, households reduce consumption by 19.4%, lowering the
-        average hit from £2,903/yr to £1,904/yr. These extra costs push
-        more households into fuel poverty, as the next section shows.
+        Under the {scenario.name} scenario, demand response reduces the average
+        extra cost from {fmt(scenario.avg_hh_hit_yr)}/yr to{" "}
+        {fmt(behav.behavioral_avg_extra)}/yr, a saving of{" "}
+        {fmt(scenario.avg_hh_hit_yr - behav.behavioral_avg_extra)}/yr. These
+        extra costs push more households into fuel poverty, as the next section
+        shows.
       </p>
     </section>
   );
@@ -660,11 +661,13 @@ function FuelPovertySection() {
 
       <p className="section-description">
         At current prices, {baseline.households_m}m households ({baseline.fuel_poverty_rate_pct}%)
-        are fuel poor. Under a +60% shock, the static rate rises to 29.9%
-        (9.5m); with demand response it is 25.5% (8.1m). At the 2022-level,
-        the static rate reaches 46.5% (14.8m), falling to 36.6% (11.7m)
-        with behavioural adjustment. The next section evaluates four policy
-        tools that could offset these costs.
+        are fuel poor. Even a modest +10% shock pushes the rate
+        to {fp[1].fuel_poverty_rate_pct}% ({fp[1].households_m}m). At
+        the 2022-level ({fp[fp.length - 1].scenario.split("(")[0].trim()}),
+        the static rate reaches {fp[fp.length - 1].fuel_poverty_rate_pct}%
+        ({fp[fp.length - 1].households_m}m). Demand response lowers
+        these figures but cannot prevent a large rise in fuel poverty. The
+        next section evaluates policy tools that could offset these costs.
       </p>
     </section>
   );
@@ -947,13 +950,11 @@ function PolicySection() {
       )}
 
       <p className="section-description">
-        Under the +60% scenario, the EPG costs £0.4bn and offsets ~1% of
-        the shock. The flat transfer costs £12.8bn and offsets 25–36%. The
-        CT rebate costs £7.7bn and offsets 11–26%. Winter fuel expansion
-        costs £1.5bn and covers pensioner households only. Under smaller
-        shocks, the same fixed payments cover a larger share of the extra
-        cost. All four face a targeting gap: the government holds no single
-        database linking household energy costs with
+        Under the selected scenario, fixed-cost policies (A–D) offset a
+        larger share of the shock when the shock is milder. Budget-neutral
+        policies (E, F) scale with the shock by design. All face a
+        targeting gap: the government holds no single database linking
+        household energy costs with
         income. <a href="#fn-9">Bangham (2026)</a> argues joining data
         across Ofgem, DWP and HMRC before 1 July could enable more
         targeted support than the 2022 response. The next section shows the
@@ -1163,13 +1164,13 @@ function PolicyNetSection() {
       )}
 
       <p className="section-description">
-        Under a +60% scenario with the flat transfer, the average household
-        still faces a net extra cost of {fmt(Math.max(0, avgStaticShock - 400))}/yr
-        (static) or {fmt(Math.max(0, avgBehavShock - 400))}/yr (behavioural).
-        Under smaller shocks such as +10%, the £400 flat transfer covers
-        a much larger share of the extra cost. This illustrates the fiscal
-        trade-off: fully offsetting a severe shock is expensive, while the
-        same fixed payment goes much further against a milder shock.
+        Under the {scenario.name} scenario, the selected policy determines how
+        much of the shock each decile absorbs. Budget-neutral policies (E, F)
+        fully offset the average hit but still leave some deciles worse off.
+        Fixed-cost policies (A–D) cover a larger share when the shock is
+        milder. This illustrates the fiscal trade-off: fully offsetting a
+        severe shock is expensive, while the same fixed payment goes much
+        further against a milder shock.
       </p>
     </section>
   );
@@ -1314,9 +1315,10 @@ function SummarySection() {
       <p className="section-description">
         Policies A–D have fixed costs regardless of the shock size.
         The budget-neutral policies (E, F) cost more as the shock grows:
-        under +60%, fully offsetting the average household costs {fmtBn(scenario.total_cost_bn)}.
-        The trade-off is clear — household budget neutrality requires the
-        government to absorb the full cost of the shock.
+        under the {scenario.name} scenario, fully offsetting the average
+        household costs {fmtBn(scenario.total_cost_bn)}. The trade-off is
+        clear — household budget neutrality requires the government to absorb
+        the full cost of the shock.
       </p>
     </section>
   );
