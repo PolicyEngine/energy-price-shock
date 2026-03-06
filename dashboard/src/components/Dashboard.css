@@ -569,6 +569,7 @@ html {
   color: #64748b;
   line-height: 1.7;
   margin-bottom: 10px;
+  scroll-margin-top: 24px;
 }
 
 .policy-bullet-list li strong {
@@ -655,7 +656,8 @@ ol.ref-list li {
   padding-left: 4px;
   scroll-margin-top: 24px;
 }
-ol.ref-list li:target {
+ol.ref-list li:target,
+.policy-bullet-list li:target {
   background: #e6fffa;
   border-radius: 4px;
   padding: 2px 4px;
