@@ -622,6 +622,54 @@ html {
 .summary-table tr:last-child td { border-bottom: none; }
 .summary-table tr:hover { background: #f8fafc; }
 
+/* Numbered reference list */
+ol.ref-list {
+  margin: 0 0 24px 0;
+  padding-left: 24px;
+  list-style: decimal;
+}
+
+ol.ref-list li {
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.8;
+  margin-bottom: 6px;
+  padding-left: 4px;
+  scroll-margin-top: 24px;
+}
+ol.ref-list li:target {
+  background: #e6fffa;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+ol.ref-list li a {
+  color: #319795;
+}
+
+/* Inline academic citations */
+.section-description .cite {
+  color: #64748b;
+  font-size: 0.92em;
+}
+
+/* Footnote superscripts */
+.section-description sup {
+  font-size: 0.65rem;
+  font-weight: 600;
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 1px;
+}
+.section-description a:has(sup) {
+  color: #319795;
+  text-decoration: none;
+  cursor: pointer;
+}
+.section-description a:has(sup):hover {
+  text-decoration: underline;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .narrative-container {

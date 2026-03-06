@@ -24,3 +24,4 @@ dashboard/.vite/
 
 # Jupyter
 .ipynb_checkpoints/
+.vercel

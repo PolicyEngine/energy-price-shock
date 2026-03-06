@@ -10,7 +10,7 @@ const POLICY_META = {
     letter: "A",
     fullName: "Energy Price Guarantee (EPG)",
     description:
-      "Government caps bills at £2,500/yr and subsidises the difference. Proportional to consumption, so higher users get more. Covers ~9% of each household's bill in this scenario.",
+      "Government caps bills at £2,500/yr and subsidises the difference. Proportional to consumption, so higher users get more. Covers ~5% of each household's bill in this scenario.",
     targeting: "Proportional to energy spend; higher spenders get more £",
   },
   flat_transfer: {
@@ -190,9 +190,10 @@ function BaselineSection() {
       </div>
 
       <p className="section-description">
-        The chart below shows how energy costs relate to income across the
-        ten income deciles. Toggle between energy as a share of income,
-        absolute energy spend, and net income.
+        Before modelling any price shock, we establish how energy costs are
+        distributed across income deciles at current prices. The chart below
+        shows energy spend as a share of income, absolute energy spend, and
+        net income for each decile.
       </p>
 
       <div className="chart-wrapper">
@@ -223,17 +224,17 @@ function BaselineSection() {
       </div>
 
       <p className="section-description">
-        Decile 1 households spend 10.8% of net income on energy. Decile 10
-        households spend 2.2%. Energy spending ranges from £1,926 to £2,690
+        Decile 1 households spend 10.3% of net income on energy. Decile 10
+        households spend 2.2%. Energy spending ranges from £1,848 to £2,703
         across deciles: the variation in burden is driven by income, not
-        consumption.
+        consumption. The next section models what happens when prices rise.
       </p>
     </section>
   );
 }
 
 function ShockSection() {
-  const [selected, setSelected] = useState(2);
+  const [selected, setSelected] = useState(3);
   const [shockMetric, setShockMetric] = useState("pct_of_income");
   const [scenarioMetric, setScenarioMetric] = useState("avg_hh_hit_yr");
   const scenario = results.shock_scenarios[selected];
@@ -247,36 +248,23 @@ function ShockSection() {
     <section className="section" id="shocks">
       <h2 className="section-title">Price shock scenarios</h2>
       <p className="section-description">
-        The UK is particularly{" "}
-        <a href="https://www.ft.com/content/13f5e566-83c0-4d94-9338-9d418053c290" target="_blank" rel="noopener noreferrer">
-          exposed
-        </a>{" "}
-        to gas price shocks. Gas makes up 35% of total energy demand and
-        gas-fired power stations set electricity prices. The Resolution Foundation{" "}
-        <a href="https://www.theguardian.com/business/2026/mar/04/war-in-middle-east-could-wipe-out-growth-in-uk-living-standards" target="_blank" rel="noopener noreferrer">
-          estimates
-        </a>{" "}
-        a persistent rise could add £500 to typical annual energy bills.
-        We model five scenarios below, from a mild +10% to an extreme
-        £4,500 cap.
+        Given the baseline distribution above, we model five scenarios for
+        how a price increase would affect households. Gas makes up 35% of
+        UK energy demand<a href="#fn-7"><sup>7</sup></a> and gas-fired power stations set
+        electricity prices, so gas price shocks feed through to all
+        household bills.
       </p>
+      <ul className="policy-bullet-list">
+        <li><strong>+10%</strong> Short-lived supply disruption or moderate market uncertainty. Cap rises to £1,805.</li>
+        <li><strong>+20%</strong> Sustained disruption or extended uncertainty in shipping routes. Cap rises to £1,969.</li>
+        <li><strong>+30%</strong> Prolonged conflict affecting gas supply, such as extended Strait of Hormuz disruption. Cap rises to £2,133.</li>
+        <li><strong>+60%</strong> Major escalation comparable to the initial impact of the 2022 crisis. Cap rises to £2,625.</li>
+        <li><strong>2022-level</strong> Matches the October 2022 peak of £3,764, when wholesale gas prices reached record highs.</li>
+      </ul>
       <p className="section-description">
-        <strong>Mild (+10%)</strong> represents a short-lived supply disruption
-        or moderate market uncertainty, raising the cap to £1,892.{" "}
-        <strong>Moderate (+30%)</strong> corresponds to a sustained disruption,
-        such as extended conflict affecting gas shipping routes, with a cap
-        of £2,236.{" "}
-        <strong>Severe (+60%)</strong> models a major escalation comparable to
-        the initial impact of the 2022 crisis, raising the cap to £2,752.{" "}
-        <strong>2022-level</strong> matches the October 2022 peak of £3,764,
-        when wholesale gas prices reached record highs.{" "}
-        <strong>Extreme (4500)</strong> models a scenario at £4,500, above any
-        cap level previously seen.
-      </p>
-      <p className="section-description">
-        Select a scenario above to see its distributional impact. The chart
-        below shows the extra cost per decile, toggled as a percentage of
-        income or in pounds.
+        Select a scenario to see its distributional impact. The first chart
+        shows the extra cost per decile as a percentage of income or in
+        pounds. The second chart compares all five scenarios side by side.
       </p>
 
       <div className="scenario-pills">
@@ -315,11 +303,6 @@ function ShockSection() {
           color="teal"
         />
       </div>
-
-      <p className="section-description">
-        Under a severe (+60%) shock, decile 1 households lose 6.5% of
-        income to the extra cost. Decile 10 households lose 1.3%.
-      </p>
 
       <div className="chart-wrapper">
         <div className="chart-header">
@@ -360,9 +343,8 @@ function ShockSection() {
       </div>
 
       <p className="section-description">
-        The chart below compares all five scenarios side by side. Toggle
-        between the new cap level, percentage increase, average household
-        hit, and total cost.
+        Under a +60% shock, decile 1 households lose 6.2% of income to
+        the extra cost. Decile 10 households lose 1.3%.
       </p>
 
       <div className="chart-wrapper">
@@ -371,7 +353,6 @@ function ShockSection() {
             <div className="chart-title">All scenarios at a glance</div>
             <div className="chart-subtitle">
               {{ new_cap: "New Ofgem price cap by scenario",
-                 increase: "Percentage increase from current cap",
                  avg_hh_hit_yr: "Average household hit per year, by scenario",
                  total_cost: "Total cost to all UK households",
               }[scenarioMetric]}
@@ -380,7 +361,6 @@ function ShockSection() {
           <div className="scenario-pills">
             {[
               { key: "new_cap", label: "New cap" },
-              { key: "increase", label: "Increase" },
               { key: "avg_hh_hit_yr", label: "Avg HH hit (£/yr)" },
               { key: "total_cost", label: "Total cost" },
             ].map((m) => (
@@ -399,21 +379,18 @@ function ShockSection() {
             label: s.name,
             value: {
               new_cap: s.new_cap,
-              increase: s.price_increase_pct,
               avg_hh_hit_yr: s.avg_hh_hit_yr,
               total_cost: s.total_cost_bn,
             }[scenarioMetric],
           }))}
           maxValue={Math.max(...results.shock_scenarios.map((s) => ({
             new_cap: s.new_cap,
-            increase: s.price_increase_pct,
             avg_hh_hit_yr: s.avg_hh_hit_yr,
             total_cost: s.total_cost_bn,
           })[scenarioMetric])) * 1.15}
           color="teal"
           formatValue={{
             new_cap: (v) => fmt(v),
-            increase: (v) => `+${v}%`,
             avg_hh_hit_yr: (v) => fmt(v),
             total_cost: (v) => fmtBn(v),
           }[scenarioMetric]}
@@ -421,9 +398,10 @@ function ShockSection() {
       </div>
 
       <p className="section-description">
-        The mild scenario adds £225/yr (£19/month) to the average bill. The
-        severe scenario adds £1,350/yr (£113/month). At the 2022-level, the
-        total cost to all households is £85.3bn.
+        The +10% scenario adds £224/yr (£19/month) to the average bill. The
+        +60% scenario adds £1,345/yr (£112/month). At the 2022-level, the
+        total cost to all households is £92.6bn. These extra costs push
+        more households into fuel poverty, as the next section shows.
       </p>
     </section>
   );
@@ -443,12 +421,11 @@ function FuelPovertySection() {
     <section className="section" id="fuel-poverty">
       <h2 className="section-title">Fuel poverty impact</h2>
       <p className="section-description">
-        A household is fuel poor if it spends more than 10% of its net
-        income on energy. The official UK{" "}
-        <a href="https://www.gov.uk/government/collections/fuel-poverty-statistics" target="_blank" rel="noopener noreferrer">
-          definition
-        </a>{" "}
-        (LILEE) is more complex, but the 10% threshold captures the same
+        The previous section showed extra costs per household. Here we
+        translate those costs into fuel poverty: a household is fuel poor
+        if it spends more than 10% of its net income on energy. The
+        official UK definition (LILEE)<a href="#fn-8"><sup>8</sup></a> is more complex, but
+        the 10% threshold captures the same
         dynamic. The chart below shows the fuel poverty rate and number of
         affected households under each scenario.
       </p>
@@ -492,8 +469,9 @@ function FuelPovertySection() {
 
       <p className="section-description">
         At current prices, {baseline.households_m}m households ({baseline.fuel_poverty_rate_pct}%)
-        are fuel poor. Under a severe shock, this rises to 8.7m (27.3%).
-        At the 2022-level, 12.7m households (39.8%) are fuel poor.
+        are fuel poor. Under a +60% shock, this rises to 9.5m (29.9%).
+        At the 2022-level, 14.8m households (46.5%) are fuel poor. The next
+        section evaluates four policy tools that could offset these costs.
       </p>
     </section>
   );
@@ -528,10 +506,11 @@ function PolicySection() {
     <section className="section" id="policies">
       <h2 className="section-title">Policy responses</h2>
       <p className="section-description">
-        We model four policy tools against a severe (+60%) shock (cap rises
-        to £2,752, adding £1,350/yr per household). The key metric is{" "}
+        Given the scale of the impact shown above, we model four policy
+        tools against a +60% shock (cap rises to £2,625, adding £1,345/yr
+        per household). The key metric is{" "}
         <strong>shock offset</strong>: what share of the extra cost each
-        policy covers.
+        policy covers for each decile.
       </p>
 
       <ul className="policy-bullet-list">
@@ -659,10 +638,15 @@ function PolicySection() {
       </div>
 
       <p className="section-description">
-        The EPG costs £0.8bn and offsets ~2% of the shock. The flat transfer
-        costs £12.8bn and offsets 25–35%. The CT rebate costs £7.7bn and
-        offsets 11–23%. Winter fuel expansion costs £1.5bn and covers
-        pensioner households only.
+        The EPG costs £0.4bn and offsets ~1% of the shock. The flat transfer
+        costs £12.8bn and offsets 25–36%. The CT rebate costs £7.7bn and
+        offsets 11–26%. Winter fuel expansion costs £1.5bn and covers
+        pensioner households only. All four face a targeting gap: the
+        government holds no single database linking household energy costs
+        with income. Bangham argues<a href="#fn-9"><sup>9</sup></a> joining data across Ofgem,
+        DWP and HMRC before 1 July could enable
+        more targeted support than the 2022 response. The final section
+        compares all four policies on cost and household benefit.
       </p>
     </section>
   );
@@ -703,8 +687,9 @@ function SummarySection() {
     <section className="section" id="summary">
       <h2 className="section-title">Policy cost comparison</h2>
       <p className="section-description">
-        The chart below compares the four policies on exchequer cost and
-        average household benefit. Toggle between the two metrics.
+        The previous section examined each policy individually. The chart
+        below places all four side by side on two metrics: exchequer cost
+        and average household benefit.
       </p>
 
       <div className="chart-wrapper">
@@ -739,7 +724,7 @@ function SummarySection() {
 
       <p className="section-description">
         The flat transfer provides the largest average benefit (£400/yr) at
-        £12.8bn. The EPG is the cheapest (£0.8bn) but provides only £24/yr
+        £12.8bn. The EPG is the cheapest (£0.4bn) but provides only £12/yr
         on average. The CT rebate falls in between at £7.7bn and £240/yr.
         Winter fuel expansion costs £1.5bn and averages £104/yr.
       </p>
@@ -753,36 +738,132 @@ export default function Dashboard() {
       <header className="narrative-hero">
         <h1>Energy price shock: distributional impact and policy options</h1>
         <p className="narrative-lead">
-          The Iran war could trigger an energy price{" "}
-          <a href="https://www.ft.com/content/13f5e566-83c0-4d94-9338-9d418053c290" target="_blank" rel="noopener noreferrer">
-            shock
-          </a>{" "}
-          that the Resolution Foundation{" "}
-          <a href="https://www.theguardian.com/business/2026/mar/04/war-in-middle-east-could-wipe-out-growth-in-uk-living-standards" target="_blank" rel="noopener noreferrer">
-            estimates
-          </a>{" "}
-          could add £500 to typical annual energy bills and offset the
-          £300 rise in living standards expected this year. The price cap
-          system means bills would not rise until the end of June at the
-          earliest, giving the government time to{" "}
-          <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another?r=8zbi3" target="_blank" rel="noopener noreferrer">
-            prepare
-          </a>
-          . This
-          analysis{" "}
-          <a href="https://github.com/PolicyEngine/energy-price-shock" target="_blank" rel="noopener noreferrer">
-            uses
-          </a>{" "}
-          <strong>PolicyEngine UK</strong> microsimulation to model the
-          distributional impact and evaluate <strong>four policy responses</strong>.
+          This analysis estimates the distributional impact of five
+          energy price shock scenarios across income deciles and models
+          four policy responses.
         </p>
       </header>
+
+      <section className="section" id="introduction">
+      <h2 className="section-title">Introduction</h2>
+      <p className="section-description">
+        Military strikes on Iran have disrupted shipping through the Strait
+        of Hormuz, which carries roughly 20% of the world's oil and
+        gas. UK wholesale gas prices spiked over 90% in the first
+        week.<a href="#fn-1"><sup>1</sup></a> Cornwall Insight forecasts the July 2026 Ofgem
+        price cap at £1,801, a 10% increase.<a href="#fn-2"><sup>2</sup></a> Stifel analysts
+        warn a prolonged closure could push the cap to
+        £2,500.<a href="#fn-3"><sup>3</sup></a> The Resolution Foundation estimates a sustained
+        rise could add £500 to typical annual energy bills, offsetting the
+        £300 growth in living standards expected this year.<a href="#fn-4"><sup>4</sup></a>
+      </p>
+      <p className="section-description">
+        The most recent comparable episode, the 2022 European energy
+        crisis, raised household living costs by around 7% of
+        consumption, with lower-income households bearing a larger
+        share (Ari et al., 2022). In the UK, average household losses
+        reached 6% of income before government intervention. Households at
+        the 10th income percentile lost 5 percentage points more than those
+        at the 90th (Levell et al., 2025). The UK's 2022 relief package, a
+        39% price subsidy combined with a universal £400 transfer, cost
+        1.3% of GDP in six months and reduced losses, but 12% of total
+        spending was lost to inefficiency (Levell et al., 2025). More
+        broadly, oil price shocks have triggered recessions since the
+        1970s, though their macroeconomic impact has diminished over time
+        (Blanchard and Galí, 2010). Price increases tend to reduce output
+        more than equivalent decreases boost it (Kilian, 2008). Even in
+        the absence of a crisis, energy price volatility alone costs around
+        0.8% of consumption per year (Manzano and Rey, 2013).
+      </p>
+      <p className="section-description">
+        Under current Ofgem rules,<a href="#fn-5"><sup>5</sup></a> the
+        price cap for April to June is already set at £1,641, so household
+        bills would not change before 1 July. From July, the cap will
+        reflect wholesale market conditions. This analysis models five
+        price shock scenarios, from a 10% increase to
+        a return to 2022-level prices. For each, it estimates the extra
+        cost per household across income deciles, the impact on fuel
+        poverty rates, and the distributional effects of four policy
+        responses: an Energy Price Guarantee, a flat transfer, a council
+        tax band rebate, and an expanded Winter Fuel Allowance. All
+        modelling uses the PolicyEngine UK microsimulation
+        model.<a href="#fn-6"><sup>6</sup></a>
+      </p>
+      </section>
 
       <BaselineSection />
       <ShockSection />
       <FuelPovertySection />
       <PolicySection />
       <SummarySection />
+
+      <section className="section" id="references">
+        <h2 className="section-title">References</h2>
+
+        <div className="chart-title" style={{ marginBottom: 12 }}>Academic literature</div>
+        <ul className="policy-bullet-list" style={{ fontSize: "0.82rem", color: "#64748b", lineHeight: 1.8 }}>
+          <li>
+            Ari, A., Arregui, N., Black, S., Celasun, O., Iakova, D., Mineshima, A., Mylonas, V., Parry, I., Teodoru, I. and Zhunussova, K. (2022). "Surging Energy Prices in Europe in the Aftermath of the War: How to Support the Vulnerable and Speed up the Transition Away from Fossil Fuels." <em>IMF Working Paper</em>, No. 22/152.{" "}
+            <a href="https://www.imf.org/en/publications/wp/issues/2022/07/28/surging-energy-prices-in-europe-in-the-aftermath-of-the-war-how-to-support-the-vulnerable-521457" target="_blank" rel="noopener noreferrer">Link</a>
+          </li>
+          <li>
+            Levell, P., O'Connell, M. and Smith, K. (2025). "The Welfare Effects of Price Shocks and Household Relief Packages: Evidence from an Energy Crisis." <em>IFS Working Paper</em>, No. 25/03. London: Institute for Fiscal Studies.{" "}
+            <a href="https://ifs.org.uk/sites/default/files/2025-06/WP202503-The-welfare-effects-of-price-shocks-and-household-relief-packages-evidence-from-an-energy-crisis.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+          </li>
+          <li>
+            Blanchard, O. J. and Galí, J. (2010). "The Macroeconomic Effects of Oil Price Shocks: Why Are the 2000s so Different from the 1970s?" In Galí, J. and Gertler, M. J. (eds.), <em>International Dimensions of Monetary Policy</em>, pp. 373–421. Chicago: University of Chicago Press (NBER).{" "}
+            <a href="https://www.nber.org/system/files/chapters/c0517/c0517.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+          </li>
+          <li>
+            Kilian, L. (2008). "The Economic Effects of Energy Price Shocks." <em>Journal of Economic Literature</em>, 46(4), pp. 871–909.{" "}
+            <a href="http://www.douglaslaxton.org/sitebuildercontent/sitebuilderfiles/kilian.theeconomiceffects.paper.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+          </li>
+          <li>
+            Manzano, B. and Rey, L. (2013). "The Welfare Cost of Energy Insecurity." Paper presented at the International Energy Workshop, Paris, 19–21 June 2013.{" "}
+            <a href="https://www.internationalenergyworkshop.org/docs/IEW%202013_5A2paperManzano.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+          </li>
+        </ul>
+
+        <div className="chart-title" style={{ marginTop: 24, marginBottom: 12 }}>Sources and data</div>
+        <ol className="ref-list">
+          <li id="fn-1">
+            <em>City AM</em>, "UK gas prices spike over 90 per cent amid US-Iran war," 3 March 2026.{" "}
+            <a href="https://www.cityam.com/uk-gas-prices-spike-over-90-per-cent-amid-us-iran-war/" target="_blank" rel="noopener noreferrer">cityam.com</a>
+          </li>
+          <li id="fn-2">
+            Cornwall Insight, "Final July price cap forecast," March 2026.{" "}
+            <a href="https://www.cornwall-insight.com/press-and-media/press-release/cornwall-insight-release-final-july-price-cap-forecast/" target="_blank" rel="noopener noreferrer">cornwall-insight.com</a>
+          </li>
+          <li id="fn-3">
+            <em>GB News</em>, "Iran war: Household energy bills could rise by £160," March 2026 (citing Stifel analysts).{" "}
+            <a href="https://www.gbnews.com/news/iran-war-household-energy-bills-rise" target="_blank" rel="noopener noreferrer">gbnews.com</a>
+          </li>
+          <li id="fn-4">
+            Resolution Foundation, "War in Middle East threatens bumper year of living standards growth for lower-income families," 4 March 2026.{" "}
+            <a href="https://www.resolutionfoundation.org/press-releases/war-in-middle-east-threatens-bumper-year-of-living-standards-growth-for-lower-income-families/" target="_blank" rel="noopener noreferrer">resolutionfoundation.org</a>
+          </li>
+          <li id="fn-5">
+            Ofgem, "Energy price cap explained," accessed March 2026.{" "}
+            <a href="https://www.ofgem.gov.uk/energy-regulation/domestic-and-non-domestic/energy-pricing-rules/energy-price-cap" target="_blank" rel="noopener noreferrer">ofgem.gov.uk</a>
+          </li>
+          <li id="fn-6">
+            PolicyEngine, "Energy price shock: distributional impact and policy options," GitHub repository.{" "}
+            <a href="https://github.com/PolicyEngine/energy-price-shock" target="_blank" rel="noopener noreferrer">github.com</a>
+          </li>
+          <li id="fn-7">
+            <em>Financial Times</em>, "Iran conflict pushes gas prices higher," March 2026.{" "}
+            <a href="https://www.ft.com/content/13f5e566-83c0-4d94-9338-9d418053c290" target="_blank" rel="noopener noreferrer">ft.com</a>
+          </li>
+          <li id="fn-8">
+            DESNZ, "Fuel poverty statistics," GOV.UK, accessed March 2026.{" "}
+            <a href="https://www.gov.uk/government/collections/fuel-poverty-statistics" target="_blank" rel="noopener noreferrer">gov.uk</a>
+          </li>
+          <li id="fn-9">
+            Bangham, G., "Now is the time to prepare for another energy price shock," Substack, March 2026.{" "}
+            <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another" target="_blank" rel="noopener noreferrer">substack.com</a>
+          </li>
+        </ol>
+      </section>
     </div>
   );
 }
