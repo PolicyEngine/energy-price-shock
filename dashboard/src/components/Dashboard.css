@@ -230,7 +230,7 @@ html {
 
 /* ======= Vertical Column Chart ======= */
 .col-chart {
-  padding: 24px 0 28px;
+  padding: 24px 0 64px;
 }
 
 .col-chart-y-label {
@@ -390,7 +390,7 @@ html {
 
 .col-chart-label {
   position: absolute;
-  bottom: -22px;
+  bottom: -24px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.7rem;
@@ -399,12 +399,30 @@ html {
   white-space: nowrap;
 }
 
+.col-chart-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 36px;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.col-chart-legend-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
 .col-chart-x-label {
   font-size: 0.7rem;
   font-weight: 600;
   color: #94a3b8;
   text-align: center;
-  margin-top: 32px;
+  margin-top: 44px;
   letter-spacing: 0.5px;
 }
 

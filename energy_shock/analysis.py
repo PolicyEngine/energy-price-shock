@@ -6,6 +6,7 @@ from microdf import MicroDataFrame
 from .config import (
     YEAR, CURRENT_CAP, PRICE_SCENARIOS,
     SHOCK_CAP, EPG_TARGET, FLAT_TRANSFER, CT_REBATE,
+    SHORT_RUN_ELASTICITY,
 )
 from .utils import calc_decile_table
 
@@ -102,6 +103,150 @@ def _fuel_poverty(energy, net_income, weights):
         })
 
     return rows
+
+
+def _behavioral_responses(energy, net_income, weights, energy_by_decile, income_by_decile):
+    """Behavioral responses: how households cut consumption when prices rise."""
+    epsilon = SHORT_RUN_ELASTICITY  # e.g. -0.15
+    results_list = []
+
+    for name, new_cap in PRICE_SCENARIOS.items():
+        price_pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
+        # Consumption change: dq/q = epsilon * dp/p
+        consumption_change_pct = epsilon * price_pct
+        # Static: spend rises by price_pct
+        # Behavioral: new_spend = old_spend * (1 + price_pct) * (1 + epsilon * price_pct)
+        behavioral_factor = (1 + price_pct) * (1 + consumption_change_pct)
+        static_factor = (1 + price_pct)
+
+        static_extra = float(energy.mean()) * price_pct
+        behavioral_extra = float(energy.mean()) * (behavioral_factor - 1)
+        bill_saving = static_extra - behavioral_extra
+
+        # Welfare loss from reduced consumption (comfort/warmth given up)
+        # Approximation: 0.5 * old_spend * |epsilon| * (price_pct)^2
+        welfare_loss_comfort = float(energy.mean()) * 0.5 * abs(epsilon) * (price_pct ** 2)
+
+        # Decile breakdown
+        deciles = []
+        for d in range(1, 11):
+            e = float(energy_by_decile.get(d, 0))
+            inc = float(income_by_decile.get(d, 0))
+            static_hit = e * price_pct
+            behavioral_hit = e * (behavioral_factor - 1)
+            saving = static_hit - behavioral_hit
+            deciles.append({
+                "decile": d,
+                "static_extra_cost": round(static_hit),
+                "behavioral_extra_cost": round(behavioral_hit),
+                "bill_saving": round(saving),
+                "consumption_reduction_pct": round(consumption_change_pct * 100, 1),
+                "static_pct_of_income": round(static_hit / inc * 100, 1) if inc > 0 else 0,
+                "behavioral_pct_of_income": round(behavioral_hit / inc * 100, 1) if inc > 0 else 0,
+            })
+
+        # Behavioral fuel poverty
+        fp_df = MicroDataFrame(
+            {"energy": energy.values, "income": net_income.values},
+            weights=weights,
+        )
+        static_energy = fp_df.energy * static_factor
+        behavioral_energy = fp_df.energy * behavioral_factor
+        static_fp = (static_energy / fp_df.income.clip(lower=1)) > 0.10
+        behavioral_fp = (behavioral_energy / fp_df.income.clip(lower=1)) > 0.10
+
+        results_list.append({
+            "name": name,
+            "new_cap": new_cap,
+            "price_increase_pct": round(price_pct * 100),
+            "elasticity": epsilon,
+            "consumption_change_pct": round(consumption_change_pct * 100, 1),
+            "static_avg_extra": round(static_extra),
+            "behavioral_avg_extra": round(behavioral_extra),
+            "bill_saving_avg": round(bill_saving),
+            "welfare_loss_comfort_avg": round(welfare_loss_comfort),
+            "static_fp_rate": round(float(static_fp.mean()) * 100, 1),
+            "behavioral_fp_rate": round(float(behavioral_fp.mean()) * 100, 1),
+            "static_fp_households_m": round(float(static_fp.sum()) / 1e6, 1),
+            "behavioral_fp_households_m": round(float(behavioral_fp.sum()) / 1e6, 1),
+            "deciles": deciles,
+        })
+
+    return results_list
+
+
+def _policy_net_position(energy, net_income, weights, energy_by_decile, income_by_decile):
+    """Show net household position: baseline → shock → shock + policy."""
+    shock_pct = (SHOCK_CAP - CURRENT_CAP) / CURRENT_CAP
+    epsilon = SHORT_RUN_ELASTICITY
+    consumption_change = epsilon * shock_pct
+    behavioral_factor = (1 + shock_pct) * (1 + consumption_change)
+
+    policies_config = {
+        "epg": {
+            "name": "EPG subsidy",
+            "reform": {
+                "gov.ofgem.energy_price_cap": {"2026-01-01": SHOCK_CAP},
+                "gov.ofgem.energy_price_guarantee": {"2026-01-01": EPG_TARGET},
+            },
+            "variable": "epg_subsidy",
+        },
+        "flat_transfer": {
+            "name": "Flat transfer",
+            "reform": {
+                "gov.treasury.energy_bills_rebate.energy_bills_credit": {"2026-01-01": FLAT_TRANSFER},
+            },
+            "variable": "ebr_energy_bills_credit",
+        },
+        "ct_rebate": {
+            "name": "CT band rebate",
+            "reform": {
+                "gov.treasury.energy_bills_rebate.council_tax_rebate.amount": {"2026-01-01": CT_REBATE},
+            },
+            "variable": "ebr_council_tax_rebate",
+        },
+    }
+
+    results_dict = {}
+    for key, cfg in policies_config.items():
+        sim = Microsimulation(reform=cfg["reform"])
+        benefit = sim.calculate(cfg["variable"], YEAR)
+        by_decile = calc_decile_table(sim, cfg["variable"], YEAR)
+
+        deciles = []
+        for d in range(1, 11):
+            e = float(energy_by_decile.get(d, 0))
+            inc = float(income_by_decile.get(d, 0))
+            static_shock = e * shock_pct
+            behavioral_shock = e * (behavioral_factor - 1)
+            policy_benefit = float(by_decile.get(d, 0))
+            # Net position: how much worse off vs baseline after shock + policy
+            net_static = static_shock - policy_benefit
+            net_behavioral = behavioral_shock - policy_benefit
+            deciles.append({
+                "decile": d,
+                "baseline_energy": round(e),
+                "shock_extra_static": round(static_shock),
+                "shock_extra_behavioral": round(behavioral_shock),
+                "policy_benefit": round(policy_benefit),
+                "net_cost_static": round(max(net_static, 0)),
+                "net_cost_behavioral": round(max(net_behavioral, 0)),
+                "offset_pct_static": round(policy_benefit / static_shock * 100) if static_shock > 0 else 0,
+                "offset_pct_behavioral": round(policy_benefit / behavioral_shock * 100) if behavioral_shock > 0 else 0,
+            })
+
+        results_dict[key] = {
+            "name": cfg["name"],
+            "exchequer_cost_bn": round(float(benefit.sum()) / 1e9, 1),
+            "avg_benefit": round(float(benefit.mean())),
+            "avg_shock_static": round(float(energy.mean()) * shock_pct),
+            "avg_shock_behavioral": round(float(energy.mean()) * (behavioral_factor - 1)),
+            "avg_net_cost_static": round(float(energy.mean()) * shock_pct - float(benefit.mean())),
+            "avg_net_cost_behavioral": round(float(energy.mean()) * (behavioral_factor - 1) - float(benefit.mean())),
+            "deciles": deciles,
+        }
+
+    return results_dict
 
 
 def _policy_epg(energy_by_decile):
@@ -285,6 +430,9 @@ def run_full_analysis(output_path=None):
     print("Computing fuel poverty...")
     fuel_poverty = _fuel_poverty(energy, net_income, weights)
 
+    print("Computing behavioral responses...")
+    behavioral = _behavioral_responses(energy, net_income, weights, energy_by_decile, income_by_decile)
+
     print("Running Policy A: EPG...")
     pol_epg = _policy_epg(energy_by_decile)
 
@@ -300,10 +448,14 @@ def run_full_analysis(output_path=None):
     print("Running Policy E: Combined...")
     pol_combined = _policy_combined(sim, energy_by_decile, income_by_decile)
 
+    print("Computing policy net positions...")
+    policy_net = _policy_net_position(energy, net_income, weights, energy_by_decile, income_by_decile)
+
     results = {
         "baseline": baseline,
         "shock_scenarios": scenarios,
         "fuel_poverty": fuel_poverty,
+        "behavioral": behavioral,
         "policies": {
             "epg": pol_epg,
             "flat_transfer": pol_flat,
@@ -311,6 +463,7 @@ def run_full_analysis(output_path=None):
             "winter_fuel": pol_wfa,
             "combined": pol_combined,
         },
+        "policy_net_position": policy_net,
         "config": {
             "year": YEAR,
             "current_cap": CURRENT_CAP,
@@ -318,6 +471,7 @@ def run_full_analysis(output_path=None):
             "epg_target": EPG_TARGET,
             "flat_transfer": FLAT_TRANSFER,
             "ct_rebate": CT_REBATE,
+            "elasticity": SHORT_RUN_ELASTICITY,
         },
     }
 

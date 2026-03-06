@@ -234,25 +234,31 @@ function BaselineSection() {
 }
 
 function ShockSection() {
-  const [selected, setSelected] = useState(3);
+  const [selected, setSelected] = useState(0);
   const [shockMetric, setShockMetric] = useState("pct_of_income");
   const [scenarioMetric, setScenarioMetric] = useState("avg_hh_hit_yr");
   const scenario = results.shock_scenarios[selected];
+  const behav = results.behavioral[selected];
 
-  const barData = scenario.deciles.map((d) => ({
-    label: `${d.decile}`,
-    value: shockMetric === "pct_of_income" ? d.pct_of_income : d.extra_cost,
-  }));
+  const barData = scenario.deciles.map((d, i) => {
+    const bd = behav.deciles[i];
+    return {
+      label: `${d.decile}`,
+      staticVal: shockMetric === "pct_of_income" ? d.pct_of_income : d.extra_cost,
+      behavVal: shockMetric === "pct_of_income" ? bd.behavioral_pct_of_income : bd.behavioral_extra_cost,
+    };
+  });
 
   return (
     <section className="section" id="shocks">
       <h2 className="section-title">Price shock scenarios</h2>
       <p className="section-description">
-        Given the baseline distribution above, we model five scenarios for
-        how a price increase would affect households. Gas makes up 35% of
-        UK energy demand<a href="#fn-7"><sup>7</sup></a> and gas-fired power stations set
-        electricity prices, so gas price shocks feed through to all
-        household bills.
+        Given the baseline distribution above, we model five scenarios in
+        which the Ofgem price cap rises by a given percentage from the
+        current level of £1,641. Gas makes up 35% of UK energy
+        demand<a href="#fn-7"><sup>7</sup></a> and gas-fired power stations set electricity
+        prices, so wholesale gas price shocks feed through to the cap and
+        to all household bills.
       </p>
       <ul className="policy-bullet-list">
         <li><strong>+10%</strong> Short-lived supply disruption or moderate market uncertainty. Cap rises to £1,805.</li>
@@ -261,22 +267,40 @@ function ShockSection() {
         <li><strong>+60%</strong> Major escalation comparable to the initial impact of the 2022 crisis. Cap rises to £2,625.</li>
         <li><strong>2022-level</strong> Matches the October 2022 peak of £3,764, when wholesale gas prices reached record highs.</li>
       </ul>
+      <h3 className="section-title" style={{ fontSize: "1.1rem", marginTop: 32 }}>Behavioural response</h3>
+      <p className="section-description">
+        Each chart below shows two estimates side by side. The grey bar is
+        the static estimate, assuming households do not change their energy
+        consumption. The teal bar is the behavioural estimate, which
+        accounts for the fact that households reduce usage when prices
+        rise — turning down heating, using less hot water. The behavioural
+        estimate uses a short-run price elasticity of −0.15, matching the
+        overall energy short-run average of −0.149 reported in a
+        meta-analysis of 428 studies (Labandeira, Labeaga and López-Otero,
+        2017). Elasticities vary by income: Priesmann and Praktiknjo
+        (2025) find short-run gas price elasticities ranging from −0.64
+        for low-income to −0.11 for high-income households. The bill
+        saving from reduced consumption does not capture the full cost to
+        households, who also lose comfort and warmth.
+      </p>
       <p className="section-description">
         Select a scenario to see its distributional impact. The first chart
         shows the extra cost per decile as a percentage of income or in
         pounds. The second chart compares all five scenarios side by side.
       </p>
 
-      <div className="scenario-pills">
-        {results.shock_scenarios.map((s, i) => (
-          <button
-            key={i}
-            className={`scenario-pill${i === selected ? " active" : ""}`}
-            onClick={() => setSelected(i)}
-          >
-            {s.name}
-          </button>
-        ))}
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
+        <div className="scenario-pills">
+          {results.shock_scenarios.map((s, i) => (
+            <button
+              key={i}
+              className={`scenario-pill${i === selected ? " active" : ""}`}
+              onClick={() => setSelected(i)}
+            >
+              {s.name}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="kpi-row">
@@ -287,20 +311,19 @@ function ShockSection() {
           color="teal"
         />
         <KpiCard
-          label="Price increase"
-          value={`+${scenario.price_increase_pct}%`}
-          color="teal"
+          label="Static avg hit"
+          value={fmt(scenario.avg_hh_hit_yr)}
+          unit="/yr"
         />
         <KpiCard
-          label="Avg household hit"
-          value={fmt(scenario.avg_hh_hit_yr)}
+          label="Behavioural avg hit"
+          value={fmt(behav.behavioral_avg_extra)}
           unit="/yr"
           color="teal"
         />
         <KpiCard
-          label="Total cost to households"
-          value={fmtBn(scenario.total_cost_bn)}
-          color="teal"
+          label="Consumption change"
+          value={`${behav.consumption_change_pct}%`}
         />
       </div>
 
@@ -314,8 +337,8 @@ function ShockSection() {
             </div>
             <div className="chart-subtitle">
               {shockMetric === "pct_of_income"
-                ? "Share of each decile's income consumed by the price increase"
-                : "Annual extra cost per household by income decile"}
+                ? "Grey = static (no demand response), teal = behavioural (ε = −0.15)"
+                : "Grey = static (no demand response), teal = behavioural (ε = −0.15)"}
             </div>
           </div>
           <div className="scenario-pills">
@@ -333,13 +356,57 @@ function ShockSection() {
             </button>
           </div>
         </div>
-        <ColumnChart
-          data={barData}
-          maxValue={Math.max(...barData.map((d) => d.value)) * 1.15}
-          color="teal"
-          formatValue={shockMetric === "pct_of_income" ? (v) => `${v}%` : (v) => fmt(v)}
-          xLabel="Decile"
-        />
+        {(() => {
+          const maxVal = Math.max(...barData.map((d) => d.staticVal)) * 1.15;
+          const ticks = niceTicks(maxVal);
+          const topTick = ticks[ticks.length - 1] || maxVal;
+          const effectiveMax = Math.max(maxVal, topTick);
+          const fmtVal = shockMetric === "pct_of_income" ? (v) => `${v}%` : (v) => fmt(v);
+          return (
+            <div className="col-chart">
+              <div className="col-chart-body">
+                <div className="col-chart-y-axis">
+                  {[...ticks].reverse().map((t, i) => (
+                    <div className="col-chart-y-tick" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }}>
+                      {fmtVal(t)}
+                    </div>
+                  ))}
+                </div>
+                <div className="col-chart-area">
+                  {ticks.map((t, i) => (
+                    <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
+                  ))}
+                  <div className="col-chart-bars">
+                    {barData.map((d, i) => (
+                      <div className="col-chart-col" key={i}>
+                        <div className="col-chart-tooltip">
+                          {shockMetric === "pct_of_income"
+                            ? `Static: ${d.staticVal}%, Behavioural: ${d.behavVal}%`
+                            : `Static: ${fmt(d.staticVal)}, Behavioural: ${fmt(d.behavVal)}`}
+                        </div>
+                        <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
+                          <div
+                            className="col-chart-fill"
+                            style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#94a3b8", borderRadius: "3px 3px 0 0" }}
+                          />
+                          <div
+                            className="col-chart-fill"
+                            style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#319795", borderRadius: "3px 3px 0 0" }}
+                          />
+                        </div>
+                        <div className="col-chart-label">{d.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="col-chart-legend">
+                <span><span className="col-chart-legend-dot" style={{ background: "#94a3b8" }} />Static</span>
+                <span><span className="col-chart-legend-dot" style={{ background: "#319795" }} />Behavioural</span>
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       <p className="section-description">
@@ -352,10 +419,9 @@ function ShockSection() {
           <div>
             <div className="chart-title">All scenarios at a glance</div>
             <div className="chart-subtitle">
-              {{ new_cap: "New Ofgem price cap by scenario",
-                 avg_hh_hit_yr: "Average household hit per year, by scenario",
-                 total_cost: "Total cost to all UK households",
-              }[scenarioMetric]}
+              {scenarioMetric === "new_cap"
+                ? "New Ofgem price cap by scenario"
+                : "Grey = static, teal = behavioural"}
             </div>
           </div>
           <div className="scenario-pills">
@@ -374,48 +440,114 @@ function ShockSection() {
             ))}
           </div>
         </div>
-        <ColumnChart
-          data={results.shock_scenarios.map((s) => ({
-            label: s.name,
-            value: {
-              new_cap: s.new_cap,
-              avg_hh_hit_yr: s.avg_hh_hit_yr,
-              total_cost: s.total_cost_bn,
-            }[scenarioMetric],
-          }))}
-          maxValue={Math.max(...results.shock_scenarios.map((s) => ({
-            new_cap: s.new_cap,
-            avg_hh_hit_yr: s.avg_hh_hit_yr,
-            total_cost: s.total_cost_bn,
-          })[scenarioMetric])) * 1.15}
-          color="teal"
-          formatValue={{
-            new_cap: (v) => fmt(v),
-            avg_hh_hit_yr: (v) => fmt(v),
-            total_cost: (v) => fmtBn(v),
-          }[scenarioMetric]}
-        />
+        {scenarioMetric === "new_cap" ? (
+          <ColumnChart
+            data={results.shock_scenarios.map((s) => ({
+              label: s.name,
+              value: s.new_cap,
+            }))}
+            maxValue={Math.max(...results.shock_scenarios.map((s) => s.new_cap)) * 1.15}
+            color="teal"
+            formatValue={(v) => fmt(v)}
+          />
+        ) : (
+          (() => {
+            const scenarios = results.shock_scenarios;
+            const behavAll = results.behavioral;
+            const nHH = results.baseline.n_households_m;
+            const glanceData = scenarios.map((s, i) => {
+              if (scenarioMetric === "avg_hh_hit_yr") {
+                return { label: s.name, staticVal: s.avg_hh_hit_yr, behavVal: behavAll[i].behavioral_avg_extra };
+              }
+              const staticTotal = Math.round((s.avg_hh_hit_yr * nHH / 1000) * 10) / 10;
+              const behavTotal = Math.round((behavAll[i].behavioral_avg_extra * nHH / 1000) * 10) / 10;
+              return { label: s.name, staticVal: staticTotal, behavVal: behavTotal };
+            });
+            const maxVal = Math.max(...glanceData.map((d) => d.staticVal)) * 1.15;
+            const ticks = niceTicks(maxVal);
+            const topTick = ticks[ticks.length - 1] || maxVal;
+            const effectiveMax = Math.max(maxVal, topTick);
+            const fmtVal = scenarioMetric === "avg_hh_hit_yr" ? (v) => fmt(v) : (v) => fmtBn(v);
+            const fmtTip = scenarioMetric === "avg_hh_hit_yr"
+              ? (d) => `Static: ${fmt(d.staticVal)}/yr, Behavioural: ${fmt(d.behavVal)}/yr`
+              : (d) => `Static: ${fmtBn(d.staticVal)}, Behavioural: ${fmtBn(d.behavVal)}`;
+            return (
+              <div className="col-chart">
+                <div className="col-chart-body">
+                  <div className="col-chart-y-axis">
+                    {[...ticks].reverse().map((t, i) => (
+                      <div className="col-chart-y-tick" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }}>
+                        {fmtVal(t)}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="col-chart-area">
+                    {ticks.map((t, i) => (
+                      <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
+                    ))}
+                    <div className="col-chart-bars">
+                      {glanceData.map((d, i) => (
+                        <div className="col-chart-col" key={i}>
+                          <div className="col-chart-tooltip">
+                            {fmtTip(d)}
+                          </div>
+                          <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
+                            <div
+                              className="col-chart-fill"
+                              style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#94a3b8", borderRadius: "3px 3px 0 0" }}
+                            />
+                            <div
+                              className="col-chart-fill"
+                              style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#319795", borderRadius: "3px 3px 0 0" }}
+                            />
+                          </div>
+                          <div className="col-chart-label">{d.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-chart-legend">
+                  <span><span className="col-chart-legend-dot" style={{ background: "#94a3b8" }} />Static</span>
+                  <span><span className="col-chart-legend-dot" style={{ background: "#319795" }} />Behavioural</span>
+                </div>
+              </div>
+            );
+          })()
+        )}
       </div>
 
       <p className="section-description">
-        The +10% scenario adds £224/yr (£19/month) to the average bill. The
-        +60% scenario adds £1,345/yr (£112/month). At the 2022-level, the
-        total cost to all households is £92.6bn. These extra costs push
+        Under a +60% shock, demand response reduces the average extra cost
+        from £1,345/yr to £1,023/yr, a saving of £323/yr. At the
+        2022-level, households reduce consumption by 19.4%, lowering the
+        average hit from £2,903/yr to £1,904/yr. These extra costs push
         more households into fuel poverty, as the next section shows.
       </p>
     </section>
   );
 }
 
+
 function FuelPovertySection() {
   const fp = results.fuel_poverty;
+  const behavioral = results.behavioral;
   const baseline = fp[0];
   const [fpMetric, setFpMetric] = useState("rate");
 
-  const barData = fp.map((r) => ({
-    label: r.scenario.split("(")[0].trim(),
-    value: fpMetric === "rate" ? r.fuel_poverty_rate_pct : r.households_m,
-  }));
+  const barData = fp.map((r, i) => {
+    const label = r.scenario.split("(")[0].trim();
+    if (i === 0) {
+      const v = fpMetric === "rate" ? r.fuel_poverty_rate_pct : r.households_m;
+      return { label, staticVal: v, behavVal: v };
+    }
+    const b = behavioral[i - 1];
+    return {
+      label,
+      staticVal: fpMetric === "rate" ? r.fuel_poverty_rate_pct : r.households_m,
+      behavVal: fpMetric === "rate" ? b.behavioral_fp_rate : b.behavioral_fp_households_m,
+    };
+  });
 
   return (
     <section className="section" id="fuel-poverty">
@@ -427,7 +559,8 @@ function FuelPovertySection() {
         official UK definition (LILEE)<a href="#fn-8"><sup>8</sup></a> is more complex, but
         the 10% threshold captures the same
         dynamic. The chart below shows the fuel poverty rate and number of
-        affected households under each scenario.
+        affected households under each scenario, with and without demand
+        response.
       </p>
 
       <div className="chart-wrapper">
@@ -439,9 +572,7 @@ function FuelPovertySection() {
                 : "Fuel poor households by scenario"}
             </div>
             <div className="chart-subtitle">
-              {fpMetric === "rate"
-                ? "Percentage of all UK households spending >10% of net income on energy"
-                : "Millions of UK households spending >10% of net income on energy"}
+              Grey = static, teal = behavioural (ε = −0.15)
             </div>
           </div>
           <div className="scenario-pills">
@@ -459,19 +590,66 @@ function FuelPovertySection() {
             </button>
           </div>
         </div>
-        <ColumnChart
-          data={barData}
-          maxValue={fpMetric === "rate" ? 55 : Math.max(...fp.map((r) => r.households_m)) * 1.15}
-          color="teal"
-          formatValue={fpMetric === "rate" ? (v) => `${v}%` : (v) => `${v}m`}
-        />
+        {(() => {
+          const maxVal = fpMetric === "rate" ? 55 : Math.max(...barData.map((d) => d.staticVal)) * 1.15;
+          const ticks = niceTicks(maxVal);
+          const topTick = ticks[ticks.length - 1] || maxVal;
+          const effectiveMax = Math.max(maxVal, topTick);
+          const fmtVal = fpMetric === "rate" ? (v) => `${v}%` : (v) => `${v}m`;
+          return (
+            <div className="col-chart">
+              <div className="col-chart-body">
+                <div className="col-chart-y-axis">
+                  {[...ticks].reverse().map((t, i) => (
+                    <div className="col-chart-y-tick" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }}>
+                      {fmtVal(t)}
+                    </div>
+                  ))}
+                </div>
+                <div className="col-chart-area">
+                  {ticks.map((t, i) => (
+                    <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
+                  ))}
+                  <div className="col-chart-bars">
+                    {barData.map((d, i) => (
+                      <div className="col-chart-col" key={i}>
+                        <div className="col-chart-tooltip">
+                          {fpMetric === "rate"
+                            ? `Static: ${d.staticVal}%, Behavioural: ${d.behavVal}%`
+                            : `Static: ${d.staticVal}m, Behavioural: ${d.behavVal}m`}
+                        </div>
+                        <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
+                          <div
+                            className="col-chart-fill"
+                            style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#94a3b8", borderRadius: "3px 3px 0 0" }}
+                          />
+                          <div
+                            className="col-chart-fill"
+                            style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#319795", borderRadius: "3px 3px 0 0" }}
+                          />
+                        </div>
+                        <div className="col-chart-label">{d.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="col-chart-legend">
+                <span><span className="col-chart-legend-dot" style={{ background: "#94a3b8" }} />Static</span>
+                <span><span className="col-chart-legend-dot" style={{ background: "#319795" }} />Behavioural</span>
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       <p className="section-description">
         At current prices, {baseline.households_m}m households ({baseline.fuel_poverty_rate_pct}%)
-        are fuel poor. Under a +60% shock, this rises to 9.5m (29.9%).
-        At the 2022-level, 14.8m households (46.5%) are fuel poor. The next
-        section evaluates four policy tools that could offset these costs.
+        are fuel poor. Under a +60% shock, the static rate rises to 29.9%
+        (9.5m); with demand response it is 25.5% (8.1m). At the 2022-level,
+        the static rate reaches 46.5% (14.8m), falling to 36.6% (11.7m)
+        with behavioural adjustment. The next section evaluates four policy
+        tools that could offset these costs.
       </p>
     </section>
   );
@@ -645,8 +823,121 @@ function PolicySection() {
         government holds no single database linking household energy costs
         with income. Bangham argues<a href="#fn-9"><sup>9</sup></a> joining data across Ofgem,
         DWP and HMRC before 1 July could enable
-        more targeted support than the 2022 response. The final section
-        compares all four policies on cost and household benefit.
+        more targeted support than the 2022 response. The next section
+        shows the net household position after both the price shock and
+        the policy response.
+      </p>
+    </section>
+  );
+}
+
+function PolicyNetSection() {
+  const policyNet = results.policy_net_position;
+  const policyKeys = ["epg", "flat_transfer", "ct_rebate"];
+  const policyLabels = {
+    epg: "EPG subsidy",
+    flat_transfer: "Flat transfer",
+    ct_rebate: "CT band rebate",
+  };
+  const [selectedNet, setSelectedNet] = useState("flat_transfer");
+  const [netMode, setNetMode] = useState("behavioral");
+  const pol = policyNet[selectedNet];
+
+  const barData = pol.deciles.map((d) => ({
+    label: `${d.decile}`,
+    value: netMode === "behavioral" ? d.net_cost_behavioral : d.net_cost_static,
+  }));
+
+  return (
+    <section className="section" id="policy-net">
+      <h2 className="section-title">Net household position</h2>
+      <p className="section-description">
+        The previous section showed each policy's payment in isolation.
+        This section shows the net household position: after the +60%
+        price shock and the policy response, how much extra are
+        households still paying compared to baseline? This accounts for
+        both the behavioural demand response (ε = −0.15) and the policy
+        benefit.
+      </p>
+
+      <div className="scenario-pills">
+        {policyKeys.map((key) => (
+          <button
+            key={key}
+            className={`scenario-pill${selectedNet === key ? " active" : ""}`}
+            onClick={() => setSelectedNet(key)}
+          >
+            {policyLabels[key]}
+          </button>
+        ))}
+      </div>
+
+      <div className="kpi-row">
+        <KpiCard
+          label="Shock (behavioural)"
+          value={fmt(pol.avg_shock_behavioral)}
+          unit="/yr"
+        />
+        <KpiCard
+          label="Policy benefit"
+          value={fmt(pol.avg_benefit)}
+          unit="/yr"
+          color="teal"
+        />
+        <KpiCard
+          label="Net extra cost"
+          value={fmt(pol.avg_net_cost_behavioral)}
+          unit="/yr"
+        />
+        <KpiCard
+          label="Exchequer cost"
+          value={fmtBn(pol.exchequer_cost_bn)}
+        />
+      </div>
+
+      <div className="chart-wrapper">
+        <div className="chart-header">
+          <div>
+            <div className="chart-title">
+              Remaining extra cost after {pol.name}, by decile
+            </div>
+            <div className="chart-subtitle">
+              Annual extra cost vs baseline after +60% shock and policy response
+            </div>
+          </div>
+          <div className="scenario-pills">
+            <button
+              className={`scenario-pill scenario-pill-sm${netMode === "behavioral" ? " active" : ""}`}
+              onClick={() => setNetMode("behavioral")}
+            >
+              With demand response
+            </button>
+            <button
+              className={`scenario-pill scenario-pill-sm${netMode === "static" ? " active" : ""}`}
+              onClick={() => setNetMode("static")}
+            >
+              Static
+            </button>
+          </div>
+        </div>
+        <ColumnChart
+          data={barData}
+          maxValue={Math.max(...barData.map((d) => d.value)) * 1.15}
+          color="teal"
+          formatValue={(v) => fmt(v)}
+          xLabel="Decile"
+        />
+      </div>
+
+      <p className="section-description">
+        After accounting for both demand response and the flat transfer,
+        the average household still faces an extra{" "}
+        {fmt(policyNet.flat_transfer.avg_net_cost_behavioral)}/yr
+        compared to baseline. The EPG leaves households with{" "}
+        {fmt(policyNet.epg.avg_net_cost_behavioral)}/yr extra cost. The
+        CT rebate leaves {fmt(policyNet.ct_rebate.avg_net_cost_behavioral)}/yr.
+        None of the modelled policies fully offset the shock, consistent
+        with the targeting constraints identified in the previous section.
       </p>
     </section>
   );
@@ -795,6 +1086,7 @@ export default function Dashboard() {
       <ShockSection />
       <FuelPovertySection />
       <PolicySection />
+      <PolicyNetSection />
       <SummarySection />
 
       <section className="section" id="references">
@@ -821,6 +1113,14 @@ export default function Dashboard() {
           <li>
             Manzano, B. and Rey, L. (2013). "The Welfare Cost of Energy Insecurity." Paper presented at the International Energy Workshop, Paris, 19–21 June 2013.{" "}
             <a href="https://www.internationalenergyworkshop.org/docs/IEW%202013_5A2paperManzano.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+          </li>
+          <li>
+            Labandeira, X., Labeaga, J. M. and López-Otero, X. (2017). "A Meta-Analysis on the Price Elasticity of Energy Demand." <em>Energy Policy</em>, 102, pp. 549–568. Short-run averages: energy −0.149, electricity −0.201, natural gas −0.184 (428 papers, 966 estimates).{" "}
+            <a href="https://doi.org/10.1016/j.enpol.2017.01.002" target="_blank" rel="noopener noreferrer">DOI</a>
+          </li>
+          <li>
+            Priesmann, J. and Praktiknjo, A. (2025). "Estimating Short- and Long-Run Price and Income Elasticities of Final Energy Demand as a Function of Household Income." <em>Energy Policy</em>, 207, 114850. Short-run gas elasticity: −0.64 (low-income) to −0.11 (high-income).{" "}
+            <a href="https://doi.org/10.1016/j.enpol.2025.114850" target="_blank" rel="noopener noreferrer">DOI</a>
           </li>
         </ul>
 

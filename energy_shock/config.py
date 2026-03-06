@@ -12,6 +12,11 @@ PRICE_SCENARIOS = {
     "2022-level": 3_764,
 }
 
+# Short-run price elasticity of household energy demand
+# NEED 2022-23 data: consumption fell ~10-15% when prices roughly doubled
+# Consistent with Levell et al. (2025) and Kilian (2008) estimates
+SHORT_RUN_ELASTICITY = -0.15
+
 # Policy response parameters (applied to severe shock)
 SHOCK_CAP = PRICE_SCENARIOS["+60%"]
 EPG_TARGET = 2_500

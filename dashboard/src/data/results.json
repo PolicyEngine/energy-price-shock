@@ -408,6 +408,543 @@
       "extra_households_m": 10.2
     }
   ],
+  "behavioral": [
+    {
+      "name": "+10%",
+      "new_cap": 1805,
+      "price_increase_pct": 10,
+      "elasticity": -0.15,
+      "consumption_change_pct": -1.5,
+      "static_avg_extra": 224,
+      "behavioral_avg_extra": 187,
+      "bill_saving_avg": 37,
+      "welfare_loss_comfort_avg": 2,
+      "static_fp_rate": 16.3,
+      "behavioral_fp_rate": 16.0,
+      "static_fp_households_m": 5.2,
+      "behavioral_fp_households_m": 5.1,
+      "deciles": [
+        {
+          "decile": 1,
+          "static_extra_cost": 208,
+          "behavioral_extra_cost": 174,
+          "bill_saving": 34,
+          "consumption_reduction_pct": -1.5,
+          "static_pct_of_income": 1.0,
+          "behavioral_pct_of_income": 0.9
+        },
+        {
+          "decile": 2,
+          "static_extra_cost": 197,
+          "behavioral_extra_cost": 165,
+          "bill_saving": 33,
+          "consumption_reduction_pct": -1.5,
+          "static_pct_of_income": 0.6,
+          "behavioral_pct_of_income": 0.5
+        },
+        {
+          "decile": 3,
+          "static_extra_cost": 185,
+          "behavioral_extra_cost": 154,
+          "bill_saving": 30,
+          "consumption_reduction_pct": -1.5,
+          "static_pct_of_income": 0.5,
+          "behavioral_pct_of_income": 0.4
+        },
+        {
+          "decile": 4,
+          "static_extra_cost": 200,
+          "behavioral_extra_cost": 167,
+          "bill_saving": 33,
+          "consumption_reduction_pct": -1.5,
+          "static_pct_of_income": 0.5,
+          "behavioral_pct_of_income": 0.4
+        },
+        {
+          "decile": 5,
+          "static_extra_cost": 217,
+          "behavioral_extra_cost": 181,
+          "bill_saving": 36,
+          "consumption_reduction_pct": -1.5,
+          "static_pct_of_income": 0.5,
+          "behavioral_pct_of_income": 0.4
+        },
+        {
+          "decile": 6,
+          "static_extra_cost": 213,
+          "behavioral_extra_cost": 178,
+          "bill_saving": 35,
+          "consumption_reduction_pct": -1.5,
+          "static_pct_of_income": 0.4,
+          "behavioral_pct_of_income": 0.3
+        },
+        {
+          "decile": 7,
+          "static_extra_cost": 234,
+          "behavioral_extra_cost": 195,
+          "bill_saving": 39,
+          "consumption_reduction_pct": -1.5,
+          "static_pct_of_income": 0.4,
+          "behavioral_pct_of_income": 0.4
+        },
+        {
+          "decile": 8,
+          "static_extra_cost": 265,
+          "behavioral_extra_cost": 221,
+          "bill_saving": 44,
+          "consumption_reduction_pct": -1.5,
+          "static_pct_of_income": 0.4,
+          "behavioral_pct_of_income": 0.3
+        },
+        {
+          "decile": 9,
+          "static_extra_cost": 259,
+          "behavioral_extra_cost": 216,
+          "bill_saving": 43,
+          "consumption_reduction_pct": -1.5,
+          "static_pct_of_income": 0.4,
+          "behavioral_pct_of_income": 0.3
+        },
+        {
+          "decile": 10,
+          "static_extra_cost": 270,
+          "behavioral_extra_cost": 226,
+          "bill_saving": 45,
+          "consumption_reduction_pct": -1.5,
+          "static_pct_of_income": 0.2,
+          "behavioral_pct_of_income": 0.2
+        }
+      ]
+    },
+    {
+      "name": "+20%",
+      "new_cap": 1969,
+      "price_increase_pct": 20,
+      "elasticity": -0.15,
+      "consumption_change_pct": -3.0,
+      "static_avg_extra": 448,
+      "behavioral_avg_extra": 368,
+      "bill_saving_avg": 81,
+      "welfare_loss_comfort_avg": 7,
+      "static_fp_rate": 19.2,
+      "behavioral_fp_rate": 18.5,
+      "static_fp_households_m": 6.1,
+      "behavioral_fp_households_m": 5.9,
+      "deciles": [
+        {
+          "decile": 1,
+          "static_extra_cost": 416,
+          "behavioral_extra_cost": 341,
+          "bill_saving": 75,
+          "consumption_reduction_pct": -3.0,
+          "static_pct_of_income": 2.1,
+          "behavioral_pct_of_income": 1.7
+        },
+        {
+          "decile": 2,
+          "static_extra_cost": 394,
+          "behavioral_extra_cost": 323,
+          "bill_saving": 71,
+          "consumption_reduction_pct": -3.0,
+          "static_pct_of_income": 1.3,
+          "behavioral_pct_of_income": 1.1
+        },
+        {
+          "decile": 3,
+          "static_extra_cost": 369,
+          "behavioral_extra_cost": 303,
+          "bill_saving": 66,
+          "consumption_reduction_pct": -3.0,
+          "static_pct_of_income": 1.0,
+          "behavioral_pct_of_income": 0.8
+        },
+        {
+          "decile": 4,
+          "static_extra_cost": 401,
+          "behavioral_extra_cost": 328,
+          "bill_saving": 72,
+          "consumption_reduction_pct": -3.0,
+          "static_pct_of_income": 0.9,
+          "behavioral_pct_of_income": 0.8
+        },
+        {
+          "decile": 5,
+          "static_extra_cost": 434,
+          "behavioral_extra_cost": 356,
+          "bill_saving": 78,
+          "consumption_reduction_pct": -3.0,
+          "static_pct_of_income": 0.9,
+          "behavioral_pct_of_income": 0.8
+        },
+        {
+          "decile": 6,
+          "static_extra_cost": 427,
+          "behavioral_extra_cost": 350,
+          "bill_saving": 77,
+          "consumption_reduction_pct": -3.0,
+          "static_pct_of_income": 0.8,
+          "behavioral_pct_of_income": 0.7
+        },
+        {
+          "decile": 7,
+          "static_extra_cost": 467,
+          "behavioral_extra_cost": 383,
+          "bill_saving": 84,
+          "consumption_reduction_pct": -3.0,
+          "static_pct_of_income": 0.8,
+          "behavioral_pct_of_income": 0.7
+        },
+        {
+          "decile": 8,
+          "static_extra_cost": 530,
+          "behavioral_extra_cost": 435,
+          "bill_saving": 95,
+          "consumption_reduction_pct": -3.0,
+          "static_pct_of_income": 0.8,
+          "behavioral_pct_of_income": 0.7
+        },
+        {
+          "decile": 9,
+          "static_extra_cost": 518,
+          "behavioral_extra_cost": 424,
+          "bill_saving": 93,
+          "consumption_reduction_pct": -3.0,
+          "static_pct_of_income": 0.7,
+          "behavioral_pct_of_income": 0.6
+        },
+        {
+          "decile": 10,
+          "static_extra_cost": 540,
+          "behavioral_extra_cost": 443,
+          "bill_saving": 97,
+          "consumption_reduction_pct": -3.0,
+          "static_pct_of_income": 0.4,
+          "behavioral_pct_of_income": 0.4
+        }
+      ]
+    },
+    {
+      "name": "+30%",
+      "new_cap": 2133,
+      "price_increase_pct": 30,
+      "elasticity": -0.15,
+      "consumption_change_pct": -4.5,
+      "static_avg_extra": 673,
+      "behavioral_avg_extra": 542,
+      "bill_saving_avg": 131,
+      "welfare_loss_comfort_avg": 15,
+      "static_fp_rate": 21.3,
+      "behavioral_fp_rate": 20.1,
+      "static_fp_households_m": 6.8,
+      "behavioral_fp_households_m": 6.4,
+      "deciles": [
+        {
+          "decile": 1,
+          "static_extra_cost": 623,
+          "behavioral_extra_cost": 502,
+          "bill_saving": 122,
+          "consumption_reduction_pct": -4.5,
+          "static_pct_of_income": 3.1,
+          "behavioral_pct_of_income": 2.5
+        },
+        {
+          "decile": 2,
+          "static_extra_cost": 591,
+          "behavioral_extra_cost": 476,
+          "bill_saving": 115,
+          "consumption_reduction_pct": -4.5,
+          "static_pct_of_income": 1.9,
+          "behavioral_pct_of_income": 1.5
+        },
+        {
+          "decile": 3,
+          "static_extra_cost": 554,
+          "behavioral_extra_cost": 446,
+          "bill_saving": 108,
+          "consumption_reduction_pct": -4.5,
+          "static_pct_of_income": 1.5,
+          "behavioral_pct_of_income": 1.2
+        },
+        {
+          "decile": 4,
+          "static_extra_cost": 601,
+          "behavioral_extra_cost": 484,
+          "bill_saving": 117,
+          "consumption_reduction_pct": -4.5,
+          "static_pct_of_income": 1.4,
+          "behavioral_pct_of_income": 1.1
+        },
+        {
+          "decile": 5,
+          "static_extra_cost": 651,
+          "behavioral_extra_cost": 524,
+          "bill_saving": 127,
+          "consumption_reduction_pct": -4.5,
+          "static_pct_of_income": 1.4,
+          "behavioral_pct_of_income": 1.1
+        },
+        {
+          "decile": 6,
+          "static_extra_cost": 640,
+          "behavioral_extra_cost": 515,
+          "bill_saving": 125,
+          "consumption_reduction_pct": -4.5,
+          "static_pct_of_income": 1.2,
+          "behavioral_pct_of_income": 1.0
+        },
+        {
+          "decile": 7,
+          "static_extra_cost": 701,
+          "behavioral_extra_cost": 564,
+          "bill_saving": 137,
+          "consumption_reduction_pct": -4.5,
+          "static_pct_of_income": 1.3,
+          "behavioral_pct_of_income": 1.0
+        },
+        {
+          "decile": 8,
+          "static_extra_cost": 795,
+          "behavioral_extra_cost": 640,
+          "bill_saving": 155,
+          "consumption_reduction_pct": -4.5,
+          "static_pct_of_income": 1.2,
+          "behavioral_pct_of_income": 1.0
+        },
+        {
+          "decile": 9,
+          "static_extra_cost": 776,
+          "behavioral_extra_cost": 625,
+          "bill_saving": 151,
+          "consumption_reduction_pct": -4.5,
+          "static_pct_of_income": 1.1,
+          "behavioral_pct_of_income": 0.9
+        },
+        {
+          "decile": 10,
+          "static_extra_cost": 811,
+          "behavioral_extra_cost": 653,
+          "bill_saving": 158,
+          "consumption_reduction_pct": -4.5,
+          "static_pct_of_income": 0.6,
+          "behavioral_pct_of_income": 0.5
+        }
+      ]
+    },
+    {
+      "name": "+60%",
+      "new_cap": 2625,
+      "price_increase_pct": 60,
+      "elasticity": -0.15,
+      "consumption_change_pct": -9.0,
+      "static_avg_extra": 1345,
+      "behavioral_avg_extra": 1023,
+      "bill_saving_avg": 323,
+      "welfare_loss_comfort_avg": 61,
+      "static_fp_rate": 29.9,
+      "behavioral_fp_rate": 25.5,
+      "static_fp_households_m": 9.5,
+      "behavioral_fp_households_m": 8.1,
+      "deciles": [
+        {
+          "decile": 1,
+          "static_extra_cost": 1247,
+          "behavioral_extra_cost": 948,
+          "bill_saving": 299,
+          "consumption_reduction_pct": -9.0,
+          "static_pct_of_income": 6.2,
+          "behavioral_pct_of_income": 4.7
+        },
+        {
+          "decile": 2,
+          "static_extra_cost": 1183,
+          "behavioral_extra_cost": 899,
+          "bill_saving": 284,
+          "consumption_reduction_pct": -9.0,
+          "static_pct_of_income": 3.8,
+          "behavioral_pct_of_income": 2.9
+        },
+        {
+          "decile": 3,
+          "static_extra_cost": 1108,
+          "behavioral_extra_cost": 842,
+          "bill_saving": 266,
+          "consumption_reduction_pct": -9.0,
+          "static_pct_of_income": 3.0,
+          "behavioral_pct_of_income": 2.3
+        },
+        {
+          "decile": 4,
+          "static_extra_cost": 1202,
+          "behavioral_extra_cost": 913,
+          "bill_saving": 288,
+          "consumption_reduction_pct": -9.0,
+          "static_pct_of_income": 2.8,
+          "behavioral_pct_of_income": 2.2
+        },
+        {
+          "decile": 5,
+          "static_extra_cost": 1302,
+          "behavioral_extra_cost": 990,
+          "bill_saving": 312,
+          "consumption_reduction_pct": -9.0,
+          "static_pct_of_income": 2.8,
+          "behavioral_pct_of_income": 2.2
+        },
+        {
+          "decile": 6,
+          "static_extra_cost": 1280,
+          "behavioral_extra_cost": 973,
+          "bill_saving": 307,
+          "consumption_reduction_pct": -9.0,
+          "static_pct_of_income": 2.4,
+          "behavioral_pct_of_income": 1.9
+        },
+        {
+          "decile": 7,
+          "static_extra_cost": 1402,
+          "behavioral_extra_cost": 1066,
+          "bill_saving": 336,
+          "consumption_reduction_pct": -9.0,
+          "static_pct_of_income": 2.5,
+          "behavioral_pct_of_income": 1.9
+        },
+        {
+          "decile": 8,
+          "static_extra_cost": 1591,
+          "behavioral_extra_cost": 1209,
+          "bill_saving": 382,
+          "consumption_reduction_pct": -9.0,
+          "static_pct_of_income": 2.4,
+          "behavioral_pct_of_income": 1.8
+        },
+        {
+          "decile": 9,
+          "static_extra_cost": 1553,
+          "behavioral_extra_cost": 1180,
+          "bill_saving": 373,
+          "consumption_reduction_pct": -9.0,
+          "static_pct_of_income": 2.1,
+          "behavioral_pct_of_income": 1.6
+        },
+        {
+          "decile": 10,
+          "static_extra_cost": 1621,
+          "behavioral_extra_cost": 1232,
+          "bill_saving": 389,
+          "consumption_reduction_pct": -9.0,
+          "static_pct_of_income": 1.3,
+          "behavioral_pct_of_income": 1.0
+        }
+      ]
+    },
+    {
+      "name": "2022-level",
+      "new_cap": 3764,
+      "price_increase_pct": 129,
+      "elasticity": -0.15,
+      "consumption_change_pct": -19.4,
+      "static_avg_extra": 2903,
+      "behavioral_avg_extra": 1904,
+      "bill_saving_avg": 999,
+      "welfare_loss_comfort_avg": 282,
+      "static_fp_rate": 46.5,
+      "behavioral_fp_rate": 36.6,
+      "static_fp_households_m": 14.8,
+      "behavioral_fp_households_m": 11.7,
+      "deciles": [
+        {
+          "decile": 1,
+          "static_extra_cost": 2690,
+          "behavioral_extra_cost": 1765,
+          "bill_saving": 926,
+          "consumption_reduction_pct": -19.4,
+          "static_pct_of_income": 13.4,
+          "behavioral_pct_of_income": 8.8
+        },
+        {
+          "decile": 2,
+          "static_extra_cost": 2552,
+          "behavioral_extra_cost": 1674,
+          "bill_saving": 878,
+          "consumption_reduction_pct": -19.4,
+          "static_pct_of_income": 8.3,
+          "behavioral_pct_of_income": 5.4
+        },
+        {
+          "decile": 3,
+          "static_extra_cost": 2390,
+          "behavioral_extra_cost": 1568,
+          "bill_saving": 822,
+          "consumption_reduction_pct": -19.4,
+          "static_pct_of_income": 6.5,
+          "behavioral_pct_of_income": 4.2
+        },
+        {
+          "decile": 4,
+          "static_extra_cost": 2592,
+          "behavioral_extra_cost": 1700,
+          "bill_saving": 892,
+          "consumption_reduction_pct": -19.4,
+          "static_pct_of_income": 6.1,
+          "behavioral_pct_of_income": 4.0
+        },
+        {
+          "decile": 5,
+          "static_extra_cost": 2809,
+          "behavioral_extra_cost": 1843,
+          "bill_saving": 966,
+          "consumption_reduction_pct": -19.4,
+          "static_pct_of_income": 6.1,
+          "behavioral_pct_of_income": 4.0
+        },
+        {
+          "decile": 6,
+          "static_extra_cost": 2761,
+          "behavioral_extra_cost": 1811,
+          "bill_saving": 950,
+          "consumption_reduction_pct": -19.4,
+          "static_pct_of_income": 5.3,
+          "behavioral_pct_of_income": 3.5
+        },
+        {
+          "decile": 7,
+          "static_extra_cost": 3025,
+          "behavioral_extra_cost": 1984,
+          "bill_saving": 1041,
+          "consumption_reduction_pct": -19.4,
+          "static_pct_of_income": 5.5,
+          "behavioral_pct_of_income": 3.6
+        },
+        {
+          "decile": 8,
+          "static_extra_cost": 3432,
+          "behavioral_extra_cost": 2251,
+          "bill_saving": 1181,
+          "consumption_reduction_pct": -19.4,
+          "static_pct_of_income": 5.2,
+          "behavioral_pct_of_income": 3.4
+        },
+        {
+          "decile": 9,
+          "static_extra_cost": 3350,
+          "behavioral_extra_cost": 2197,
+          "bill_saving": 1153,
+          "consumption_reduction_pct": -19.4,
+          "static_pct_of_income": 4.6,
+          "behavioral_pct_of_income": 3.0
+        },
+        {
+          "decile": 10,
+          "static_extra_cost": 3498,
+          "behavioral_extra_cost": 2294,
+          "bill_saving": 1203,
+          "consumption_reduction_pct": -19.4,
+          "static_pct_of_income": 2.8,
+          "behavioral_pct_of_income": 1.8
+        }
+      ]
+    }
+  ],
   "policies": {
     "epg": {
       "name": "EPG subsidy",
@@ -707,12 +1244,378 @@
       ]
     }
   },
+  "policy_net_position": {
+    "epg": {
+      "name": "EPG subsidy",
+      "exchequer_cost_bn": 0.4,
+      "avg_benefit": 12,
+      "avg_shock_static": 1345,
+      "avg_shock_behavioral": 1023,
+      "avg_net_cost_static": 1333,
+      "avg_net_cost_behavioral": 1010,
+      "deciles": [
+        {
+          "decile": 1,
+          "baseline_energy": 2079,
+          "shock_extra_static": 1247,
+          "shock_extra_behavioral": 948,
+          "policy_benefit": 11,
+          "net_cost_static": 1235,
+          "net_cost_behavioral": 936,
+          "offset_pct_static": 1,
+          "offset_pct_behavioral": 1
+        },
+        {
+          "decile": 2,
+          "baseline_energy": 1972,
+          "shock_extra_static": 1183,
+          "shock_extra_behavioral": 899,
+          "policy_benefit": 11,
+          "net_cost_static": 1172,
+          "net_cost_behavioral": 888,
+          "offset_pct_static": 1,
+          "offset_pct_behavioral": 1
+        },
+        {
+          "decile": 3,
+          "baseline_energy": 1848,
+          "shock_extra_static": 1108,
+          "shock_extra_behavioral": 842,
+          "policy_benefit": 10,
+          "net_cost_static": 1098,
+          "net_cost_behavioral": 832,
+          "offset_pct_static": 1,
+          "offset_pct_behavioral": 1
+        },
+        {
+          "decile": 4,
+          "baseline_energy": 2004,
+          "shock_extra_static": 1202,
+          "shock_extra_behavioral": 913,
+          "policy_benefit": 11,
+          "net_cost_static": 1191,
+          "net_cost_behavioral": 902,
+          "offset_pct_static": 1,
+          "offset_pct_behavioral": 1
+        },
+        {
+          "decile": 5,
+          "baseline_energy": 2171,
+          "shock_extra_static": 1302,
+          "shock_extra_behavioral": 990,
+          "policy_benefit": 12,
+          "net_cost_static": 1290,
+          "net_cost_behavioral": 978,
+          "offset_pct_static": 1,
+          "offset_pct_behavioral": 1
+        },
+        {
+          "decile": 6,
+          "baseline_energy": 2134,
+          "shock_extra_static": 1280,
+          "shock_extra_behavioral": 973,
+          "policy_benefit": 12,
+          "net_cost_static": 1268,
+          "net_cost_behavioral": 961,
+          "offset_pct_static": 1,
+          "offset_pct_behavioral": 1
+        },
+        {
+          "decile": 7,
+          "baseline_energy": 2338,
+          "shock_extra_static": 1402,
+          "shock_extra_behavioral": 1066,
+          "policy_benefit": 13,
+          "net_cost_static": 1389,
+          "net_cost_behavioral": 1053,
+          "offset_pct_static": 1,
+          "offset_pct_behavioral": 1
+        },
+        {
+          "decile": 8,
+          "baseline_energy": 2653,
+          "shock_extra_static": 1591,
+          "shock_extra_behavioral": 1209,
+          "policy_benefit": 15,
+          "net_cost_static": 1576,
+          "net_cost_behavioral": 1194,
+          "offset_pct_static": 1,
+          "offset_pct_behavioral": 1
+        },
+        {
+          "decile": 9,
+          "baseline_energy": 2589,
+          "shock_extra_static": 1553,
+          "shock_extra_behavioral": 1180,
+          "policy_benefit": 14,
+          "net_cost_static": 1538,
+          "net_cost_behavioral": 1166,
+          "offset_pct_static": 1,
+          "offset_pct_behavioral": 1
+        },
+        {
+          "decile": 10,
+          "baseline_energy": 2703,
+          "shock_extra_static": 1621,
+          "shock_extra_behavioral": 1232,
+          "policy_benefit": 15,
+          "net_cost_static": 1606,
+          "net_cost_behavioral": 1217,
+          "offset_pct_static": 1,
+          "offset_pct_behavioral": 1
+        }
+      ]
+    },
+    "flat_transfer": {
+      "name": "Flat transfer",
+      "exchequer_cost_bn": 12.8,
+      "avg_benefit": 400,
+      "avg_shock_static": 1345,
+      "avg_shock_behavioral": 1023,
+      "avg_net_cost_static": 945,
+      "avg_net_cost_behavioral": 623,
+      "deciles": [
+        {
+          "decile": 1,
+          "baseline_energy": 2079,
+          "shock_extra_static": 1247,
+          "shock_extra_behavioral": 948,
+          "policy_benefit": 400,
+          "net_cost_static": 847,
+          "net_cost_behavioral": 548,
+          "offset_pct_static": 32,
+          "offset_pct_behavioral": 42
+        },
+        {
+          "decile": 2,
+          "baseline_energy": 1972,
+          "shock_extra_static": 1183,
+          "shock_extra_behavioral": 899,
+          "policy_benefit": 400,
+          "net_cost_static": 783,
+          "net_cost_behavioral": 499,
+          "offset_pct_static": 34,
+          "offset_pct_behavioral": 45
+        },
+        {
+          "decile": 3,
+          "baseline_energy": 1848,
+          "shock_extra_static": 1108,
+          "shock_extra_behavioral": 842,
+          "policy_benefit": 400,
+          "net_cost_static": 708,
+          "net_cost_behavioral": 442,
+          "offset_pct_static": 36,
+          "offset_pct_behavioral": 48
+        },
+        {
+          "decile": 4,
+          "baseline_energy": 2004,
+          "shock_extra_static": 1202,
+          "shock_extra_behavioral": 913,
+          "policy_benefit": 400,
+          "net_cost_static": 802,
+          "net_cost_behavioral": 513,
+          "offset_pct_static": 33,
+          "offset_pct_behavioral": 44
+        },
+        {
+          "decile": 5,
+          "baseline_energy": 2171,
+          "shock_extra_static": 1302,
+          "shock_extra_behavioral": 990,
+          "policy_benefit": 400,
+          "net_cost_static": 902,
+          "net_cost_behavioral": 590,
+          "offset_pct_static": 31,
+          "offset_pct_behavioral": 40
+        },
+        {
+          "decile": 6,
+          "baseline_energy": 2134,
+          "shock_extra_static": 1280,
+          "shock_extra_behavioral": 973,
+          "policy_benefit": 400,
+          "net_cost_static": 880,
+          "net_cost_behavioral": 573,
+          "offset_pct_static": 31,
+          "offset_pct_behavioral": 41
+        },
+        {
+          "decile": 7,
+          "baseline_energy": 2338,
+          "shock_extra_static": 1402,
+          "shock_extra_behavioral": 1066,
+          "policy_benefit": 400,
+          "net_cost_static": 1002,
+          "net_cost_behavioral": 666,
+          "offset_pct_static": 29,
+          "offset_pct_behavioral": 38
+        },
+        {
+          "decile": 8,
+          "baseline_energy": 2653,
+          "shock_extra_static": 1591,
+          "shock_extra_behavioral": 1209,
+          "policy_benefit": 400,
+          "net_cost_static": 1191,
+          "net_cost_behavioral": 809,
+          "offset_pct_static": 25,
+          "offset_pct_behavioral": 33
+        },
+        {
+          "decile": 9,
+          "baseline_energy": 2589,
+          "shock_extra_static": 1553,
+          "shock_extra_behavioral": 1180,
+          "policy_benefit": 400,
+          "net_cost_static": 1153,
+          "net_cost_behavioral": 780,
+          "offset_pct_static": 26,
+          "offset_pct_behavioral": 34
+        },
+        {
+          "decile": 10,
+          "baseline_energy": 2703,
+          "shock_extra_static": 1621,
+          "shock_extra_behavioral": 1232,
+          "policy_benefit": 400,
+          "net_cost_static": 1221,
+          "net_cost_behavioral": 832,
+          "offset_pct_static": 25,
+          "offset_pct_behavioral": 32
+        }
+      ]
+    },
+    "ct_rebate": {
+      "name": "CT band rebate",
+      "exchequer_cost_bn": 7.7,
+      "avg_benefit": 240,
+      "avg_shock_static": 1345,
+      "avg_shock_behavioral": 1023,
+      "avg_net_cost_static": 1105,
+      "avg_net_cost_behavioral": 782,
+      "deciles": [
+        {
+          "decile": 1,
+          "baseline_energy": 2079,
+          "shock_extra_static": 1247,
+          "shock_extra_behavioral": 948,
+          "policy_benefit": 246,
+          "net_cost_static": 1001,
+          "net_cost_behavioral": 702,
+          "offset_pct_static": 20,
+          "offset_pct_behavioral": 26
+        },
+        {
+          "decile": 2,
+          "baseline_energy": 1972,
+          "shock_extra_static": 1183,
+          "shock_extra_behavioral": 899,
+          "policy_benefit": 261,
+          "net_cost_static": 922,
+          "net_cost_behavioral": 638,
+          "offset_pct_static": 22,
+          "offset_pct_behavioral": 29
+        },
+        {
+          "decile": 3,
+          "baseline_energy": 1848,
+          "shock_extra_static": 1108,
+          "shock_extra_behavioral": 842,
+          "policy_benefit": 283,
+          "net_cost_static": 825,
+          "net_cost_behavioral": 559,
+          "offset_pct_static": 26,
+          "offset_pct_behavioral": 34
+        },
+        {
+          "decile": 4,
+          "baseline_energy": 2004,
+          "shock_extra_static": 1202,
+          "shock_extra_behavioral": 913,
+          "policy_benefit": 243,
+          "net_cost_static": 959,
+          "net_cost_behavioral": 670,
+          "offset_pct_static": 20,
+          "offset_pct_behavioral": 27
+        },
+        {
+          "decile": 5,
+          "baseline_energy": 2171,
+          "shock_extra_static": 1302,
+          "shock_extra_behavioral": 990,
+          "policy_benefit": 251,
+          "net_cost_static": 1051,
+          "net_cost_behavioral": 739,
+          "offset_pct_static": 19,
+          "offset_pct_behavioral": 25
+        },
+        {
+          "decile": 6,
+          "baseline_energy": 2134,
+          "shock_extra_static": 1280,
+          "shock_extra_behavioral": 973,
+          "policy_benefit": 247,
+          "net_cost_static": 1032,
+          "net_cost_behavioral": 725,
+          "offset_pct_static": 19,
+          "offset_pct_behavioral": 25
+        },
+        {
+          "decile": 7,
+          "baseline_energy": 2338,
+          "shock_extra_static": 1402,
+          "shock_extra_behavioral": 1066,
+          "policy_benefit": 241,
+          "net_cost_static": 1161,
+          "net_cost_behavioral": 824,
+          "offset_pct_static": 17,
+          "offset_pct_behavioral": 23
+        },
+        {
+          "decile": 8,
+          "baseline_energy": 2653,
+          "shock_extra_static": 1591,
+          "shock_extra_behavioral": 1209,
+          "policy_benefit": 221,
+          "net_cost_static": 1370,
+          "net_cost_behavioral": 988,
+          "offset_pct_static": 14,
+          "offset_pct_behavioral": 18
+        },
+        {
+          "decile": 9,
+          "baseline_energy": 2589,
+          "shock_extra_static": 1553,
+          "shock_extra_behavioral": 1180,
+          "policy_benefit": 225,
+          "net_cost_static": 1328,
+          "net_cost_behavioral": 955,
+          "offset_pct_static": 14,
+          "offset_pct_behavioral": 19
+        },
+        {
+          "decile": 10,
+          "baseline_energy": 2703,
+          "shock_extra_static": 1621,
+          "shock_extra_behavioral": 1232,
+          "policy_benefit": 185,
+          "net_cost_static": 1436,
+          "net_cost_behavioral": 1047,
+          "offset_pct_static": 11,
+          "offset_pct_behavioral": 15
+        }
+      ]
+    }
+  },
   "config": {
     "year": 2026,
     "current_cap": 1641,
     "shock_cap": 2625,
     "epg_target": 2500,
     "flat_transfer": 400,
-    "ct_rebate": 300
+    "ct_rebate": 300,
+    "elasticity": -0.15
   }
 }
