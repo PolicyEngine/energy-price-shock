@@ -1,5 +1,9 @@
 import { useState } from "react";
 import results from "../data/results.json";
+import resultsV2 from "../data/results_v2.json";
+import constituencyData from "../data/constituency_results.json";
+import ConstituencyMap from "./ConstituencyMap";
+import RegionMap from "./RegionMap";
 import "./Dashboard.css";
 
 const fmt = (v) => `£${v.toLocaleString("en-GB")}`;
@@ -1324,6 +1328,499 @@ function SummarySection() {
   );
 }
 
+function EnergySplitSection() {
+  const split = resultsV2.energy_split;
+  const regional = resultsV2.regional;
+  const tenureData = resultsV2.tenure;
+  const [splitView, setSplitView] = useState("decile");
+
+  const TENURE_LABELS = {
+    OWNED_OUTRIGHT: "Owned outright",
+    OWNED_WITH_MORTGAGE: "Mortgage",
+    RENT_PRIVATELY: "Private rent",
+    RENT_FROM_COUNCIL: "Council rent",
+    RENT_FROM_HA: "Housing assoc.",
+  };
+  const REGION_LABELS = {
+    NORTH_EAST: "NE",
+    NORTH_WEST: "NW",
+    YORKSHIRE: "Yorks",
+    EAST_MIDLANDS: "E Mids",
+    WEST_MIDLANDS: "W Mids",
+    EAST_OF_ENGLAND: "E Eng",
+    LONDON: "London",
+    SOUTH_EAST: "SE",
+    SOUTH_WEST: "SW",
+    WALES: "Wales",
+    SCOTLAND: "Scotland",
+    NORTHERN_IRELAND: "NI",
+  };
+
+  return (
+    <section className="section" id="energy-split">
+      <h2 className="section-title">Electricity vs gas</h2>
+      <p className="section-description">
+        Household energy bills are split between electricity ({split.elec_share_pct}%
+        of spending) and gas ({(100 - split.elec_share_pct).toFixed(1)}%). The
+        average household spends {fmt(split.mean_electricity)}/yr on electricity
+        and {fmt(split.mean_gas)}/yr on gas. Gas prices are more volatile
+        because they are directly tied to wholesale markets, so a geopolitical
+        shock (such as the Iran conflict) feeds through primarily via gas.
+        Electricity prices also rise because gas-fired power stations set the
+        marginal price.
+      </p>
+
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
+        <div className="scenario-pills">
+          {[
+            { key: "decile", label: "By decile" },
+            { key: "region", label: "By region" },
+            { key: "tenure", label: "By tenure" },
+          ].map((v) => (
+            <button
+              key={v.key}
+              className={`scenario-pill scenario-pill-sm${splitView === v.key ? " active" : ""}`}
+              onClick={() => setSplitView(v.key)}
+            >
+              {v.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {splitView === "region" && (
+        <div className="chart-wrapper" style={{ marginBottom: 32 }}>
+          <div className="chart-header">
+            <div>
+              <div className="chart-title">Regional energy map</div>
+              <div className="chart-subtitle">Hover over a region to see details. Switch metric with the buttons below.</div>
+            </div>
+          </div>
+          <RegionMap regionData={regional} />
+        </div>
+      )}
+
+      <div className="chart-wrapper">
+        <div className="chart-header">
+          <div>
+            <div className="chart-title">
+              {splitView === "decile"
+                ? "Electricity and gas spending by income decile"
+                : splitView === "region"
+                ? "Energy burden by region"
+                : "Energy burden by tenure"}
+            </div>
+            <div className="chart-subtitle">
+              {splitView === "decile" ? "Annual £ per household" : "As % of net income"}
+            </div>
+          </div>
+        </div>
+        {(() => {
+          let barData, maxVal, fmtVal, xLabel;
+          if (splitView === "decile") {
+            barData = split.deciles.map((d) => ({
+              label: `${d.decile}`,
+              staticVal: d.electricity,
+              behavVal: d.gas,
+            }));
+            maxVal = Math.max(...barData.map((d) => d.staticVal + d.behavVal)) * 1.15;
+            fmtVal = (v) => fmt(v);
+            xLabel = "Decile";
+          } else if (splitView === "region") {
+            barData = regional.map((r) => ({
+              label: REGION_LABELS[r.region] || r.region,
+              staticVal: r.electricity,
+              behavVal: r.gas,
+            }));
+            maxVal = Math.max(...barData.map((d) => d.staticVal + d.behavVal)) * 1.15;
+            fmtVal = (v) => fmt(v);
+            xLabel = "Region";
+          } else {
+            barData = tenureData.map((t) => ({
+              label: TENURE_LABELS[t.tenure] || t.tenure,
+              staticVal: t.electricity,
+              behavVal: t.gas,
+            }));
+            maxVal = Math.max(...barData.map((d) => d.staticVal + d.behavVal)) * 1.15;
+            fmtVal = (v) => fmt(v);
+            xLabel = "Tenure";
+          }
+          const ticks = niceTicks(maxVal);
+          const topTick = ticks[ticks.length - 1] || maxVal;
+          const effectiveMax = Math.max(maxVal, topTick);
+          return (
+            <div className="col-chart">
+              <div className="col-chart-body">
+                <div className="col-chart-y-axis">
+                  {[...ticks].reverse().map((t, i) => (
+                    <div className="col-chart-y-tick" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }}>
+                      {fmtVal(t)}
+                    </div>
+                  ))}
+                </div>
+                <div className="col-chart-area">
+                  {ticks.map((t, i) => (
+                    <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
+                  ))}
+                  <div className="col-chart-bars">
+                    {barData.map((d, i) => (
+                      <div className="col-chart-col" key={i}>
+                        <div className="col-chart-tooltip">
+                          Elec: {fmt(d.staticVal)}, Gas: {fmt(d.behavVal)}
+                        </div>
+                        <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
+                          <div
+                            className="col-chart-fill"
+                            style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#f59e0b", borderRadius: "3px 3px 0 0" }}
+                          />
+                          <div
+                            className="col-chart-fill"
+                            style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#3b82f6", borderRadius: "3px 3px 0 0" }}
+                          />
+                        </div>
+                        <div className="col-chart-label">{d.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="col-chart-x-label">{xLabel}</div>
+              <div className="col-chart-legend">
+                <span><span className="col-chart-legend-dot" style={{ background: "#f59e0b" }} />Electricity</span>
+                <span><span className="col-chart-legend-dot" style={{ background: "#3b82f6" }} />Gas</span>
+              </div>
+            </div>
+          );
+        })()}
+      </div>
+
+      {splitView === "tenure" && (
+        <div className="chart-wrapper" style={{ marginTop: 32 }}>
+          <div className="chart-header">
+            <div>
+              <div className="chart-title">Fuel poverty rate by tenure</div>
+              <div className="chart-subtitle">% of households spending &gt;10% of income on energy</div>
+            </div>
+          </div>
+          <ColumnChart
+            data={tenureData.map((t) => ({
+              label: TENURE_LABELS[t.tenure] || t.tenure,
+              value: t.fuel_poverty_pct,
+            }))}
+            maxValue={Math.max(...tenureData.map((t) => t.fuel_poverty_pct)) * 1.2}
+            colorFn={() => "#ef4444"}
+            formatValue={(v) => `${v}%`}
+          />
+        </div>
+      )}
+
+      <p className="section-description">
+        Gas accounts for {(100 - split.elec_share_pct).toFixed(0)}% of energy
+        spending but drives most price volatility. Regional variation is
+        significant: the North West has the highest energy burden
+        at {regional[0].energy_burden_pct}% of income, while London
+        is lowest. Social housing tenants face the highest fuel poverty rates.
+        These patterns inform the policy options explored below.
+      </p>
+    </section>
+  );
+}
+
+
+function NewPoliciesSection() {
+  const neg = resultsV2.neg_policy;
+  const rbt = resultsV2.rising_block_tariff;
+  const gasCap = resultsV2.gas_price_cap;
+  const [newPolicy, setNewPolicy] = useState("neg");
+  const [selectedScenario, setSelectedScenario] = useState(0);
+
+  const scenarioNames = results.shock_scenarios.map((s) => s.name);
+
+  return (
+    <section className="section" id="new-policies">
+      <h2 className="section-title">Alternative policy designs</h2>
+      <p className="section-description">
+        The policies above replicate the 2022 response. <a href="#ref-bangham">Bangham (2026)</a> argues
+        the government should use the next four months to build better
+        infrastructure. Below we model three alternative designs that exploit
+        the new electricity/gas data split.
+      </p>
+
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", marginBottom: 16 }}>
+        <div className="scenario-pills">
+          {[
+            { key: "neg", label: "Energy Guarantee" },
+            { key: "rbt", label: "Block tariff" },
+            { key: "gas_cap", label: "Gas-only cap" },
+          ].map((p) => (
+            <button
+              key={p.key}
+              className={`scenario-pill${newPolicy === p.key ? " active" : ""}`}
+              onClick={() => setNewPolicy(p.key)}
+            >
+              {p.key === "neg" ? "G" : p.key === "rbt" ? "H" : "I"}. {p.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {newPolicy !== "rbt" && (
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", marginBottom: 16 }}>
+          <span style={{ fontSize: "0.8rem", color: "#64748b", fontWeight: 600 }}>SCENARIO</span>
+          <div className="scenario-pills">
+            {scenarioNames.map((name, i) => (
+              <button
+                key={i}
+                className={`scenario-pill scenario-pill-sm${i === selectedScenario ? " active" : ""}`}
+                onClick={() => setSelectedScenario(i)}
+              >
+                {name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="policy-card" style={{ marginBottom: 24 }}>
+        {newPolicy === "neg" && (
+          <>
+            <div className="chart-title">G. {neg.name}</div>
+            <p className="section-description" style={{ margin: "8px 0 16px" }}>
+              {neg.description}
+            </p>
+            <div className="kpi-row">
+              <KpiCard label="Threshold" value={`${neg.threshold_kwh.toLocaleString()} kWh`} />
+              <KpiCard label="Threshold (£)" value={fmt(neg.threshold_spend)} unit="/yr" />
+              <KpiCard label="Exchequer cost" value={fmtBn(neg.scenarios[selectedScenario].exchequer_cost_bn)} />
+              <KpiCard label="Avg benefit" value={fmt(neg.scenarios[selectedScenario].avg_benefit)} unit="/yr" />
+            </div>
+          </>
+        )}
+        {newPolicy === "rbt" && (
+          <>
+            <div className="chart-title">H. {rbt.name}</div>
+            <p className="section-description" style={{ margin: "8px 0 16px" }}>
+              {rbt.description}
+            </p>
+            <div className="kpi-row">
+              <KpiCard label="Block 1 discount" value={`${rbt.discount_rate_pct}%`} />
+              <KpiCard label="Block 2 surcharge" value={`${rbt.surcharge_rate_pct}%`} />
+              <KpiCard label="Exchequer cost" value="£0" />
+              <KpiCard label="Redistribution" value={fmtBn(rbt.total_subsidy_bn)} />
+            </div>
+          </>
+        )}
+        {newPolicy === "gas_cap" && (
+          <>
+            <div className="chart-title">I. {gasCap.name}</div>
+            <p className="section-description" style={{ margin: "8px 0 16px" }}>
+              {gasCap.description}
+            </p>
+            <div className="kpi-row">
+              <KpiCard label="Exchequer cost" value={fmtBn(gasCap.scenarios[selectedScenario].exchequer_cost_bn)} />
+              <KpiCard label="Avg gas subsidy" value={fmt(gasCap.scenarios[selectedScenario].avg_gas_subsidy)} unit="/yr" />
+              <KpiCard label="Avg remaining cost" value={fmt(gasCap.scenarios[selectedScenario].avg_remaining_cost)} unit="/yr" />
+            </div>
+          </>
+        )}
+      </div>
+
+      <div className="chart-wrapper">
+        <div className="chart-header">
+          <div>
+            <div className="chart-title">
+              {newPolicy === "neg"
+                ? `Shock offset by decile (${scenarioNames[selectedScenario]})`
+                : newPolicy === "rbt"
+                ? "Net effect by decile (baseline)"
+                : `Gas subsidy vs remaining cost (${scenarioNames[selectedScenario]})`}
+            </div>
+            <div className="chart-subtitle">
+              {newPolicy === "rbt" ? "Negative = household saves, positive = pays more" : "Annual £ per household"}
+            </div>
+          </div>
+        </div>
+        {(() => {
+          let barData, maxVal;
+          if (newPolicy === "neg") {
+            const scen = neg.scenarios[selectedScenario];
+            barData = scen.deciles.map((d) => ({
+              label: `${d.decile}`,
+              staticVal: d.benefit_extra_vs_baseline,
+              behavVal: d.shock_extra,
+            }));
+            maxVal = Math.max(...barData.map((d) => Math.max(d.staticVal, d.behavVal))) * 1.15;
+            const ticks = niceTicks(maxVal);
+            const topTick = ticks[ticks.length - 1] || maxVal;
+            const effectiveMax = Math.max(maxVal, topTick);
+            return (
+              <div className="col-chart">
+                <div className="col-chart-body">
+                  <div className="col-chart-y-axis">
+                    {[...ticks].reverse().map((t, i) => (
+                      <div className="col-chart-y-tick" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }}>{fmt(t)}</div>
+                    ))}
+                  </div>
+                  <div className="col-chart-area">
+                    {ticks.map((t, i) => (
+                      <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
+                    ))}
+                    <div className="col-chart-bars">
+                      {barData.map((d, i) => (
+                        <div className="col-chart-col" key={i}>
+                          <div className="col-chart-tooltip">
+                            NEG benefit: {fmt(d.staticVal)}, Shock: {fmt(d.behavVal)}
+                          </div>
+                          <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
+                            <div className="col-chart-fill" style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#10b981", borderRadius: "3px 3px 0 0" }} />
+                            <div className="col-chart-fill" style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#ef4444", borderRadius: "3px 3px 0 0" }} />
+                          </div>
+                          <div className="col-chart-label">{d.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-chart-x-label">Decile</div>
+                <div className="col-chart-legend">
+                  <span><span className="col-chart-legend-dot" style={{ background: "#10b981" }} />NEG benefit</span>
+                  <span><span className="col-chart-legend-dot" style={{ background: "#ef4444" }} />Shock cost</span>
+                </div>
+              </div>
+            );
+          } else if (newPolicy === "rbt") {
+            barData = rbt.deciles.map((d) => ({
+              label: `${d.decile}`,
+              value: d.net_effect,
+            }));
+            const absMax = Math.max(...barData.map((d) => Math.abs(d.value))) * 1.15;
+            const ticks = niceTicks(absMax);
+            const topTick = ticks[ticks.length - 1] || absMax;
+            const effectiveMax = Math.max(absMax, topTick);
+            return (
+              <div className="col-chart">
+                <div className="col-chart-body">
+                  <div className="col-chart-y-axis">
+                    {[...ticks].reverse().map((t, i) => (
+                      <div className="col-chart-y-tick" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }}>{fmt(t)}</div>
+                    ))}
+                  </div>
+                  <div className="col-chart-area">
+                    {ticks.map((t, i) => (
+                      <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
+                    ))}
+                    <div className="col-chart-bars">
+                      {barData.map((d, i) => (
+                        <div className="col-chart-col" key={i}>
+                          <div className="col-chart-tooltip">
+                            Net: {d.value >= 0 ? "+" : ""}{fmt(d.value)}/yr
+                          </div>
+                          <div className="col-chart-track">
+                            <div
+                              className="col-chart-fill"
+                              style={{
+                                height: `${(Math.abs(d.value) / effectiveMax) * 100}%`,
+                                background: d.value <= 0 ? "#10b981" : "#ef4444",
+                                borderRadius: "3px 3px 0 0",
+                              }}
+                            />
+                          </div>
+                          <div className="col-chart-label">{d.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-chart-x-label">Decile</div>
+                <div className="col-chart-legend">
+                  <span><span className="col-chart-legend-dot" style={{ background: "#10b981" }} />Saves</span>
+                  <span><span className="col-chart-legend-dot" style={{ background: "#ef4444" }} />Pays more</span>
+                </div>
+              </div>
+            );
+          } else {
+            const scen = gasCap.scenarios[selectedScenario];
+            barData = scen.deciles.map((d) => ({
+              label: `${d.decile}`,
+              staticVal: d.gas_subsidy,
+              behavVal: d.remaining_cost,
+            }));
+            maxVal = Math.max(...barData.map((d) => Math.max(d.staticVal, d.behavVal))) * 1.15;
+            const ticks = niceTicks(maxVal);
+            const topTick = ticks[ticks.length - 1] || maxVal;
+            const effectiveMax = Math.max(maxVal, topTick);
+            return (
+              <div className="col-chart">
+                <div className="col-chart-body">
+                  <div className="col-chart-y-axis">
+                    {[...ticks].reverse().map((t, i) => (
+                      <div className="col-chart-y-tick" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }}>{fmt(t)}</div>
+                    ))}
+                  </div>
+                  <div className="col-chart-area">
+                    {ticks.map((t, i) => (
+                      <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
+                    ))}
+                    <div className="col-chart-bars">
+                      {barData.map((d, i) => (
+                        <div className="col-chart-col" key={i}>
+                          <div className="col-chart-tooltip">
+                            Gas subsidy: {fmt(d.staticVal)}, Remaining: {fmt(d.behavVal)}
+                          </div>
+                          <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
+                            <div className="col-chart-fill" style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#3b82f6", borderRadius: "3px 3px 0 0" }} />
+                            <div className="col-chart-fill" style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#ef4444", borderRadius: "3px 3px 0 0" }} />
+                          </div>
+                          <div className="col-chart-label">{d.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-chart-x-label">Decile</div>
+                <div className="col-chart-legend">
+                  <span><span className="col-chart-legend-dot" style={{ background: "#3b82f6" }} />Gas subsidy</span>
+                  <span><span className="col-chart-legend-dot" style={{ background: "#ef4444" }} />Remaining cost</span>
+                </div>
+              </div>
+            );
+          }
+        })()}
+      </div>
+
+      <p className="section-description">
+        The National Energy Guarantee (G) is the most progressive: it covers
+        a larger share of spending for low-income households. The rising block
+        tariff (H) achieves redistribution at zero exchequer cost — low users
+        save while high users pay more. The gas-only cap (I) targets the most
+        volatile fuel at lower fiscal cost than capping total energy bills.
+        These designs respond to <a href="#ref-bangham">Bangham's (2026)</a> call for better
+        infrastructure built before the next price cap change on 30 June.
+      </p>
+    </section>
+  );
+}
+
+
+function ConstituencyMapSection() {
+  return (
+    <section className="section" id="constituency-map">
+      <h2 className="section-title">Constituency-level impacts</h2>
+      <p className="section-description">
+        Energy burden and price shock impacts vary widely across the UK's 650
+        parliamentary constituencies. This map shows how each constituency
+        is affected, computed by applying constituency-specific population
+        weights to household-level microsimulation data. Hover over a
+        constituency to see detailed metrics, or use the search bar to find
+        a specific area. Switch between metrics using the buttons above the
+        map.
+      </p>
+      <ConstituencyMap data={constituencyData} />
+    </section>
+  );
+}
+
+
 export default function Dashboard() {
   return (
     <div className="narrative-container">
@@ -1331,8 +1828,9 @@ export default function Dashboard() {
         <h1>Energy price shock: distributional impact and policy options</h1>
         <p className="narrative-lead">
           This analysis estimates the distributional impact of five
-          energy price shock scenarios across income deciles and models
-          four policy responses.
+          energy price shock scenarios across income deciles, with separate
+          electricity and gas breakdowns, and models nine policy responses
+          including three new designs for the next crisis.
         </p>
       </header>
 
@@ -1377,18 +1875,24 @@ export default function Dashboard() {
         cost per household across income deciles, the impact on fuel
         poverty rates, and the distributional effects of four policy
         responses: an Energy Price Guarantee, a flat transfer, a council
-        tax band rebate, and an expanded Winter Fuel Allowance. All
-        modelling uses the PolicyEngine UK microsimulation
-        model.<a href="#fn-6"><sup>6</sup></a>
+        tax band rebate, an expanded Winter Fuel Allowance, and three
+        alternative designs — a National Energy Guarantee, a rising block
+        tariff, and a gas-only price cap. All modelling uses the PolicyEngine
+        UK microsimulation model with separate electricity and gas
+        imputations calibrated to NEED 2023 admin
+        data.<a href="#fn-6"><sup>6</sup></a>
       </p>
       </section>
 
       <BaselineSection />
+      <EnergySplitSection />
       <ShockSection />
       <FuelPovertySection />
       <PolicySection />
       <PolicyNetSection />
       <SummarySection />
+      <NewPoliciesSection />
+      <ConstituencyMapSection />
 
       <hr style={{ border: "none", borderTop: "1px solid #e2e8f0", margin: "48px 0" }} />
 
@@ -1424,6 +1928,10 @@ export default function Dashboard() {
           <li id="ref-priesmann">
             Priesmann, J. and Praktiknjo, A. (2025). "Estimating Short- and Long-Run Price and Income Elasticities of Final Energy Demand as a Function of Household Income." <em>Energy Policy</em>, 207, 114850. Short-run gas elasticity: −0.64 (low-income) to −0.11 (high-income).{" "}
             <a href="https://doi.org/10.1016/j.enpol.2025.114850" target="_blank" rel="noopener noreferrer">DOI</a>
+          </li>
+          <li id="ref-bangham">
+            Bangham, G. (2026). "Now is the time to prepare for another energy price shock." <em>Substack</em>, 5 March 2026. Argues for joining Ofgem, DWP and HMRC data and implementing a National Energy Guarantee with rising block tariffs.{" "}
+            <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another" target="_blank" rel="noopener noreferrer">Link</a>
           </li>
         </ul>
 
