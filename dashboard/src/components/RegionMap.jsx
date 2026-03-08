@@ -36,13 +36,12 @@ const REGION_DISPLAY = {
   NORTHERN_IRELAND: "N. Ireland",
 };
 
-const METRIC_OPTIONS = [
-  { key: "energy_burden_pct", label: "Energy burden (%)" },
-  { key: "total_energy", label: "Total energy (£)" },
-  { key: "electricity", label: "Electricity (£)" },
-  { key: "gas", label: "Gas (£)" },
-  { key: "net_income", label: "Net income (£)" },
-];
+// Metric key mapping from parent baselineView
+const VIEW_TO_METRIC = {
+  elec_gas: "total_energy",
+  energy_share: "energy_burden_pct",
+  net_income: "net_income",
+};
 
 function getRegionEnum(feature) {
   const region = feature.properties.CTR_REG || "";
@@ -51,11 +50,11 @@ function getRegionEnum(feature) {
   return COUNTRY_TO_ENUM[country] || null;
 }
 
-export default function RegionMap({ regionData }) {
+export default function RegionMap({ regionData, activeView = "elec_gas", customMetricKey = null, customLabel = null }) {
   const svgRef = useRef(null);
   const [geoData, setGeoData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [metricKey, setMetricKey] = useState("energy_burden_pct");
+  const metricKey = customMetricKey || VIEW_TO_METRIC[activeView] || "total_energy";
   const [hoveredRegion, setHoveredRegion] = useState(null);
 
   // Build lookup: enum -> region data
@@ -78,16 +77,12 @@ export default function RegionMap({ regionData }) {
       .catch(() => setLoading(false));
   }, []);
 
-  // Color scale
+  // Color scale — blue palette for all metrics
   const colorScale = useMemo(() => {
     const vals = regionData.map((r) => r[metricKey]).filter((v) => v != null);
     if (!vals.length) return () => "#e5e7eb";
-    const isCurrency = metricKey !== "energy_burden_pct";
-    if (isCurrency) {
-      return d3.scaleSequential((t) => d3.interpolateRgb("#dbeafe", "#1e40af")(t))
-        .domain([d3.min(vals), d3.max(vals)]);
-    }
-    return d3.scaleSequential(d3.interpolateOrRd).domain([d3.min(vals), d3.max(vals)]);
+    return d3.scaleSequential((t) => d3.interpolateRgb("#dbeafe", "#1e40af")(t))
+      .domain([d3.min(vals), d3.max(vals)]);
   }, [regionData, metricKey]);
 
   // Render map
@@ -175,31 +170,31 @@ export default function RegionMap({ regionData }) {
 
   if (loading) return <p style={{ color: "#94a3b8" }}>Loading map...</p>;
 
-  const isCurrency = metricKey !== "energy_burden_pct";
+  const isPct = metricKey.includes("pct") || metricKey.includes("fp_rate");
+  const isMillions = metricKey.includes("fp_hh");
   const fmtVal = (v) => {
     if (v == null) return "N/A";
-    if (isCurrency) return `£${v.toLocaleString("en-GB")}`;
-    return `${v}%`;
+    if (isPct) return `${v}%`;
+    if (isMillions) return `${v}m`;
+    return `£${v.toLocaleString("en-GB")}`;
   };
 
   const hoveredData = hoveredRegion ? lookup[hoveredRegion] : null;
   const sortedRegions = [...regionData].sort((a, b) => b[metricKey] - a[metricKey]);
 
+  const metricLabel = customLabel || (
+    metricKey === "energy_burden_pct" ? "Energy burden (%)"
+    : metricKey === "total_energy" ? "Total energy (£)"
+    : "Net income (£)"
+  );
+
+  // Build tooltip rows from available data fields (skip 'region')
+  const tooltipFields = regionData.length > 0
+    ? Object.keys(regionData[0]).filter((k) => k !== "region" && typeof regionData[0][k] === "number")
+    : [];
+
   return (
     <div>
-      {/* Metric pills */}
-      <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 14 }}>
-        {METRIC_OPTIONS.map((m) => (
-          <button
-            key={m.key}
-            className={`scenario-btn${metricKey === m.key ? " active" : ""}`}
-            onClick={() => setMetricKey(m.key)}
-          >
-            {m.label}
-          </button>
-        ))}
-      </div>
-
       <div style={{ display: "flex", gap: 24, alignItems: "flex-start", flexWrap: "wrap" }}>
         {/* Map */}
         <div style={{ position: "relative", flex: "1 1 420px", maxWidth: 460 }}>
@@ -227,30 +222,20 @@ export default function RegionMap({ regionData }) {
               </div>
               <table style={{ fontSize: "0.78rem", borderCollapse: "collapse" }}>
                 <tbody>
-                  <tr>
-                    <td style={{ paddingRight: 10, color: "#64748b" }}>Electricity</td>
-                    <td style={{ fontWeight: 600 }}>£{hoveredData.electricity.toLocaleString()}</td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: 10, color: "#64748b" }}>Gas</td>
-                    <td style={{ fontWeight: 600 }}>£{hoveredData.gas.toLocaleString()}</td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: 10, color: "#64748b" }}>Total energy</td>
-                    <td>£{hoveredData.total_energy.toLocaleString()}</td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: 10, color: "#64748b" }}>Net income</td>
-                    <td>£{hoveredData.net_income.toLocaleString()}</td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: 10, color: "#64748b" }}>Energy burden</td>
-                    <td style={{ fontWeight: 700, color: "#dc2626" }}>{hoveredData.energy_burden_pct}%</td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: 10, color: "#64748b" }}>Households</td>
-                    <td>{hoveredData.households_m}m</td>
-                  </tr>
+                  {tooltipFields.map((k) => {
+                    const v = hoveredData[k];
+                    const label = k.replace(/_/g, " ").replace(/\bpct\b/g, "%").replace(/^./, (c) => c.toUpperCase());
+                    const isHighlight = k === metricKey;
+                    const display = k.includes("pct") || k.includes("fp_rate") ? `${v}%`
+                      : k.includes("_m") || k.includes("fp_hh") ? `${v}m`
+                      : `£${v.toLocaleString()}`;
+                    return (
+                      <tr key={k}>
+                        <td style={{ paddingRight: 10, color: "#64748b" }}>{label}</td>
+                        <td style={{ fontWeight: isHighlight ? 700 : 400, color: isHighlight ? "#1e40af" : undefined }}>{display}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -262,7 +247,7 @@ export default function RegionMap({ regionData }) {
           {/* Legend */}
           <div style={{ marginBottom: 16 }}>
             <div style={{ fontSize: "0.82rem", fontWeight: 600, marginBottom: 6 }}>
-              {METRIC_OPTIONS.find((m) => m.key === metricKey)?.label}
+              {metricLabel}
             </div>
             <RegionLegend colorScale={colorScale} regionData={regionData} metricKey={metricKey} fmtVal={fmtVal} />
           </div>

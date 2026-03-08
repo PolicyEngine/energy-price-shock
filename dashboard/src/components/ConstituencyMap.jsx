@@ -1,25 +1,25 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 import * as d3 from "d3";
 
-const SCENARIO_KEYS = [
-  { key: "energy_burden_pct", label: "Baseline energy burden (%)" },
-  { key: "extra_cost_plus_10pct", label: "+10% shock: extra cost (£)" },
-  { key: "extra_cost_plus_20pct", label: "+20% shock: extra cost (£)" },
-  { key: "extra_cost_plus_30pct", label: "+30% shock: extra cost (£)" },
-  { key: "extra_cost_plus_60pct", label: "+60% shock: extra cost (£)" },
-  { key: "extra_cost_2022_level", label: "2022-level: extra cost (£)" },
-  { key: "fuel_poverty_pct", label: "Baseline fuel poverty (%)" },
-  { key: "fp_pct_plus_10pct", label: "+10% shock: fuel poverty (%)" },
-  { key: "fp_pct_plus_30pct", label: "+30% shock: fuel poverty (%)" },
-  { key: "fp_pct_plus_60pct", label: "+60% shock: fuel poverty (%)" },
-];
+// Map parent activeView to constituency data keys
+const VIEW_TO_METRIC = {
+  elec_gas: "avg_energy",
+  energy_share: "energy_burden_pct",
+  net_income: "avg_income",
+};
 
-export default function ConstituencyMap({ data }) {
+const VIEW_TO_LABEL = {
+  elec_gas: "Total energy (£)",
+  energy_share: "Energy burden (%)",
+  net_income: "Net income (£)",
+};
+
+export default function ConstituencyMap({ data, activeView = "elec_gas", customMetricKey = null, customLabel = null }) {
   const svgRef = useRef(null);
   const tooltipRef = useRef(null);
   const [geoData, setGeoData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [metricKey, setMetricKey] = useState("energy_burden_pct");
+  const metricKey = customMetricKey || VIEW_TO_METRIC[activeView] || "avg_energy";
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedConstituency, setSelectedConstituency] = useState(null);
 
@@ -45,23 +45,13 @@ export default function ConstituencyMap({ data }) {
       .catch(() => setLoading(false));
   }, []);
 
-  // Determine color scale
+  // Color scale — blue palette for all metrics
   const colorScale = useMemo(() => {
     if (!constituencies.length) return () => "#e5e7eb";
     const vals = constituencies.map((c) => c[metricKey]).filter((v) => v != null);
-    const isBurden = metricKey.includes("burden") || metricKey.includes("fp_pct") || metricKey.includes("fuel_poverty");
-    const isExtra = metricKey.includes("extra_cost");
-
-    if (isBurden || metricKey === "fuel_poverty_pct") {
-      // Sequential: light -> red for burden/poverty
-      const [lo, hi] = [d3.min(vals), d3.max(vals)];
-      return d3.scaleSequential(d3.interpolateOrRd).domain([lo, hi]);
-    } else if (isExtra) {
-      // Sequential: light -> amber for extra cost
-      const [lo, hi] = [d3.min(vals), d3.max(vals)];
-      return d3.scaleSequential((t) => d3.interpolateRgb("#fef3c7", "#b45309")(t)).domain([lo, hi]);
-    }
-    return () => "#e5e7eb";
+    if (!vals.length) return () => "#e5e7eb";
+    return d3.scaleSequential((t) => d3.interpolateRgb("#dbeafe", "#1e40af")(t))
+      .domain([d3.min(vals), d3.max(vals)]);
   }, [constituencies, metricKey]);
 
   // Search results
@@ -165,32 +155,21 @@ export default function ConstituencyMap({ data }) {
 
   if (loading) return <p style={{ color: "#94a3b8" }}>Loading map data...</p>;
 
-  const selectedLabel = SCENARIO_KEYS.find((s) => s.key === metricKey)?.label || metricKey;
-  const isCurrency = metricKey.includes("extra_cost");
-  const isPct = metricKey.includes("pct");
+  const selectedLabel = customLabel || VIEW_TO_LABEL[activeView] || metricKey;
+  // Determine format: keys starting with "extra_cost" or "behav_cost" are £, not %
+  const isCostKey = metricKey.startsWith("extra_cost") || metricKey.startsWith("behav_cost")
+    || metricKey.includes("energy") || metricKey.includes("income") || metricKey.includes("electricity") || metricKey.includes("gas");
+  const isPct = !isCostKey && metricKey.includes("pct");
 
   const fmtVal = (v) => {
     if (v == null) return "N/A";
-    if (isCurrency) return `£${v.toLocaleString("en-GB")}`;
+    if (isCostKey) return `£${v.toLocaleString("en-GB")}`;
     if (isPct) return `${v}%`;
     return String(v);
   };
 
   return (
     <div>
-      {/* Metric selector */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
-        {SCENARIO_KEYS.map((s) => (
-          <button
-            key={s.key}
-            className={`scenario-btn${metricKey === s.key ? " active" : ""}`}
-            onClick={() => setMetricKey(s.key)}
-          >
-            {s.label}
-          </button>
-        ))}
-      </div>
-
       {/* Search */}
       <div style={{ marginBottom: 12, position: "relative" }}>
         <input
@@ -273,42 +252,15 @@ export default function ConstituencyMap({ data }) {
               <div style={{ color: "#64748b", fontSize: "0.75rem", marginBottom: 6 }}>
                 {selectedConstituency.region}
               </div>
-              <table style={{ fontSize: "0.78rem", borderCollapse: "collapse" }}>
+              <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "#1e40af", marginBottom: 4 }}>
+                {selectedLabel}: {fmtVal(selectedConstituency[metricKey])}
+              </div>
+              <table style={{ fontSize: "0.75rem", borderCollapse: "collapse", color: "#64748b" }}>
                 <tbody>
-                  <tr>
-                    <td style={{ paddingRight: 10 }}>Energy spend</td>
-                    <td style={{ fontWeight: 600 }}>£{selectedConstituency.avg_energy?.toLocaleString()}</td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: 10 }}>Electricity</td>
-                    <td>£{selectedConstituency.avg_electricity?.toLocaleString()}</td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: 10 }}>Gas</td>
-                    <td>£{selectedConstituency.avg_gas?.toLocaleString()}</td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: 10 }}>Income</td>
-                    <td>£{selectedConstituency.avg_income?.toLocaleString()}</td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: 10 }}>Energy burden</td>
-                    <td style={{ fontWeight: 600, color: "#dc2626" }}>
-                      {selectedConstituency.energy_burden_pct}%
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: 10 }}>Fuel poverty</td>
-                    <td>{selectedConstituency.fuel_poverty_pct}%</td>
-                  </tr>
-                  {metricKey.includes("extra_cost") && (
-                    <tr>
-                      <td style={{ paddingRight: 10, fontWeight: 600 }}>{selectedLabel}</td>
-                      <td style={{ fontWeight: 600, color: "#b45309" }}>
-                        {fmtVal(selectedConstituency[metricKey])}
-                      </td>
-                    </tr>
-                  )}
+                  <tr><td style={{ paddingRight: 8 }}>Energy</td><td>£{selectedConstituency.avg_energy?.toLocaleString()}</td></tr>
+                  <tr><td style={{ paddingRight: 8 }}>Electricity</td><td>£{selectedConstituency.avg_electricity?.toLocaleString()}</td></tr>
+                  <tr><td style={{ paddingRight: 8 }}>Gas</td><td>£{selectedConstituency.avg_gas?.toLocaleString()}</td></tr>
+                  <tr><td style={{ paddingRight: 8 }}>Income</td><td>£{selectedConstituency.avg_income?.toLocaleString()}</td></tr>
                 </tbody>
               </table>
             </div>

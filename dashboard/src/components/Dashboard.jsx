@@ -21,7 +21,7 @@ const POLICY_META = {
     letter: "B",
     fullName: "Flat transfer (£400 per household)",
     description:
-      "£400 credited to every household's energy bill. Progressive in percentage terms but untargeted. Costs £12.8bn for 31.9m households.",
+      "£400 credited to every household's energy bill. Progressive in percentage terms but untargeted.",
     targeting: "Universal, same amount regardless of income or usage",
   },
   ct_rebate: {
@@ -144,108 +144,291 @@ function ColumnChart({ data, maxValue, color, formatValue, colorFn, yLabel, xLab
 
 function BaselineSection() {
   const { baseline } = results;
-  const [baselineView, setBaselineView] = useState("energy_share");
+  const split = resultsV2.energy_split;
+  const regional = resultsV2.regional;
+  const tenureData = resultsV2.tenure;
+  const hhTypeData = resultsV2.household_type;
+  const [baselineView, setBaselineView] = useState("elec_gas");
+  const [breakdownView, setBreakdownView] = useState("decile");
 
-  const views = {
-    energy_share: {
-      label: "Energy / income (%)",
-      data: baseline.deciles.map((d) => ({
-        label: `${d.decile}`,
-        value: d.energy_share_pct,
-      })),
-      format: (v) => `${v}%`,
-      title: "Energy spend as % of net income, by decile",
-      subtitle: "decile 1 = lowest income, decile 10 = highest income",
-    },
-    energy_spend: {
-      label: "Energy spend (£/yr)",
-      data: baseline.deciles.map((d) => ({
-        label: `${d.decile}`,
-        value: d.energy_spend,
-      })),
-      format: (v) => fmt(v),
-      title: "Energy spend by decile",
-      subtitle: "annual household gas and electricity bill",
-    },
-    net_income: {
-      label: "Net income (£/yr)",
-      data: baseline.deciles.map((d) => ({
-        label: `${d.decile}`,
-        value: d.net_income,
-      })),
-      format: (v) => fmt(v),
-      title: "Net income by decile",
-      subtitle: "annual household net income (earnings + benefits − taxes)",
-    },
+  const TENURE_LABELS = {
+    OWNED_OUTRIGHT: "Owned outright",
+    OWNED_WITH_MORTGAGE: "Mortgage",
+    RENT_PRIVATELY: "Private rent",
+    RENT_FROM_COUNCIL: "Council rent",
+    RENT_FROM_HA: "Housing assoc.",
+  };
+  const HH_TYPE_LABELS = {
+    SINGLE_PENSIONER: "Single pensioner",
+    COUPLE_PENSIONER: "Couple pensioner",
+    SINGLE_WORKING_AGE: "Single (working age)",
+    COUPLE_NO_CHILDREN: "Couple, no children",
+    COUPLE_WITH_CHILDREN: "Couple with children",
+    LONE_PARENT: "Lone parent",
+    OTHER: "Other",
+  };
+  const REGION_LABELS = {
+    NORTH_EAST: "NE",
+    NORTH_WEST: "NW",
+    YORKSHIRE: "Yorks",
+    EAST_MIDLANDS: "E Mids",
+    WEST_MIDLANDS: "W Mids",
+    EAST_OF_ENGLAND: "E Eng",
+    LONDON: "London",
+    SOUTH_EAST: "SE",
+    SOUTH_WEST: "SW",
+    WALES: "Wales",
+    SCOTLAND: "Scotland",
+    NORTHERN_IRELAND: "NI",
   };
 
-  const current = views[baselineView];
+  // Build chart data for current metric + breakdown combo
+  let chartTitle, chartSubtitle, xLabel;
+  const bk = breakdownView;
+
+  if (bk === "decile") xLabel = "Decile";
+  else if (bk === "region") xLabel = "Region";
+  else if (bk === "hh_type") xLabel = "Household type";
+  else xLabel = "Tenure";
+
+  // Helper: generic item list with .elec, .gas, .net_income, .energy_burden_pct
+  const getItems = () => {
+    if (bk === "decile") return baseline.deciles.map((d, i) => ({
+      label: `${d.decile}`,
+      elec: split.deciles[i].electricity, gas: split.deciles[i].gas,
+      net_income: d.net_income, energy_burden_pct: d.energy_share_pct,
+      elec_burden_pct: split.deciles[i].elec_burden_pct, gas_burden_pct: split.deciles[i].gas_burden_pct,
+    }));
+    if (bk === "region") return regional.map((r) => ({
+      label: REGION_LABELS[r.region] || r.region,
+      elec: r.electricity, gas: r.gas, net_income: r.net_income, energy_burden_pct: r.energy_burden_pct,
+    }));
+    if (bk === "hh_type") return hhTypeData.map((h) => ({
+      label: HH_TYPE_LABELS[h.hh_type] || h.hh_type,
+      elec: h.electricity, gas: h.gas, net_income: h.net_income, energy_burden_pct: h.energy_burden_pct,
+    }));
+    return tenureData.map((t) => ({
+      label: TENURE_LABELS[t.tenure] || t.tenure,
+      elec: t.electricity, gas: t.gas, net_income: t.net_income, energy_burden_pct: t.energy_burden_pct,
+    }));
+  };
+  const items = getItems();
+
+  // All views use stacked elec/gas bars except net_income
+  let stackedBarData, stackedMaxVal, stackedFmtVal, stackedLegendA, stackedLegendB, stackedColorA, stackedColorB;
+  let simpleBarData, simpleMaxVal, simpleFormat;
+  const isStacked = baselineView === "elec_gas" || baselineView === "energy_share";
+
+  if (baselineView === "elec_gas") {
+    stackedBarData = items.map((it) => ({ label: it.label, elec: it.elec, gas: it.gas }));
+    stackedMaxVal = Math.max(...stackedBarData.map((d) => d.elec + d.gas)) * 1.15;
+    stackedFmtVal = (v) => fmt(v);
+    stackedLegendA = "Electricity"; stackedLegendB = "Gas";
+    stackedColorA = "#f59e0b"; stackedColorB = "#3b82f6";
+    chartTitle = `Energy spending by ${xLabel.toLowerCase()}`;
+    chartSubtitle = "Annual £ per household";
+  } else if (baselineView === "energy_share") {
+    stackedBarData = items.map((it) => {
+      const elecPct = it.elec_burden_pct != null ? it.elec_burden_pct : +(it.elec / it.net_income * 100).toFixed(1);
+      const gasPct = it.gas_burden_pct != null ? it.gas_burden_pct : +(it.gas / it.net_income * 100).toFixed(1);
+      return { label: it.label, elec: elecPct, gas: gasPct };
+    });
+    stackedMaxVal = Math.max(...stackedBarData.map((d) => d.elec + d.gas)) * 1.15;
+    stackedFmtVal = (v) => `${v.toFixed(1)}%`;
+    stackedLegendA = "Electricity"; stackedLegendB = "Gas";
+    stackedColorA = "#f59e0b"; stackedColorB = "#3b82f6";
+    chartTitle = `Energy spend as % of net income, by ${xLabel.toLowerCase()}`;
+    chartSubtitle = bk === "decile" ? "decile 1 = lowest income, decile 10 = highest income" : "% of household net income spent on energy";
+  } else {
+    simpleBarData = items.map((it) => ({ label: it.label, value: it.net_income }));
+    simpleMaxVal = Math.max(...simpleBarData.map((d) => d.value)) * 1.15;
+    simpleFormat = (v) => fmt(v);
+    chartTitle = `Net income by ${xLabel.toLowerCase()}`;
+    chartSubtitle = "annual household net income (earnings + benefits − taxes)";
+  }
 
   return (
     <section className="section" id="baseline">
       <h2 className="section-title">Baseline energy burden</h2>
 
       <div className="kpi-row">
-        <KpiCard
-          label="Households"
-          value={`${baseline.n_households_m}m`}
-          color="teal"
-        />
-        <KpiCard
-          label="Current Ofgem cap"
-          value={fmt(baseline.current_cap)}
-          unit="/yr"
-        />
-        <KpiCard
-          label="Mean energy spend"
-          value={fmt(baseline.mean_energy_spend)}
-          unit="/yr"
-        />
-        <KpiCard
-          label="Total energy spend"
-          value={fmtBn(baseline.total_energy_spend_bn)}
-        />
+        <KpiCard label="Households" value={`${baseline.n_households_m}m`} color="teal" />
+        <KpiCard label="Current Ofgem cap" value={fmt(baseline.current_cap)} unit="/yr" />
+        <KpiCard label="Avg electricity" value={fmt(split.mean_electricity)} unit="/yr" />
+        <KpiCard label="Avg gas" value={fmt(split.mean_gas)} unit="/yr" />
+        <KpiCard label="Avg total energy" value={fmt(baseline.mean_energy_spend)} unit="/yr" />
       </div>
 
       <p className="section-description">
         Before modelling any price shock, we establish how energy costs are
-        distributed across income deciles at current prices. The chart below
-        shows energy spend as a share of income, absolute energy spend, and
-        net income for each decile.
+        distributed. Household energy bills are split between
+        electricity ({split.elec_share_pct}% of spending)
+        and gas ({(100 - split.elec_share_pct).toFixed(1)}%). Gas prices are
+        more volatile because they are directly tied to wholesale markets, so
+        a geopolitical shock feeds through primarily via gas. Electricity
+        prices also rise because gas-fired power stations set the marginal
+        price.
       </p>
 
-      <div className="chart-wrapper">
-        <div className="chart-header">
-          <div>
-            <div className="chart-title">{current.title}</div>
-            <div className="chart-subtitle">{current.subtitle}</div>
-          </div>
-          <div className="scenario-pills">
-            {Object.entries(views).map(([key, v]) => (
-              <button
-                key={key}
-                className={`scenario-pill scenario-pill-sm${baselineView === key ? " active" : ""}`}
-                onClick={() => setBaselineView(key)}
-              >
-                {v.label}
-              </button>
-            ))}
-          </div>
+      <div className="pill-row">
+        <span className="pill-row-label">METRIC</span>
+        <div className="scenario-pills">
+          {[
+            { key: "elec_gas", label: "Energy (£/yr)" },
+            { key: "energy_share", label: "Energy / income (%)" },
+            { key: "net_income", label: "Net income (£/yr)" },
+          ].map((v) => (
+            <button
+              key={v.key}
+              className={`scenario-pill${baselineView === v.key ? " active" : ""}`}
+              onClick={() => setBaselineView(v.key)}
+            >
+              {v.label}
+            </button>
+          ))}
         </div>
-        <ColumnChart
-          data={current.data}
-          maxValue={Math.max(...current.data.map((d) => d.value)) * 1.15}
-          color="teal"
-          formatValue={current.format}
-          xLabel="Decile"
-        />
+      </div>
+      <div className="pill-row">
+        <span className="pill-row-label">BREAKDOWN</span>
+        <div className="scenario-pills">
+          {[
+            { key: "decile", label: "By decile" },
+            { key: "tenure", label: "By tenure" },
+            { key: "hh_type", label: "By household type" },
+            { key: "region", label: "By region" },
+            { key: "constituency", label: "By constituency" },
+          ].map((v) => (
+            <button
+              key={v.key}
+              className={`scenario-pill${breakdownView === v.key ? " active" : ""}`}
+              onClick={() => setBreakdownView(v.key)}
+            >
+              {v.label}
+            </button>
+          ))}
+        </div>
       </div>
 
+      {breakdownView === "region" ? (
+        <div className="chart-wrapper">
+          <div className="chart-header">
+            <div>
+              <div className="chart-title">Regional energy map</div>
+              <div className="chart-subtitle">Hover over a region to see details</div>
+            </div>
+          </div>
+          <RegionMap regionData={regional} activeView={baselineView} />
+        </div>
+      ) : breakdownView === "constituency" ? (
+        <div className="chart-wrapper">
+          <div className="chart-header">
+            <div>
+              <div className="chart-title">Constituency-level map</div>
+              <div className="chart-subtitle">650 parliamentary constituencies — search or hover to explore</div>
+            </div>
+          </div>
+          <ConstituencyMap data={constituencyData} activeView={baselineView} />
+        </div>
+      ) : (
+        <div className="chart-wrapper">
+          <div className="chart-header">
+            <div>
+              <div className="chart-title">{chartTitle}</div>
+              <div className="chart-subtitle">{chartSubtitle}</div>
+            </div>
+          </div>
+
+          {isStacked ? (
+            (() => {
+              const ticks = niceTicks(stackedMaxVal);
+              const topTick = ticks[ticks.length - 1] || stackedMaxVal;
+              const effectiveMax = Math.max(stackedMaxVal, topTick);
+              return (
+                <div className="col-chart">
+                  <div className="col-chart-body">
+                    <div className="col-chart-y-axis">
+                      {[...ticks].reverse().map((t, i) => (
+                        <div className="col-chart-y-tick" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }}>
+                          {stackedFmtVal(t)}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="col-chart-area">
+                      {ticks.map((t, i) => (
+                        <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
+                      ))}
+                      <div className="col-chart-bars">
+                        {stackedBarData.map((d, i) => (
+                          <div className="col-chart-col" key={i}>
+                            <div className="col-chart-tooltip">
+                              Elec: {stackedFmtVal(d.elec)}, Gas: {stackedFmtVal(d.gas)}
+                            </div>
+                            <div className="col-chart-track" style={{ flexDirection: "column-reverse" }}>
+                              <div
+                                className="col-chart-fill"
+                                style={{ height: `${(d.elec / effectiveMax) * 100}%`, background: stackedColorA, borderRadius: 0 }}
+                              />
+                              <div
+                                className="col-chart-fill"
+                                style={{ height: `${(d.gas / effectiveMax) * 100}%`, background: stackedColorB, borderRadius: "3px 3px 0 0" }}
+                              />
+                            </div>
+                            <div className="col-chart-label">{d.label}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-chart-x-label">{xLabel}</div>
+                  <div className="col-chart-legend">
+                    <span><span className="col-chart-legend-dot" style={{ background: stackedColorA }} />{stackedLegendA}</span>
+                    <span><span className="col-chart-legend-dot" style={{ background: stackedColorB }} />{stackedLegendB}</span>
+                  </div>
+                </div>
+              );
+            })()
+          ) : (
+            <ColumnChart
+              data={simpleBarData}
+              maxValue={simpleMaxVal}
+              color="teal"
+              formatValue={simpleFormat}
+              xLabel={xLabel}
+            />
+          )}
+        </div>
+      )}
+
+      {(breakdownView === "tenure" || breakdownView === "hh_type") && baselineView !== "net_income" && (
+        <div className="chart-wrapper" style={{ marginTop: 32 }}>
+          <div className="chart-header">
+            <div>
+              <div className="chart-title">Fuel poverty rate by {breakdownView === "hh_type" ? "household type" : "tenure"}</div>
+              <div className="chart-subtitle">% of households spending &gt;10% of income on energy</div>
+            </div>
+          </div>
+          <ColumnChart
+            data={breakdownView === "hh_type"
+              ? hhTypeData.map((h) => ({ label: HH_TYPE_LABELS[h.hh_type] || h.hh_type, value: h.fuel_poverty_pct }))
+              : tenureData.map((t) => ({ label: TENURE_LABELS[t.tenure] || t.tenure, value: t.fuel_poverty_pct }))
+            }
+            maxValue={Math.max(...(breakdownView === "hh_type" ? hhTypeData : tenureData).map((d) => d.fuel_poverty_pct)) * 1.2}
+            colorFn={() => "#ef4444"}
+            formatValue={(v) => `${v}%`}
+          />
+        </div>
+      )}
+
       <p className="section-description">
-        Decile 1 households spend 10.3% of net income on energy. Decile 10
-        households spend 2.2%. Energy spending ranges from £1,848 to £2,703
-        across deciles: the variation in burden is driven by income, not
-        consumption. The next section models what happens when prices rise.
+        Decile 1 households spend {baseline.deciles[0].energy_share_pct}% of
+        net income on energy. Decile 10 households
+        spend {baseline.deciles[9].energy_share_pct}%.
+        Gas accounts for {(100 - split.elec_share_pct).toFixed(0)}% of energy
+        spending but drives most price volatility. Regional variation is
+        significant: the {regional[0].region === "NORTH_WEST" ? "North West" : regional[0].region} has
+        the highest energy burden at {regional[0].energy_burden_pct}% of
+        income, while London is lowest. The next section models what happens
+        when prices rise.
       </p>
     </section>
   );
@@ -254,18 +437,93 @@ function BaselineSection() {
 function ShockSection() {
   const [selected, setSelected] = useState(0);
   const [shockMetric, setShockMetric] = useState("pct_of_income");
-  const [scenarioMetric, setScenarioMetric] = useState("avg_hh_hit_yr");
+  const [shockResponse, setShockResponse] = useState("both");
+  const [shockBreakdown, setShockBreakdown] = useState("decile");
   const scenario = results.shock_scenarios[selected];
   const behav = results.behavioral[selected];
 
-  const barData = scenario.deciles.map((d, i) => {
-    const bd = behav.deciles[i];
-    return {
-      label: `${d.decile}`,
-      staticVal: shockMetric === "pct_of_income" ? d.pct_of_income : d.extra_cost,
-      behavVal: shockMetric === "pct_of_income" ? bd.behavioral_pct_of_income : bd.behavioral_extra_cost,
-    };
-  });
+  const TENURE_LABELS = {
+    OWNED_OUTRIGHT: "Owned outright", OWNED_WITH_MORTGAGE: "Mortgage",
+    RENT_PRIVATELY: "Private rent", RENT_FROM_COUNCIL: "Council rent", RENT_FROM_HA: "Housing assoc.",
+  };
+  const HH_TYPE_LABELS = {
+    SINGLE_PENSIONER: "Single pensioner", COUPLE_PENSIONER: "Couple pensioner",
+    SINGLE_WORKING_AGE: "Single (WA)", COUPLE_NO_CHILDREN: "Couple, no kids",
+    COUPLE_WITH_CHILDREN: "Couple + kids", LONE_PARENT: "Lone parent", OTHER: "Other",
+  };
+  const REGION_LABELS = {
+    NORTH_EAST: "NE", NORTH_WEST: "NW", YORKSHIRE: "Yorks", EAST_MIDLANDS: "E Mids",
+    WEST_MIDLANDS: "W Mids", EAST_OF_ENGLAND: "E Eng", LONDON: "London",
+    SOUTH_EAST: "SE", SOUTH_WEST: "SW", WALES: "Wales", SCOTLAND: "Scotland", NORTHERN_IRELAND: "NI",
+  };
+
+  // Build bar data based on breakdown
+  const isPct = shockMetric === "pct_of_income" || shockMetric === "fp_rate";
+
+  // Helper to pick the right static/behavioral field from a row
+  const getStaticVal = (d) => {
+    if (shockMetric === "pct_of_income") return d.pct_of_income;
+    if (shockMetric === "extra_cost") return d.extra_cost;
+    if (shockMetric === "fp_rate") return d.fp_rate;
+    if (shockMetric === "fp_households") return d.fp_households_m;
+    return 0;
+  };
+  const getBehavVal = (bd) => {
+    if (!bd) return 0;
+    if (shockMetric === "pct_of_income") return bd.behavioral_pct_of_income;
+    if (shockMetric === "extra_cost") return bd.behavioral_extra_cost;
+    if (shockMetric === "fp_rate") return bd.behavioral_fp_rate;
+    if (shockMetric === "fp_households") return bd.behavioral_fp_households_m;
+    return 0;
+  };
+
+  let barData, xLabel;
+  if (shockBreakdown === "decile") {
+    xLabel = "Decile";
+    barData = scenario.deciles.map((d, i) => {
+      const bd = behav.deciles[i];
+      return {
+        label: `${d.decile}`,
+        staticVal: getStaticVal(d),
+        behavVal: getBehavVal(bd),
+      };
+    });
+  } else if (shockBreakdown === "tenure") {
+    xLabel = "Tenure";
+    barData = scenario.by_tenure.map((d) => {
+      const bd = behav.by_tenure.find((b) => b.tenure === d.tenure);
+      return {
+        label: TENURE_LABELS[d.tenure] || d.tenure,
+        staticVal: getStaticVal(d),
+        behavVal: getBehavVal(bd),
+      };
+    });
+  } else if (shockBreakdown === "hh_type") {
+    xLabel = "Household type";
+    barData = scenario.by_hh_type.map((d) => {
+      const bd = behav.by_hh_type.find((b) => b.hh_type === d.hh_type);
+      return {
+        label: HH_TYPE_LABELS[d.hh_type] || d.hh_type,
+        staticVal: getStaticVal(d),
+        behavVal: getBehavVal(bd),
+      };
+    });
+  } else if (shockBreakdown === "region") {
+    xLabel = "Region";
+    barData = scenario.by_region.map((d) => {
+      const bd = behav.by_region.find((b) => b.region === d.region);
+      return {
+        label: REGION_LABELS[d.region] || d.region,
+        staticVal: getStaticVal(d),
+        behavVal: getBehavVal(bd),
+      };
+    });
+  }
+
+  // Sort non-decile breakdowns by static value descending
+  if (shockBreakdown !== "decile" && shockBreakdown !== "constituency") {
+    barData.sort((a, b) => b.staticVal - a.staticVal);
+  }
 
   return (
     <section className="section" id="shocks">
@@ -273,8 +531,8 @@ function ShockSection() {
       <p className="section-description">
         Given the baseline distribution above, we model five scenarios in
         which the Ofgem price cap rises by a given percentage from the
-        current level of £1,641. Gas makes up 35% of UK energy
-        demand<a href="#fn-7"><sup>7</sup></a> and gas-fired power stations set electricity
+        current level of £1,641. Gas accounts for {(100 - resultsV2.energy_split.elec_share_pct).toFixed(0)}% of
+        household energy spending and gas-fired power stations set electricity
         prices, so wholesale gas price shocks feed through to the cap and
         to all household bills.
       </p>
@@ -287,9 +545,9 @@ function ShockSection() {
       </ul>
       <h3 className="section-title" style={{ fontSize: "1.1rem", marginTop: 32 }}>Behavioural response</h3>
       <p className="section-description">
-        Each chart below shows two estimates side by side. The static
+        Each chart below shows two estimates side by side. The <strong>static</strong>{" "}
         estimate assumes households do not change their energy
-        consumption. The behavioural estimate accounts for the fact that
+        consumption. The <strong>behavioural</strong> estimate accounts for the fact that
         households reduce usage when prices rise — turning down heating,
         using less hot water. The behavioural estimate uses a short-run
         price elasticity of −0.15, matching the
@@ -301,13 +559,33 @@ function ShockSection() {
         saving from reduced consumption does not capture the full cost to
         households, who also lose comfort and warmth.
       </p>
+
+      <h3 className="section-title" style={{ fontSize: "1.1rem", marginTop: 32 }}>Fuel poverty</h3>
       <p className="section-description">
-        Select a scenario to see its distributional impact. The first chart
-        shows the extra cost per decile as a percentage of income or in
-        pounds. The second chart compares all five scenarios side by side.
+        A household is fuel poor if it spends more than 10% of its net income
+        on energy. The official UK definition
+        (LILEE)<a href="#fn-8"><sup>8</sup></a> is more complex, but the 10%
+        threshold captures the same dynamic and is straightforward to apply
+        across the income distribution. Use the "FP rate (%)" and "FP
+        households (m)" metric toggles below to see how each scenario pushes
+        households into fuel poverty. At current prices,{" "}
+        {results.fuel_poverty[0].households_m}m households
+        ({results.fuel_poverty[0].fuel_poverty_rate_pct}%) are fuel poor. Even
+        a modest +10% shock pushes the rate
+        to {results.fuel_poverty[1].fuel_poverty_rate_pct}%
+        ({results.fuel_poverty[1].households_m}m). At the 2022-level, the
+        static rate
+        reaches {results.fuel_poverty[results.fuel_poverty.length - 1].fuel_poverty_rate_pct}%
+        ({results.fuel_poverty[results.fuel_poverty.length - 1].households_m}m).
+        Demand response lowers these figures but cannot prevent a large rise in
+        fuel poverty. The distributional pattern is stark: fuel poverty is
+        concentrated among low-income deciles, private renters, single
+        pensioners and lone parents, and regions such as the North East and
+        West Midlands.
       </p>
 
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
+      <div className="pill-row">
+        <span className="pill-row-label">SCENARIO</span>
         <div className="scenario-pills">
           {results.shock_scenarios.map((s, i) => (
             <button
@@ -320,176 +598,159 @@ function ShockSection() {
           ))}
         </div>
       </div>
+      <div className="pill-row">
+        <span className="pill-row-label">METRIC</span>
+        <div className="scenario-pills">
+          {[
+            { key: "pct_of_income", label: "% of income" },
+            { key: "extra_cost", label: "Extra cost (£/yr)" },
+            { key: "fp_rate", label: "FP rate (%)" },
+            { key: "fp_households", label: "FP households (m)" },
+          ].map((m) => (
+            <button key={m.key} className={`scenario-pill${shockMetric === m.key ? " active" : ""}`} onClick={() => setShockMetric(m.key)}>
+              {m.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="pill-row">
+        <span className="pill-row-label">RESPONSE</span>
+        <div className="scenario-pills">
+          {[
+            { key: "static", label: "Static" },
+            { key: "behavioural", label: "Behavioural" },
+            { key: "both", label: "Both" },
+          ].map((m) => (
+            <button key={m.key} className={`scenario-pill${shockResponse === m.key ? " active" : ""}`} onClick={() => setShockResponse(m.key)}>
+              {m.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="pill-row">
+        <span className="pill-row-label">BREAKDOWN</span>
+        <div className="scenario-pills">
+          {[
+            { key: "decile", label: "By decile" },
+            { key: "tenure", label: "By tenure" },
+            { key: "hh_type", label: "By household type" },
+            { key: "region", label: "By region" },
+            { key: "constituency", label: "By constituency" },
+          ].map((v) => (
+            <button key={v.key} className={`scenario-pill${shockBreakdown === v.key ? " active" : ""}`} onClick={() => setShockBreakdown(v.key)}>
+              {v.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div className="kpi-row">
-        <KpiCard
-          label="New price cap"
-          value={fmt(scenario.new_cap)}
-          unit="/yr"
-          color="teal"
-        />
-        <KpiCard
-          label="Static avg hit"
-          value={fmt(scenario.avg_hh_hit_yr)}
-          unit="/yr"
-        />
-        <KpiCard
-          label="Behavioural avg hit"
-          value={fmt(behav.behavioral_avg_extra)}
-          unit="/yr"
-          color="teal"
-        />
-        <KpiCard
-          label="Consumption change"
-          value={`${behav.consumption_change_pct}%`}
-        />
+        <KpiCard label="New price cap" value={fmt(scenario.new_cap)} unit="/yr" color="teal" />
+        <KpiCard label="Static avg hit" value={fmt(scenario.avg_hh_hit_yr)} unit="/yr" />
+        <KpiCard label="Behavioural avg hit" value={fmt(behav.behavioral_avg_extra)} unit="/yr" color="teal" />
+        <KpiCard label="Consumption change" value={`${behav.consumption_change_pct}%`} />
       </div>
 
-      <div className="chart-wrapper">
-        <div className="chart-header">
-          <div>
-            <div className="chart-title">
-              {shockMetric === "pct_of_income"
-                ? `Extra energy cost as % of income, by decile: ${scenario.name.toLowerCase()}`
-                : `Extra energy cost (£/yr), by decile: ${scenario.name.toLowerCase()}`}
-            </div>
-            <div className="chart-subtitle">
-              {shockMetric === "pct_of_income"
-                ? "Static (no demand response) vs behavioural (ε = −0.15)"
-                : "Static (no demand response) vs behavioural (ε = −0.15)"}
-            </div>
-          </div>
-          <div className="scenario-pills">
-            <button
-              className={`scenario-pill scenario-pill-sm${shockMetric === "pct_of_income" ? " active" : ""}`}
-              onClick={() => setShockMetric("pct_of_income")}
-            >
-              % of income
-            </button>
-            <button
-              className={`scenario-pill scenario-pill-sm${shockMetric === "extra_cost" ? " active" : ""}`}
-              onClick={() => setShockMetric("extra_cost")}
-            >
-              Extra cost (£/yr)
-            </button>
-          </div>
-        </div>
-        {(() => {
-          const maxVal = Math.max(...barData.map((d) => d.staticVal)) * 1.15;
-          const ticks = niceTicks(maxVal);
-          const topTick = ticks[ticks.length - 1] || maxVal;
-          const effectiveMax = Math.max(maxVal, topTick);
-          const fmtVal = shockMetric === "pct_of_income" ? (v) => `${v}%` : (v) => fmt(v);
-          return (
-            <div className="col-chart">
-              <div className="col-chart-body">
-                <div className="col-chart-y-axis">
-                  {[...ticks].reverse().map((t, i) => (
-                    <div className="col-chart-y-tick" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }}>
-                      {fmtVal(t)}
-                    </div>
-                  ))}
-                </div>
-                <div className="col-chart-area">
-                  {ticks.map((t, i) => (
-                    <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
-                  ))}
-                  <div className="col-chart-bars">
-                    {barData.map((d, i) => (
-                      <div className="col-chart-col" key={i}>
-                        <div className="col-chart-tooltip">
-                          {shockMetric === "pct_of_income"
-                            ? `Static: ${d.staticVal}%, Behavioural: ${d.behavVal}%`
-                            : `Static: ${fmt(d.staticVal)}, Behavioural: ${fmt(d.behavVal)}`}
-                        </div>
-                        <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
-                          <div
-                            className="col-chart-fill"
-                            style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#94a3b8", borderRadius: "3px 3px 0 0" }}
-                          />
-                          <div
-                            className="col-chart-fill"
-                            style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#319795", borderRadius: "3px 3px 0 0" }}
-                          />
-                        </div>
-                        <div className="col-chart-label">{d.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="col-chart-legend">
-                <span><span className="col-chart-legend-dot" style={{ background: "#94a3b8" }} />Static</span>
-                <span><span className="col-chart-legend-dot" style={{ background: "#319795" }} />Behavioural</span>
+      {shockBreakdown === "region" ? (() => {
+        // Build shock-specific region data for the map
+        const useStatic = shockResponse !== "behavioural";
+        const srcData = useStatic ? scenario.by_region : behav.by_region;
+        const fieldMap = {
+          pct_of_income: useStatic ? "pct_of_income" : "behavioral_pct_of_income",
+          extra_cost: useStatic ? "extra_cost" : "behavioral_extra_cost",
+          fp_rate: useStatic ? "fp_rate" : "behavioral_fp_rate",
+          fp_households: useStatic ? "fp_households_m" : "behavioral_fp_households_m",
+        };
+        const srcField = fieldMap[shockMetric];
+        const metricField = shockMetric === "pct_of_income" ? "shock_pct"
+          : shockMetric === "fp_rate" ? "shock_fp_rate"
+          : shockMetric === "fp_households" ? "shock_fp_hh"
+          : "shock_cost";
+        const shockRegionData = srcData.map((r) => ({
+          region: r.region,
+          [metricField]: r[srcField] || 0,
+        }));
+        const responseLabel = useStatic ? "static" : "behavioural";
+        const labelMap = {
+          pct_of_income: `Extra cost as % of income (${responseLabel})`,
+          extra_cost: `Extra cost £/yr (${responseLabel})`,
+          fp_rate: `Fuel poverty rate % (${responseLabel})`,
+          fp_households: `Fuel poor households, millions (${responseLabel})`,
+        };
+        const mapLabel = labelMap[shockMetric];
+        return (
+          <div className="chart-wrapper">
+            <div className="chart-header">
+              <div>
+                <div className="chart-title">Regional shock impact: {scenario.name}</div>
+                <div className="chart-subtitle">{mapLabel}</div>
               </div>
             </div>
-          );
-        })()}
-      </div>
-
-      <p className="section-description">
-        Under the {scenario.name} scenario, decile 1 households lose{" "}
-        {scenario.deciles[0].pct_of_income}% of income to the extra cost.
-        Decile 10 households lose {scenario.deciles[9].pct_of_income}%.
-      </p>
-
-      <div className="chart-wrapper">
-        <div className="chart-header">
-          <div>
-            <div className="chart-title">All scenarios at a glance</div>
-            <div className="chart-subtitle">
-              {scenarioMetric === "new_cap"
-                ? "New Ofgem price cap by scenario"
-                : "Static vs behavioural"}
+            <RegionMap regionData={shockRegionData} customMetricKey={metricField} customLabel={mapLabel} />
+          </div>
+        );
+      })() : shockBreakdown === "constituency" ? (() => {
+        // Map scenario name to constituency data key suffix
+        const SCENARIO_KEY_MAP = { "+10%": "plus_10pct", "+20%": "plus_20pct", "+30%": "plus_30pct", "+60%": "plus_60pct", "2022-level": "2022_level" };
+        const suffix = SCENARIO_KEY_MAP[scenario.name] || "plus_10pct";
+        const useBehav = shockResponse === "behavioural";
+        let constMetricKey, constLabel;
+        const responseLabel = useBehav ? "behavioural" : "static";
+        if (shockMetric === "fp_rate" || shockMetric === "fp_households") {
+          // Constituency data only has static FP rate (no behavioural or household counts)
+          constMetricKey = `fp_pct_${suffix}`;
+          constLabel = `Fuel poverty rate %: ${scenario.name}`;
+        } else {
+          const costPrefix = useBehav ? "behav_cost" : "extra_cost";
+          const pctPrefix = useBehav ? "behav_pct" : "extra_pct";
+          constMetricKey = shockMetric === "pct_of_income" ? `${pctPrefix}_${suffix}` : `${costPrefix}_${suffix}`;
+          constLabel = shockMetric === "pct_of_income"
+            ? `Extra cost as % of income (${responseLabel}): ${scenario.name}`
+            : `Extra cost £ (${responseLabel}): ${scenario.name}`;
+        }
+        return (
+          <div className="chart-wrapper">
+            <div className="chart-header">
+              <div>
+                <div className="chart-title">Constituency-level shock impact: {scenario.name}</div>
+                <div className="chart-subtitle">Search or hover to explore 650 constituencies</div>
+              </div>
+            </div>
+            <ConstituencyMap data={constituencyData} customMetricKey={constMetricKey} customLabel={constLabel} />
+          </div>
+        );
+      })() : (
+        <div className="chart-wrapper">
+          <div className="chart-header">
+            <div>
+              <div className="chart-title">
+                {shockMetric === "pct_of_income" ? `Extra energy cost as % of income, by ${xLabel.toLowerCase()}: ${scenario.name}`
+                  : shockMetric === "extra_cost" ? `Extra energy cost (£/yr), by ${xLabel.toLowerCase()}: ${scenario.name}`
+                  : shockMetric === "fp_rate" ? `Fuel poverty rate (%), by ${xLabel.toLowerCase()}: ${scenario.name}`
+                  : `Fuel poor households (millions), by ${xLabel.toLowerCase()}: ${scenario.name}`}
+              </div>
+              <div className="chart-subtitle">
+                {shockResponse === "both" ? "Static vs behavioural (ε = −0.15)"
+                  : shockResponse === "static" ? "Static (no demand response)"
+                  : "Behavioural (ε = −0.15)"}
+              </div>
             </div>
           </div>
-          <div className="scenario-pills">
-            {[
-              { key: "new_cap", label: "New cap" },
-              { key: "avg_hh_hit_yr", label: "Avg HH hit (£/yr)" },
-              { key: "total_cost", label: "Total cost" },
-            ].map((m) => (
-              <button
-                key={m.key}
-                className={`scenario-pill scenario-pill-sm${scenarioMetric === m.key ? " active" : ""}`}
-                onClick={() => setScenarioMetric(m.key)}
-              >
-                {m.label}
-              </button>
-            ))}
-          </div>
-        </div>
-        {scenarioMetric === "new_cap" ? (
-          <ColumnChart
-            data={results.shock_scenarios.map((s) => ({
-              label: s.name,
-              value: s.new_cap,
-            }))}
-            maxValue={Math.max(...results.shock_scenarios.map((s) => s.new_cap)) * 1.15}
-            color="teal"
-            formatValue={(v) => fmt(v)}
-          />
-        ) : (
-          (() => {
-            const scenarios = results.shock_scenarios;
-            const behavAll = results.behavioral;
-            const nHH = results.baseline.n_households_m;
-            const glanceData = scenarios.map((s, i) => {
-              if (scenarioMetric === "avg_hh_hit_yr") {
-                return { label: s.name, staticVal: s.avg_hh_hit_yr, behavVal: behavAll[i].behavioral_avg_extra };
-              }
-              const staticTotal = Math.round((s.avg_hh_hit_yr * nHH / 1000) * 10) / 10;
-              const behavTotal = Math.round((behavAll[i].behavioral_avg_extra * nHH / 1000) * 10) / 10;
-              return { label: s.name, staticVal: staticTotal, behavVal: behavTotal };
-            });
-            const maxVal = Math.max(...glanceData.map((d) => d.staticVal)) * 1.15;
+          {(() => {
+            const showStatic = shockResponse === "static" || shockResponse === "both";
+            const showBehav = shockResponse === "behavioural" || shockResponse === "both";
+            const showBoth = showStatic && showBehav;
+            const maxVal = Math.max(...barData.map((d) => Math.max(
+              showStatic ? d.staticVal : 0,
+              showBehav ? d.behavVal : 0
+            ))) * 1.15;
             const ticks = niceTicks(maxVal);
             const topTick = ticks[ticks.length - 1] || maxVal;
             const effectiveMax = Math.max(maxVal, topTick);
-            const fmtVal = scenarioMetric === "avg_hh_hit_yr" ? (v) => fmt(v) : (v) => fmtBn(v);
-            const fmtTip = scenarioMetric === "avg_hh_hit_yr"
-              ? (d) => `Static: ${fmt(d.staticVal)}/yr, Behavioural: ${fmt(d.behavVal)}/yr`
-              : (d) => `Static: ${fmtBn(d.staticVal)}, Behavioural: ${fmtBn(d.behavVal)}`;
+            const fmtVal = shockMetric === "pct_of_income" ? (v) => `${v}%`
+              : shockMetric === "fp_rate" ? (v) => `${v}%`
+              : shockMetric === "fp_households" ? (v) => `${v}m`
+              : (v) => fmt(v);
             return (
               <div className="col-chart">
                 <div className="col-chart-body">
@@ -505,21 +766,28 @@ function ShockSection() {
                       <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
                     ))}
                     <div className="col-chart-bars">
-                      {glanceData.map((d, i) => (
+                      {barData.map((d, i) => (
                         <div className="col-chart-col" key={i}>
                           <div className="col-chart-tooltip">
-                            {fmtTip(d)}
+                            {showBoth
+                              ? `Static: ${fmtVal(d.staticVal)}, Behavioural: ${fmtVal(d.behavVal)}`
+                              : showStatic ? `Static: ${fmtVal(d.staticVal)}`
+                              : `Behavioural: ${fmtVal(d.behavVal)}`}
                           </div>
-                          <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
-                            <div
-                              className="col-chart-fill"
-                              style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#94a3b8", borderRadius: "3px 3px 0 0" }}
-                            />
-                            <div
-                              className="col-chart-fill"
-                              style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#319795", borderRadius: "3px 3px 0 0" }}
-                            />
-                          </div>
+                          {showBoth ? (
+                            <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
+                              <div className="col-chart-fill" style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#94a3b8", borderRadius: "3px 3px 0 0" }} />
+                              <div className="col-chart-fill" style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#319795", borderRadius: "3px 3px 0 0" }} />
+                            </div>
+                          ) : (
+                            <div className="col-chart-track">
+                              <div className="col-chart-fill" style={{
+                                height: `${((showStatic ? d.staticVal : d.behavVal) / effectiveMax) * 100}%`,
+                                background: showStatic ? "#94a3b8" : "#319795",
+                                borderRadius: "3px 3px 0 0",
+                              }} />
+                            </div>
+                          )}
                           <div className="col-chart-label">{d.label}</div>
                         </div>
                       ))}
@@ -527,155 +795,27 @@ function ShockSection() {
                   </div>
                 </div>
                 <div className="col-chart-legend">
-                  <span><span className="col-chart-legend-dot" style={{ background: "#94a3b8" }} />Static</span>
-                  <span><span className="col-chart-legend-dot" style={{ background: "#319795" }} />Behavioural</span>
+                  {showStatic && <span><span className="col-chart-legend-dot" style={{ background: "#94a3b8" }} />Static</span>}
+                  {showBehav && <span><span className="col-chart-legend-dot" style={{ background: "#319795" }} />Behavioural</span>}
                 </div>
               </div>
             );
-          })()
-        )}
-      </div>
+          })()}
+        </div>
+      )}
 
       <p className="section-description">
         Under the {scenario.name} scenario, demand response reduces the average
         extra cost from {fmt(scenario.avg_hh_hit_yr)}/yr to{" "}
         {fmt(behav.behavioral_avg_extra)}/yr, a saving of{" "}
-        {fmt(scenario.avg_hh_hit_yr - behav.behavioral_avg_extra)}/yr. These
-        extra costs push more households into fuel poverty, as the next section
-        shows.
+        {fmt(scenario.avg_hh_hit_yr - behav.behavioral_avg_extra)}/yr.
+        The next section evaluates policy tools that could offset these costs.
       </p>
     </section>
   );
 }
 
 
-function FuelPovertySection() {
-  const fp = results.fuel_poverty;
-  const behavioral = results.behavioral;
-  const baseline = fp[0];
-  const [fpMetric, setFpMetric] = useState("rate");
-
-  const barData = fp.map((r, i) => {
-    const label = r.scenario.split("(")[0].trim();
-    if (i === 0) {
-      const v = fpMetric === "rate" ? r.fuel_poverty_rate_pct : r.households_m;
-      return { label, staticVal: v, behavVal: v };
-    }
-    const b = behavioral[i - 1];
-    return {
-      label,
-      staticVal: fpMetric === "rate" ? r.fuel_poverty_rate_pct : r.households_m,
-      behavVal: fpMetric === "rate" ? b.behavioral_fp_rate : b.behavioral_fp_households_m,
-    };
-  });
-
-  return (
-    <section className="section" id="fuel-poverty">
-      <h2 className="section-title">Fuel poverty impact</h2>
-      <p className="section-description">
-        The previous section showed extra costs per household. Here we
-        translate those costs into fuel poverty: a household is fuel poor
-        if it spends more than 10% of its net income on energy. The
-        official UK definition (LILEE)<a href="#fn-8"><sup>8</sup></a> is more complex, but
-        the 10% threshold captures the same
-        dynamic. The chart below shows the fuel poverty rate and number of
-        affected households under each scenario, with and without demand
-        response.
-      </p>
-
-      <div className="chart-wrapper">
-        <div className="chart-header">
-          <div>
-            <div className="chart-title">
-              {fpMetric === "rate"
-                ? "Fuel poverty rate by scenario"
-                : "Fuel poor households by scenario"}
-            </div>
-            <div className="chart-subtitle">
-              Static vs behavioural (ε = −0.15)
-            </div>
-          </div>
-          <div className="scenario-pills">
-            <button
-              className={`scenario-pill scenario-pill-sm${fpMetric === "rate" ? " active" : ""}`}
-              onClick={() => setFpMetric("rate")}
-            >
-              Rate
-            </button>
-            <button
-              className={`scenario-pill scenario-pill-sm${fpMetric === "households" ? " active" : ""}`}
-              onClick={() => setFpMetric("households")}
-            >
-              Households
-            </button>
-          </div>
-        </div>
-        {(() => {
-          const maxVal = fpMetric === "rate" ? 55 : Math.max(...barData.map((d) => d.staticVal)) * 1.15;
-          const ticks = niceTicks(maxVal);
-          const topTick = ticks[ticks.length - 1] || maxVal;
-          const effectiveMax = Math.max(maxVal, topTick);
-          const fmtVal = fpMetric === "rate" ? (v) => `${v}%` : (v) => `${v}m`;
-          return (
-            <div className="col-chart">
-              <div className="col-chart-body">
-                <div className="col-chart-y-axis">
-                  {[...ticks].reverse().map((t, i) => (
-                    <div className="col-chart-y-tick" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }}>
-                      {fmtVal(t)}
-                    </div>
-                  ))}
-                </div>
-                <div className="col-chart-area">
-                  {ticks.map((t, i) => (
-                    <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
-                  ))}
-                  <div className="col-chart-bars">
-                    {barData.map((d, i) => (
-                      <div className="col-chart-col" key={i}>
-                        <div className="col-chart-tooltip">
-                          {fpMetric === "rate"
-                            ? `Static: ${d.staticVal}%, Behavioural: ${d.behavVal}%`
-                            : `Static: ${d.staticVal}m, Behavioural: ${d.behavVal}m`}
-                        </div>
-                        <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
-                          <div
-                            className="col-chart-fill"
-                            style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#94a3b8", borderRadius: "3px 3px 0 0" }}
-                          />
-                          <div
-                            className="col-chart-fill"
-                            style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#319795", borderRadius: "3px 3px 0 0" }}
-                          />
-                        </div>
-                        <div className="col-chart-label">{d.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="col-chart-legend">
-                <span><span className="col-chart-legend-dot" style={{ background: "#94a3b8" }} />Static</span>
-                <span><span className="col-chart-legend-dot" style={{ background: "#319795" }} />Behavioural</span>
-              </div>
-            </div>
-          );
-        })()}
-      </div>
-
-      <p className="section-description">
-        At current prices, {baseline.households_m}m households ({baseline.fuel_poverty_rate_pct}%)
-        are fuel poor. Even a modest +10% shock pushes the rate
-        to {fp[1].fuel_poverty_rate_pct}% ({fp[1].households_m}m). At
-        the 2022-level ({fp[fp.length - 1].scenario.split("(")[0].trim()}),
-        the static rate reaches {fp[fp.length - 1].fuel_poverty_rate_pct}%
-        ({fp[fp.length - 1].households_m}m). Demand response lowers
-        these figures but cannot prevent a large rise in fuel poverty. The
-        next section evaluates policy tools that could offset these costs.
-      </p>
-    </section>
-  );
-}
 
 function PolicySection() {
   const { policies } = results;
@@ -1328,204 +1468,6 @@ function SummarySection() {
   );
 }
 
-function EnergySplitSection() {
-  const split = resultsV2.energy_split;
-  const regional = resultsV2.regional;
-  const tenureData = resultsV2.tenure;
-  const [splitView, setSplitView] = useState("decile");
-
-  const TENURE_LABELS = {
-    OWNED_OUTRIGHT: "Owned outright",
-    OWNED_WITH_MORTGAGE: "Mortgage",
-    RENT_PRIVATELY: "Private rent",
-    RENT_FROM_COUNCIL: "Council rent",
-    RENT_FROM_HA: "Housing assoc.",
-  };
-  const REGION_LABELS = {
-    NORTH_EAST: "NE",
-    NORTH_WEST: "NW",
-    YORKSHIRE: "Yorks",
-    EAST_MIDLANDS: "E Mids",
-    WEST_MIDLANDS: "W Mids",
-    EAST_OF_ENGLAND: "E Eng",
-    LONDON: "London",
-    SOUTH_EAST: "SE",
-    SOUTH_WEST: "SW",
-    WALES: "Wales",
-    SCOTLAND: "Scotland",
-    NORTHERN_IRELAND: "NI",
-  };
-
-  return (
-    <section className="section" id="energy-split">
-      <h2 className="section-title">Electricity vs gas</h2>
-      <p className="section-description">
-        Household energy bills are split between electricity ({split.elec_share_pct}%
-        of spending) and gas ({(100 - split.elec_share_pct).toFixed(1)}%). The
-        average household spends {fmt(split.mean_electricity)}/yr on electricity
-        and {fmt(split.mean_gas)}/yr on gas. Gas prices are more volatile
-        because they are directly tied to wholesale markets, so a geopolitical
-        shock (such as the Iran conflict) feeds through primarily via gas.
-        Electricity prices also rise because gas-fired power stations set the
-        marginal price.
-      </p>
-
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
-        <div className="scenario-pills">
-          {[
-            { key: "decile", label: "By decile" },
-            { key: "region", label: "By region" },
-            { key: "tenure", label: "By tenure" },
-          ].map((v) => (
-            <button
-              key={v.key}
-              className={`scenario-pill scenario-pill-sm${splitView === v.key ? " active" : ""}`}
-              onClick={() => setSplitView(v.key)}
-            >
-              {v.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {splitView === "region" && (
-        <div className="chart-wrapper" style={{ marginBottom: 32 }}>
-          <div className="chart-header">
-            <div>
-              <div className="chart-title">Regional energy map</div>
-              <div className="chart-subtitle">Hover over a region to see details. Switch metric with the buttons below.</div>
-            </div>
-          </div>
-          <RegionMap regionData={regional} />
-        </div>
-      )}
-
-      <div className="chart-wrapper">
-        <div className="chart-header">
-          <div>
-            <div className="chart-title">
-              {splitView === "decile"
-                ? "Electricity and gas spending by income decile"
-                : splitView === "region"
-                ? "Energy burden by region"
-                : "Energy burden by tenure"}
-            </div>
-            <div className="chart-subtitle">
-              {splitView === "decile" ? "Annual £ per household" : "As % of net income"}
-            </div>
-          </div>
-        </div>
-        {(() => {
-          let barData, maxVal, fmtVal, xLabel;
-          if (splitView === "decile") {
-            barData = split.deciles.map((d) => ({
-              label: `${d.decile}`,
-              staticVal: d.electricity,
-              behavVal: d.gas,
-            }));
-            maxVal = Math.max(...barData.map((d) => d.staticVal + d.behavVal)) * 1.15;
-            fmtVal = (v) => fmt(v);
-            xLabel = "Decile";
-          } else if (splitView === "region") {
-            barData = regional.map((r) => ({
-              label: REGION_LABELS[r.region] || r.region,
-              staticVal: r.electricity,
-              behavVal: r.gas,
-            }));
-            maxVal = Math.max(...barData.map((d) => d.staticVal + d.behavVal)) * 1.15;
-            fmtVal = (v) => fmt(v);
-            xLabel = "Region";
-          } else {
-            barData = tenureData.map((t) => ({
-              label: TENURE_LABELS[t.tenure] || t.tenure,
-              staticVal: t.electricity,
-              behavVal: t.gas,
-            }));
-            maxVal = Math.max(...barData.map((d) => d.staticVal + d.behavVal)) * 1.15;
-            fmtVal = (v) => fmt(v);
-            xLabel = "Tenure";
-          }
-          const ticks = niceTicks(maxVal);
-          const topTick = ticks[ticks.length - 1] || maxVal;
-          const effectiveMax = Math.max(maxVal, topTick);
-          return (
-            <div className="col-chart">
-              <div className="col-chart-body">
-                <div className="col-chart-y-axis">
-                  {[...ticks].reverse().map((t, i) => (
-                    <div className="col-chart-y-tick" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }}>
-                      {fmtVal(t)}
-                    </div>
-                  ))}
-                </div>
-                <div className="col-chart-area">
-                  {ticks.map((t, i) => (
-                    <div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />
-                  ))}
-                  <div className="col-chart-bars">
-                    {barData.map((d, i) => (
-                      <div className="col-chart-col" key={i}>
-                        <div className="col-chart-tooltip">
-                          Elec: {fmt(d.staticVal)}, Gas: {fmt(d.behavVal)}
-                        </div>
-                        <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
-                          <div
-                            className="col-chart-fill"
-                            style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#f59e0b", borderRadius: "3px 3px 0 0" }}
-                          />
-                          <div
-                            className="col-chart-fill"
-                            style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#3b82f6", borderRadius: "3px 3px 0 0" }}
-                          />
-                        </div>
-                        <div className="col-chart-label">{d.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="col-chart-x-label">{xLabel}</div>
-              <div className="col-chart-legend">
-                <span><span className="col-chart-legend-dot" style={{ background: "#f59e0b" }} />Electricity</span>
-                <span><span className="col-chart-legend-dot" style={{ background: "#3b82f6" }} />Gas</span>
-              </div>
-            </div>
-          );
-        })()}
-      </div>
-
-      {splitView === "tenure" && (
-        <div className="chart-wrapper" style={{ marginTop: 32 }}>
-          <div className="chart-header">
-            <div>
-              <div className="chart-title">Fuel poverty rate by tenure</div>
-              <div className="chart-subtitle">% of households spending &gt;10% of income on energy</div>
-            </div>
-          </div>
-          <ColumnChart
-            data={tenureData.map((t) => ({
-              label: TENURE_LABELS[t.tenure] || t.tenure,
-              value: t.fuel_poverty_pct,
-            }))}
-            maxValue={Math.max(...tenureData.map((t) => t.fuel_poverty_pct)) * 1.2}
-            colorFn={() => "#ef4444"}
-            formatValue={(v) => `${v}%`}
-          />
-        </div>
-      )}
-
-      <p className="section-description">
-        Gas accounts for {(100 - split.elec_share_pct).toFixed(0)}% of energy
-        spending but drives most price volatility. Regional variation is
-        significant: the North West has the highest energy burden
-        at {regional[0].energy_burden_pct}% of income, while London
-        is lowest. Social housing tenants face the highest fuel poverty rates.
-        These patterns inform the policy options explored below.
-      </p>
-    </section>
-  );
-}
-
 
 function NewPoliciesSection() {
   const neg = resultsV2.neg_policy;
@@ -1873,11 +1815,12 @@ export default function Dashboard() {
         price shock scenarios, from a 10% increase to
         a return to 2022-level prices. For each, it estimates the extra
         cost per household across income deciles, the impact on fuel
-        poverty rates, and the distributional effects of four policy
-        responses: an Energy Price Guarantee, a flat transfer, a council
-        tax band rebate, an expanded Winter Fuel Allowance, and three
-        alternative designs — a National Energy Guarantee, a rising block
-        tariff, and a gas-only price cap. All modelling uses the PolicyEngine
+        poverty rates, and the distributional effects of six policy
+        responses — an Energy Price Guarantee, a flat transfer, a council
+        tax band rebate, an expanded Winter Fuel Allowance, and two
+        budget-neutral variants — plus three alternative designs: a
+        National Energy Guarantee, a rising block tariff, and a gas-only
+        price cap. All modelling uses the PolicyEngine
         UK microsimulation model with separate electricity and gas
         imputations calibrated to NEED 2023 admin
         data.<a href="#fn-6"><sup>6</sup></a>
@@ -1885,9 +1828,7 @@ export default function Dashboard() {
       </section>
 
       <BaselineSection />
-      <EnergySplitSection />
       <ShockSection />
-      <FuelPovertySection />
       <PolicySection />
       <PolicyNetSection />
       <SummarySection />

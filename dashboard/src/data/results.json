@@ -2,69 +2,69 @@
   "baseline": {
     "n_households_m": 31.9,
     "current_cap": 1641,
-    "mean_energy_spend": 1618,
-    "total_energy_spend_bn": 51.6,
+    "mean_energy_spend": 1560,
+    "total_energy_spend_bn": 49.7,
     "mean_net_income": 53949,
     "deciles": [
       {
         "decile": 1,
-        "energy_spend": 1485,
+        "energy_spend": 1388,
         "net_income": 20044,
-        "energy_share_pct": 7.4
+        "energy_share_pct": 6.9
       },
       {
         "decile": 2,
-        "energy_spend": 1422,
+        "energy_spend": 1460,
         "net_income": 30931,
-        "energy_share_pct": 4.6
+        "energy_share_pct": 4.7
       },
       {
         "decile": 3,
-        "energy_spend": 1335,
+        "energy_spend": 1370,
         "net_income": 37529,
         "energy_share_pct": 3.6
       },
       {
         "decile": 4,
-        "energy_spend": 1426,
+        "energy_spend": 1513,
         "net_income": 42174,
-        "energy_share_pct": 3.4
+        "energy_share_pct": 3.6
       },
       {
         "decile": 5,
-        "energy_spend": 1540,
+        "energy_spend": 1515,
         "net_income": 44158,
-        "energy_share_pct": 3.5
+        "energy_share_pct": 3.4
       },
       {
         "decile": 6,
-        "energy_spend": 1631,
+        "energy_spend": 1613,
         "net_income": 51600,
-        "energy_share_pct": 3.2
+        "energy_share_pct": 3.1
       },
       {
         "decile": 7,
-        "energy_spend": 1625,
+        "energy_spend": 1518,
         "net_income": 56013,
-        "energy_share_pct": 2.9
-      },
-      {
-        "decile": 8,
-        "energy_spend": 1802,
-        "net_income": 67097,
         "energy_share_pct": 2.7
       },
       {
+        "decile": 8,
+        "energy_spend": 1670,
+        "net_income": 67097,
+        "energy_share_pct": 2.5
+      },
+      {
         "decile": 9,
-        "energy_spend": 1886,
+        "energy_spend": 1744,
         "net_income": 73807,
-        "energy_share_pct": 2.6
+        "energy_share_pct": 2.4
       },
       {
         "decile": 10,
-        "energy_spend": 2061,
+        "energy_spend": 1702,
         "net_income": 125107,
-        "energy_share_pct": 1.6
+        "energy_share_pct": 1.4
       }
     ]
   },
@@ -73,59 +73,253 @@
       "name": "+10%",
       "new_cap": 1805,
       "price_increase_pct": 10,
-      "avg_hh_hit_yr": 162,
+      "avg_hh_hit_yr": 156,
       "avg_hh_hit_mo": 13,
-      "total_cost_bn": 5.2,
+      "total_cost_bn": 5.0,
       "deciles": [
         {
           "decile": 1,
-          "extra_cost": 148,
-          "pct_of_income": 0.7
+          "extra_cost": 139,
+          "pct_of_income": 0.7,
+          "fp_rate": 29.7,
+          "fp_households_m": 1.14
         },
         {
           "decile": 2,
-          "extra_cost": 142,
-          "pct_of_income": 0.5
+          "extra_cost": 146,
+          "pct_of_income": 0.5,
+          "fp_rate": 15.0,
+          "fp_households_m": 0.51
         },
         {
           "decile": 3,
-          "extra_cost": 133,
-          "pct_of_income": 0.4
+          "extra_cost": 137,
+          "pct_of_income": 0.4,
+          "fp_rate": 7.8,
+          "fp_households_m": 0.24
         },
         {
           "decile": 4,
-          "extra_cost": 143,
-          "pct_of_income": 0.3
+          "extra_cost": 151,
+          "pct_of_income": 0.4,
+          "fp_rate": 9.6,
+          "fp_households_m": 0.29
         },
         {
           "decile": 5,
-          "extra_cost": 154,
-          "pct_of_income": 0.3
+          "extra_cost": 151,
+          "pct_of_income": 0.3,
+          "fp_rate": 10.1,
+          "fp_households_m": 0.31
         },
         {
           "decile": 6,
-          "extra_cost": 163,
-          "pct_of_income": 0.3
+          "extra_cost": 161,
+          "pct_of_income": 0.3,
+          "fp_rate": 6.7,
+          "fp_households_m": 0.2
         },
         {
           "decile": 7,
-          "extra_cost": 162,
-          "pct_of_income": 0.3
+          "extra_cost": 152,
+          "pct_of_income": 0.3,
+          "fp_rate": 3.7,
+          "fp_households_m": 0.12
         },
         {
           "decile": 8,
-          "extra_cost": 180,
-          "pct_of_income": 0.3
+          "extra_cost": 167,
+          "pct_of_income": 0.2,
+          "fp_rate": 4.9,
+          "fp_households_m": 0.14
         },
         {
           "decile": 9,
-          "extra_cost": 189,
-          "pct_of_income": 0.3
+          "extra_cost": 174,
+          "pct_of_income": 0.2,
+          "fp_rate": 7.4,
+          "fp_households_m": 0.23
         },
         {
           "decile": 10,
-          "extra_cost": 206,
-          "pct_of_income": 0.2
+          "extra_cost": 170,
+          "pct_of_income": 0.1,
+          "fp_rate": 1.0,
+          "fp_households_m": 0.03
+        }
+      ],
+      "by_tenure": [
+        {
+          "tenure": "OWNED_OUTRIGHT",
+          "extra_cost": 189,
+          "pct_of_income": 0.4,
+          "fp_rate": 16.4,
+          "fp_households_m": 1.77
+        },
+        {
+          "tenure": "OWNED_WITH_MORTGAGE",
+          "extra_cost": 157,
+          "pct_of_income": 0.2,
+          "fp_rate": 5.4,
+          "fp_households_m": 0.45
+        },
+        {
+          "tenure": "RENT_FROM_COUNCIL",
+          "extra_cost": 113,
+          "pct_of_income": 0.3,
+          "fp_rate": 7.3,
+          "fp_households_m": 0.18
+        },
+        {
+          "tenure": "RENT_FROM_HA",
+          "extra_cost": 118,
+          "pct_of_income": 0.3,
+          "fp_rate": 7.2,
+          "fp_households_m": 0.24
+        },
+        {
+          "tenure": "RENT_PRIVATELY",
+          "extra_cost": 137,
+          "pct_of_income": 0.3,
+          "fp_rate": 9.2,
+          "fp_households_m": 0.64
+        }
+      ],
+      "by_hh_type": [
+        {
+          "hh_type": "COUPLE_NO_CHILDREN",
+          "extra_cost": 170,
+          "pct_of_income": 0.3,
+          "fp_rate": 7.1,
+          "fp_households_m": 0.55
+        },
+        {
+          "hh_type": "COUPLE_PENSIONER",
+          "extra_cost": 176,
+          "pct_of_income": 0.3,
+          "fp_rate": 8.7,
+          "fp_households_m": 0.39
+        },
+        {
+          "hh_type": "COUPLE_WITH_CHILDREN",
+          "extra_cost": 147,
+          "pct_of_income": 0.2,
+          "fp_rate": 3.5,
+          "fp_households_m": 0.2
+        },
+        {
+          "hh_type": "LONE_PARENT",
+          "extra_cost": 135,
+          "pct_of_income": 0.3,
+          "fp_rate": 8.6,
+          "fp_households_m": 0.18
+        },
+        {
+          "hh_type": "OTHER",
+          "extra_cost": 155,
+          "pct_of_income": 0.2,
+          "fp_rate": 3.1,
+          "fp_households_m": 0.07
+        },
+        {
+          "hh_type": "SINGLE_PENSIONER",
+          "extra_cost": 156,
+          "pct_of_income": 0.6,
+          "fp_rate": 22.3,
+          "fp_households_m": 0.86
+        },
+        {
+          "hh_type": "SINGLE_WORKING_AGE",
+          "extra_cost": 138,
+          "pct_of_income": 0.4,
+          "fp_rate": 18.1,
+          "fp_households_m": 1.03
+        }
+      ],
+      "by_region": [
+        {
+          "region": "EAST_MIDLANDS",
+          "extra_cost": 153,
+          "pct_of_income": 0.3,
+          "fp_rate": 7.2,
+          "fp_households_m": 0.17
+        },
+        {
+          "region": "EAST_OF_ENGLAND",
+          "extra_cost": 178,
+          "pct_of_income": 0.3,
+          "fp_rate": 9.7,
+          "fp_households_m": 0.29
+        },
+        {
+          "region": "LONDON",
+          "extra_cost": 151,
+          "pct_of_income": 0.2,
+          "fp_rate": 13.3,
+          "fp_households_m": 0.54
+        },
+        {
+          "region": "NORTHERN_IRELAND",
+          "extra_cost": 191,
+          "pct_of_income": 0.3,
+          "fp_rate": 12.6,
+          "fp_households_m": 0.1
+        },
+        {
+          "region": "NORTH_EAST",
+          "extra_cost": 157,
+          "pct_of_income": 0.3,
+          "fp_rate": 11.4,
+          "fp_households_m": 0.15
+        },
+        {
+          "region": "NORTH_WEST",
+          "extra_cost": 161,
+          "pct_of_income": 0.4,
+          "fp_rate": 13.5,
+          "fp_households_m": 0.48
+        },
+        {
+          "region": "SCOTLAND",
+          "extra_cost": 157,
+          "pct_of_income": 0.3,
+          "fp_rate": 10.2,
+          "fp_households_m": 0.28
+        },
+        {
+          "region": "SOUTH_EAST",
+          "extra_cost": 142,
+          "pct_of_income": 0.3,
+          "fp_rate": 9.0,
+          "fp_households_m": 0.39
+        },
+        {
+          "region": "SOUTH_WEST",
+          "extra_cost": 151,
+          "pct_of_income": 0.3,
+          "fp_rate": 10.3,
+          "fp_households_m": 0.29
+        },
+        {
+          "region": "WALES",
+          "extra_cost": 131,
+          "pct_of_income": 0.3,
+          "fp_rate": 8.1,
+          "fp_households_m": 0.13
+        },
+        {
+          "region": "WEST_MIDLANDS",
+          "extra_cost": 156,
+          "pct_of_income": 0.3,
+          "fp_rate": 6.6,
+          "fp_households_m": 0.18
+        },
+        {
+          "region": "YORKSHIRE",
+          "extra_cost": 164,
+          "pct_of_income": 0.3,
+          "fp_rate": 11.1,
+          "fp_households_m": 0.29
         }
       ]
     },
@@ -133,59 +327,253 @@
       "name": "+20%",
       "new_cap": 1969,
       "price_increase_pct": 20,
-      "avg_hh_hit_yr": 323,
-      "avg_hh_hit_mo": 27,
-      "total_cost_bn": 10.3,
+      "avg_hh_hit_yr": 312,
+      "avg_hh_hit_mo": 26,
+      "total_cost_bn": 9.9,
       "deciles": [
         {
           "decile": 1,
-          "extra_cost": 297,
-          "pct_of_income": 1.5
+          "extra_cost": 277,
+          "pct_of_income": 1.4,
+          "fp_rate": 32.2,
+          "fp_households_m": 1.23
         },
         {
           "decile": 2,
-          "extra_cost": 284,
-          "pct_of_income": 0.9
+          "extra_cost": 292,
+          "pct_of_income": 0.9,
+          "fp_rate": 19.5,
+          "fp_households_m": 0.66
         },
         {
           "decile": 3,
-          "extra_cost": 267,
-          "pct_of_income": 0.7
+          "extra_cost": 274,
+          "pct_of_income": 0.7,
+          "fp_rate": 9.6,
+          "fp_households_m": 0.3
         },
         {
           "decile": 4,
-          "extra_cost": 285,
-          "pct_of_income": 0.7
+          "extra_cost": 302,
+          "pct_of_income": 0.7,
+          "fp_rate": 10.2,
+          "fp_households_m": 0.3
         },
         {
           "decile": 5,
-          "extra_cost": 308,
-          "pct_of_income": 0.7
+          "extra_cost": 303,
+          "pct_of_income": 0.7,
+          "fp_rate": 10.7,
+          "fp_households_m": 0.33
         },
         {
           "decile": 6,
-          "extra_cost": 326,
-          "pct_of_income": 0.6
+          "extra_cost": 322,
+          "pct_of_income": 0.6,
+          "fp_rate": 7.9,
+          "fp_households_m": 0.24
         },
         {
           "decile": 7,
-          "extra_cost": 325,
-          "pct_of_income": 0.6
+          "extra_cost": 303,
+          "pct_of_income": 0.5,
+          "fp_rate": 4.0,
+          "fp_households_m": 0.13
         },
         {
           "decile": 8,
-          "extra_cost": 360,
-          "pct_of_income": 0.5
+          "extra_cost": 334,
+          "pct_of_income": 0.5,
+          "fp_rate": 5.8,
+          "fp_households_m": 0.17
         },
         {
           "decile": 9,
-          "extra_cost": 377,
-          "pct_of_income": 0.5
+          "extra_cost": 349,
+          "pct_of_income": 0.5,
+          "fp_rate": 7.7,
+          "fp_households_m": 0.24
         },
         {
           "decile": 10,
-          "extra_cost": 412,
-          "pct_of_income": 0.3
+          "extra_cost": 340,
+          "pct_of_income": 0.3,
+          "fp_rate": 1.4,
+          "fp_households_m": 0.05
+        }
+      ],
+      "by_tenure": [
+        {
+          "tenure": "OWNED_OUTRIGHT",
+          "extra_cost": 377,
+          "pct_of_income": 0.8,
+          "fp_rate": 18.7,
+          "fp_households_m": 2.02
+        },
+        {
+          "tenure": "OWNED_WITH_MORTGAGE",
+          "extra_cost": 313,
+          "pct_of_income": 0.4,
+          "fp_rate": 6.1,
+          "fp_households_m": 0.51
+        },
+        {
+          "tenure": "RENT_FROM_COUNCIL",
+          "extra_cost": 227,
+          "pct_of_income": 0.6,
+          "fp_rate": 8.4,
+          "fp_households_m": 0.2
+        },
+        {
+          "tenure": "RENT_FROM_HA",
+          "extra_cost": 236,
+          "pct_of_income": 0.6,
+          "fp_rate": 7.8,
+          "fp_households_m": 0.26
+        },
+        {
+          "tenure": "RENT_PRIVATELY",
+          "extra_cost": 274,
+          "pct_of_income": 0.5,
+          "fp_rate": 10.3,
+          "fp_households_m": 0.72
+        }
+      ],
+      "by_hh_type": [
+        {
+          "hh_type": "COUPLE_NO_CHILDREN",
+          "extra_cost": 341,
+          "pct_of_income": 0.5,
+          "fp_rate": 7.7,
+          "fp_households_m": 0.6
+        },
+        {
+          "hh_type": "COUPLE_PENSIONER",
+          "extra_cost": 353,
+          "pct_of_income": 0.7,
+          "fp_rate": 9.2,
+          "fp_households_m": 0.41
+        },
+        {
+          "hh_type": "COUPLE_WITH_CHILDREN",
+          "extra_cost": 293,
+          "pct_of_income": 0.4,
+          "fp_rate": 4.2,
+          "fp_households_m": 0.24
+        },
+        {
+          "hh_type": "LONE_PARENT",
+          "extra_cost": 270,
+          "pct_of_income": 0.7,
+          "fp_rate": 10.7,
+          "fp_households_m": 0.22
+        },
+        {
+          "hh_type": "OTHER",
+          "extra_cost": 311,
+          "pct_of_income": 0.3,
+          "fp_rate": 4.2,
+          "fp_households_m": 0.09
+        },
+        {
+          "hh_type": "SINGLE_PENSIONER",
+          "extra_cost": 311,
+          "pct_of_income": 1.3,
+          "fp_rate": 26.6,
+          "fp_households_m": 1.03
+        },
+        {
+          "hh_type": "SINGLE_WORKING_AGE",
+          "extra_cost": 275,
+          "pct_of_income": 0.9,
+          "fp_rate": 19.9,
+          "fp_households_m": 1.13
+        }
+      ],
+      "by_region": [
+        {
+          "region": "EAST_MIDLANDS",
+          "extra_cost": 307,
+          "pct_of_income": 0.6,
+          "fp_rate": 8.0,
+          "fp_households_m": 0.19
+        },
+        {
+          "region": "EAST_OF_ENGLAND",
+          "extra_cost": 357,
+          "pct_of_income": 0.7,
+          "fp_rate": 12.2,
+          "fp_households_m": 0.36
+        },
+        {
+          "region": "LONDON",
+          "extra_cost": 302,
+          "pct_of_income": 0.4,
+          "fp_rate": 14.3,
+          "fp_households_m": 0.57
+        },
+        {
+          "region": "NORTHERN_IRELAND",
+          "extra_cost": 383,
+          "pct_of_income": 0.7,
+          "fp_rate": 13.9,
+          "fp_households_m": 0.11
+        },
+        {
+          "region": "NORTH_EAST",
+          "extra_cost": 314,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.9,
+          "fp_households_m": 0.16
+        },
+        {
+          "region": "NORTH_WEST",
+          "extra_cost": 323,
+          "pct_of_income": 0.7,
+          "fp_rate": 14.1,
+          "fp_households_m": 0.51
+        },
+        {
+          "region": "SCOTLAND",
+          "extra_cost": 314,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.0,
+          "fp_households_m": 0.3
+        },
+        {
+          "region": "SOUTH_EAST",
+          "extra_cost": 284,
+          "pct_of_income": 0.5,
+          "fp_rate": 9.8,
+          "fp_households_m": 0.42
+        },
+        {
+          "region": "SOUTH_WEST",
+          "extra_cost": 303,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.2,
+          "fp_households_m": 0.32
+        },
+        {
+          "region": "WALES",
+          "extra_cost": 262,
+          "pct_of_income": 0.5,
+          "fp_rate": 9.1,
+          "fp_households_m": 0.14
+        },
+        {
+          "region": "WEST_MIDLANDS",
+          "extra_cost": 312,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.6,
+          "fp_households_m": 0.32
+        },
+        {
+          "region": "YORKSHIRE",
+          "extra_cost": 327,
+          "pct_of_income": 0.7,
+          "fp_rate": 12.2,
+          "fp_households_m": 0.32
         }
       ]
     },
@@ -193,59 +581,253 @@
       "name": "+30%",
       "new_cap": 2133,
       "price_increase_pct": 30,
-      "avg_hh_hit_yr": 485,
-      "avg_hh_hit_mo": 40,
-      "total_cost_bn": 15.5,
+      "avg_hh_hit_yr": 468,
+      "avg_hh_hit_mo": 39,
+      "total_cost_bn": 14.9,
       "deciles": [
         {
           "decile": 1,
-          "extra_cost": 445,
-          "pct_of_income": 2.2
+          "extra_cost": 416,
+          "pct_of_income": 2.1,
+          "fp_rate": 35.2,
+          "fp_households_m": 1.34
         },
         {
           "decile": 2,
-          "extra_cost": 426,
-          "pct_of_income": 1.4
+          "extra_cost": 438,
+          "pct_of_income": 1.4,
+          "fp_rate": 21.4,
+          "fp_households_m": 0.72
         },
         {
           "decile": 3,
-          "extra_cost": 400,
-          "pct_of_income": 1.1
+          "extra_cost": 411,
+          "pct_of_income": 1.1,
+          "fp_rate": 10.8,
+          "fp_households_m": 0.33
         },
         {
           "decile": 4,
-          "extra_cost": 428,
-          "pct_of_income": 1.0
+          "extra_cost": 454,
+          "pct_of_income": 1.1,
+          "fp_rate": 11.2,
+          "fp_households_m": 0.33
         },
         {
           "decile": 5,
-          "extra_cost": 462,
-          "pct_of_income": 1.0
+          "extra_cost": 454,
+          "pct_of_income": 1.0,
+          "fp_rate": 11.1,
+          "fp_households_m": 0.34
         },
         {
           "decile": 6,
-          "extra_cost": 489,
-          "pct_of_income": 0.9
+          "extra_cost": 484,
+          "pct_of_income": 0.9,
+          "fp_rate": 8.4,
+          "fp_households_m": 0.26
         },
         {
           "decile": 7,
-          "extra_cost": 487,
-          "pct_of_income": 0.9
+          "extra_cost": 455,
+          "pct_of_income": 0.8,
+          "fp_rate": 4.2,
+          "fp_households_m": 0.13
         },
         {
           "decile": 8,
-          "extra_cost": 540,
-          "pct_of_income": 0.8
+          "extra_cost": 501,
+          "pct_of_income": 0.7,
+          "fp_rate": 6.5,
+          "fp_households_m": 0.19
         },
         {
           "decile": 9,
-          "extra_cost": 566,
-          "pct_of_income": 0.8
+          "extra_cost": 523,
+          "pct_of_income": 0.7,
+          "fp_rate": 9.0,
+          "fp_households_m": 0.28
         },
         {
           "decile": 10,
-          "extra_cost": 618,
-          "pct_of_income": 0.5
+          "extra_cost": 510,
+          "pct_of_income": 0.4,
+          "fp_rate": 1.5,
+          "fp_households_m": 0.05
+        }
+      ],
+      "by_tenure": [
+        {
+          "tenure": "OWNED_OUTRIGHT",
+          "extra_cost": 566,
+          "pct_of_income": 1.1,
+          "fp_rate": 20.2,
+          "fp_households_m": 2.18
+        },
+        {
+          "tenure": "OWNED_WITH_MORTGAGE",
+          "extra_cost": 470,
+          "pct_of_income": 0.7,
+          "fp_rate": 6.9,
+          "fp_households_m": 0.57
+        },
+        {
+          "tenure": "RENT_FROM_COUNCIL",
+          "extra_cost": 340,
+          "pct_of_income": 0.9,
+          "fp_rate": 9.9,
+          "fp_households_m": 0.24
+        },
+        {
+          "tenure": "RENT_FROM_HA",
+          "extra_cost": 354,
+          "pct_of_income": 1.0,
+          "fp_rate": 9.3,
+          "fp_households_m": 0.31
+        },
+        {
+          "tenure": "RENT_PRIVATELY",
+          "extra_cost": 412,
+          "pct_of_income": 0.8,
+          "fp_rate": 10.8,
+          "fp_households_m": 0.76
+        }
+      ],
+      "by_hh_type": [
+        {
+          "hh_type": "COUPLE_NO_CHILDREN",
+          "extra_cost": 511,
+          "pct_of_income": 0.8,
+          "fp_rate": 8.1,
+          "fp_households_m": 0.63
+        },
+        {
+          "hh_type": "COUPLE_PENSIONER",
+          "extra_cost": 529,
+          "pct_of_income": 1.0,
+          "fp_rate": 11.1,
+          "fp_households_m": 0.5
+        },
+        {
+          "hh_type": "COUPLE_WITH_CHILDREN",
+          "extra_cost": 440,
+          "pct_of_income": 0.6,
+          "fp_rate": 4.5,
+          "fp_households_m": 0.25
+        },
+        {
+          "hh_type": "LONE_PARENT",
+          "extra_cost": 405,
+          "pct_of_income": 1.0,
+          "fp_rate": 11.0,
+          "fp_households_m": 0.23
+        },
+        {
+          "hh_type": "OTHER",
+          "extra_cost": 466,
+          "pct_of_income": 0.5,
+          "fp_rate": 5.0,
+          "fp_households_m": 0.11
+        },
+        {
+          "hh_type": "SINGLE_PENSIONER",
+          "extra_cost": 467,
+          "pct_of_income": 1.9,
+          "fp_rate": 28.8,
+          "fp_households_m": 1.11
+        },
+        {
+          "hh_type": "SINGLE_WORKING_AGE",
+          "extra_cost": 413,
+          "pct_of_income": 1.3,
+          "fp_rate": 21.5,
+          "fp_households_m": 1.22
+        }
+      ],
+      "by_region": [
+        {
+          "region": "EAST_MIDLANDS",
+          "extra_cost": 460,
+          "pct_of_income": 0.8,
+          "fp_rate": 9.1,
+          "fp_households_m": 0.21
+        },
+        {
+          "region": "EAST_OF_ENGLAND",
+          "extra_cost": 535,
+          "pct_of_income": 1.0,
+          "fp_rate": 13.2,
+          "fp_households_m": 0.39
+        },
+        {
+          "region": "LONDON",
+          "extra_cost": 454,
+          "pct_of_income": 0.6,
+          "fp_rate": 15.5,
+          "fp_households_m": 0.62
+        },
+        {
+          "region": "NORTHERN_IRELAND",
+          "extra_cost": 574,
+          "pct_of_income": 1.0,
+          "fp_rate": 16.8,
+          "fp_households_m": 0.13
+        },
+        {
+          "region": "NORTH_EAST",
+          "extra_cost": 470,
+          "pct_of_income": 1.0,
+          "fp_rate": 12.3,
+          "fp_households_m": 0.17
+        },
+        {
+          "region": "NORTH_WEST",
+          "extra_cost": 484,
+          "pct_of_income": 1.1,
+          "fp_rate": 15.2,
+          "fp_households_m": 0.54
+        },
+        {
+          "region": "SCOTLAND",
+          "extra_cost": 470,
+          "pct_of_income": 0.9,
+          "fp_rate": 12.1,
+          "fp_households_m": 0.33
+        },
+        {
+          "region": "SOUTH_EAST",
+          "extra_cost": 426,
+          "pct_of_income": 0.8,
+          "fp_rate": 10.5,
+          "fp_households_m": 0.46
+        },
+        {
+          "region": "SOUTH_WEST",
+          "extra_cost": 454,
+          "pct_of_income": 0.8,
+          "fp_rate": 11.9,
+          "fp_households_m": 0.33
+        },
+        {
+          "region": "WALES",
+          "extra_cost": 393,
+          "pct_of_income": 0.8,
+          "fp_rate": 9.9,
+          "fp_households_m": 0.15
+        },
+        {
+          "region": "WEST_MIDLANDS",
+          "extra_cost": 468,
+          "pct_of_income": 0.9,
+          "fp_rate": 13.6,
+          "fp_households_m": 0.38
+        },
+        {
+          "region": "YORKSHIRE",
+          "extra_cost": 491,
+          "pct_of_income": 1.0,
+          "fp_rate": 13.0,
+          "fp_households_m": 0.34
         }
       ]
     },
@@ -253,59 +835,253 @@
       "name": "+60%",
       "new_cap": 2625,
       "price_increase_pct": 60,
-      "avg_hh_hit_yr": 970,
-      "avg_hh_hit_mo": 81,
-      "total_cost_bn": 30.9,
+      "avg_hh_hit_yr": 936,
+      "avg_hh_hit_mo": 78,
+      "total_cost_bn": 29.8,
       "deciles": [
         {
           "decile": 1,
-          "extra_cost": 891,
-          "pct_of_income": 4.4
+          "extra_cost": 832,
+          "pct_of_income": 4.2,
+          "fp_rate": 42.6,
+          "fp_households_m": 1.63
         },
         {
           "decile": 2,
-          "extra_cost": 853,
-          "pct_of_income": 2.8
+          "extra_cost": 875,
+          "pct_of_income": 2.8,
+          "fp_rate": 25.2,
+          "fp_households_m": 0.85
         },
         {
           "decile": 3,
-          "extra_cost": 801,
-          "pct_of_income": 2.1
+          "extra_cost": 821,
+          "pct_of_income": 2.2,
+          "fp_rate": 15.9,
+          "fp_households_m": 0.49
         },
         {
           "decile": 4,
-          "extra_cost": 855,
-          "pct_of_income": 2.0
+          "extra_cost": 907,
+          "pct_of_income": 2.2,
+          "fp_rate": 16.6,
+          "fp_households_m": 0.49
         },
         {
           "decile": 5,
-          "extra_cost": 923,
-          "pct_of_income": 2.1
+          "extra_cost": 909,
+          "pct_of_income": 2.1,
+          "fp_rate": 14.5,
+          "fp_households_m": 0.44
         },
         {
           "decile": 6,
-          "extra_cost": 978,
-          "pct_of_income": 1.9
+          "extra_cost": 967,
+          "pct_of_income": 1.9,
+          "fp_rate": 14.3,
+          "fp_households_m": 0.44
         },
         {
           "decile": 7,
-          "extra_cost": 974,
-          "pct_of_income": 1.7
+          "extra_cost": 910,
+          "pct_of_income": 1.6,
+          "fp_rate": 8.1,
+          "fp_households_m": 0.25
         },
         {
           "decile": 8,
-          "extra_cost": 1081,
-          "pct_of_income": 1.6
+          "extra_cost": 1001,
+          "pct_of_income": 1.5,
+          "fp_rate": 7.9,
+          "fp_households_m": 0.23
         },
         {
           "decile": 9,
-          "extra_cost": 1131,
-          "pct_of_income": 1.5
+          "extra_cost": 1046,
+          "pct_of_income": 1.4,
+          "fp_rate": 10.4,
+          "fp_households_m": 0.32
         },
         {
           "decile": 10,
-          "extra_cost": 1236,
-          "pct_of_income": 1.0
+          "extra_cost": 1021,
+          "pct_of_income": 0.8,
+          "fp_rate": 2.2,
+          "fp_households_m": 0.07
+        }
+      ],
+      "by_tenure": [
+        {
+          "tenure": "OWNED_OUTRIGHT",
+          "extra_cost": 1132,
+          "pct_of_income": 2.3,
+          "fp_rate": 26.2,
+          "fp_households_m": 2.83
+        },
+        {
+          "tenure": "OWNED_WITH_MORTGAGE",
+          "extra_cost": 939,
+          "pct_of_income": 1.3,
+          "fp_rate": 8.6,
+          "fp_households_m": 0.71
+        },
+        {
+          "tenure": "RENT_FROM_COUNCIL",
+          "extra_cost": 681,
+          "pct_of_income": 1.8,
+          "fp_rate": 17.9,
+          "fp_households_m": 0.43
+        },
+        {
+          "tenure": "RENT_FROM_HA",
+          "extra_cost": 709,
+          "pct_of_income": 1.9,
+          "fp_rate": 11.7,
+          "fp_households_m": 0.39
+        },
+        {
+          "tenure": "RENT_PRIVATELY",
+          "extra_cost": 823,
+          "pct_of_income": 1.5,
+          "fp_rate": 13.4,
+          "fp_households_m": 0.94
+        }
+      ],
+      "by_hh_type": [
+        {
+          "hh_type": "COUPLE_NO_CHILDREN",
+          "extra_cost": 1022,
+          "pct_of_income": 1.6,
+          "fp_rate": 10.6,
+          "fp_households_m": 0.83
+        },
+        {
+          "hh_type": "COUPLE_PENSIONER",
+          "extra_cost": 1058,
+          "pct_of_income": 2.0,
+          "fp_rate": 15.8,
+          "fp_households_m": 0.71
+        },
+        {
+          "hh_type": "COUPLE_WITH_CHILDREN",
+          "extra_cost": 879,
+          "pct_of_income": 1.2,
+          "fp_rate": 6.5,
+          "fp_households_m": 0.37
+        },
+        {
+          "hh_type": "LONE_PARENT",
+          "extra_cost": 809,
+          "pct_of_income": 2.0,
+          "fp_rate": 14.6,
+          "fp_households_m": 0.31
+        },
+        {
+          "hh_type": "OTHER",
+          "extra_cost": 932,
+          "pct_of_income": 1.0,
+          "fp_rate": 8.1,
+          "fp_households_m": 0.18
+        },
+        {
+          "hh_type": "SINGLE_PENSIONER",
+          "extra_cost": 934,
+          "pct_of_income": 3.8,
+          "fp_rate": 36.2,
+          "fp_households_m": 1.4
+        },
+        {
+          "hh_type": "SINGLE_WORKING_AGE",
+          "extra_cost": 825,
+          "pct_of_income": 2.7,
+          "fp_rate": 26.6,
+          "fp_households_m": 1.51
+        }
+      ],
+      "by_region": [
+        {
+          "region": "EAST_MIDLANDS",
+          "extra_cost": 920,
+          "pct_of_income": 1.7,
+          "fp_rate": 14.6,
+          "fp_households_m": 0.34
+        },
+        {
+          "region": "EAST_OF_ENGLAND",
+          "extra_cost": 1070,
+          "pct_of_income": 2.0,
+          "fp_rate": 19.2,
+          "fp_households_m": 0.57
+        },
+        {
+          "region": "LONDON",
+          "extra_cost": 907,
+          "pct_of_income": 1.2,
+          "fp_rate": 18.5,
+          "fp_households_m": 0.74
+        },
+        {
+          "region": "NORTHERN_IRELAND",
+          "extra_cost": 1148,
+          "pct_of_income": 2.1,
+          "fp_rate": 25.2,
+          "fp_households_m": 0.19
+        },
+        {
+          "region": "NORTH_EAST",
+          "extra_cost": 941,
+          "pct_of_income": 1.9,
+          "fp_rate": 16.4,
+          "fp_households_m": 0.22
+        },
+        {
+          "region": "NORTH_WEST",
+          "extra_cost": 968,
+          "pct_of_income": 2.1,
+          "fp_rate": 18.9,
+          "fp_households_m": 0.68
+        },
+        {
+          "region": "SCOTLAND",
+          "extra_cost": 941,
+          "pct_of_income": 1.9,
+          "fp_rate": 17.5,
+          "fp_households_m": 0.48
+        },
+        {
+          "region": "SOUTH_EAST",
+          "extra_cost": 852,
+          "pct_of_income": 1.5,
+          "fp_rate": 12.8,
+          "fp_households_m": 0.56
+        },
+        {
+          "region": "SOUTH_WEST",
+          "extra_cost": 909,
+          "pct_of_income": 1.7,
+          "fp_rate": 15.4,
+          "fp_households_m": 0.43
+        },
+        {
+          "region": "WALES",
+          "extra_cost": 786,
+          "pct_of_income": 1.6,
+          "fp_rate": 13.1,
+          "fp_households_m": 0.2
+        },
+        {
+          "region": "WEST_MIDLANDS",
+          "extra_cost": 937,
+          "pct_of_income": 1.9,
+          "fp_rate": 17.7,
+          "fp_households_m": 0.49
+        },
+        {
+          "region": "YORKSHIRE",
+          "extra_cost": 982,
+          "pct_of_income": 2.0,
+          "fp_rate": 15.1,
+          "fp_households_m": 0.4
         }
       ]
     },
@@ -313,59 +1089,253 @@
       "name": "2022-level",
       "new_cap": 3764,
       "price_increase_pct": 129,
-      "avg_hh_hit_yr": 2094,
-      "avg_hh_hit_mo": 174,
-      "total_cost_bn": 66.7,
+      "avg_hh_hit_yr": 2019,
+      "avg_hh_hit_mo": 168,
+      "total_cost_bn": 64.3,
       "deciles": [
         {
           "decile": 1,
-          "extra_cost": 1922,
-          "pct_of_income": 9.6
+          "extra_cost": 1795,
+          "pct_of_income": 9.0,
+          "fp_rate": 57.6,
+          "fp_households_m": 2.2
         },
         {
           "decile": 2,
-          "extra_cost": 1840,
-          "pct_of_income": 5.9
+          "extra_cost": 1888,
+          "pct_of_income": 6.1,
+          "fp_rate": 42.6,
+          "fp_households_m": 1.44
         },
         {
           "decile": 3,
-          "extra_cost": 1727,
-          "pct_of_income": 4.6
+          "extra_cost": 1772,
+          "pct_of_income": 4.7,
+          "fp_rate": 36.3,
+          "fp_households_m": 1.12
         },
         {
           "decile": 4,
-          "extra_cost": 1845,
-          "pct_of_income": 4.4
+          "extra_cost": 1958,
+          "pct_of_income": 4.6,
+          "fp_rate": 27.8,
+          "fp_households_m": 0.83
         },
         {
           "decile": 5,
-          "extra_cost": 1992,
-          "pct_of_income": 4.5
+          "extra_cost": 1960,
+          "pct_of_income": 4.4,
+          "fp_rate": 22.0,
+          "fp_households_m": 0.68
         },
         {
           "decile": 6,
-          "extra_cost": 2109,
-          "pct_of_income": 4.1
+          "extra_cost": 2086,
+          "pct_of_income": 4.0,
+          "fp_rate": 29.3,
+          "fp_households_m": 0.9
         },
         {
           "decile": 7,
-          "extra_cost": 2102,
-          "pct_of_income": 3.8
+          "extra_cost": 1964,
+          "pct_of_income": 3.5,
+          "fp_rate": 17.0,
+          "fp_households_m": 0.53
         },
         {
           "decile": 8,
-          "extra_cost": 2332,
-          "pct_of_income": 3.5
+          "extra_cost": 2160,
+          "pct_of_income": 3.2,
+          "fp_rate": 13.8,
+          "fp_households_m": 0.41
         },
         {
           "decile": 9,
-          "extra_cost": 2440,
-          "pct_of_income": 3.3
+          "extra_cost": 2257,
+          "pct_of_income": 3.1,
+          "fp_rate": 14.7,
+          "fp_households_m": 0.45
         },
         {
           "decile": 10,
-          "extra_cost": 2666,
-          "pct_of_income": 2.1
+          "extra_cost": 2202,
+          "pct_of_income": 1.8,
+          "fp_rate": 4.6,
+          "fp_households_m": 0.15
+        }
+      ],
+      "by_tenure": [
+        {
+          "tenure": "OWNED_OUTRIGHT",
+          "extra_cost": 2443,
+          "pct_of_income": 4.9,
+          "fp_rate": 37.4,
+          "fp_households_m": 4.04
+        },
+        {
+          "tenure": "OWNED_WITH_MORTGAGE",
+          "extra_cost": 2027,
+          "pct_of_income": 2.8,
+          "fp_rate": 17.4,
+          "fp_households_m": 1.44
+        },
+        {
+          "tenure": "RENT_FROM_COUNCIL",
+          "extra_cost": 1469,
+          "pct_of_income": 4.0,
+          "fp_rate": 28.0,
+          "fp_households_m": 0.67
+        },
+        {
+          "tenure": "RENT_FROM_HA",
+          "extra_cost": 1529,
+          "pct_of_income": 4.1,
+          "fp_rate": 28.7,
+          "fp_households_m": 0.96
+        },
+        {
+          "tenure": "RENT_PRIVATELY",
+          "extra_cost": 1777,
+          "pct_of_income": 3.3,
+          "fp_rate": 23.7,
+          "fp_households_m": 1.66
+        }
+      ],
+      "by_hh_type": [
+        {
+          "hh_type": "COUPLE_NO_CHILDREN",
+          "extra_cost": 2206,
+          "pct_of_income": 3.4,
+          "fp_rate": 18.4,
+          "fp_households_m": 1.44
+        },
+        {
+          "hh_type": "COUPLE_PENSIONER",
+          "extra_cost": 2282,
+          "pct_of_income": 4.4,
+          "fp_rate": 27.6,
+          "fp_households_m": 1.24
+        },
+        {
+          "hh_type": "COUPLE_WITH_CHILDREN",
+          "extra_cost": 1897,
+          "pct_of_income": 2.6,
+          "fp_rate": 12.7,
+          "fp_households_m": 0.72
+        },
+        {
+          "hh_type": "LONE_PARENT",
+          "extra_cost": 1746,
+          "pct_of_income": 4.4,
+          "fp_rate": 24.5,
+          "fp_households_m": 0.52
+        },
+        {
+          "hh_type": "OTHER",
+          "extra_cost": 2010,
+          "pct_of_income": 2.1,
+          "fp_rate": 12.0,
+          "fp_households_m": 0.27
+        },
+        {
+          "hh_type": "SINGLE_PENSIONER",
+          "extra_cost": 2015,
+          "pct_of_income": 8.3,
+          "fp_rate": 56.2,
+          "fp_households_m": 2.17
+        },
+        {
+          "hh_type": "SINGLE_WORKING_AGE",
+          "extra_cost": 1781,
+          "pct_of_income": 5.7,
+          "fp_rate": 42.7,
+          "fp_households_m": 2.42
+        }
+      ],
+      "by_region": [
+        {
+          "region": "EAST_MIDLANDS",
+          "extra_cost": 1985,
+          "pct_of_income": 3.7,
+          "fp_rate": 28.1,
+          "fp_households_m": 0.65
+        },
+        {
+          "region": "EAST_OF_ENGLAND",
+          "extra_cost": 2309,
+          "pct_of_income": 4.3,
+          "fp_rate": 32.5,
+          "fp_households_m": 0.97
+        },
+        {
+          "region": "LONDON",
+          "extra_cost": 1957,
+          "pct_of_income": 2.7,
+          "fp_rate": 27.9,
+          "fp_households_m": 1.12
+        },
+        {
+          "region": "NORTHERN_IRELAND",
+          "extra_cost": 2477,
+          "pct_of_income": 4.5,
+          "fp_rate": 35.8,
+          "fp_households_m": 0.27
+        },
+        {
+          "region": "NORTH_EAST",
+          "extra_cost": 2030,
+          "pct_of_income": 4.2,
+          "fp_rate": 31.2,
+          "fp_households_m": 0.42
+        },
+        {
+          "region": "NORTH_WEST",
+          "extra_cost": 2088,
+          "pct_of_income": 4.6,
+          "fp_rate": 34.9,
+          "fp_households_m": 1.25
+        },
+        {
+          "region": "SCOTLAND",
+          "extra_cost": 2030,
+          "pct_of_income": 4.0,
+          "fp_rate": 28.1,
+          "fp_households_m": 0.76
+        },
+        {
+          "region": "SOUTH_EAST",
+          "extra_cost": 1838,
+          "pct_of_income": 3.3,
+          "fp_rate": 20.6,
+          "fp_households_m": 0.9
+        },
+        {
+          "region": "SOUTH_WEST",
+          "extra_cost": 1960,
+          "pct_of_income": 3.7,
+          "fp_rate": 21.9,
+          "fp_households_m": 0.62
+        },
+        {
+          "region": "WALES",
+          "extra_cost": 1696,
+          "pct_of_income": 3.4,
+          "fp_rate": 21.8,
+          "fp_households_m": 0.34
+        },
+        {
+          "region": "WEST_MIDLANDS",
+          "extra_cost": 2021,
+          "pct_of_income": 4.1,
+          "fp_rate": 28.0,
+          "fp_households_m": 0.77
+        },
+        {
+          "region": "YORKSHIRE",
+          "extra_cost": 2119,
+          "pct_of_income": 4.4,
+          "fp_rate": 26.6,
+          "fp_households_m": 0.7
         }
       ]
     }
@@ -373,39 +1343,39 @@
   "fuel_poverty": [
     {
       "scenario": "Baseline (current prices)",
-      "fuel_poverty_rate_pct": 9.2,
-      "households_m": 2.9,
+      "fuel_poverty_rate_pct": 9.3,
+      "households_m": 3.0,
       "extra_households_m": 0
     },
     {
       "scenario": "+10% (cap -> 1805)",
-      "fuel_poverty_rate_pct": 11.2,
-      "households_m": 3.6,
-      "extra_households_m": 0.6
+      "fuel_poverty_rate_pct": 10.3,
+      "households_m": 3.3,
+      "extra_households_m": 0.3
     },
     {
       "scenario": "+20% (cap -> 1969)",
-      "fuel_poverty_rate_pct": 12.4,
-      "households_m": 4.0,
-      "extra_households_m": 1.0
+      "fuel_poverty_rate_pct": 11.7,
+      "households_m": 3.7,
+      "extra_households_m": 0.8
     },
     {
       "scenario": "+30% (cap -> 2133)",
-      "fuel_poverty_rate_pct": 13.6,
-      "households_m": 4.3,
-      "extra_households_m": 1.4
+      "fuel_poverty_rate_pct": 12.7,
+      "households_m": 4.1,
+      "extra_households_m": 1.1
     },
     {
       "scenario": "+60% (cap -> 2625)",
-      "fuel_poverty_rate_pct": 17.7,
-      "households_m": 5.6,
-      "extra_households_m": 2.7
+      "fuel_poverty_rate_pct": 16.7,
+      "households_m": 5.3,
+      "extra_households_m": 2.3
     },
     {
       "scenario": "2022-level (cap -> 3764)",
-      "fuel_poverty_rate_pct": 31.2,
-      "households_m": 9.9,
-      "extra_households_m": 7.0
+      "fuel_poverty_rate_pct": 27.6,
+      "households_m": 8.8,
+      "extra_households_m": 5.8
     }
   ],
   "behavioral": [
@@ -415,104 +1385,414 @@
       "price_increase_pct": 10,
       "elasticity": -0.15,
       "consumption_change_pct": -1.5,
-      "static_avg_extra": 162,
-      "behavioral_avg_extra": 135,
-      "bill_saving_avg": 27,
+      "static_avg_extra": 156,
+      "behavioral_avg_extra": 130,
+      "bill_saving_avg": 26,
       "welfare_loss_comfort_avg": 1,
-      "static_fp_rate": 11.2,
-      "behavioral_fp_rate": 10.8,
-      "static_fp_households_m": 3.6,
-      "behavioral_fp_households_m": 3.4,
+      "static_fp_rate": 10.3,
+      "behavioral_fp_rate": 10.2,
+      "static_fp_households_m": 3.3,
+      "behavioral_fp_households_m": 3.2,
       "deciles": [
         {
           "decile": 1,
-          "static_extra_cost": 148,
-          "behavioral_extra_cost": 124,
-          "bill_saving": 24,
+          "static_extra_cost": 139,
+          "behavioral_extra_cost": 116,
+          "bill_saving": 23,
           "consumption_reduction_pct": -1.5,
           "static_pct_of_income": 0.7,
-          "behavioral_pct_of_income": 0.6
+          "behavioral_pct_of_income": 0.6,
+          "static_fp_rate": 29.7,
+          "behavioral_fp_rate": 29.6,
+          "static_fp_households_m": 1.14,
+          "behavioral_fp_households_m": 1.13
         },
         {
           "decile": 2,
-          "static_extra_cost": 142,
-          "behavioral_extra_cost": 119,
-          "bill_saving": 23,
+          "static_extra_cost": 146,
+          "behavioral_extra_cost": 122,
+          "bill_saving": 24,
           "consumption_reduction_pct": -1.5,
           "static_pct_of_income": 0.5,
-          "behavioral_pct_of_income": 0.4
+          "behavioral_pct_of_income": 0.4,
+          "static_fp_rate": 15.0,
+          "behavioral_fp_rate": 14.7,
+          "static_fp_households_m": 0.51,
+          "behavioral_fp_households_m": 0.5
         },
         {
           "decile": 3,
-          "static_extra_cost": 133,
-          "behavioral_extra_cost": 111,
-          "bill_saving": 22,
+          "static_extra_cost": 137,
+          "behavioral_extra_cost": 114,
+          "bill_saving": 23,
           "consumption_reduction_pct": -1.5,
           "static_pct_of_income": 0.4,
-          "behavioral_pct_of_income": 0.3
+          "behavioral_pct_of_income": 0.3,
+          "static_fp_rate": 7.8,
+          "behavioral_fp_rate": 7.8,
+          "static_fp_households_m": 0.24,
+          "behavioral_fp_households_m": 0.24
         },
         {
           "decile": 4,
-          "static_extra_cost": 143,
-          "behavioral_extra_cost": 119,
-          "bill_saving": 24,
+          "static_extra_cost": 151,
+          "behavioral_extra_cost": 126,
+          "bill_saving": 25,
           "consumption_reduction_pct": -1.5,
-          "static_pct_of_income": 0.3,
-          "behavioral_pct_of_income": 0.3
+          "static_pct_of_income": 0.4,
+          "behavioral_pct_of_income": 0.3,
+          "static_fp_rate": 9.6,
+          "behavioral_fp_rate": 9.3,
+          "static_fp_households_m": 0.29,
+          "behavioral_fp_households_m": 0.28
         },
         {
           "decile": 5,
-          "static_extra_cost": 154,
-          "behavioral_extra_cost": 128,
+          "static_extra_cost": 151,
+          "behavioral_extra_cost": 126,
           "bill_saving": 25,
           "consumption_reduction_pct": -1.5,
           "static_pct_of_income": 0.3,
-          "behavioral_pct_of_income": 0.3
+          "behavioral_pct_of_income": 0.3,
+          "static_fp_rate": 10.1,
+          "behavioral_fp_rate": 9.9,
+          "static_fp_households_m": 0.31,
+          "behavioral_fp_households_m": 0.3
         },
         {
           "decile": 6,
-          "static_extra_cost": 163,
-          "behavioral_extra_cost": 136,
+          "static_extra_cost": 161,
+          "behavioral_extra_cost": 135,
           "bill_saving": 27,
           "consumption_reduction_pct": -1.5,
           "static_pct_of_income": 0.3,
-          "behavioral_pct_of_income": 0.3
+          "behavioral_pct_of_income": 0.3,
+          "static_fp_rate": 6.7,
+          "behavioral_fp_rate": 6.7,
+          "static_fp_households_m": 0.2,
+          "behavioral_fp_households_m": 0.2
         },
         {
           "decile": 7,
-          "static_extra_cost": 162,
-          "behavioral_extra_cost": 136,
-          "bill_saving": 27,
+          "static_extra_cost": 152,
+          "behavioral_extra_cost": 127,
+          "bill_saving": 25,
           "consumption_reduction_pct": -1.5,
           "static_pct_of_income": 0.3,
-          "behavioral_pct_of_income": 0.2
+          "behavioral_pct_of_income": 0.2,
+          "static_fp_rate": 3.7,
+          "behavioral_fp_rate": 3.7,
+          "static_fp_households_m": 0.12,
+          "behavioral_fp_households_m": 0.12
         },
         {
           "decile": 8,
-          "static_extra_cost": 180,
-          "behavioral_extra_cost": 150,
-          "bill_saving": 30,
+          "static_extra_cost": 167,
+          "behavioral_extra_cost": 139,
+          "bill_saving": 28,
           "consumption_reduction_pct": -1.5,
-          "static_pct_of_income": 0.3,
-          "behavioral_pct_of_income": 0.2
+          "static_pct_of_income": 0.2,
+          "behavioral_pct_of_income": 0.2,
+          "static_fp_rate": 4.9,
+          "behavioral_fp_rate": 4.9,
+          "static_fp_households_m": 0.14,
+          "behavioral_fp_households_m": 0.14
         },
         {
           "decile": 9,
-          "static_extra_cost": 189,
-          "behavioral_extra_cost": 157,
-          "bill_saving": 31,
+          "static_extra_cost": 174,
+          "behavioral_extra_cost": 146,
+          "bill_saving": 29,
           "consumption_reduction_pct": -1.5,
-          "static_pct_of_income": 0.3,
-          "behavioral_pct_of_income": 0.2
+          "static_pct_of_income": 0.2,
+          "behavioral_pct_of_income": 0.2,
+          "static_fp_rate": 7.4,
+          "behavioral_fp_rate": 7.3,
+          "static_fp_households_m": 0.23,
+          "behavioral_fp_households_m": 0.23
         },
         {
           "decile": 10,
-          "static_extra_cost": 206,
-          "behavioral_extra_cost": 172,
-          "bill_saving": 34,
+          "static_extra_cost": 170,
+          "behavioral_extra_cost": 142,
+          "bill_saving": 28,
           "consumption_reduction_pct": -1.5,
-          "static_pct_of_income": 0.2,
-          "behavioral_pct_of_income": 0.1
+          "static_pct_of_income": 0.1,
+          "behavioral_pct_of_income": 0.1,
+          "static_fp_rate": 1.0,
+          "behavioral_fp_rate": 1.0,
+          "static_fp_households_m": 0.03,
+          "behavioral_fp_households_m": 0.03
+        }
+      ],
+      "by_tenure": [
+        {
+          "tenure": "OWNED_OUTRIGHT",
+          "extra_cost": 189,
+          "pct_of_income": 0.4,
+          "fp_rate": 16.4,
+          "fp_households_m": 1.77,
+          "behavioral_extra_cost": 158,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 16.3,
+          "behavioral_fp_households_m": 1.76
+        },
+        {
+          "tenure": "OWNED_WITH_MORTGAGE",
+          "extra_cost": 157,
+          "pct_of_income": 0.2,
+          "fp_rate": 5.4,
+          "fp_households_m": 0.45,
+          "behavioral_extra_cost": 131,
+          "behavioral_pct_of_income": 0.2,
+          "behavioral_fp_rate": 5.3,
+          "behavioral_fp_households_m": 0.44
+        },
+        {
+          "tenure": "RENT_FROM_COUNCIL",
+          "extra_cost": 113,
+          "pct_of_income": 0.3,
+          "fp_rate": 7.3,
+          "fp_households_m": 0.18,
+          "behavioral_extra_cost": 95,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 7.2,
+          "behavioral_fp_households_m": 0.17
+        },
+        {
+          "tenure": "RENT_FROM_HA",
+          "extra_cost": 118,
+          "pct_of_income": 0.3,
+          "fp_rate": 7.2,
+          "fp_households_m": 0.24,
+          "behavioral_extra_cost": 99,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 7.0,
+          "behavioral_fp_households_m": 0.24
+        },
+        {
+          "tenure": "RENT_PRIVATELY",
+          "extra_cost": 137,
+          "pct_of_income": 0.3,
+          "fp_rate": 9.2,
+          "fp_households_m": 0.64,
+          "behavioral_extra_cost": 115,
+          "behavioral_pct_of_income": 0.2,
+          "behavioral_fp_rate": 9.1,
+          "behavioral_fp_households_m": 0.64
+        }
+      ],
+      "by_hh_type": [
+        {
+          "hh_type": "COUPLE_NO_CHILDREN",
+          "extra_cost": 170,
+          "pct_of_income": 0.3,
+          "fp_rate": 7.1,
+          "fp_households_m": 0.55,
+          "behavioral_extra_cost": 142,
+          "behavioral_pct_of_income": 0.2,
+          "behavioral_fp_rate": 7.0,
+          "behavioral_fp_households_m": 0.55
+        },
+        {
+          "hh_type": "COUPLE_PENSIONER",
+          "extra_cost": 176,
+          "pct_of_income": 0.3,
+          "fp_rate": 8.7,
+          "fp_households_m": 0.39,
+          "behavioral_extra_cost": 147,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 8.6,
+          "behavioral_fp_households_m": 0.39
+        },
+        {
+          "hh_type": "COUPLE_WITH_CHILDREN",
+          "extra_cost": 147,
+          "pct_of_income": 0.2,
+          "fp_rate": 3.5,
+          "fp_households_m": 0.2,
+          "behavioral_extra_cost": 122,
+          "behavioral_pct_of_income": 0.2,
+          "behavioral_fp_rate": 3.5,
+          "behavioral_fp_households_m": 0.2
+        },
+        {
+          "hh_type": "LONE_PARENT",
+          "extra_cost": 135,
+          "pct_of_income": 0.3,
+          "fp_rate": 8.6,
+          "fp_households_m": 0.18,
+          "behavioral_extra_cost": 113,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 8.6,
+          "behavioral_fp_households_m": 0.18
+        },
+        {
+          "hh_type": "OTHER",
+          "extra_cost": 155,
+          "pct_of_income": 0.2,
+          "fp_rate": 3.1,
+          "fp_households_m": 0.07,
+          "behavioral_extra_cost": 130,
+          "behavioral_pct_of_income": 0.1,
+          "behavioral_fp_rate": 3.0,
+          "behavioral_fp_households_m": 0.07
+        },
+        {
+          "hh_type": "SINGLE_PENSIONER",
+          "extra_cost": 156,
+          "pct_of_income": 0.6,
+          "fp_rate": 22.3,
+          "fp_households_m": 0.86,
+          "behavioral_extra_cost": 130,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 22.2,
+          "behavioral_fp_households_m": 0.86
+        },
+        {
+          "hh_type": "SINGLE_WORKING_AGE",
+          "extra_cost": 138,
+          "pct_of_income": 0.4,
+          "fp_rate": 18.1,
+          "fp_households_m": 1.03,
+          "behavioral_extra_cost": 115,
+          "behavioral_pct_of_income": 0.4,
+          "behavioral_fp_rate": 17.8,
+          "behavioral_fp_households_m": 1.01
+        }
+      ],
+      "by_region": [
+        {
+          "region": "EAST_MIDLANDS",
+          "extra_cost": 153,
+          "pct_of_income": 0.3,
+          "fp_rate": 7.2,
+          "fp_households_m": 0.17,
+          "behavioral_extra_cost": 128,
+          "behavioral_pct_of_income": 0.2,
+          "behavioral_fp_rate": 7.2,
+          "behavioral_fp_households_m": 0.17
+        },
+        {
+          "region": "EAST_OF_ENGLAND",
+          "extra_cost": 178,
+          "pct_of_income": 0.3,
+          "fp_rate": 9.7,
+          "fp_households_m": 0.29,
+          "behavioral_extra_cost": 149,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 9.4,
+          "behavioral_fp_households_m": 0.28
+        },
+        {
+          "region": "LONDON",
+          "extra_cost": 151,
+          "pct_of_income": 0.2,
+          "fp_rate": 13.3,
+          "fp_households_m": 0.54,
+          "behavioral_extra_cost": 126,
+          "behavioral_pct_of_income": 0.2,
+          "behavioral_fp_rate": 13.1,
+          "behavioral_fp_households_m": 0.53
+        },
+        {
+          "region": "NORTHERN_IRELAND",
+          "extra_cost": 191,
+          "pct_of_income": 0.3,
+          "fp_rate": 12.6,
+          "fp_households_m": 0.1,
+          "behavioral_extra_cost": 160,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 12.5,
+          "behavioral_fp_households_m": 0.1
+        },
+        {
+          "region": "NORTH_EAST",
+          "extra_cost": 157,
+          "pct_of_income": 0.3,
+          "fp_rate": 11.4,
+          "fp_households_m": 0.15,
+          "behavioral_extra_cost": 131,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 11.4,
+          "behavioral_fp_households_m": 0.15
+        },
+        {
+          "region": "NORTH_WEST",
+          "extra_cost": 161,
+          "pct_of_income": 0.4,
+          "fp_rate": 13.5,
+          "fp_households_m": 0.48,
+          "behavioral_extra_cost": 135,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 13.5,
+          "behavioral_fp_households_m": 0.48
+        },
+        {
+          "region": "SCOTLAND",
+          "extra_cost": 157,
+          "pct_of_income": 0.3,
+          "fp_rate": 10.2,
+          "fp_households_m": 0.28,
+          "behavioral_extra_cost": 131,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 9.9,
+          "behavioral_fp_households_m": 0.27
+        },
+        {
+          "region": "SOUTH_EAST",
+          "extra_cost": 142,
+          "pct_of_income": 0.3,
+          "fp_rate": 9.0,
+          "fp_households_m": 0.39,
+          "behavioral_extra_cost": 119,
+          "behavioral_pct_of_income": 0.2,
+          "behavioral_fp_rate": 8.9,
+          "behavioral_fp_households_m": 0.39
+        },
+        {
+          "region": "SOUTH_WEST",
+          "extra_cost": 151,
+          "pct_of_income": 0.3,
+          "fp_rate": 10.3,
+          "fp_households_m": 0.29,
+          "behavioral_extra_cost": 126,
+          "behavioral_pct_of_income": 0.2,
+          "behavioral_fp_rate": 10.3,
+          "behavioral_fp_households_m": 0.29
+        },
+        {
+          "region": "WALES",
+          "extra_cost": 131,
+          "pct_of_income": 0.3,
+          "fp_rate": 8.1,
+          "fp_households_m": 0.13,
+          "behavioral_extra_cost": 109,
+          "behavioral_pct_of_income": 0.2,
+          "behavioral_fp_rate": 8.0,
+          "behavioral_fp_households_m": 0.12
+        },
+        {
+          "region": "WEST_MIDLANDS",
+          "extra_cost": 156,
+          "pct_of_income": 0.3,
+          "fp_rate": 6.6,
+          "fp_households_m": 0.18,
+          "behavioral_extra_cost": 130,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 6.4,
+          "behavioral_fp_households_m": 0.18
+        },
+        {
+          "region": "YORKSHIRE",
+          "extra_cost": 164,
+          "pct_of_income": 0.3,
+          "fp_rate": 11.1,
+          "fp_households_m": 0.29,
+          "behavioral_extra_cost": 137,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 11.0,
+          "behavioral_fp_households_m": 0.29
         }
       ]
     },
@@ -522,104 +1802,414 @@
       "price_increase_pct": 20,
       "elasticity": -0.15,
       "consumption_change_pct": -3.0,
-      "static_avg_extra": 323,
-      "behavioral_avg_extra": 265,
-      "bill_saving_avg": 58,
+      "static_avg_extra": 312,
+      "behavioral_avg_extra": 256,
+      "bill_saving_avg": 56,
       "welfare_loss_comfort_avg": 5,
-      "static_fp_rate": 12.4,
-      "behavioral_fp_rate": 11.9,
-      "static_fp_households_m": 4.0,
-      "behavioral_fp_households_m": 3.8,
+      "static_fp_rate": 11.7,
+      "behavioral_fp_rate": 11.4,
+      "static_fp_households_m": 3.7,
+      "behavioral_fp_households_m": 3.6,
       "deciles": [
         {
           "decile": 1,
-          "static_extra_cost": 297,
-          "behavioral_extra_cost": 243,
-          "bill_saving": 53,
+          "static_extra_cost": 277,
+          "behavioral_extra_cost": 227,
+          "bill_saving": 50,
           "consumption_reduction_pct": -3.0,
-          "static_pct_of_income": 1.5,
-          "behavioral_pct_of_income": 1.2
+          "static_pct_of_income": 1.4,
+          "behavioral_pct_of_income": 1.1,
+          "static_fp_rate": 32.2,
+          "behavioral_fp_rate": 31.6,
+          "static_fp_households_m": 1.23,
+          "behavioral_fp_households_m": 1.21
         },
         {
           "decile": 2,
-          "static_extra_cost": 284,
-          "behavioral_extra_cost": 233,
-          "bill_saving": 51,
+          "static_extra_cost": 292,
+          "behavioral_extra_cost": 239,
+          "bill_saving": 53,
           "consumption_reduction_pct": -3.0,
           "static_pct_of_income": 0.9,
-          "behavioral_pct_of_income": 0.8
+          "behavioral_pct_of_income": 0.8,
+          "static_fp_rate": 19.5,
+          "behavioral_fp_rate": 19.2,
+          "static_fp_households_m": 0.66,
+          "behavioral_fp_households_m": 0.65
         },
         {
           "decile": 3,
-          "static_extra_cost": 267,
-          "behavioral_extra_cost": 219,
-          "bill_saving": 48,
+          "static_extra_cost": 274,
+          "behavioral_extra_cost": 224,
+          "bill_saving": 49,
           "consumption_reduction_pct": -3.0,
           "static_pct_of_income": 0.7,
-          "behavioral_pct_of_income": 0.6
+          "behavioral_pct_of_income": 0.6,
+          "static_fp_rate": 9.6,
+          "behavioral_fp_rate": 9.5,
+          "static_fp_households_m": 0.3,
+          "behavioral_fp_households_m": 0.29
         },
         {
           "decile": 4,
-          "static_extra_cost": 285,
-          "behavioral_extra_cost": 234,
-          "bill_saving": 51,
+          "static_extra_cost": 302,
+          "behavioral_extra_cost": 248,
+          "bill_saving": 54,
           "consumption_reduction_pct": -3.0,
           "static_pct_of_income": 0.7,
-          "behavioral_pct_of_income": 0.6
+          "behavioral_pct_of_income": 0.6,
+          "static_fp_rate": 10.2,
+          "behavioral_fp_rate": 9.8,
+          "static_fp_households_m": 0.3,
+          "behavioral_fp_households_m": 0.29
         },
         {
           "decile": 5,
-          "static_extra_cost": 308,
-          "behavioral_extra_cost": 252,
+          "static_extra_cost": 303,
+          "behavioral_extra_cost": 248,
           "bill_saving": 55,
           "consumption_reduction_pct": -3.0,
           "static_pct_of_income": 0.7,
-          "behavioral_pct_of_income": 0.6
+          "behavioral_pct_of_income": 0.6,
+          "static_fp_rate": 10.7,
+          "behavioral_fp_rate": 10.4,
+          "static_fp_households_m": 0.33,
+          "behavioral_fp_households_m": 0.32
         },
         {
           "decile": 6,
-          "static_extra_cost": 326,
-          "behavioral_extra_cost": 267,
-          "bill_saving": 59,
-          "consumption_reduction_pct": -3.0,
-          "static_pct_of_income": 0.6,
-          "behavioral_pct_of_income": 0.5
-        },
-        {
-          "decile": 7,
-          "static_extra_cost": 325,
-          "behavioral_extra_cost": 266,
+          "static_extra_cost": 322,
+          "behavioral_extra_cost": 264,
           "bill_saving": 58,
           "consumption_reduction_pct": -3.0,
           "static_pct_of_income": 0.6,
-          "behavioral_pct_of_income": 0.5
+          "behavioral_pct_of_income": 0.5,
+          "static_fp_rate": 7.9,
+          "behavioral_fp_rate": 7.8,
+          "static_fp_households_m": 0.24,
+          "behavioral_fp_households_m": 0.24
+        },
+        {
+          "decile": 7,
+          "static_extra_cost": 303,
+          "behavioral_extra_cost": 249,
+          "bill_saving": 55,
+          "consumption_reduction_pct": -3.0,
+          "static_pct_of_income": 0.5,
+          "behavioral_pct_of_income": 0.4,
+          "static_fp_rate": 4.0,
+          "behavioral_fp_rate": 3.8,
+          "static_fp_households_m": 0.13,
+          "behavioral_fp_households_m": 0.12
         },
         {
           "decile": 8,
-          "static_extra_cost": 360,
-          "behavioral_extra_cost": 295,
-          "bill_saving": 65,
+          "static_extra_cost": 334,
+          "behavioral_extra_cost": 274,
+          "bill_saving": 60,
           "consumption_reduction_pct": -3.0,
           "static_pct_of_income": 0.5,
-          "behavioral_pct_of_income": 0.4
+          "behavioral_pct_of_income": 0.4,
+          "static_fp_rate": 5.8,
+          "behavioral_fp_rate": 5.8,
+          "static_fp_households_m": 0.17,
+          "behavioral_fp_households_m": 0.17
         },
         {
           "decile": 9,
-          "static_extra_cost": 377,
-          "behavioral_extra_cost": 309,
-          "bill_saving": 68,
+          "static_extra_cost": 349,
+          "behavioral_extra_cost": 286,
+          "bill_saving": 63,
           "consumption_reduction_pct": -3.0,
           "static_pct_of_income": 0.5,
-          "behavioral_pct_of_income": 0.4
+          "behavioral_pct_of_income": 0.4,
+          "static_fp_rate": 7.7,
+          "behavioral_fp_rate": 7.6,
+          "static_fp_households_m": 0.24,
+          "behavioral_fp_households_m": 0.23
         },
         {
           "decile": 10,
-          "static_extra_cost": 412,
-          "behavioral_extra_cost": 338,
-          "bill_saving": 74,
+          "static_extra_cost": 340,
+          "behavioral_extra_cost": 279,
+          "bill_saving": 61,
           "consumption_reduction_pct": -3.0,
           "static_pct_of_income": 0.3,
-          "behavioral_pct_of_income": 0.3
+          "behavioral_pct_of_income": 0.2,
+          "static_fp_rate": 1.4,
+          "behavioral_fp_rate": 1.3,
+          "static_fp_households_m": 0.05,
+          "behavioral_fp_households_m": 0.04
+        }
+      ],
+      "by_tenure": [
+        {
+          "tenure": "OWNED_OUTRIGHT",
+          "extra_cost": 377,
+          "pct_of_income": 0.8,
+          "fp_rate": 18.7,
+          "fp_households_m": 2.02,
+          "behavioral_extra_cost": 310,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 18.4,
+          "behavioral_fp_households_m": 1.98
+        },
+        {
+          "tenure": "OWNED_WITH_MORTGAGE",
+          "extra_cost": 313,
+          "pct_of_income": 0.4,
+          "fp_rate": 6.1,
+          "fp_households_m": 0.51,
+          "behavioral_extra_cost": 257,
+          "behavioral_pct_of_income": 0.4,
+          "behavioral_fp_rate": 5.9,
+          "behavioral_fp_households_m": 0.49
+        },
+        {
+          "tenure": "RENT_FROM_COUNCIL",
+          "extra_cost": 227,
+          "pct_of_income": 0.6,
+          "fp_rate": 8.4,
+          "fp_households_m": 0.2,
+          "behavioral_extra_cost": 186,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 8.3,
+          "behavioral_fp_households_m": 0.2
+        },
+        {
+          "tenure": "RENT_FROM_HA",
+          "extra_cost": 236,
+          "pct_of_income": 0.6,
+          "fp_rate": 7.8,
+          "fp_households_m": 0.26,
+          "behavioral_extra_cost": 194,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 7.6,
+          "behavioral_fp_households_m": 0.26
+        },
+        {
+          "tenure": "RENT_PRIVATELY",
+          "extra_cost": 274,
+          "pct_of_income": 0.5,
+          "fp_rate": 10.3,
+          "fp_households_m": 0.72,
+          "behavioral_extra_cost": 225,
+          "behavioral_pct_of_income": 0.4,
+          "behavioral_fp_rate": 10.2,
+          "behavioral_fp_households_m": 0.71
+        }
+      ],
+      "by_hh_type": [
+        {
+          "hh_type": "COUPLE_NO_CHILDREN",
+          "extra_cost": 341,
+          "pct_of_income": 0.5,
+          "fp_rate": 7.7,
+          "fp_households_m": 0.6,
+          "behavioral_extra_cost": 279,
+          "behavioral_pct_of_income": 0.4,
+          "behavioral_fp_rate": 7.5,
+          "behavioral_fp_households_m": 0.59
+        },
+        {
+          "hh_type": "COUPLE_PENSIONER",
+          "extra_cost": 353,
+          "pct_of_income": 0.7,
+          "fp_rate": 9.2,
+          "fp_households_m": 0.41,
+          "behavioral_extra_cost": 289,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 9.0,
+          "behavioral_fp_households_m": 0.4
+        },
+        {
+          "hh_type": "COUPLE_WITH_CHILDREN",
+          "extra_cost": 293,
+          "pct_of_income": 0.4,
+          "fp_rate": 4.2,
+          "fp_households_m": 0.24,
+          "behavioral_extra_cost": 240,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 3.9,
+          "behavioral_fp_households_m": 0.22
+        },
+        {
+          "hh_type": "LONE_PARENT",
+          "extra_cost": 270,
+          "pct_of_income": 0.7,
+          "fp_rate": 10.7,
+          "fp_households_m": 0.22,
+          "behavioral_extra_cost": 221,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 10.6,
+          "behavioral_fp_households_m": 0.22
+        },
+        {
+          "hh_type": "OTHER",
+          "extra_cost": 311,
+          "pct_of_income": 0.3,
+          "fp_rate": 4.2,
+          "fp_households_m": 0.09,
+          "behavioral_extra_cost": 255,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 4.1,
+          "behavioral_fp_households_m": 0.09
+        },
+        {
+          "hh_type": "SINGLE_PENSIONER",
+          "extra_cost": 311,
+          "pct_of_income": 1.3,
+          "fp_rate": 26.6,
+          "fp_households_m": 1.03,
+          "behavioral_extra_cost": 255,
+          "behavioral_pct_of_income": 1.1,
+          "behavioral_fp_rate": 26.1,
+          "behavioral_fp_households_m": 1.01
+        },
+        {
+          "hh_type": "SINGLE_WORKING_AGE",
+          "extra_cost": 275,
+          "pct_of_income": 0.9,
+          "fp_rate": 19.9,
+          "fp_households_m": 1.13,
+          "behavioral_extra_cost": 226,
+          "behavioral_pct_of_income": 0.7,
+          "behavioral_fp_rate": 19.4,
+          "behavioral_fp_households_m": 1.1
+        }
+      ],
+      "by_region": [
+        {
+          "region": "EAST_MIDLANDS",
+          "extra_cost": 307,
+          "pct_of_income": 0.6,
+          "fp_rate": 8.0,
+          "fp_households_m": 0.19,
+          "behavioral_extra_cost": 251,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 7.9,
+          "behavioral_fp_households_m": 0.18
+        },
+        {
+          "region": "EAST_OF_ENGLAND",
+          "extra_cost": 357,
+          "pct_of_income": 0.7,
+          "fp_rate": 12.2,
+          "fp_households_m": 0.36,
+          "behavioral_extra_cost": 292,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 11.8,
+          "behavioral_fp_households_m": 0.35
+        },
+        {
+          "region": "LONDON",
+          "extra_cost": 302,
+          "pct_of_income": 0.4,
+          "fp_rate": 14.3,
+          "fp_households_m": 0.57,
+          "behavioral_extra_cost": 248,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 14.0,
+          "behavioral_fp_households_m": 0.56
+        },
+        {
+          "region": "NORTHERN_IRELAND",
+          "extra_cost": 383,
+          "pct_of_income": 0.7,
+          "fp_rate": 13.9,
+          "fp_households_m": 0.11,
+          "behavioral_extra_cost": 314,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 13.3,
+          "behavioral_fp_households_m": 0.1
+        },
+        {
+          "region": "NORTH_EAST",
+          "extra_cost": 314,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.9,
+          "fp_households_m": 0.16,
+          "behavioral_extra_cost": 257,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 11.7,
+          "behavioral_fp_households_m": 0.16
+        },
+        {
+          "region": "NORTH_WEST",
+          "extra_cost": 323,
+          "pct_of_income": 0.7,
+          "fp_rate": 14.1,
+          "fp_households_m": 0.51,
+          "behavioral_extra_cost": 264,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 13.9,
+          "behavioral_fp_households_m": 0.5
+        },
+        {
+          "region": "SCOTLAND",
+          "extra_cost": 314,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.0,
+          "fp_households_m": 0.3,
+          "behavioral_extra_cost": 257,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 10.7,
+          "behavioral_fp_households_m": 0.29
+        },
+        {
+          "region": "SOUTH_EAST",
+          "extra_cost": 284,
+          "pct_of_income": 0.5,
+          "fp_rate": 9.8,
+          "fp_households_m": 0.42,
+          "behavioral_extra_cost": 233,
+          "behavioral_pct_of_income": 0.4,
+          "behavioral_fp_rate": 9.6,
+          "behavioral_fp_households_m": 0.42
+        },
+        {
+          "region": "SOUTH_WEST",
+          "extra_cost": 303,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.2,
+          "fp_households_m": 0.32,
+          "behavioral_extra_cost": 248,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 10.7,
+          "behavioral_fp_households_m": 0.3
+        },
+        {
+          "region": "WALES",
+          "extra_cost": 262,
+          "pct_of_income": 0.5,
+          "fp_rate": 9.1,
+          "fp_households_m": 0.14,
+          "behavioral_extra_cost": 215,
+          "behavioral_pct_of_income": 0.4,
+          "behavioral_fp_rate": 8.9,
+          "behavioral_fp_households_m": 0.14
+        },
+        {
+          "region": "WEST_MIDLANDS",
+          "extra_cost": 312,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.6,
+          "fp_households_m": 0.32,
+          "behavioral_extra_cost": 256,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 11.5,
+          "behavioral_fp_households_m": 0.32
+        },
+        {
+          "region": "YORKSHIRE",
+          "extra_cost": 327,
+          "pct_of_income": 0.7,
+          "fp_rate": 12.2,
+          "fp_households_m": 0.32,
+          "behavioral_extra_cost": 268,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 12.1,
+          "behavioral_fp_households_m": 0.32
         }
       ]
     },
@@ -629,104 +2219,414 @@
       "price_increase_pct": 30,
       "elasticity": -0.15,
       "consumption_change_pct": -4.5,
-      "static_avg_extra": 485,
-      "behavioral_avg_extra": 391,
-      "bill_saving_avg": 95,
+      "static_avg_extra": 468,
+      "behavioral_avg_extra": 377,
+      "bill_saving_avg": 91,
       "welfare_loss_comfort_avg": 11,
-      "static_fp_rate": 13.6,
-      "behavioral_fp_rate": 12.8,
-      "static_fp_households_m": 4.3,
-      "behavioral_fp_households_m": 4.1,
+      "static_fp_rate": 12.7,
+      "behavioral_fp_rate": 12.0,
+      "static_fp_households_m": 4.1,
+      "behavioral_fp_households_m": 3.8,
       "deciles": [
         {
           "decile": 1,
-          "static_extra_cost": 445,
-          "behavioral_extra_cost": 358,
-          "bill_saving": 87,
+          "static_extra_cost": 416,
+          "behavioral_extra_cost": 335,
+          "bill_saving": 81,
           "consumption_reduction_pct": -4.5,
-          "static_pct_of_income": 2.2,
-          "behavioral_pct_of_income": 1.8
+          "static_pct_of_income": 2.1,
+          "behavioral_pct_of_income": 1.7,
+          "static_fp_rate": 35.2,
+          "behavioral_fp_rate": 32.7,
+          "static_fp_households_m": 1.34,
+          "behavioral_fp_households_m": 1.25
         },
         {
           "decile": 2,
-          "static_extra_cost": 426,
-          "behavioral_extra_cost": 343,
-          "bill_saving": 83,
+          "static_extra_cost": 438,
+          "behavioral_extra_cost": 352,
+          "bill_saving": 85,
           "consumption_reduction_pct": -4.5,
           "static_pct_of_income": 1.4,
-          "behavioral_pct_of_income": 1.1
+          "behavioral_pct_of_income": 1.1,
+          "static_fp_rate": 21.4,
+          "behavioral_fp_rate": 20.0,
+          "static_fp_households_m": 0.72,
+          "behavioral_fp_households_m": 0.68
         },
         {
           "decile": 3,
-          "static_extra_cost": 400,
-          "behavioral_extra_cost": 322,
-          "bill_saving": 78,
+          "static_extra_cost": 411,
+          "behavioral_extra_cost": 331,
+          "bill_saving": 80,
           "consumption_reduction_pct": -4.5,
           "static_pct_of_income": 1.1,
-          "behavioral_pct_of_income": 0.9
+          "behavioral_pct_of_income": 0.9,
+          "static_fp_rate": 10.8,
+          "behavioral_fp_rate": 10.4,
+          "static_fp_households_m": 0.33,
+          "behavioral_fp_households_m": 0.32
         },
         {
           "decile": 4,
-          "static_extra_cost": 428,
-          "behavioral_extra_cost": 344,
-          "bill_saving": 83,
+          "static_extra_cost": 454,
+          "behavioral_extra_cost": 365,
+          "bill_saving": 88,
           "consumption_reduction_pct": -4.5,
-          "static_pct_of_income": 1.0,
-          "behavioral_pct_of_income": 0.8
+          "static_pct_of_income": 1.1,
+          "behavioral_pct_of_income": 0.9,
+          "static_fp_rate": 11.2,
+          "behavioral_fp_rate": 10.4,
+          "static_fp_households_m": 0.33,
+          "behavioral_fp_households_m": 0.31
         },
         {
           "decile": 5,
-          "static_extra_cost": 462,
-          "behavioral_extra_cost": 372,
-          "bill_saving": 90,
+          "static_extra_cost": 454,
+          "behavioral_extra_cost": 366,
+          "bill_saving": 89,
           "consumption_reduction_pct": -4.5,
           "static_pct_of_income": 1.0,
-          "behavioral_pct_of_income": 0.8
+          "behavioral_pct_of_income": 0.8,
+          "static_fp_rate": 11.1,
+          "behavioral_fp_rate": 10.8,
+          "static_fp_households_m": 0.34,
+          "behavioral_fp_households_m": 0.33
         },
         {
           "decile": 6,
-          "static_extra_cost": 489,
-          "behavioral_extra_cost": 394,
-          "bill_saving": 95,
+          "static_extra_cost": 484,
+          "behavioral_extra_cost": 389,
+          "bill_saving": 94,
           "consumption_reduction_pct": -4.5,
           "static_pct_of_income": 0.9,
-          "behavioral_pct_of_income": 0.8
+          "behavioral_pct_of_income": 0.8,
+          "static_fp_rate": 8.4,
+          "behavioral_fp_rate": 8.3,
+          "static_fp_households_m": 0.26,
+          "behavioral_fp_households_m": 0.25
         },
         {
           "decile": 7,
-          "static_extra_cost": 487,
-          "behavioral_extra_cost": 392,
-          "bill_saving": 95,
+          "static_extra_cost": 455,
+          "behavioral_extra_cost": 366,
+          "bill_saving": 89,
           "consumption_reduction_pct": -4.5,
-          "static_pct_of_income": 0.9,
-          "behavioral_pct_of_income": 0.7
+          "static_pct_of_income": 0.8,
+          "behavioral_pct_of_income": 0.7,
+          "static_fp_rate": 4.2,
+          "behavioral_fp_rate": 4.1,
+          "static_fp_households_m": 0.13,
+          "behavioral_fp_households_m": 0.13
         },
         {
           "decile": 8,
-          "static_extra_cost": 540,
-          "behavioral_extra_cost": 435,
-          "bill_saving": 105,
+          "static_extra_cost": 501,
+          "behavioral_extra_cost": 403,
+          "bill_saving": 98,
           "consumption_reduction_pct": -4.5,
-          "static_pct_of_income": 0.8,
-          "behavioral_pct_of_income": 0.6
+          "static_pct_of_income": 0.7,
+          "behavioral_pct_of_income": 0.6,
+          "static_fp_rate": 6.5,
+          "behavioral_fp_rate": 5.9,
+          "static_fp_households_m": 0.19,
+          "behavioral_fp_households_m": 0.17
         },
         {
           "decile": 9,
-          "static_extra_cost": 566,
-          "behavioral_extra_cost": 455,
-          "bill_saving": 110,
+          "static_extra_cost": 523,
+          "behavioral_extra_cost": 421,
+          "bill_saving": 102,
           "consumption_reduction_pct": -4.5,
-          "static_pct_of_income": 0.8,
-          "behavioral_pct_of_income": 0.6
+          "static_pct_of_income": 0.7,
+          "behavioral_pct_of_income": 0.6,
+          "static_fp_rate": 9.0,
+          "behavioral_fp_rate": 7.8,
+          "static_fp_households_m": 0.28,
+          "behavioral_fp_households_m": 0.24
         },
         {
           "decile": 10,
-          "static_extra_cost": 618,
-          "behavioral_extra_cost": 497,
-          "bill_saving": 120,
+          "static_extra_cost": 510,
+          "behavioral_extra_cost": 411,
+          "bill_saving": 100,
           "consumption_reduction_pct": -4.5,
-          "static_pct_of_income": 0.5,
-          "behavioral_pct_of_income": 0.4
+          "static_pct_of_income": 0.4,
+          "behavioral_pct_of_income": 0.3,
+          "static_fp_rate": 1.5,
+          "behavioral_fp_rate": 1.5,
+          "static_fp_households_m": 0.05,
+          "behavioral_fp_households_m": 0.05
+        }
+      ],
+      "by_tenure": [
+        {
+          "tenure": "OWNED_OUTRIGHT",
+          "extra_cost": 566,
+          "pct_of_income": 1.1,
+          "fp_rate": 20.2,
+          "fp_households_m": 2.18,
+          "behavioral_extra_cost": 456,
+          "behavioral_pct_of_income": 0.9,
+          "behavioral_fp_rate": 19.0,
+          "behavioral_fp_households_m": 2.05
+        },
+        {
+          "tenure": "OWNED_WITH_MORTGAGE",
+          "extra_cost": 470,
+          "pct_of_income": 0.7,
+          "fp_rate": 6.9,
+          "fp_households_m": 0.57,
+          "behavioral_extra_cost": 378,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 6.3,
+          "behavioral_fp_households_m": 0.52
+        },
+        {
+          "tenure": "RENT_FROM_COUNCIL",
+          "extra_cost": 340,
+          "pct_of_income": 0.9,
+          "fp_rate": 9.9,
+          "fp_households_m": 0.24,
+          "behavioral_extra_cost": 274,
+          "behavioral_pct_of_income": 0.7,
+          "behavioral_fp_rate": 8.7,
+          "behavioral_fp_households_m": 0.21
+        },
+        {
+          "tenure": "RENT_FROM_HA",
+          "extra_cost": 354,
+          "pct_of_income": 1.0,
+          "fp_rate": 9.3,
+          "fp_households_m": 0.31,
+          "behavioral_extra_cost": 285,
+          "behavioral_pct_of_income": 0.8,
+          "behavioral_fp_rate": 8.7,
+          "behavioral_fp_households_m": 0.29
+        },
+        {
+          "tenure": "RENT_PRIVATELY",
+          "extra_cost": 412,
+          "pct_of_income": 0.8,
+          "fp_rate": 10.8,
+          "fp_households_m": 0.76,
+          "behavioral_extra_cost": 331,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 10.5,
+          "behavioral_fp_households_m": 0.74
+        }
+      ],
+      "by_hh_type": [
+        {
+          "hh_type": "COUPLE_NO_CHILDREN",
+          "extra_cost": 511,
+          "pct_of_income": 0.8,
+          "fp_rate": 8.1,
+          "fp_households_m": 0.63,
+          "behavioral_extra_cost": 412,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 7.8,
+          "behavioral_fp_households_m": 0.61
+        },
+        {
+          "hh_type": "COUPLE_PENSIONER",
+          "extra_cost": 529,
+          "pct_of_income": 1.0,
+          "fp_rate": 11.1,
+          "fp_households_m": 0.5,
+          "behavioral_extra_cost": 426,
+          "behavioral_pct_of_income": 0.8,
+          "behavioral_fp_rate": 9.5,
+          "behavioral_fp_households_m": 0.43
+        },
+        {
+          "hh_type": "COUPLE_WITH_CHILDREN",
+          "extra_cost": 440,
+          "pct_of_income": 0.6,
+          "fp_rate": 4.5,
+          "fp_households_m": 0.25,
+          "behavioral_extra_cost": 354,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 4.3,
+          "behavioral_fp_households_m": 0.24
+        },
+        {
+          "hh_type": "LONE_PARENT",
+          "extra_cost": 405,
+          "pct_of_income": 1.0,
+          "fp_rate": 11.0,
+          "fp_households_m": 0.23,
+          "behavioral_extra_cost": 326,
+          "behavioral_pct_of_income": 0.8,
+          "behavioral_fp_rate": 10.7,
+          "behavioral_fp_households_m": 0.23
+        },
+        {
+          "hh_type": "OTHER",
+          "extra_cost": 466,
+          "pct_of_income": 0.5,
+          "fp_rate": 5.0,
+          "fp_households_m": 0.11,
+          "behavioral_extra_cost": 375,
+          "behavioral_pct_of_income": 0.4,
+          "behavioral_fp_rate": 4.7,
+          "behavioral_fp_households_m": 0.1
+        },
+        {
+          "hh_type": "SINGLE_PENSIONER",
+          "extra_cost": 467,
+          "pct_of_income": 1.9,
+          "fp_rate": 28.8,
+          "fp_households_m": 1.11,
+          "behavioral_extra_cost": 376,
+          "behavioral_pct_of_income": 1.5,
+          "behavioral_fp_rate": 27.4,
+          "behavioral_fp_households_m": 1.06
+        },
+        {
+          "hh_type": "SINGLE_WORKING_AGE",
+          "extra_cost": 413,
+          "pct_of_income": 1.3,
+          "fp_rate": 21.5,
+          "fp_households_m": 1.22,
+          "behavioral_extra_cost": 332,
+          "behavioral_pct_of_income": 1.1,
+          "behavioral_fp_rate": 20.2,
+          "behavioral_fp_households_m": 1.15
+        }
+      ],
+      "by_region": [
+        {
+          "region": "EAST_MIDLANDS",
+          "extra_cost": 460,
+          "pct_of_income": 0.8,
+          "fp_rate": 9.1,
+          "fp_households_m": 0.21,
+          "behavioral_extra_cost": 370,
+          "behavioral_pct_of_income": 0.7,
+          "behavioral_fp_rate": 8.3,
+          "behavioral_fp_households_m": 0.19
+        },
+        {
+          "region": "EAST_OF_ENGLAND",
+          "extra_cost": 535,
+          "pct_of_income": 1.0,
+          "fp_rate": 13.2,
+          "fp_households_m": 0.39,
+          "behavioral_extra_cost": 431,
+          "behavioral_pct_of_income": 0.8,
+          "behavioral_fp_rate": 12.8,
+          "behavioral_fp_households_m": 0.38
+        },
+        {
+          "region": "LONDON",
+          "extra_cost": 454,
+          "pct_of_income": 0.6,
+          "fp_rate": 15.5,
+          "fp_households_m": 0.62,
+          "behavioral_extra_cost": 365,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 14.4,
+          "behavioral_fp_households_m": 0.58
+        },
+        {
+          "region": "NORTHERN_IRELAND",
+          "extra_cost": 574,
+          "pct_of_income": 1.0,
+          "fp_rate": 16.8,
+          "fp_households_m": 0.13,
+          "behavioral_extra_cost": 462,
+          "behavioral_pct_of_income": 0.8,
+          "behavioral_fp_rate": 13.9,
+          "behavioral_fp_households_m": 0.11
+        },
+        {
+          "region": "NORTH_EAST",
+          "extra_cost": 470,
+          "pct_of_income": 1.0,
+          "fp_rate": 12.3,
+          "fp_households_m": 0.17,
+          "behavioral_extra_cost": 379,
+          "behavioral_pct_of_income": 0.8,
+          "behavioral_fp_rate": 12.1,
+          "behavioral_fp_households_m": 0.16
+        },
+        {
+          "region": "NORTH_WEST",
+          "extra_cost": 484,
+          "pct_of_income": 1.1,
+          "fp_rate": 15.2,
+          "fp_households_m": 0.54,
+          "behavioral_extra_cost": 389,
+          "behavioral_pct_of_income": 0.9,
+          "behavioral_fp_rate": 14.7,
+          "behavioral_fp_households_m": 0.52
+        },
+        {
+          "region": "SCOTLAND",
+          "extra_cost": 470,
+          "pct_of_income": 0.9,
+          "fp_rate": 12.1,
+          "fp_households_m": 0.33,
+          "behavioral_extra_cost": 379,
+          "behavioral_pct_of_income": 0.7,
+          "behavioral_fp_rate": 11.4,
+          "behavioral_fp_households_m": 0.31
+        },
+        {
+          "region": "SOUTH_EAST",
+          "extra_cost": 426,
+          "pct_of_income": 0.8,
+          "fp_rate": 10.5,
+          "fp_households_m": 0.46,
+          "behavioral_extra_cost": 343,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 9.8,
+          "behavioral_fp_households_m": 0.43
+        },
+        {
+          "region": "SOUTH_WEST",
+          "extra_cost": 454,
+          "pct_of_income": 0.8,
+          "fp_rate": 11.9,
+          "fp_households_m": 0.33,
+          "behavioral_extra_cost": 366,
+          "behavioral_pct_of_income": 0.7,
+          "behavioral_fp_rate": 11.4,
+          "behavioral_fp_households_m": 0.32
+        },
+        {
+          "region": "WALES",
+          "extra_cost": 393,
+          "pct_of_income": 0.8,
+          "fp_rate": 9.9,
+          "fp_households_m": 0.15,
+          "behavioral_extra_cost": 316,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 9.6,
+          "behavioral_fp_households_m": 0.15
+        },
+        {
+          "region": "WEST_MIDLANDS",
+          "extra_cost": 468,
+          "pct_of_income": 0.9,
+          "fp_rate": 13.6,
+          "fp_households_m": 0.38,
+          "behavioral_extra_cost": 377,
+          "behavioral_pct_of_income": 0.8,
+          "behavioral_fp_rate": 11.8,
+          "behavioral_fp_households_m": 0.33
+        },
+        {
+          "region": "YORKSHIRE",
+          "extra_cost": 491,
+          "pct_of_income": 1.0,
+          "fp_rate": 13.0,
+          "fp_households_m": 0.34,
+          "behavioral_extra_cost": 395,
+          "behavioral_pct_of_income": 0.8,
+          "behavioral_fp_rate": 12.5,
+          "behavioral_fp_households_m": 0.33
         }
       ]
     },
@@ -736,104 +2636,414 @@
       "price_increase_pct": 60,
       "elasticity": -0.15,
       "consumption_change_pct": -9.0,
-      "static_avg_extra": 970,
-      "behavioral_avg_extra": 738,
-      "bill_saving_avg": 233,
-      "welfare_loss_comfort_avg": 44,
-      "static_fp_rate": 17.7,
-      "behavioral_fp_rate": 15.9,
-      "static_fp_households_m": 5.6,
-      "behavioral_fp_households_m": 5.1,
+      "static_avg_extra": 936,
+      "behavioral_avg_extra": 711,
+      "bill_saving_avg": 225,
+      "welfare_loss_comfort_avg": 42,
+      "static_fp_rate": 16.7,
+      "behavioral_fp_rate": 14.7,
+      "static_fp_households_m": 5.3,
+      "behavioral_fp_households_m": 4.7,
       "deciles": [
         {
           "decile": 1,
-          "static_extra_cost": 891,
-          "behavioral_extra_cost": 677,
-          "bill_saving": 214,
+          "static_extra_cost": 832,
+          "behavioral_extra_cost": 632,
+          "bill_saving": 200,
           "consumption_reduction_pct": -9.0,
-          "static_pct_of_income": 4.4,
-          "behavioral_pct_of_income": 3.4
+          "static_pct_of_income": 4.2,
+          "behavioral_pct_of_income": 3.2,
+          "static_fp_rate": 42.6,
+          "behavioral_fp_rate": 38.6,
+          "static_fp_households_m": 1.63,
+          "behavioral_fp_households_m": 1.47
         },
         {
           "decile": 2,
-          "static_extra_cost": 853,
-          "behavioral_extra_cost": 648,
-          "bill_saving": 205,
+          "static_extra_cost": 875,
+          "behavioral_extra_cost": 665,
+          "bill_saving": 210,
           "consumption_reduction_pct": -9.0,
           "static_pct_of_income": 2.8,
-          "behavioral_pct_of_income": 2.1
+          "behavioral_pct_of_income": 2.2,
+          "static_fp_rate": 25.2,
+          "behavioral_fp_rate": 23.8,
+          "static_fp_households_m": 0.85,
+          "behavioral_fp_households_m": 0.81
         },
         {
           "decile": 3,
-          "static_extra_cost": 801,
-          "behavioral_extra_cost": 608,
-          "bill_saving": 192,
+          "static_extra_cost": 821,
+          "behavioral_extra_cost": 624,
+          "bill_saving": 197,
           "consumption_reduction_pct": -9.0,
-          "static_pct_of_income": 2.1,
-          "behavioral_pct_of_income": 1.6
+          "static_pct_of_income": 2.2,
+          "behavioral_pct_of_income": 1.7,
+          "static_fp_rate": 15.9,
+          "behavioral_fp_rate": 12.1,
+          "static_fp_households_m": 0.49,
+          "behavioral_fp_households_m": 0.37
         },
         {
           "decile": 4,
-          "static_extra_cost": 855,
-          "behavioral_extra_cost": 650,
-          "bill_saving": 205,
+          "static_extra_cost": 907,
+          "behavioral_extra_cost": 690,
+          "bill_saving": 218,
           "consumption_reduction_pct": -9.0,
-          "static_pct_of_income": 2.0,
-          "behavioral_pct_of_income": 1.5
+          "static_pct_of_income": 2.2,
+          "behavioral_pct_of_income": 1.6,
+          "static_fp_rate": 16.6,
+          "behavioral_fp_rate": 13.7,
+          "static_fp_households_m": 0.49,
+          "behavioral_fp_households_m": 0.41
         },
         {
           "decile": 5,
-          "static_extra_cost": 923,
-          "behavioral_extra_cost": 702,
-          "bill_saving": 222,
+          "static_extra_cost": 909,
+          "behavioral_extra_cost": 691,
+          "bill_saving": 218,
           "consumption_reduction_pct": -9.0,
           "static_pct_of_income": 2.1,
-          "behavioral_pct_of_income": 1.6
+          "behavioral_pct_of_income": 1.6,
+          "static_fp_rate": 14.5,
+          "behavioral_fp_rate": 12.9,
+          "static_fp_households_m": 0.44,
+          "behavioral_fp_households_m": 0.4
         },
         {
           "decile": 6,
-          "static_extra_cost": 978,
-          "behavioral_extra_cost": 743,
-          "bill_saving": 235,
+          "static_extra_cost": 967,
+          "behavioral_extra_cost": 735,
+          "bill_saving": 232,
           "consumption_reduction_pct": -9.0,
           "static_pct_of_income": 1.9,
-          "behavioral_pct_of_income": 1.4
+          "behavioral_pct_of_income": 1.4,
+          "static_fp_rate": 14.3,
+          "behavioral_fp_rate": 11.7,
+          "static_fp_households_m": 0.44,
+          "behavioral_fp_households_m": 0.36
         },
         {
           "decile": 7,
-          "static_extra_cost": 974,
-          "behavioral_extra_cost": 741,
-          "bill_saving": 234,
+          "static_extra_cost": 910,
+          "behavioral_extra_cost": 692,
+          "bill_saving": 218,
           "consumption_reduction_pct": -9.0,
-          "static_pct_of_income": 1.7,
-          "behavioral_pct_of_income": 1.3
+          "static_pct_of_income": 1.6,
+          "behavioral_pct_of_income": 1.2,
+          "static_fp_rate": 8.1,
+          "behavioral_fp_rate": 7.1,
+          "static_fp_households_m": 0.25,
+          "behavioral_fp_households_m": 0.22
         },
         {
           "decile": 8,
-          "static_extra_cost": 1081,
-          "behavioral_extra_cost": 821,
-          "bill_saving": 259,
+          "static_extra_cost": 1001,
+          "behavioral_extra_cost": 761,
+          "bill_saving": 240,
           "consumption_reduction_pct": -9.0,
-          "static_pct_of_income": 1.6,
-          "behavioral_pct_of_income": 1.2
+          "static_pct_of_income": 1.5,
+          "behavioral_pct_of_income": 1.1,
+          "static_fp_rate": 7.9,
+          "behavioral_fp_rate": 7.2,
+          "static_fp_households_m": 0.23,
+          "behavioral_fp_households_m": 0.21
         },
         {
           "decile": 9,
-          "static_extra_cost": 1131,
-          "behavioral_extra_cost": 860,
-          "bill_saving": 271,
+          "static_extra_cost": 1046,
+          "behavioral_extra_cost": 795,
+          "bill_saving": 251,
           "consumption_reduction_pct": -9.0,
-          "static_pct_of_income": 1.5,
-          "behavioral_pct_of_income": 1.2
+          "static_pct_of_income": 1.4,
+          "behavioral_pct_of_income": 1.1,
+          "static_fp_rate": 10.4,
+          "behavioral_fp_rate": 9.8,
+          "static_fp_households_m": 0.32,
+          "behavioral_fp_households_m": 0.3
         },
         {
           "decile": 10,
-          "static_extra_cost": 1236,
-          "behavioral_extra_cost": 939,
-          "bill_saving": 296,
+          "static_extra_cost": 1021,
+          "behavioral_extra_cost": 776,
+          "bill_saving": 245,
           "consumption_reduction_pct": -9.0,
-          "static_pct_of_income": 1.0,
-          "behavioral_pct_of_income": 0.8
+          "static_pct_of_income": 0.8,
+          "behavioral_pct_of_income": 0.6,
+          "static_fp_rate": 2.2,
+          "behavioral_fp_rate": 1.8,
+          "static_fp_households_m": 0.07,
+          "behavioral_fp_households_m": 0.06
+        }
+      ],
+      "by_tenure": [
+        {
+          "tenure": "OWNED_OUTRIGHT",
+          "extra_cost": 1132,
+          "pct_of_income": 2.3,
+          "fp_rate": 26.2,
+          "fp_households_m": 2.83,
+          "behavioral_extra_cost": 861,
+          "behavioral_pct_of_income": 1.7,
+          "behavioral_fp_rate": 23.9,
+          "behavioral_fp_households_m": 2.58
+        },
+        {
+          "tenure": "OWNED_WITH_MORTGAGE",
+          "extra_cost": 939,
+          "pct_of_income": 1.3,
+          "fp_rate": 8.6,
+          "fp_households_m": 0.71,
+          "behavioral_extra_cost": 714,
+          "behavioral_pct_of_income": 1.0,
+          "behavioral_fp_rate": 7.5,
+          "behavioral_fp_households_m": 0.62
+        },
+        {
+          "tenure": "RENT_FROM_COUNCIL",
+          "extra_cost": 681,
+          "pct_of_income": 1.8,
+          "fp_rate": 17.9,
+          "fp_households_m": 0.43,
+          "behavioral_extra_cost": 517,
+          "behavioral_pct_of_income": 1.4,
+          "behavioral_fp_rate": 11.8,
+          "behavioral_fp_households_m": 0.28
+        },
+        {
+          "tenure": "RENT_FROM_HA",
+          "extra_cost": 709,
+          "pct_of_income": 1.9,
+          "fp_rate": 11.7,
+          "fp_households_m": 0.39,
+          "behavioral_extra_cost": 539,
+          "behavioral_pct_of_income": 1.5,
+          "behavioral_fp_rate": 10.6,
+          "behavioral_fp_households_m": 0.36
+        },
+        {
+          "tenure": "RENT_PRIVATELY",
+          "extra_cost": 823,
+          "pct_of_income": 1.5,
+          "fp_rate": 13.4,
+          "fp_households_m": 0.94,
+          "behavioral_extra_cost": 626,
+          "behavioral_pct_of_income": 1.2,
+          "behavioral_fp_rate": 11.9,
+          "behavioral_fp_households_m": 0.83
+        }
+      ],
+      "by_hh_type": [
+        {
+          "hh_type": "COUPLE_NO_CHILDREN",
+          "extra_cost": 1022,
+          "pct_of_income": 1.6,
+          "fp_rate": 10.6,
+          "fp_households_m": 0.83,
+          "behavioral_extra_cost": 777,
+          "behavioral_pct_of_income": 1.2,
+          "behavioral_fp_rate": 9.7,
+          "behavioral_fp_households_m": 0.76
+        },
+        {
+          "hh_type": "COUPLE_PENSIONER",
+          "extra_cost": 1058,
+          "pct_of_income": 2.0,
+          "fp_rate": 15.8,
+          "fp_households_m": 0.71,
+          "behavioral_extra_cost": 804,
+          "behavioral_pct_of_income": 1.5,
+          "behavioral_fp_rate": 13.9,
+          "behavioral_fp_households_m": 0.62
+        },
+        {
+          "hh_type": "COUPLE_WITH_CHILDREN",
+          "extra_cost": 879,
+          "pct_of_income": 1.2,
+          "fp_rate": 6.5,
+          "fp_households_m": 0.37,
+          "behavioral_extra_cost": 668,
+          "behavioral_pct_of_income": 0.9,
+          "behavioral_fp_rate": 5.3,
+          "behavioral_fp_households_m": 0.3
+        },
+        {
+          "hh_type": "LONE_PARENT",
+          "extra_cost": 809,
+          "pct_of_income": 2.0,
+          "fp_rate": 14.6,
+          "fp_households_m": 0.31,
+          "behavioral_extra_cost": 615,
+          "behavioral_pct_of_income": 1.6,
+          "behavioral_fp_rate": 12.8,
+          "behavioral_fp_households_m": 0.27
+        },
+        {
+          "hh_type": "OTHER",
+          "extra_cost": 932,
+          "pct_of_income": 1.0,
+          "fp_rate": 8.1,
+          "fp_households_m": 0.18,
+          "behavioral_extra_cost": 708,
+          "behavioral_pct_of_income": 0.7,
+          "behavioral_fp_rate": 7.1,
+          "behavioral_fp_households_m": 0.16
+        },
+        {
+          "hh_type": "SINGLE_PENSIONER",
+          "extra_cost": 934,
+          "pct_of_income": 3.8,
+          "fp_rate": 36.2,
+          "fp_households_m": 1.4,
+          "behavioral_extra_cost": 710,
+          "behavioral_pct_of_income": 2.9,
+          "behavioral_fp_rate": 31.5,
+          "behavioral_fp_households_m": 1.22
+        },
+        {
+          "hh_type": "SINGLE_WORKING_AGE",
+          "extra_cost": 825,
+          "pct_of_income": 2.7,
+          "fp_rate": 26.6,
+          "fp_households_m": 1.51,
+          "behavioral_extra_cost": 627,
+          "behavioral_pct_of_income": 2.0,
+          "behavioral_fp_rate": 23.9,
+          "behavioral_fp_households_m": 1.36
+        }
+      ],
+      "by_region": [
+        {
+          "region": "EAST_MIDLANDS",
+          "extra_cost": 920,
+          "pct_of_income": 1.7,
+          "fp_rate": 14.6,
+          "fp_households_m": 0.34,
+          "behavioral_extra_cost": 699,
+          "behavioral_pct_of_income": 1.3,
+          "behavioral_fp_rate": 11.5,
+          "behavioral_fp_households_m": 0.27
+        },
+        {
+          "region": "EAST_OF_ENGLAND",
+          "extra_cost": 1070,
+          "pct_of_income": 2.0,
+          "fp_rate": 19.2,
+          "fp_households_m": 0.57,
+          "behavioral_extra_cost": 813,
+          "behavioral_pct_of_income": 1.5,
+          "behavioral_fp_rate": 17.8,
+          "behavioral_fp_households_m": 0.53
+        },
+        {
+          "region": "LONDON",
+          "extra_cost": 907,
+          "pct_of_income": 1.2,
+          "fp_rate": 18.5,
+          "fp_households_m": 0.74,
+          "behavioral_extra_cost": 689,
+          "behavioral_pct_of_income": 0.9,
+          "behavioral_fp_rate": 16.0,
+          "behavioral_fp_households_m": 0.64
+        },
+        {
+          "region": "NORTHERN_IRELAND",
+          "extra_cost": 1148,
+          "pct_of_income": 2.1,
+          "fp_rate": 25.2,
+          "fp_households_m": 0.19,
+          "behavioral_extra_cost": 873,
+          "behavioral_pct_of_income": 1.6,
+          "behavioral_fp_rate": 20.7,
+          "behavioral_fp_households_m": 0.16
+        },
+        {
+          "region": "NORTH_EAST",
+          "extra_cost": 941,
+          "pct_of_income": 1.9,
+          "fp_rate": 16.4,
+          "fp_households_m": 0.22,
+          "behavioral_extra_cost": 715,
+          "behavioral_pct_of_income": 1.5,
+          "behavioral_fp_rate": 14.1,
+          "behavioral_fp_households_m": 0.19
+        },
+        {
+          "region": "NORTH_WEST",
+          "extra_cost": 968,
+          "pct_of_income": 2.1,
+          "fp_rate": 18.9,
+          "fp_households_m": 0.68,
+          "behavioral_extra_cost": 735,
+          "behavioral_pct_of_income": 1.6,
+          "behavioral_fp_rate": 17.3,
+          "behavioral_fp_households_m": 0.62
+        },
+        {
+          "region": "SCOTLAND",
+          "extra_cost": 941,
+          "pct_of_income": 1.9,
+          "fp_rate": 17.5,
+          "fp_households_m": 0.48,
+          "behavioral_extra_cost": 715,
+          "behavioral_pct_of_income": 1.4,
+          "behavioral_fp_rate": 16.3,
+          "behavioral_fp_households_m": 0.44
+        },
+        {
+          "region": "SOUTH_EAST",
+          "extra_cost": 852,
+          "pct_of_income": 1.5,
+          "fp_rate": 12.8,
+          "fp_households_m": 0.56,
+          "behavioral_extra_cost": 647,
+          "behavioral_pct_of_income": 1.2,
+          "behavioral_fp_rate": 11.8,
+          "behavioral_fp_households_m": 0.51
+        },
+        {
+          "region": "SOUTH_WEST",
+          "extra_cost": 909,
+          "pct_of_income": 1.7,
+          "fp_rate": 15.4,
+          "fp_households_m": 0.43,
+          "behavioral_extra_cost": 691,
+          "behavioral_pct_of_income": 1.3,
+          "behavioral_fp_rate": 14.0,
+          "behavioral_fp_households_m": 0.39
+        },
+        {
+          "region": "WALES",
+          "extra_cost": 786,
+          "pct_of_income": 1.6,
+          "fp_rate": 13.1,
+          "fp_households_m": 0.2,
+          "behavioral_extra_cost": 597,
+          "behavioral_pct_of_income": 1.2,
+          "behavioral_fp_rate": 10.6,
+          "behavioral_fp_households_m": 0.16
+        },
+        {
+          "region": "WEST_MIDLANDS",
+          "extra_cost": 937,
+          "pct_of_income": 1.9,
+          "fp_rate": 17.7,
+          "fp_households_m": 0.49,
+          "behavioral_extra_cost": 712,
+          "behavioral_pct_of_income": 1.4,
+          "behavioral_fp_rate": 14.4,
+          "behavioral_fp_households_m": 0.4
+        },
+        {
+          "region": "YORKSHIRE",
+          "extra_cost": 982,
+          "pct_of_income": 2.0,
+          "fp_rate": 15.1,
+          "fp_households_m": 0.4,
+          "behavioral_extra_cost": 746,
+          "behavioral_pct_of_income": 1.6,
+          "behavioral_fp_rate": 13.7,
+          "behavioral_fp_households_m": 0.36
         }
       ]
     },
@@ -843,104 +3053,414 @@
       "price_increase_pct": 129,
       "elasticity": -0.15,
       "consumption_change_pct": -19.4,
-      "static_avg_extra": 2094,
-      "behavioral_avg_extra": 1373,
-      "bill_saving_avg": 720,
-      "welfare_loss_comfort_avg": 203,
-      "static_fp_rate": 31.2,
-      "behavioral_fp_rate": 22.1,
-      "static_fp_households_m": 9.9,
-      "behavioral_fp_households_m": 7.0,
+      "static_avg_extra": 2019,
+      "behavioral_avg_extra": 1324,
+      "bill_saving_avg": 695,
+      "welfare_loss_comfort_avg": 196,
+      "static_fp_rate": 27.6,
+      "behavioral_fp_rate": 20.9,
+      "static_fp_households_m": 8.8,
+      "behavioral_fp_households_m": 6.7,
       "deciles": [
         {
           "decile": 1,
-          "static_extra_cost": 1922,
-          "behavioral_extra_cost": 1260,
-          "bill_saving": 661,
+          "static_extra_cost": 1795,
+          "behavioral_extra_cost": 1178,
+          "bill_saving": 618,
           "consumption_reduction_pct": -19.4,
-          "static_pct_of_income": 9.6,
-          "behavioral_pct_of_income": 6.3
+          "static_pct_of_income": 9.0,
+          "behavioral_pct_of_income": 5.9,
+          "static_fp_rate": 57.6,
+          "behavioral_fp_rate": 48.8,
+          "static_fp_households_m": 2.2,
+          "behavioral_fp_households_m": 1.87
         },
         {
           "decile": 2,
-          "static_extra_cost": 1840,
-          "behavioral_extra_cost": 1207,
-          "bill_saving": 633,
+          "static_extra_cost": 1888,
+          "behavioral_extra_cost": 1239,
+          "bill_saving": 650,
           "consumption_reduction_pct": -19.4,
-          "static_pct_of_income": 5.9,
-          "behavioral_pct_of_income": 3.9
+          "static_pct_of_income": 6.1,
+          "behavioral_pct_of_income": 4.0,
+          "static_fp_rate": 42.6,
+          "behavioral_fp_rate": 36.0,
+          "static_fp_households_m": 1.44,
+          "behavioral_fp_households_m": 1.22
         },
         {
           "decile": 3,
-          "static_extra_cost": 1727,
-          "behavioral_extra_cost": 1133,
-          "bill_saving": 594,
+          "static_extra_cost": 1772,
+          "behavioral_extra_cost": 1162,
+          "bill_saving": 610,
           "consumption_reduction_pct": -19.4,
-          "static_pct_of_income": 4.6,
-          "behavioral_pct_of_income": 3.0
+          "static_pct_of_income": 4.7,
+          "behavioral_pct_of_income": 3.1,
+          "static_fp_rate": 36.3,
+          "behavioral_fp_rate": 22.5,
+          "static_fp_households_m": 1.12,
+          "behavioral_fp_households_m": 0.69
         },
         {
           "decile": 4,
-          "static_extra_cost": 1845,
-          "behavioral_extra_cost": 1210,
-          "bill_saving": 635,
+          "static_extra_cost": 1958,
+          "behavioral_extra_cost": 1284,
+          "bill_saving": 674,
           "consumption_reduction_pct": -19.4,
-          "static_pct_of_income": 4.4,
-          "behavioral_pct_of_income": 2.9
+          "static_pct_of_income": 4.6,
+          "behavioral_pct_of_income": 3.0,
+          "static_fp_rate": 27.8,
+          "behavioral_fp_rate": 23.0,
+          "static_fp_households_m": 0.83,
+          "behavioral_fp_households_m": 0.69
         },
         {
           "decile": 5,
-          "static_extra_cost": 1992,
-          "behavioral_extra_cost": 1307,
-          "bill_saving": 685,
+          "static_extra_cost": 1960,
+          "behavioral_extra_cost": 1286,
+          "bill_saving": 674,
           "consumption_reduction_pct": -19.4,
-          "static_pct_of_income": 4.5,
-          "behavioral_pct_of_income": 3.0
+          "static_pct_of_income": 4.4,
+          "behavioral_pct_of_income": 2.9,
+          "static_fp_rate": 22.0,
+          "behavioral_fp_rate": 16.9,
+          "static_fp_households_m": 0.68,
+          "behavioral_fp_households_m": 0.52
         },
         {
           "decile": 6,
-          "static_extra_cost": 2109,
-          "behavioral_extra_cost": 1384,
-          "bill_saving": 726,
+          "static_extra_cost": 2086,
+          "behavioral_extra_cost": 1369,
+          "bill_saving": 718,
           "consumption_reduction_pct": -19.4,
-          "static_pct_of_income": 4.1,
-          "behavioral_pct_of_income": 2.7
+          "static_pct_of_income": 4.0,
+          "behavioral_pct_of_income": 2.7,
+          "static_fp_rate": 29.3,
+          "behavioral_fp_rate": 16.5,
+          "static_fp_households_m": 0.9,
+          "behavioral_fp_households_m": 0.51
         },
         {
           "decile": 7,
-          "static_extra_cost": 2102,
-          "behavioral_extra_cost": 1379,
-          "bill_saving": 723,
+          "static_extra_cost": 1964,
+          "behavioral_extra_cost": 1288,
+          "bill_saving": 676,
           "consumption_reduction_pct": -19.4,
-          "static_pct_of_income": 3.8,
-          "behavioral_pct_of_income": 2.5
+          "static_pct_of_income": 3.5,
+          "behavioral_pct_of_income": 2.3,
+          "static_fp_rate": 17.0,
+          "behavioral_fp_rate": 10.5,
+          "static_fp_households_m": 0.53,
+          "behavioral_fp_households_m": 0.33
         },
         {
           "decile": 8,
-          "static_extra_cost": 2332,
-          "behavioral_extra_cost": 1530,
-          "bill_saving": 802,
+          "static_extra_cost": 2160,
+          "behavioral_extra_cost": 1417,
+          "bill_saving": 743,
           "consumption_reduction_pct": -19.4,
-          "static_pct_of_income": 3.5,
-          "behavioral_pct_of_income": 2.3
+          "static_pct_of_income": 3.2,
+          "behavioral_pct_of_income": 2.1,
+          "static_fp_rate": 13.8,
+          "behavioral_fp_rate": 10.7,
+          "static_fp_households_m": 0.41,
+          "behavioral_fp_households_m": 0.31
         },
         {
           "decile": 9,
-          "static_extra_cost": 2440,
-          "behavioral_extra_cost": 1601,
-          "bill_saving": 840,
+          "static_extra_cost": 2257,
+          "behavioral_extra_cost": 1480,
+          "bill_saving": 776,
           "consumption_reduction_pct": -19.4,
-          "static_pct_of_income": 3.3,
-          "behavioral_pct_of_income": 2.2
+          "static_pct_of_income": 3.1,
+          "behavioral_pct_of_income": 2.0,
+          "static_fp_rate": 14.7,
+          "behavioral_fp_rate": 12.3,
+          "static_fp_households_m": 0.45,
+          "behavioral_fp_households_m": 0.38
         },
         {
           "decile": 10,
-          "static_extra_cost": 2666,
-          "behavioral_extra_cost": 1749,
-          "bill_saving": 917,
+          "static_extra_cost": 2202,
+          "behavioral_extra_cost": 1444,
+          "bill_saving": 758,
           "consumption_reduction_pct": -19.4,
-          "static_pct_of_income": 2.1,
-          "behavioral_pct_of_income": 1.4
+          "static_pct_of_income": 1.8,
+          "behavioral_pct_of_income": 1.2,
+          "static_fp_rate": 4.6,
+          "behavioral_fp_rate": 2.7,
+          "static_fp_households_m": 0.15,
+          "behavioral_fp_households_m": 0.09
+        }
+      ],
+      "by_tenure": [
+        {
+          "tenure": "OWNED_OUTRIGHT",
+          "extra_cost": 2443,
+          "pct_of_income": 4.9,
+          "fp_rate": 37.4,
+          "fp_households_m": 4.04,
+          "behavioral_extra_cost": 1603,
+          "behavioral_pct_of_income": 3.2,
+          "behavioral_fp_rate": 30.1,
+          "behavioral_fp_households_m": 3.26
+        },
+        {
+          "tenure": "OWNED_WITH_MORTGAGE",
+          "extra_cost": 2027,
+          "pct_of_income": 2.8,
+          "fp_rate": 17.4,
+          "fp_households_m": 1.44,
+          "behavioral_extra_cost": 1329,
+          "behavioral_pct_of_income": 1.9,
+          "behavioral_fp_rate": 10.9,
+          "behavioral_fp_households_m": 0.9
+        },
+        {
+          "tenure": "RENT_FROM_COUNCIL",
+          "extra_cost": 1469,
+          "pct_of_income": 4.0,
+          "fp_rate": 28.0,
+          "fp_households_m": 0.67,
+          "behavioral_extra_cost": 964,
+          "behavioral_pct_of_income": 2.6,
+          "behavioral_fp_rate": 20.7,
+          "behavioral_fp_households_m": 0.5
+        },
+        {
+          "tenure": "RENT_FROM_HA",
+          "extra_cost": 1529,
+          "pct_of_income": 4.1,
+          "fp_rate": 28.7,
+          "fp_households_m": 0.96,
+          "behavioral_extra_cost": 1003,
+          "behavioral_pct_of_income": 2.7,
+          "behavioral_fp_rate": 21.0,
+          "behavioral_fp_households_m": 0.7
+        },
+        {
+          "tenure": "RENT_PRIVATELY",
+          "extra_cost": 1777,
+          "pct_of_income": 3.3,
+          "fp_rate": 23.7,
+          "fp_households_m": 1.66,
+          "behavioral_extra_cost": 1165,
+          "behavioral_pct_of_income": 2.2,
+          "behavioral_fp_rate": 18.8,
+          "behavioral_fp_households_m": 1.31
+        }
+      ],
+      "by_hh_type": [
+        {
+          "hh_type": "COUPLE_NO_CHILDREN",
+          "extra_cost": 2206,
+          "pct_of_income": 3.4,
+          "fp_rate": 18.4,
+          "fp_households_m": 1.44,
+          "behavioral_extra_cost": 1447,
+          "behavioral_pct_of_income": 2.2,
+          "behavioral_fp_rate": 13.3,
+          "behavioral_fp_households_m": 1.04
+        },
+        {
+          "hh_type": "COUPLE_PENSIONER",
+          "extra_cost": 2282,
+          "pct_of_income": 4.4,
+          "fp_rate": 27.6,
+          "fp_households_m": 1.24,
+          "behavioral_extra_cost": 1497,
+          "behavioral_pct_of_income": 2.9,
+          "behavioral_fp_rate": 19.1,
+          "behavioral_fp_households_m": 0.86
+        },
+        {
+          "hh_type": "COUPLE_WITH_CHILDREN",
+          "extra_cost": 1897,
+          "pct_of_income": 2.6,
+          "fp_rate": 12.7,
+          "fp_households_m": 0.72,
+          "behavioral_extra_cost": 1244,
+          "behavioral_pct_of_income": 1.7,
+          "behavioral_fp_rate": 7.8,
+          "behavioral_fp_households_m": 0.44
+        },
+        {
+          "hh_type": "LONE_PARENT",
+          "extra_cost": 1746,
+          "pct_of_income": 4.4,
+          "fp_rate": 24.5,
+          "fp_households_m": 0.52,
+          "behavioral_extra_cost": 1145,
+          "behavioral_pct_of_income": 2.9,
+          "behavioral_fp_rate": 18.8,
+          "behavioral_fp_households_m": 0.4
+        },
+        {
+          "hh_type": "OTHER",
+          "extra_cost": 2010,
+          "pct_of_income": 2.1,
+          "fp_rate": 12.0,
+          "fp_households_m": 0.27,
+          "behavioral_extra_cost": 1319,
+          "behavioral_pct_of_income": 1.4,
+          "behavioral_fp_rate": 9.4,
+          "behavioral_fp_households_m": 0.21
+        },
+        {
+          "hh_type": "SINGLE_PENSIONER",
+          "extra_cost": 2015,
+          "pct_of_income": 8.3,
+          "fp_rate": 56.2,
+          "fp_households_m": 2.17,
+          "behavioral_extra_cost": 1321,
+          "behavioral_pct_of_income": 5.4,
+          "behavioral_fp_rate": 45.5,
+          "behavioral_fp_households_m": 1.76
+        },
+        {
+          "hh_type": "SINGLE_WORKING_AGE",
+          "extra_cost": 1781,
+          "pct_of_income": 5.7,
+          "fp_rate": 42.7,
+          "fp_households_m": 2.42,
+          "behavioral_extra_cost": 1168,
+          "behavioral_pct_of_income": 3.8,
+          "behavioral_fp_rate": 34.8,
+          "behavioral_fp_households_m": 1.97
+        }
+      ],
+      "by_region": [
+        {
+          "region": "EAST_MIDLANDS",
+          "extra_cost": 1985,
+          "pct_of_income": 3.7,
+          "fp_rate": 28.1,
+          "fp_households_m": 0.65,
+          "behavioral_extra_cost": 1302,
+          "behavioral_pct_of_income": 2.4,
+          "behavioral_fp_rate": 18.4,
+          "behavioral_fp_households_m": 0.43
+        },
+        {
+          "region": "EAST_OF_ENGLAND",
+          "extra_cost": 2309,
+          "pct_of_income": 4.3,
+          "fp_rate": 32.5,
+          "fp_households_m": 0.97,
+          "behavioral_extra_cost": 1514,
+          "behavioral_pct_of_income": 2.8,
+          "behavioral_fp_rate": 24.7,
+          "behavioral_fp_households_m": 0.74
+        },
+        {
+          "region": "LONDON",
+          "extra_cost": 1957,
+          "pct_of_income": 2.7,
+          "fp_rate": 27.9,
+          "fp_households_m": 1.12,
+          "behavioral_extra_cost": 1284,
+          "behavioral_pct_of_income": 1.7,
+          "behavioral_fp_rate": 23.6,
+          "behavioral_fp_households_m": 0.95
+        },
+        {
+          "region": "NORTHERN_IRELAND",
+          "extra_cost": 2477,
+          "pct_of_income": 4.5,
+          "fp_rate": 35.8,
+          "fp_households_m": 0.27,
+          "behavioral_extra_cost": 1625,
+          "behavioral_pct_of_income": 3.0,
+          "behavioral_fp_rate": 28.6,
+          "behavioral_fp_households_m": 0.22
+        },
+        {
+          "region": "NORTH_EAST",
+          "extra_cost": 2030,
+          "pct_of_income": 4.2,
+          "fp_rate": 31.2,
+          "fp_households_m": 0.42,
+          "behavioral_extra_cost": 1331,
+          "behavioral_pct_of_income": 2.7,
+          "behavioral_fp_rate": 21.5,
+          "behavioral_fp_households_m": 0.29
+        },
+        {
+          "region": "NORTH_WEST",
+          "extra_cost": 2088,
+          "pct_of_income": 4.6,
+          "fp_rate": 34.9,
+          "fp_households_m": 1.25,
+          "behavioral_extra_cost": 1369,
+          "behavioral_pct_of_income": 3.0,
+          "behavioral_fp_rate": 27.9,
+          "behavioral_fp_households_m": 1.0
+        },
+        {
+          "region": "SCOTLAND",
+          "extra_cost": 2030,
+          "pct_of_income": 4.0,
+          "fp_rate": 28.1,
+          "fp_households_m": 0.76,
+          "behavioral_extra_cost": 1331,
+          "behavioral_pct_of_income": 2.6,
+          "behavioral_fp_rate": 20.3,
+          "behavioral_fp_households_m": 0.55
+        },
+        {
+          "region": "SOUTH_EAST",
+          "extra_cost": 1838,
+          "pct_of_income": 3.3,
+          "fp_rate": 20.6,
+          "fp_households_m": 0.9,
+          "behavioral_extra_cost": 1205,
+          "behavioral_pct_of_income": 2.2,
+          "behavioral_fp_rate": 15.0,
+          "behavioral_fp_households_m": 0.65
+        },
+        {
+          "region": "SOUTH_WEST",
+          "extra_cost": 1960,
+          "pct_of_income": 3.7,
+          "fp_rate": 21.9,
+          "fp_households_m": 0.62,
+          "behavioral_extra_cost": 1286,
+          "behavioral_pct_of_income": 2.4,
+          "behavioral_fp_rate": 17.0,
+          "behavioral_fp_households_m": 0.48
+        },
+        {
+          "region": "WALES",
+          "extra_cost": 1696,
+          "pct_of_income": 3.4,
+          "fp_rate": 21.8,
+          "fp_households_m": 0.34,
+          "behavioral_extra_cost": 1112,
+          "behavioral_pct_of_income": 2.3,
+          "behavioral_fp_rate": 17.6,
+          "behavioral_fp_households_m": 0.27
+        },
+        {
+          "region": "WEST_MIDLANDS",
+          "extra_cost": 2021,
+          "pct_of_income": 4.1,
+          "fp_rate": 28.0,
+          "fp_households_m": 0.77,
+          "behavioral_extra_cost": 1326,
+          "behavioral_pct_of_income": 2.7,
+          "behavioral_fp_rate": 22.5,
+          "behavioral_fp_households_m": 0.62
+        },
+        {
+          "region": "YORKSHIRE",
+          "extra_cost": 2119,
+          "pct_of_income": 4.4,
+          "fp_rate": 26.6,
+          "fp_households_m": 0.7,
+          "behavioral_extra_cost": 1390,
+          "behavioral_pct_of_income": 2.9,
+          "behavioral_fp_rate": 17.9,
+          "behavioral_fp_households_m": 0.47
         }
       ]
     }
@@ -1013,27 +3533,27 @@
         {
           "decile": 1,
           "payment": 400,
-          "shock_offset_pct": 45
+          "shock_offset_pct": 48
         },
         {
           "decile": 2,
           "payment": 400,
-          "shock_offset_pct": 47
+          "shock_offset_pct": 46
         },
         {
           "decile": 3,
           "payment": 400,
-          "shock_offset_pct": 50
+          "shock_offset_pct": 49
         },
         {
           "decile": 4,
           "payment": 400,
-          "shock_offset_pct": 47
+          "shock_offset_pct": 44
         },
         {
           "decile": 5,
           "payment": 400,
-          "shock_offset_pct": 43
+          "shock_offset_pct": 44
         },
         {
           "decile": 6,
@@ -1043,22 +3563,22 @@
         {
           "decile": 7,
           "payment": 400,
-          "shock_offset_pct": 41
+          "shock_offset_pct": 44
         },
         {
           "decile": 8,
           "payment": 400,
-          "shock_offset_pct": 37
+          "shock_offset_pct": 40
         },
         {
           "decile": 9,
           "payment": 400,
-          "shock_offset_pct": 35
+          "shock_offset_pct": 38
         },
         {
           "decile": 10,
           "payment": 400,
-          "shock_offset_pct": 32
+          "shock_offset_pct": 39
         }
       ]
     },
@@ -1071,22 +3591,22 @@
         {
           "decile": 1,
           "payment": 248,
-          "shock_offset_pct": 28
+          "shock_offset_pct": 30
         },
         {
           "decile": 2,
           "payment": 262,
-          "shock_offset_pct": 31
+          "shock_offset_pct": 30
         },
         {
           "decile": 3,
           "payment": 275,
-          "shock_offset_pct": 34
+          "shock_offset_pct": 33
         },
         {
           "decile": 4,
           "payment": 245,
-          "shock_offset_pct": 29
+          "shock_offset_pct": 27
         },
         {
           "decile": 5,
@@ -1096,27 +3616,27 @@
         {
           "decile": 6,
           "payment": 249,
-          "shock_offset_pct": 25
+          "shock_offset_pct": 26
         },
         {
           "decile": 7,
           "payment": 240,
-          "shock_offset_pct": 25
+          "shock_offset_pct": 26
         },
         {
           "decile": 8,
           "payment": 222,
-          "shock_offset_pct": 21
+          "shock_offset_pct": 22
         },
         {
           "decile": 9,
           "payment": 225,
-          "shock_offset_pct": 20
+          "shock_offset_pct": 22
         },
         {
           "decile": 10,
           "payment": 185,
-          "shock_offset_pct": 15
+          "shock_offset_pct": 18
         }
       ]
     },
@@ -1249,118 +3769,118 @@
       "name": "EPG subsidy",
       "exchequer_cost_bn": 0.3,
       "avg_benefit": 9,
-      "avg_shock_static": 970,
-      "avg_shock_behavioral": 738,
-      "avg_net_cost_static": 962,
-      "avg_net_cost_behavioral": 729,
+      "avg_shock_static": 936,
+      "avg_shock_behavioral": 711,
+      "avg_net_cost_static": 927,
+      "avg_net_cost_behavioral": 702,
       "deciles": [
         {
           "decile": 1,
-          "baseline_energy": 1485,
-          "shock_extra_static": 891,
-          "shock_extra_behavioral": 677,
+          "baseline_energy": 1388,
+          "shock_extra_static": 832,
+          "shock_extra_behavioral": 632,
           "policy_benefit": 8,
-          "net_cost_static": 882,
-          "net_cost_behavioral": 669,
+          "net_cost_static": 824,
+          "net_cost_behavioral": 624,
           "offset_pct_static": 1,
           "offset_pct_behavioral": 1
         },
         {
           "decile": 2,
-          "baseline_energy": 1422,
-          "shock_extra_static": 853,
-          "shock_extra_behavioral": 648,
+          "baseline_energy": 1460,
+          "shock_extra_static": 875,
+          "shock_extra_behavioral": 665,
           "policy_benefit": 8,
-          "net_cost_static": 845,
-          "net_cost_behavioral": 640,
+          "net_cost_static": 867,
+          "net_cost_behavioral": 657,
           "offset_pct_static": 1,
           "offset_pct_behavioral": 1
         },
         {
           "decile": 3,
-          "baseline_energy": 1335,
-          "shock_extra_static": 801,
-          "shock_extra_behavioral": 608,
+          "baseline_energy": 1370,
+          "shock_extra_static": 821,
+          "shock_extra_behavioral": 624,
           "policy_benefit": 7,
-          "net_cost_static": 793,
-          "net_cost_behavioral": 601,
+          "net_cost_static": 814,
+          "net_cost_behavioral": 617,
           "offset_pct_static": 1,
           "offset_pct_behavioral": 1
         },
         {
           "decile": 4,
-          "baseline_energy": 1426,
-          "shock_extra_static": 855,
-          "shock_extra_behavioral": 650,
+          "baseline_energy": 1513,
+          "shock_extra_static": 907,
+          "shock_extra_behavioral": 690,
           "policy_benefit": 8,
-          "net_cost_static": 847,
-          "net_cost_behavioral": 642,
+          "net_cost_static": 900,
+          "net_cost_behavioral": 682,
           "offset_pct_static": 1,
           "offset_pct_behavioral": 1
         },
         {
           "decile": 5,
-          "baseline_energy": 1540,
-          "shock_extra_static": 923,
-          "shock_extra_behavioral": 702,
+          "baseline_energy": 1515,
+          "shock_extra_static": 909,
+          "shock_extra_behavioral": 691,
           "policy_benefit": 8,
-          "net_cost_static": 915,
-          "net_cost_behavioral": 693,
+          "net_cost_static": 900,
+          "net_cost_behavioral": 682,
           "offset_pct_static": 1,
           "offset_pct_behavioral": 1
         },
         {
           "decile": 6,
-          "baseline_energy": 1631,
-          "shock_extra_static": 978,
-          "shock_extra_behavioral": 743,
+          "baseline_energy": 1613,
+          "shock_extra_static": 967,
+          "shock_extra_behavioral": 735,
           "policy_benefit": 9,
-          "net_cost_static": 969,
-          "net_cost_behavioral": 734,
+          "net_cost_static": 958,
+          "net_cost_behavioral": 726,
           "offset_pct_static": 1,
           "offset_pct_behavioral": 1
         },
         {
           "decile": 7,
-          "baseline_energy": 1625,
-          "shock_extra_static": 974,
-          "shock_extra_behavioral": 741,
+          "baseline_energy": 1518,
+          "shock_extra_static": 910,
+          "shock_extra_behavioral": 692,
           "policy_benefit": 9,
-          "net_cost_static": 965,
-          "net_cost_behavioral": 732,
+          "net_cost_static": 901,
+          "net_cost_behavioral": 683,
           "offset_pct_static": 1,
           "offset_pct_behavioral": 1
         },
         {
           "decile": 8,
-          "baseline_energy": 1802,
-          "shock_extra_static": 1081,
-          "shock_extra_behavioral": 821,
+          "baseline_energy": 1670,
+          "shock_extra_static": 1001,
+          "shock_extra_behavioral": 761,
           "policy_benefit": 10,
-          "net_cost_static": 1071,
-          "net_cost_behavioral": 812,
+          "net_cost_static": 991,
+          "net_cost_behavioral": 751,
           "offset_pct_static": 1,
           "offset_pct_behavioral": 1
         },
         {
           "decile": 9,
-          "baseline_energy": 1886,
-          "shock_extra_static": 1131,
-          "shock_extra_behavioral": 860,
+          "baseline_energy": 1744,
+          "shock_extra_static": 1046,
+          "shock_extra_behavioral": 795,
           "policy_benefit": 10,
-          "net_cost_static": 1121,
-          "net_cost_behavioral": 849,
+          "net_cost_static": 1036,
+          "net_cost_behavioral": 785,
           "offset_pct_static": 1,
           "offset_pct_behavioral": 1
         },
         {
           "decile": 10,
-          "baseline_energy": 2061,
-          "shock_extra_static": 1236,
-          "shock_extra_behavioral": 939,
+          "baseline_energy": 1702,
+          "shock_extra_static": 1021,
+          "shock_extra_behavioral": 776,
           "policy_benefit": 11,
-          "net_cost_static": 1224,
-          "net_cost_behavioral": 928,
+          "net_cost_static": 1009,
+          "net_cost_behavioral": 764,
           "offset_pct_static": 1,
           "offset_pct_behavioral": 1
         }
@@ -1370,120 +3890,120 @@
       "name": "Flat transfer",
       "exchequer_cost_bn": 12.7,
       "avg_benefit": 400,
-      "avg_shock_static": 970,
-      "avg_shock_behavioral": 738,
-      "avg_net_cost_static": 570,
-      "avg_net_cost_behavioral": 338,
+      "avg_shock_static": 936,
+      "avg_shock_behavioral": 711,
+      "avg_net_cost_static": 536,
+      "avg_net_cost_behavioral": 311,
       "deciles": [
         {
           "decile": 1,
-          "baseline_energy": 1485,
-          "shock_extra_static": 891,
-          "shock_extra_behavioral": 677,
+          "baseline_energy": 1388,
+          "shock_extra_static": 832,
+          "shock_extra_behavioral": 632,
           "policy_benefit": 400,
-          "net_cost_static": 491,
-          "net_cost_behavioral": 277,
-          "offset_pct_static": 45,
-          "offset_pct_behavioral": 59
+          "net_cost_static": 432,
+          "net_cost_behavioral": 232,
+          "offset_pct_static": 48,
+          "offset_pct_behavioral": 63
         },
         {
           "decile": 2,
-          "baseline_energy": 1422,
-          "shock_extra_static": 853,
-          "shock_extra_behavioral": 648,
+          "baseline_energy": 1460,
+          "shock_extra_static": 875,
+          "shock_extra_behavioral": 665,
           "policy_benefit": 400,
-          "net_cost_static": 453,
-          "net_cost_behavioral": 248,
-          "offset_pct_static": 47,
-          "offset_pct_behavioral": 62
+          "net_cost_static": 475,
+          "net_cost_behavioral": 265,
+          "offset_pct_static": 46,
+          "offset_pct_behavioral": 60
         },
         {
           "decile": 3,
-          "baseline_energy": 1335,
-          "shock_extra_static": 801,
-          "shock_extra_behavioral": 608,
+          "baseline_energy": 1370,
+          "shock_extra_static": 821,
+          "shock_extra_behavioral": 624,
           "policy_benefit": 400,
-          "net_cost_static": 401,
-          "net_cost_behavioral": 208,
-          "offset_pct_static": 50,
-          "offset_pct_behavioral": 66
+          "net_cost_static": 421,
+          "net_cost_behavioral": 224,
+          "offset_pct_static": 49,
+          "offset_pct_behavioral": 64
         },
         {
           "decile": 4,
-          "baseline_energy": 1426,
-          "shock_extra_static": 855,
-          "shock_extra_behavioral": 650,
+          "baseline_energy": 1513,
+          "shock_extra_static": 907,
+          "shock_extra_behavioral": 690,
           "policy_benefit": 400,
-          "net_cost_static": 455,
-          "net_cost_behavioral": 250,
-          "offset_pct_static": 47,
-          "offset_pct_behavioral": 62
+          "net_cost_static": 507,
+          "net_cost_behavioral": 290,
+          "offset_pct_static": 44,
+          "offset_pct_behavioral": 58
         },
         {
           "decile": 5,
-          "baseline_energy": 1540,
-          "shock_extra_static": 923,
-          "shock_extra_behavioral": 702,
+          "baseline_energy": 1515,
+          "shock_extra_static": 909,
+          "shock_extra_behavioral": 691,
           "policy_benefit": 400,
-          "net_cost_static": 523,
-          "net_cost_behavioral": 302,
-          "offset_pct_static": 43,
-          "offset_pct_behavioral": 57
+          "net_cost_static": 509,
+          "net_cost_behavioral": 291,
+          "offset_pct_static": 44,
+          "offset_pct_behavioral": 58
         },
         {
           "decile": 6,
-          "baseline_energy": 1631,
-          "shock_extra_static": 978,
-          "shock_extra_behavioral": 743,
+          "baseline_energy": 1613,
+          "shock_extra_static": 967,
+          "shock_extra_behavioral": 735,
           "policy_benefit": 400,
-          "net_cost_static": 578,
-          "net_cost_behavioral": 343,
+          "net_cost_static": 567,
+          "net_cost_behavioral": 335,
           "offset_pct_static": 41,
           "offset_pct_behavioral": 54
         },
         {
           "decile": 7,
-          "baseline_energy": 1625,
-          "shock_extra_static": 974,
-          "shock_extra_behavioral": 741,
+          "baseline_energy": 1518,
+          "shock_extra_static": 910,
+          "shock_extra_behavioral": 692,
           "policy_benefit": 400,
-          "net_cost_static": 574,
-          "net_cost_behavioral": 341,
-          "offset_pct_static": 41,
-          "offset_pct_behavioral": 54
+          "net_cost_static": 510,
+          "net_cost_behavioral": 292,
+          "offset_pct_static": 44,
+          "offset_pct_behavioral": 58
         },
         {
           "decile": 8,
-          "baseline_energy": 1802,
-          "shock_extra_static": 1081,
-          "shock_extra_behavioral": 821,
+          "baseline_energy": 1670,
+          "shock_extra_static": 1001,
+          "shock_extra_behavioral": 761,
           "policy_benefit": 400,
-          "net_cost_static": 681,
-          "net_cost_behavioral": 421,
-          "offset_pct_static": 37,
-          "offset_pct_behavioral": 49
+          "net_cost_static": 601,
+          "net_cost_behavioral": 361,
+          "offset_pct_static": 40,
+          "offset_pct_behavioral": 53
         },
         {
           "decile": 9,
-          "baseline_energy": 1886,
-          "shock_extra_static": 1131,
-          "shock_extra_behavioral": 860,
+          "baseline_energy": 1744,
+          "shock_extra_static": 1046,
+          "shock_extra_behavioral": 795,
           "policy_benefit": 400,
-          "net_cost_static": 731,
-          "net_cost_behavioral": 460,
-          "offset_pct_static": 35,
-          "offset_pct_behavioral": 47
+          "net_cost_static": 646,
+          "net_cost_behavioral": 395,
+          "offset_pct_static": 38,
+          "offset_pct_behavioral": 50
         },
         {
           "decile": 10,
-          "baseline_energy": 2061,
-          "shock_extra_static": 1236,
-          "shock_extra_behavioral": 939,
+          "baseline_energy": 1702,
+          "shock_extra_static": 1021,
+          "shock_extra_behavioral": 776,
           "policy_benefit": 400,
-          "net_cost_static": 836,
-          "net_cost_behavioral": 539,
-          "offset_pct_static": 32,
-          "offset_pct_behavioral": 43
+          "net_cost_static": 621,
+          "net_cost_behavioral": 376,
+          "offset_pct_static": 39,
+          "offset_pct_behavioral": 52
         }
       ]
     },
@@ -1491,120 +4011,120 @@
       "name": "CT band rebate",
       "exchequer_cost_bn": 7.7,
       "avg_benefit": 240,
-      "avg_shock_static": 970,
-      "avg_shock_behavioral": 738,
-      "avg_net_cost_static": 730,
-      "avg_net_cost_behavioral": 497,
+      "avg_shock_static": 936,
+      "avg_shock_behavioral": 711,
+      "avg_net_cost_static": 695,
+      "avg_net_cost_behavioral": 471,
       "deciles": [
         {
           "decile": 1,
-          "baseline_energy": 1485,
-          "shock_extra_static": 891,
-          "shock_extra_behavioral": 677,
+          "baseline_energy": 1388,
+          "shock_extra_static": 832,
+          "shock_extra_behavioral": 632,
           "policy_benefit": 248,
-          "net_cost_static": 643,
-          "net_cost_behavioral": 429,
-          "offset_pct_static": 28,
-          "offset_pct_behavioral": 37
+          "net_cost_static": 585,
+          "net_cost_behavioral": 385,
+          "offset_pct_static": 30,
+          "offset_pct_behavioral": 39
         },
         {
           "decile": 2,
-          "baseline_energy": 1422,
-          "shock_extra_static": 853,
-          "shock_extra_behavioral": 648,
+          "baseline_energy": 1460,
+          "shock_extra_static": 875,
+          "shock_extra_behavioral": 665,
           "policy_benefit": 262,
-          "net_cost_static": 590,
-          "net_cost_behavioral": 386,
-          "offset_pct_static": 31,
-          "offset_pct_behavioral": 40
+          "net_cost_static": 613,
+          "net_cost_behavioral": 403,
+          "offset_pct_static": 30,
+          "offset_pct_behavioral": 39
         },
         {
           "decile": 3,
-          "baseline_energy": 1335,
-          "shock_extra_static": 801,
-          "shock_extra_behavioral": 608,
+          "baseline_energy": 1370,
+          "shock_extra_static": 821,
+          "shock_extra_behavioral": 624,
           "policy_benefit": 275,
-          "net_cost_static": 526,
-          "net_cost_behavioral": 333,
-          "offset_pct_static": 34,
-          "offset_pct_behavioral": 45
+          "net_cost_static": 546,
+          "net_cost_behavioral": 349,
+          "offset_pct_static": 33,
+          "offset_pct_behavioral": 44
         },
         {
           "decile": 4,
-          "baseline_energy": 1426,
-          "shock_extra_static": 855,
-          "shock_extra_behavioral": 650,
+          "baseline_energy": 1513,
+          "shock_extra_static": 907,
+          "shock_extra_behavioral": 690,
           "policy_benefit": 245,
-          "net_cost_static": 610,
-          "net_cost_behavioral": 405,
-          "offset_pct_static": 29,
-          "offset_pct_behavioral": 38
+          "net_cost_static": 663,
+          "net_cost_behavioral": 445,
+          "offset_pct_static": 27,
+          "offset_pct_behavioral": 35
         },
         {
           "decile": 5,
-          "baseline_energy": 1540,
-          "shock_extra_static": 923,
-          "shock_extra_behavioral": 702,
+          "baseline_energy": 1515,
+          "shock_extra_static": 909,
+          "shock_extra_behavioral": 691,
           "policy_benefit": 250,
-          "net_cost_static": 674,
-          "net_cost_behavioral": 452,
+          "net_cost_static": 659,
+          "net_cost_behavioral": 441,
           "offset_pct_static": 27,
           "offset_pct_behavioral": 36
         },
         {
           "decile": 6,
-          "baseline_energy": 1631,
-          "shock_extra_static": 978,
-          "shock_extra_behavioral": 743,
+          "baseline_energy": 1613,
+          "shock_extra_static": 967,
+          "shock_extra_behavioral": 735,
           "policy_benefit": 249,
-          "net_cost_static": 729,
-          "net_cost_behavioral": 494,
-          "offset_pct_static": 25,
+          "net_cost_static": 718,
+          "net_cost_behavioral": 486,
+          "offset_pct_static": 26,
           "offset_pct_behavioral": 34
         },
         {
           "decile": 7,
-          "baseline_energy": 1625,
-          "shock_extra_static": 974,
-          "shock_extra_behavioral": 741,
+          "baseline_energy": 1518,
+          "shock_extra_static": 910,
+          "shock_extra_behavioral": 692,
           "policy_benefit": 240,
-          "net_cost_static": 734,
-          "net_cost_behavioral": 500,
-          "offset_pct_static": 25,
-          "offset_pct_behavioral": 32
+          "net_cost_static": 670,
+          "net_cost_behavioral": 451,
+          "offset_pct_static": 26,
+          "offset_pct_behavioral": 35
         },
         {
           "decile": 8,
-          "baseline_energy": 1802,
-          "shock_extra_static": 1081,
-          "shock_extra_behavioral": 821,
+          "baseline_energy": 1670,
+          "shock_extra_static": 1001,
+          "shock_extra_behavioral": 761,
           "policy_benefit": 222,
-          "net_cost_static": 859,
-          "net_cost_behavioral": 600,
-          "offset_pct_static": 21,
-          "offset_pct_behavioral": 27
+          "net_cost_static": 779,
+          "net_cost_behavioral": 539,
+          "offset_pct_static": 22,
+          "offset_pct_behavioral": 29
         },
         {
           "decile": 9,
-          "baseline_energy": 1886,
-          "shock_extra_static": 1131,
-          "shock_extra_behavioral": 860,
+          "baseline_energy": 1744,
+          "shock_extra_static": 1046,
+          "shock_extra_behavioral": 795,
           "policy_benefit": 225,
-          "net_cost_static": 906,
-          "net_cost_behavioral": 634,
-          "offset_pct_static": 20,
-          "offset_pct_behavioral": 26
+          "net_cost_static": 821,
+          "net_cost_behavioral": 570,
+          "offset_pct_static": 22,
+          "offset_pct_behavioral": 28
         },
         {
           "decile": 10,
-          "baseline_energy": 2061,
-          "shock_extra_static": 1236,
-          "shock_extra_behavioral": 939,
+          "baseline_energy": 1702,
+          "shock_extra_static": 1021,
+          "shock_extra_behavioral": 776,
           "policy_benefit": 185,
-          "net_cost_static": 1051,
-          "net_cost_behavioral": 754,
-          "offset_pct_static": 15,
-          "offset_pct_behavioral": 20
+          "net_cost_static": 836,
+          "net_cost_behavioral": 591,
+          "offset_pct_static": 18,
+          "offset_pct_behavioral": 24
         }
       ]
     }

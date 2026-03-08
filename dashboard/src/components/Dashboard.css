@@ -228,6 +228,24 @@ html {
   font-size: 0.75rem;
 }
 
+/* Pill row: label left, pills right */
+.pill-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.pill-row-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  min-width: 90px;
+  flex-shrink: 0;
+}
+
 /* ======= Vertical Column Chart ======= */
 .col-chart {
   padding: 24px 0 64px;
