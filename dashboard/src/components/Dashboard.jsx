@@ -309,7 +309,7 @@ function BaselineSection() {
           ))}
         </div>
       </div>
-      <div className="pill-row">
+      <div className="pill-row" style={{ justifyContent: "center" }}>
         <span className="pill-row-label">BREAKDOWN</span>
         <div className="scenario-pills">
           {[
@@ -536,43 +536,25 @@ function ShockSection() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><strong>+10%</strong> Short-lived supply disruption or moderate market uncertainty</td>
-            <td>£1,805</td>
-          </tr>
-          <tr>
-            <td><strong>+20%</strong> Sustained disruption or extended uncertainty in shipping routes</td>
-            <td>£1,969</td>
-          </tr>
-          <tr>
-            <td><strong>+30%</strong> Prolonged conflict, such as extended Strait of Hormuz disruption</td>
-            <td>£2,133</td>
-          </tr>
-          <tr>
-            <td><strong>+60%</strong> Major escalation comparable to the initial 2022 crisis impact</td>
-            <td>£2,625</td>
-          </tr>
-          <tr>
-            <td><strong>2022-level</strong> Matches the October 2022 peak, when wholesale gas prices hit record highs</td>
-            <td>£3,764</td>
-          </tr>
+          <tr><td>+10%</td><td>£1,805</td></tr>
+          <tr><td>+20%</td><td>£1,969</td></tr>
+          <tr><td>+30%</td><td>£2,133</td></tr>
+          <tr><td>+60%</td><td>£2,625</td></tr>
+          <tr><td>2022-level</td><td>£3,764</td></tr>
         </tbody>
       </table>
       <h3 className="section-title" style={{ fontSize: "1.1rem", marginTop: 32 }}>Behavioural response</h3>
       <p className="section-description">
-        Each chart below shows two estimates side by side. The <strong>static</strong>{" "}
-        estimate assumes households do not change their energy
-        consumption. The <strong>behavioural</strong> estimate accounts for the fact that
-        households reduce usage when prices rise, for example by turning down heating or
-        using less hot water. The behavioural estimate uses a short-run
-        price elasticity of −0.15, matching the
-        overall energy short-run average of −0.149 reported in a
-        meta-analysis of 428 studies (<a href="#ref-labandeira">Labandeira, Labeaga and López-Otero,
-        2017</a>). Elasticities vary by income: <a href="#ref-priesmann">Priesmann and Praktiknjo
-        (2025)</a> find short-run gas price elasticities ranging from −0.64
-        for low-income to −0.11 for high-income households. The bill
-        saving from reduced consumption does not capture the full cost to
-        households, who also lose comfort and warmth.
+        All charts include a <strong>static</strong> estimate (no change in
+        consumption) and a <strong>behavioural</strong> estimate (households
+        reduce usage when prices rise). The behavioural estimate applies a
+        short-run price elasticity of −0.15, the overall energy average
+        from a meta-analysis of 428 studies (<a href="#ref-labandeira">Labandeira,
+        Labeaga and López-Otero, 2017</a>). Elasticities vary by
+        income: <a href="#ref-priesmann">Priesmann and Praktiknjo (2025)</a> report
+        short-run gas price elasticities from −0.64 (low-income) to −0.11
+        (high-income). Reduced consumption lowers bills but also reduces
+        comfort and warmth.
       </p>
 
       <h3 className="section-title" style={{ fontSize: "1.1rem", marginTop: 32 }}>Fuel poverty</h3>
@@ -641,7 +623,7 @@ function ShockSection() {
           ))}
         </div>
       </div>
-      <div className="pill-row">
+      <div className="pill-row" style={{ justifyContent: "center" }}>
         <span className="pill-row-label">BREAKDOWN</span>
         <div className="scenario-pills">
           {[
@@ -1056,7 +1038,7 @@ function PolicyNetSection() {
           ))}
         </div>
       </div>
-      <div className="pill-row">
+      <div className="pill-row" style={{ justifyContent: "center" }}>
         <span className="pill-row-label">BREAKDOWN</span>
         <div className="scenario-pills">
           {[
@@ -1347,10 +1329,10 @@ function PolicyNetSection() {
 
       <p className="section-description">
         Under the {scenarioName} scenario, the selected policy determines how
-        much of the shock each decile absorbs. Budget-neutral policies (C, D)
+        much of the shock each decile absorbs. Budget-neutral policies
         fully offset the average hit but still leave some deciles worse off.
-        Fixed-cost policies (A, B) cover a larger share when the shock is
-        milder. The National Energy Guarantee (E) subsidises consumption below
+        Fixed-cost policies cover a larger share when the shock is
+        milder. The National Energy Guarantee subsidises consumption below
         a threshold. Use the breakdown toggles to see how the shock distributes
         across tenure, household type and constituency.
       </p>
@@ -1574,11 +1556,11 @@ function PolicyComparisonSection() {
         energy versus 1.4% for the highest.
       </p>
       <p className="section-description">
-        The budget-neutral EPG (D) delivers the largest fuel poverty reduction
-        (18.3 pp at 2022-level) but costs the most. The budget-neutral transfer (C)
-        reduces fuel poverty by 14.9 pp. The National Energy Guarantee (E) sits
+        The budget-neutral EPG delivers the largest fuel poverty reduction
+        (18.3 pp at 2022-level) but costs the most. The budget-neutral transfer
+        reduces fuel poverty by 14.9 pp. The National Energy Guarantee sits
         between the two, cutting fuel poverty by 9.0 pp while targeting
-        lower-consuming households. The fixed-amount policies (A, B) have lower
+        lower-consuming households. The fixed-amount policies have lower
         exchequer costs but smaller fuel poverty reductions. The trade-off
         between fiscal cost and household protection varies with the scale
         of the shock.

@@ -655,30 +655,36 @@ html {
 
 /* Scenario table */
 .scenario-table {
-  width: 100%;
+  width: auto;
   border-collapse: collapse;
   margin: 0 0 24px 0;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .scenario-table th {
   text-align: left;
   font-weight: 600;
   color: #1e293b;
-  padding: 10px 16px;
+  padding: 8px 24px;
   border-bottom: 2px solid #e2e8f0;
-  background: #f8fafc;
+  background: #f1f5f9;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .scenario-table td {
-  padding: 10px 16px;
-  color: #475569;
+  padding: 8px 24px;
+  color: #1e293b;
   border-bottom: 1px solid #f1f5f9;
-  line-height: 1.5;
+  font-weight: 500;
 }
 
-.scenario-table td strong {
-  color: #1e293b;
+.scenario-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .scenario-table tbody tr:hover {
@@ -687,9 +693,8 @@ html {
 
 .scenario-table td:last-child,
 .scenario-table th:last-child {
-  white-space: nowrap;
   text-align: right;
-  width: 90px;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Chart mode toggle — uses pill style */
