@@ -527,38 +527,33 @@ function ShockSection() {
         prices, so wholesale gas price shocks feed through to the cap and
         to all household bills.
       </p>
+      <div className="chart-title" style={{ marginBottom: 8 }}>Table 1: Price shock scenarios</div>
       <table className="scenario-table">
         <thead>
           <tr>
             <th>Scenario</th>
-            <th>Description</th>
             <th>New cap</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>+10%</strong></td>
-            <td>Short-lived supply disruption or moderate market uncertainty</td>
+            <td><strong>+10%</strong> Short-lived supply disruption or moderate market uncertainty</td>
             <td>£1,805</td>
           </tr>
           <tr>
-            <td><strong>+20%</strong></td>
-            <td>Sustained disruption or extended uncertainty in shipping routes</td>
+            <td><strong>+20%</strong> Sustained disruption or extended uncertainty in shipping routes</td>
             <td>£1,969</td>
           </tr>
           <tr>
-            <td><strong>+30%</strong></td>
-            <td>Prolonged conflict affecting gas supply, such as extended Strait of Hormuz disruption</td>
+            <td><strong>+30%</strong> Prolonged conflict, such as extended Strait of Hormuz disruption</td>
             <td>£2,133</td>
           </tr>
           <tr>
-            <td><strong>+60%</strong></td>
-            <td>Major escalation comparable to the initial impact of the 2022 crisis</td>
+            <td><strong>+60%</strong> Major escalation comparable to the initial 2022 crisis impact</td>
             <td>£2,625</td>
           </tr>
           <tr>
-            <td><strong>2022-level</strong></td>
-            <td>Matches the October 2022 peak of £3,764, when wholesale gas prices reached record highs</td>
+            <td><strong>2022-level</strong> Matches the October 2022 peak, when wholesale gas prices hit record highs</td>
             <td>£3,764</td>
           </tr>
         </tbody>
@@ -925,7 +920,12 @@ function PolicyNetSection() {
       if (selectedNet === "neg") {
         chartMode = "neg";
         const scen = neg.scenarios[selectedScenario];
-        barData = scen.deciles.map((d) => ({ label: `${d.decile}`, staticVal: d.benefit_extra_vs_baseline, behavVal: d.shock_extra }));
+        barData = scen.deciles.map((d, i) => ({
+          label: `${d.decile}`,
+          benefit: d.benefit_extra_vs_baseline,
+          shockStatic: d.shock_extra,
+          shockBehav: behav.deciles[i].behavioral_extra_cost,
+        }));
       } else if (selectedNet === "rbt") {
         chartMode = "rbt";
         barData = rbt.deciles.map((d) => ({ label: `${d.decile}`, value: d.net_effect }));
@@ -1173,7 +1173,8 @@ function PolicyNetSection() {
 
         // NEG benefit vs shock
         if (chartMode === "neg") {
-          const maxVal = Math.max(...barData.map((d) => Math.max(d.staticVal, d.behavVal))) * 1.15;
+          const shockVal = (d) => showStatic ? d.shockStatic : d.shockBehav;
+          const maxVal = Math.max(...barData.map((d) => Math.max(d.benefit, showBoth ? Math.max(d.shockStatic, d.shockBehav) : shockVal(d)))) * 1.15;
           const ticks = niceTicks(maxVal);
           const topTick = ticks[ticks.length - 1] || maxVal;
           const effectiveMax = Math.max(maxVal, topTick);
@@ -1195,23 +1196,34 @@ function PolicyNetSection() {
                   <div className="col-chart-area">
                     {ticks.map((t, i) => (<div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />))}
                     <div className="col-chart-bars">
-                      {barData.map((d, i) => (
-                        <div className="col-chart-col" key={i}>
-                          <div className="col-chart-tooltip">NEG benefit: {fmt(d.staticVal)}, Shock: {fmt(d.behavVal)}</div>
-                          <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
-                            <div className="col-chart-fill" style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#10b981", borderRadius: "3px 3px 0 0" }} />
-                            <div className="col-chart-fill" style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#ef4444", borderRadius: "3px 3px 0 0" }} />
+                      {barData.map((d, i) => {
+                        const shock = showBoth ? null : shockVal(d);
+                        return (
+                          <div className="col-chart-col" key={i}>
+                            <div className="col-chart-tooltip">
+                              NEG benefit: {fmt(d.benefit)}
+                              {showBoth
+                                ? `, Shock (static): ${fmt(d.shockStatic)}, Shock (behav): ${fmt(d.shockBehav)}`
+                                : `, Shock: ${fmt(shock)}`}
+                            </div>
+                            <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
+                              <div className="col-chart-fill" style={{ height: `${(d.benefit / effectiveMax) * 100}%`, width: showBoth ? "32%" : "48%", background: "#10b981", borderRadius: "3px 3px 0 0" }} />
+                              {showStatic && <div className="col-chart-fill" style={{ height: `${(d.shockStatic / effectiveMax) * 100}%`, width: showBoth ? "32%" : "48%", background: "#ef4444", borderRadius: "3px 3px 0 0" }} />}
+                              {showBehav && !showStatic && <div className="col-chart-fill" style={{ height: `${(d.shockBehav / effectiveMax) * 100}%`, width: "48%", background: "#f97316", borderRadius: "3px 3px 0 0" }} />}
+                              {showBoth && <div className="col-chart-fill" style={{ height: `${(d.shockBehav / effectiveMax) * 100}%`, width: "32%", background: "#f97316", borderRadius: "3px 3px 0 0" }} />}
+                            </div>
+                            <div className="col-chart-label">{d.label}</div>
                           </div>
-                          <div className="col-chart-label">{d.label}</div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
                 <div className="col-chart-x-label">Decile</div>
                 <div className="col-chart-legend">
                   <span><span className="col-chart-legend-dot" style={{ background: "#10b981" }} />NEG benefit</span>
-                  <span><span className="col-chart-legend-dot" style={{ background: "#ef4444" }} />Shock cost</span>
+                  {showStatic && <span><span className="col-chart-legend-dot" style={{ background: "#ef4444" }} />{showBoth ? "Shock (static)" : "Shock cost"}</span>}
+                  {showBehav && <span><span className="col-chart-legend-dot" style={{ background: "#f97316" }} />{showBoth ? "Shock (behav)" : "Shock cost"}</span>}
                 </div>
               </div>
             </div>
@@ -1555,32 +1567,21 @@ function PolicyComparisonSection() {
       </div>
 
       <p className="section-description" style={{ marginTop: 24 }}>
-        Even a modest 10% price shock adds £156 per year to the average household
-        energy bill and pushes the fuel poverty rate from 9.3% to 10.3%, affecting
-        an additional 300,000 households. At 2022-level prices, the average hit
-        rises to £2,019 per year and the fuel poverty rate reaches 27.6% (8.8 million
-        households). The burden is regressive throughout: the lowest-income decile
-        spends 6.9% of net income on energy compared with 1.4% for the highest.
+        A 10% shock adds £156/yr to the average bill and raises the fuel poverty
+        rate from 9.3% to 10.3%. At 2022-level prices the average hit reaches
+        £2,019/yr and 8.8 million households (27.6%) are fuel poor. The burden
+        falls hardest on the lowest-income decile, who spend 6.9% of net income on
+        energy versus 1.4% for the highest.
       </p>
       <p className="section-description">
-        Of the five policies modelled, the budget-neutral EPG (D) achieves the
-        largest fuel poverty reduction (18.3 percentage points at 2022-level prices,
-        lifting 5.8 million households out of fuel poverty) but at the highest
-        exchequer cost. The budget-neutral flat transfer (C) reduces fuel poverty by
-        14.9 percentage points at the same scenario. The National Energy
-        Guarantee (E) offers a middle path, reducing fuel poverty by 9.0 percentage
-        points while targeting support towards lower-consuming households.
-        The fixed-amount policies (A, B) provide smaller fuel poverty reductions
-        but at lower and predictable exchequer costs.
-      </p>
-      <p className="section-description">
-        The choice between policies depends on the scale of the shock and the
-        weight placed on fiscal cost versus household protection. For smaller
-        shocks, fixed-amount transfers may be sufficient. For larger shocks,
-        consumption-based or budget-neutral designs provide broader coverage.
-        Behavioural responses (households reducing consumption) lower the fiscal
-        cost of consumption-based policies but cannot prevent large increases in
-        fuel poverty at severe shock levels.
+        The budget-neutral EPG (D) delivers the largest fuel poverty reduction
+        (18.3 pp at 2022-level) but costs the most. The budget-neutral transfer (C)
+        reduces fuel poverty by 14.9 pp. The National Energy Guarantee (E) sits
+        between the two, cutting fuel poverty by 9.0 pp while targeting
+        lower-consuming households. The fixed-amount policies (A, B) have lower
+        exchequer costs but smaller fuel poverty reductions. The trade-off
+        between fiscal cost and household protection varies with the scale
+        of the shock.
       </p>
     </section>
   );
@@ -1605,7 +1606,7 @@ export default function Dashboard() {
         <h1>Energy price shock: distributional impact and policy options</h1>
         <p className="narrative-lead">
           This analysis estimates the distributional impact of five
-          energy price shock scenarios on UK households in 2026-27, with
+          energy price shock scenarios on UK households, with
           separate electricity and gas breakdowns, and models five policy
           responses.
         </p>
@@ -1681,12 +1682,14 @@ export default function Dashboard() {
       <section className="section" id="conclusion">
         <h2 className="section-title">Conclusion</h2>
         <p className="section-description">
-          Energy price shocks remain a significant risk to UK household living
-          standards, with effects that fall disproportionately on low-income
-          households. The five policies modelled here offer different trade-offs
-          between fiscal cost and household protection. Policymakers should
-          consider pre-designing and legislating a preferred mechanism now, so
-          that support can be deployed quickly if wholesale prices spike again.
+          Even a moderate price shock pushes hundreds of thousands of
+          additional households into fuel poverty, with the largest burden
+          falling on the lowest-income deciles. The five policies modelled
+          here range from low-cost fixed transfers to budget-neutral designs
+          that fully offset the shock. Each involves a different trade-off
+          between exchequer cost and the degree of household protection.
+          The comparison above summarises how these trade-offs vary across
+          shock scenarios and response assumptions.
         </p>
       </section>
 

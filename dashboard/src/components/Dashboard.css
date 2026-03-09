@@ -685,11 +685,6 @@ html {
   background: #f8fafc;
 }
 
-.scenario-table td:first-child {
-  white-space: nowrap;
-  width: 100px;
-}
-
 .scenario-table td:last-child,
 .scenario-table th:last-child {
   white-space: nowrap;
