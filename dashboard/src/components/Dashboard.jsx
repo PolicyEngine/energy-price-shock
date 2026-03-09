@@ -21,7 +21,7 @@ const POLICY_META = {
     </>,
   },
   flat_transfer: {
-    letter: "B",
+    letter: "A",
     fullName: "Flat transfer (£400 per household)",
     description: <>
       Every household receives a £400 credit on its energy bill, regardless of income, tenure, or consumption. This replicates the Energy Bills
@@ -31,7 +31,7 @@ const POLICY_META = {
     </>,
   },
   ct_rebate: {
-    letter: "C",
+    letter: "B",
     fullName: "Council tax band rebate (£300 for bands A–D)",
     description: <>
       A £300 payment to households in council tax bands A through D, replicating the Council Tax Rebate paid in April
@@ -42,7 +42,7 @@ const POLICY_META = {
     </>,
   },
   bn_transfer: {
-    letter: "D",
+    letter: "C",
     fullName: "Budget-neutral flat transfer",
     description: <>
       A hypothetical policy: every household receives a flat payment equal to the average extra energy cost under the selected shock scenario.
@@ -52,7 +52,7 @@ const POLICY_META = {
     </>,
   },
   bn_epg: {
-    letter: "E",
+    letter: "D",
     fullName: "Budget-neutral EPG (cap at £1,641)",
     description: <>
       A hypothetical policy: the government caps every household's bill at the current Ofgem level (£1,641/yr)<a href="#fn-5"><sup>5</sup></a> and
@@ -62,7 +62,7 @@ const POLICY_META = {
     </>,
   },
   neg: {
-    letter: "F",
+    letter: "E",
     fullName: "National Energy Guarantee",
     description: <>
       Based on the NEF proposal discussed in <a href="#ref-bangham">Bangham (2026)</a>: the government subsidises all energy consumption below a
@@ -247,7 +247,7 @@ function BaselineSection() {
     stackedFmtVal = (v) => fmt(v);
     stackedLegendA = "Electricity"; stackedLegendB = "Gas";
     stackedColorA = "#f59e0b"; stackedColorB = "#3b82f6";
-    chartTitle = `Figure 1: Energy spending by ${xLabel.toLowerCase()}`;
+    chartTitle = "Figure 1: Baseline energy burden";
     chartSubtitle = "Annual £ per household";
   } else if (baselineView === "energy_share") {
     stackedBarData = items.map((it) => {
@@ -259,19 +259,19 @@ function BaselineSection() {
     stackedFmtVal = (v) => `${v.toFixed(1)}%`;
     stackedLegendA = "Electricity"; stackedLegendB = "Gas";
     stackedColorA = "#f59e0b"; stackedColorB = "#3b82f6";
-    chartTitle = `Figure 1: Energy spend as % of net income, by ${xLabel.toLowerCase()}`;
+    chartTitle = "Figure 1: Baseline energy burden";
     chartSubtitle = bk === "decile" ? "decile 1 = lowest income, decile 10 = highest income" : "% of household net income spent on energy";
   } else {
     simpleBarData = items.map((it) => ({ label: it.label, value: it.net_income }));
     simpleMaxVal = Math.max(...simpleBarData.map((d) => d.value)) * 1.15;
     simpleFormat = (v) => fmt(v);
-    chartTitle = `Figure 1: Net income by ${xLabel.toLowerCase()}`;
+    chartTitle = "Figure 1: Baseline energy burden";
     chartSubtitle = "annual household net income (earnings + benefits − taxes)";
   }
 
   return (
     <section className="section" id="baseline">
-      <h2 className="section-title">Baseline energy burden (2026-27)</h2>
+      <h2 className="section-title">Baseline energy burden</h2>
 
       <div className="kpi-row">
         <KpiCard label="Households" value={`${baseline.n_households_m}m`} color="teal" info="Total number of UK households in the microsimulation sample, weighted to population totals." />
@@ -333,7 +333,7 @@ function BaselineSection() {
         <div className="chart-wrapper">
           <div className="chart-header">
             <div>
-              <div className="chart-title">Figure 1: Constituency-level map</div>
+              <div className="chart-title">Figure 1: Baseline energy burden</div>
               <div className="chart-subtitle">650 parliamentary constituencies. Search or hover to explore.</div>
             </div>
           </div>
@@ -413,7 +413,7 @@ function BaselineSection() {
         <div className="chart-wrapper" style={{ marginTop: 32 }}>
           <div className="chart-header">
             <div>
-              <div className="chart-title">Figure 2: Fuel poverty rate by {breakdownView === "hh_type" ? "household type" : "tenure"}</div>
+              <div className="chart-title">Figure 2: Fuel poverty rate</div>
               <div className="chart-subtitle">% of households spending &gt;10% of income on energy</div>
             </div>
           </div>
@@ -663,7 +663,7 @@ function ShockSection() {
           <div className="chart-wrapper">
             <div className="chart-header">
               <div>
-                <div className="chart-title">Figure 3: Constituency-level shock impact: {scenario.name}</div>
+                <div className="chart-title">Figure 3: Shock impact</div>
                 <div className="chart-subtitle">Search or hover to explore 650 constituencies</div>
               </div>
             </div>
@@ -675,10 +675,7 @@ function ShockSection() {
           <div className="chart-header">
             <div>
               <div className="chart-title">
-                {shockMetric === "pct_of_income" ? `Figure 3: Extra energy cost as % of income, by ${xLabel.toLowerCase()}: ${scenario.name}`
-                  : shockMetric === "extra_cost" ? `Figure 3: Extra energy cost (£/yr), by ${xLabel.toLowerCase()}: ${scenario.name}`
-                  : shockMetric === "fp_rate" ? `Figure 3: Fuel poverty rate (%), by ${xLabel.toLowerCase()}: ${scenario.name}`
-                  : `Figure 3: Fuel poor households (millions), by ${xLabel.toLowerCase()}: ${scenario.name}`}
+                {"Figure 3: Shock impact"}
               </div>
               <div className="chart-subtitle">
                 {shockResponse === "both" ? "Static vs behavioural (ε = −0.15)"
@@ -776,11 +773,11 @@ function PolicyNetSection() {
   const nHH = results.baseline.n_households_m;
   const neg = resultsV2.neg_policy;
   const rbt = resultsV2.rising_block_tariff;
-  const policyKeys = ["epg", "flat_transfer", "ct_rebate", "bn_transfer", "bn_epg", "neg", "rbt"];
+  const policyKeys = ["flat_transfer", "ct_rebate", "bn_transfer", "bn_epg", "neg"];
   const policyLabels = {
-    epg: "A. EPG", flat_transfer: "B. Flat transfer", ct_rebate: "C. CT rebate",
-    bn_transfer: "D. BN transfer", bn_epg: "E. BN EPG",
-    neg: "F. Energy Guarantee", rbt: "G. Block tariff",
+    flat_transfer: "A. Flat transfer", ct_rebate: "B. CT rebate",
+    bn_transfer: "C. BN transfer", bn_epg: "D. BN EPG",
+    neg: "E. Energy Guarantee",
   };
   const TENURE_LABELS = {
     OWNED_OUTRIGHT: "Owned outright", OWNED_WITH_MORTGAGE: "Mortgage",
@@ -791,7 +788,7 @@ function PolicyNetSection() {
     SINGLE_WORKING_AGE: "Single (WA)", COUPLE_NO_CHILDREN: "Couple, no kids",
     COUPLE_WITH_CHILDREN: "Couple + kids", LONE_PARENT: "Lone parent", OTHER: "Other",
   };
-  const [selectedScenario, setSelectedScenario] = useState(-1);
+  const [selectedScenario, setSelectedScenario] = useState(0);
   const [selectedNet, setSelectedNet] = useState("flat_transfer");
   const [policyMetric, setPolicyMetric] = useState("extra_cost");
   const [policyResponse, setPolicyResponse] = useState("behavioural");
@@ -801,7 +798,7 @@ function PolicyNetSection() {
   const scenario = isNoShock ? null : results.shock_scenarios[selectedScenario];
   const behav = isNoShock ? null : results.behavioral[selectedScenario];
   const scenarioName = isNoShock ? "0%" : scenario.name;
-  const isAlt = ["neg", "rbt"].includes(selectedNet);
+  const isAlt = selectedNet === "neg";
   const bk = policyBreakdown;
   const isFPMetric = policyMetric === "fp_rate" || policyMetric === "fp_households";
 
@@ -939,23 +936,15 @@ function PolicyNetSection() {
         return { label: `${d.decile}`, staticVal: sr, behavVal: br };
       });
     }
+  } else if (selectedNet === "bn_epg" && !isFPMetric) {
+    // BN EPG fully offsets every household, so all breakdowns show £0
+    chartMode = "message";
+    chartMessage = `The ${policyLabels[selectedNet]} fully offsets the ${scenarioName} shock for all households. Every household's net extra cost is £0.`;
   } else {
-    // Non-decile breakdowns (tenure, hh_type) with shock: show shock impact
-    if (bk === "tenure") {
-      xLabel = "Tenure";
-      barData = scenario.by_tenure.map((d) => {
-        const bd = behav.by_tenure.find((b) => b.tenure === d.tenure);
-        return { label: TENURE_LABELS[d.tenure] || d.tenure, staticVal: getStaticVal(d), behavVal: getBehavVal(bd) };
-      });
-    } else if (bk === "hh_type") {
-      xLabel = "Household type";
-      barData = scenario.by_hh_type.map((d) => {
-        const bd = behav.by_hh_type.find((b) => b.hh_type === d.hh_type);
-        return { label: HH_TYPE_LABELS[d.hh_type] || d.hh_type, staticVal: getStaticVal(d), behavVal: getBehavVal(bd) };
-      });
-    }
-    // Sort non-decile by static value descending
-    if (barData) barData.sort((a, b) => b.staticVal - a.staticVal);
+    // Non-decile breakdowns (tenure, hh_type) with shock: policy-adjusted data not available
+    chartMode = "message";
+    const breakdownLabel = bk === "tenure" ? "tenure" : bk === "hh_type" ? "household type" : "constituency";
+    chartMessage = `Post-policy breakdown by ${breakdownLabel} is not available. Select "By decile" to see the policy effect.`;
   }
 
   // Determine chart title/subtitle for "standard" mode
@@ -975,17 +964,17 @@ function PolicyNetSection() {
     <section className="section" id="policy-net">
       <h2 className="section-title">Policy responses</h2>
       <p className="section-description">
-        Policies A–C reflect the toolkit the UK government deployed
+        Policies A and B reflect the toolkit the UK government deployed
         during the 2022 energy crisis<a href="#fn-10"><sup>10</sup></a> and
         are the instruments available in
         the <a href="https://policyengine.org/uk" target="_blank" rel="noopener noreferrer">PolicyEngine UK</a> microsimulation
-        model. Policies D–E are <strong>budget-neutral</strong> variants
+        model. Policies C and D are <strong>budget-neutral</strong> variants
         designed to fully offset the extra cost so that households are no
-        worse off on average. Policies F–G are <strong>alternative
-        designs</strong> that exploit the new electricity/gas data split,
+        worse off on average. Policy E is an <strong>alternative
+        design</strong> that exploits the new electricity/gas data split,
         responding to <a href="#ref-bangham">Bangham's (2026)</a> call for
         better infrastructure built before the next price cap change.
-        Select "0%" to see the policy benefit with no price shock.
+        All estimates are for the 2026-27 fiscal year. Select a scenario and policy to explore the distributional effects.
       </p>
 
       <ul className="policy-bullet-list">
@@ -1000,7 +989,6 @@ function PolicyNetSection() {
       <div className="pill-row">
         <span className="pill-row-label">SCENARIO</span>
         <div className="scenario-pills">
-          <button className={`scenario-pill scenario-pill-sm${isNoShock ? " active" : ""}`} onClick={() => setSelectedScenario(-1)}>0%</button>
           {results.shock_scenarios.map((s, i) => (
             <button key={i} className={`scenario-pill scenario-pill-sm${i === selectedScenario ? " active" : ""}`} onClick={() => setSelectedScenario(i)}>{s.name}</button>
           ))}
@@ -1099,7 +1087,7 @@ function PolicyNetSection() {
             <div className="chart-wrapper">
               <div className="chart-header">
                 <div>
-                  <div className="chart-title">Figure 4: Policy benefit by decile: {policyLabels[selectedNet]} (no shock)</div>
+                  <div className="chart-title">Figure 4: Policy effect</div>
                   <div className="chart-subtitle">Annual £ received per household</div>
                 </div>
               </div>
@@ -1118,7 +1106,7 @@ function PolicyNetSection() {
             <div className="chart-wrapper">
               <div className="chart-header">
                 <div>
-                  <div className="chart-title">Figure 4: Rising block tariff: net effect by decile</div>
+                  <div className="chart-title">Figure 4: Policy effect</div>
                   <div className="chart-subtitle">{isNoShock ? "Negative = saves, positive = pays more" : "Redistribution is independent of the shock"}</div>
                 </div>
               </div>
@@ -1164,7 +1152,7 @@ function PolicyNetSection() {
             <div className="chart-wrapper">
               <div className="chart-header">
                 <div>
-                  <div className="chart-title">Figure 4: NEG shock offset by decile ({scenarioName})</div>
+                  <div className="chart-title">Figure 4: Policy effect</div>
                   <div className="chart-subtitle">Annual £ per household</div>
                 </div>
               </div>
@@ -1223,7 +1211,7 @@ function PolicyNetSection() {
             <div className="chart-wrapper">
               <div className="chart-header">
                 <div>
-                  <div className="chart-title">Figure 4: Constituency-level shock impact: {scenarioName}</div>
+                  <div className="chart-title">Figure 4: Policy effect</div>
                   <div className="chart-subtitle">Search or hover to explore 650 constituencies</div>
                 </div>
               </div>
@@ -1246,11 +1234,7 @@ function PolicyNetSection() {
 
         const isDecilePolicy = bk === "decile" && !isAlt && !isFPMetric;
         const isPostPolicyFP = bk === "decile" && isFPMetric && results.policy_fuel_poverty?.[selectedNet]?.[selectedScenario];
-        const chartTitle = isDecilePolicy
-          ? `Figure 4: Remaining ${metricLabelShort} after ${policyLabels[selectedNet]}, by decile (${scenarioName})`
-          : isPostPolicyFP
-          ? `Figure 4: Reduction in ${policyMetric === "fp_rate" ? "fuel poverty rate (pp)" : "fuel poor households (m)"} from ${policyLabels[selectedNet]}, by decile (${scenarioName})`
-          : `Figure 4: ${policyMetric === "extra_cost" ? "Extra cost (£/yr)" : policyMetric === "pct_of_income" ? "Extra cost as % of income" : policyMetric === "fp_rate" ? "Fuel poverty rate (%)" : "Fuel poor households (m)"}, by ${(xLabel || "").toLowerCase()}: ${scenarioName}`;
+        const chartTitle = "Figure 4: Policy effect";
 
         const maxVal = Math.max(...barData.map((d) => Math.max(showStatic ? d.staticVal : 0, showBehav ? d.behavVal : 0))) * 1.15;
         const ticks = niceTicks(maxVal);
@@ -1322,14 +1306,12 @@ function PolicyNetSection() {
 
       <p className="section-description">
         Under the {scenarioName} scenario, the selected policy determines how
-        much of the shock each decile absorbs. Budget-neutral policies (D, E)
+        much of the shock each decile absorbs. Budget-neutral policies (C, D)
         fully offset the average hit but still leave some deciles worse off.
-        Fixed-cost policies (A–C) cover a larger share when the shock is
-        milder. Policies F–G offer alternative designs: the National Energy
-        Guarantee (F) subsidises consumption below a threshold, and the rising
-        block tariff (G) redistributes at zero exchequer cost. Use the breakdown
-        toggles to see how the shock distributes across tenure, household
-        type and constituency.
+        Fixed-cost policies (A, B) cover a larger share when the shock is
+        milder. The National Energy Guarantee (E) subsidises consumption below
+        a threshold. Use the breakdown toggles to see how the shock distributes
+        across tenure, household type and constituency.
       </p>
     </section>
   );
@@ -1344,20 +1326,20 @@ function PolicyComparisonSection() {
   const nHH = results.baseline.n_households_m;
   const neg = resultsV2.neg_policy;
 
-  const policyKeys = ["epg", "flat_transfer", "ct_rebate", "bn_transfer", "bn_epg", "neg", "rbt"];
+  const policyKeys = ["flat_transfer", "ct_rebate", "bn_transfer", "bn_epg", "neg"];
   const policyLabels = {
-    epg: "A. EPG", flat_transfer: "B. Flat transfer", ct_rebate: "C. CT rebate",
-    bn_transfer: "D. BN transfer", bn_epg: "E. BN EPG",
-    neg: "F. Energy Guarantee", rbt: "G. Block tariff",
+    flat_transfer: "A. Flat transfer", ct_rebate: "B. CT rebate",
+    bn_transfer: "C. BN transfer", bn_epg: "D. BN EPG",
+    neg: "E. Energy Guarantee",
   };
-  const policyShortLabels = {
-    epg: "A", flat_transfer: "B", ct_rebate: "C",
-    bn_transfer: "D", bn_epg: "E", neg: "F", rbt: "G",
+  const policyBarLabels = {
+    flat_transfer: "Flat transfer", ct_rebate: "CT rebate",
+    bn_transfer: "BN transfer", bn_epg: "BN EPG", neg: "Energy Guarantee",
   };
 
   const [compScenario, setCompScenario] = useState(0);
   const [compMetric, setCompMetric] = useState("exchequer");
-  const [compResponse, setCompResponse] = useState("both");
+  const [compResponse, setCompResponse] = useState("behavioural");
   const showStatic = compResponse === "static" || compResponse === "both";
   const showBehav = compResponse === "behavioural" || compResponse === "both";
   const showBoth = compResponse === "both";
@@ -1370,20 +1352,26 @@ function PolicyComparisonSection() {
   const behav = results.behavioral[compScenario];
   const behavRatio = behav.behavioral_avg_extra / (behav.static_avg_extra || 1);
   const getExchequer = (pk) => {
-    let staticCost;
-    if (pk === "bn_transfer") staticCost = Math.round(scenario.avg_hh_hit_yr * nHH / 100) / 10;
-    else if (pk === "bn_epg") staticCost = scenario.total_cost_bn;
-    else if (pk === "neg") staticCost = neg.scenarios[compScenario].exchequer_cost_bn;
-    else if (pk === "rbt") staticCost = 0;
-    else if (pk === "epg") {
+    let staticCost, behavCost;
+    if (pk === "bn_transfer") {
+      // Budget-neutral: pays the average hit, which differs under behavioural response
+      staticCost = Math.round(scenario.avg_hh_hit_yr * nHH / 100) / 10;
+      behavCost = Math.round(behav.behavioral_avg_extra * nHH / 100) / 10;
+    } else if (pk === "bn_epg") {
+      staticCost = scenario.total_cost_bn;
+      behavCost = Math.round(staticCost * behavRatio * 10) / 10;
+    } else if (pk === "neg") {
+      staticCost = neg.scenarios[compScenario].exchequer_cost_bn;
+      behavCost = Math.round(staticCost * behavRatio * 10) / 10;
+    } else if (pk === "epg") {
       const epgScale = Math.max(0, scenario.new_cap - EPG_TARGET) / (EPG_REF_CAP - EPG_TARGET);
       staticCost = Math.round(policies[pk].exchequer_cost_bn * epgScale * 10) / 10;
+      behavCost = Math.round(staticCost * behavRatio * 10) / 10;
     } else {
+      // Fixed-amount policies (flat_transfer, ct_rebate): same cost regardless
       staticCost = policies[pk].exchequer_cost_bn;
+      behavCost = staticCost;
     }
-    // Behavioural cost: consumption-based policies scale down; fixed transfers stay the same
-    const isConsumptionBased = ["epg", "bn_epg", "neg"].includes(pk);
-    const behavCost = isConsumptionBased ? Math.round(staticCost * behavRatio * 10) / 10 : staticCost;
     return { staticVal: staticCost, behavVal: behavCost };
   };
 
@@ -1404,45 +1392,37 @@ function PolicyComparisonSection() {
     };
   };
 
-  const exchequerData = policyKeys.map((pk) => ({
-    label: policyShortLabels[pk],
-    value: getExchequer(pk),
-    tooltip: `${policyLabels[pk]}: £${getExchequer(pk)}bn`,
-  }));
-  const maxExchequer = Math.max(...exchequerData.map((d) => d.value)) * 1.15 || 1;
+  const exchequerData = policyKeys.map((pk) => {
+    const e = getExchequer(pk);
+    return { label: policyBarLabels[pk], staticVal: e.staticVal, behavVal: e.behavVal };
+  });
 
   const fpRateData = policyKeys.map((pk) => {
     const c = getFPChange(pk, "fp_rate");
-    return { label: policyShortLabels[pk], staticVal: c.staticVal, behavVal: c.behavVal };
+    return { label: policyBarLabels[pk], staticVal: c.staticVal, behavVal: c.behavVal };
   });
   const fpHHData = policyKeys.map((pk) => {
     const c = getFPChange(pk, "fp_households");
-    return { label: policyShortLabels[pk], staticVal: c.staticVal, behavVal: c.behavVal };
+    return { label: policyBarLabels[pk], staticVal: c.staticVal, behavVal: c.behavVal };
   });
 
-  const maxFPRate = Math.max(...fpRateData.map((d) => Math.max(showStatic ? d.staticVal : 0, showBehav ? d.behavVal : 0))) * 1.15 || 1;
-  const maxFPHH = Math.max(...fpHHData.map((d) => Math.max(showStatic ? d.staticVal : 0, showBehav ? d.behavVal : 0))) * 1.15 || 1;
+  // Pick active data based on compMetric toggle, then sort by value descending
+  const sortVal = (d) => Math.max(d.staticVal || 0, d.behavVal || 0);
+  const activeBarData = [...(compMetric === "exchequer" ? exchequerData
+    : compMetric === "fp_rate" ? fpRateData : fpHHData)].sort((a, b) => sortVal(b) - sortVal(a));
 
-  const ticksExchequer = niceTicks(maxExchequer);
-  const ticksFPRate = niceTicks(maxFPRate);
-  const ticksFPHH = niceTicks(maxFPHH);
-
-  // Pick active data based on compMetric toggle
-  const activeBarData = compMetric === "exchequer" ? exchequerData
-    : compMetric === "fp_rate" ? fpRateData : fpHHData;
-  const activeTicks = compMetric === "exchequer" ? ticksExchequer
-    : compMetric === "fp_rate" ? ticksFPRate : ticksFPHH;
+  const maxActive = Math.max(...activeBarData.map((d) => Math.max(showStatic ? d.staticVal : 0, showBehav ? d.behavVal : 0))) * 1.15 || 1;
+  const activeTicks = niceTicks(maxActive);
   const activeFmt = compMetric === "exchequer" ? (v) => `£${v}bn`
     : compMetric === "fp_rate" ? (v) => `${v}pp` : (v) => `${v}m`;
-  const activeColor = compMetric === "exchequer" ? "#6366f1" : "#10b981";
-  const activeColorB = compMetric === "exchequer" ? "#6366f1" : "#059669";
-  const isExchequer = compMetric === "exchequer";
+  const activeColor = "#94a3b8";
+  const activeColorB = "#319795";
   const activeSubtitle = compMetric === "exchequer" ? "Exchequer cost (£bn)"
     : compMetric === "fp_rate" ? "FP rate reduction (pp)" : "FP households reduction (m)";
 
   const topTick = activeTicks[activeTicks.length - 1] || 1;
   const chartMax = Math.max(topTick, ...activeBarData.map((d) => Math.max(
-    showStatic ? (d.staticVal || d.value || 0) : 0,
+    showStatic ? (d.staticVal || 0) : 0,
     showBehav ? (d.behavVal || 0) : 0
   ))) || 1;
   const effectiveMax = Math.max(chartMax, topTick);
@@ -1451,7 +1431,7 @@ function PolicyComparisonSection() {
     <section className="section" id="policy-comparison">
       <h2 className="section-title">Policy at a glance</h2>
       <p className="section-description">
-        This chart compares all seven policies side by side. Use the metric toggle to switch
+        This chart compares all five policies side by side for the 2026-27 fiscal year. Use the metric toggle to switch
         between exchequer cost, reduction in fuel poverty rate, and reduction in fuel poor households.
       </p>
 
@@ -1483,28 +1463,26 @@ function PolicyComparisonSection() {
           ))}
         </div>
       </div>
-      {!isExchequer && (
-        <div className="pill-row">
-          <span className="pill-row-label">RESPONSE</span>
-          <div className="scenario-pills">
-            {[
-              { key: "both", label: "Both" },
-              { key: "static", label: "Static" },
-              { key: "behavioural", label: "Behavioural" },
-            ].map((m) => (
-              <button key={m.key} className={`scenario-pill${compResponse === m.key ? " active" : ""}`} onClick={() => setCompResponse(m.key)}>
-                {m.label}
-              </button>
-            ))}
-          </div>
+      <div className="pill-row">
+        <span className="pill-row-label">RESPONSE</span>
+        <div className="scenario-pills">
+          {[
+            { key: "behavioural", label: "Behavioural" },
+            { key: "static", label: "Static" },
+            { key: "both", label: "Both" },
+          ].map((m) => (
+            <button key={m.key} className={`scenario-pill${compResponse === m.key ? " active" : ""}`} onClick={() => setCompResponse(m.key)}>
+              {m.label}
+            </button>
+          ))}
         </div>
-      )}
+      </div>
 
       <div className="chart-wrapper">
         <div className="chart-header">
           <div>
             <div className="chart-title">Figure 5: {activeSubtitle} by policy ({scenarioName})</div>
-            <div className="chart-subtitle">A = EPG, B = Flat transfer, C = CT rebate, D = BN transfer, E = BN EPG, F = Energy Guarantee, G = Block tariff</div>
+            <div className="chart-subtitle">Sorted by selected metric, highest first</div>
           </div>
         </div>
         <div className="col-chart">
@@ -1518,18 +1496,6 @@ function PolicyComparisonSection() {
               {activeTicks.map((t, i) => (<div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />))}
               <div className="col-chart-bars">
                 {activeBarData.map((d, i) => {
-                  if (isExchequer) {
-                    const pct = ((d.value || 0) / effectiveMax) * 100;
-                    return (
-                      <div className="col-chart-col" key={i}>
-                        <div className="col-chart-tooltip">{d.tooltip || activeFmt(d.value)}</div>
-                        <div className="col-chart-track">
-                          <div className="col-chart-fill" style={{ height: `${pct}%`, background: activeColor }} />
-                        </div>
-                        <div className="col-chart-label">{d.label}</div>
-                      </div>
-                    );
-                  }
                   const pctS = showStatic ? ((d.staticVal || 0) / effectiveMax) * 100 : 0;
                   const pctB = showBehav ? ((d.behavVal || 0) / effectiveMax) * 100 : 0;
                   return (
@@ -1551,20 +1517,13 @@ function PolicyComparisonSection() {
             </div>
           </div>
           <div className="col-chart-x-label">Policy</div>
-          {!isExchequer && (
-            <div className="col-chart-legend">
-              {showStatic && <span><span className="col-chart-legend-dot" style={{ background: activeColor }} />Static</span>}
-              {showBehav && <span><span className="col-chart-legend-dot" style={{ background: activeColorB }} />Behavioural</span>}
-            </div>
-          )}
+          <div className="col-chart-legend">
+            {showStatic && <span><span className="col-chart-legend-dot" style={{ background: activeColor }} />Static</span>}
+            {showBehav && <span><span className="col-chart-legend-dot" style={{ background: activeColorB }} />Behavioural</span>}
+          </div>
         </div>
-      </div>
 
-      <p className="section-description" style={{ fontSize: "0.82rem", color: "#64748b", marginTop: 8 }}>
-        {compMetric === "exchequer"
-          ? "Budget-neutral policies (D, E) scale with the shock size, while the EPG (A) only activates above £2,500. The rising block tariff (G) costs nothing by design."
-          : "A larger bar indicates a greater reduction in fuel poverty relative to the shocked baseline. Policies that provide more generous support to lower-income households tend to produce larger reductions."}
-      </p>
+      </div>
     </section>
   );
 }
@@ -1577,8 +1536,8 @@ export default function Dashboard() {
         <p className="narrative-lead">
           This analysis estimates the distributional impact of five
           energy price shock scenarios on UK households in 2026-27, with
-          separate electricity and gas breakdowns, and models seven policy
-          responses including two new designs for the next crisis.
+          separate electricity and gas breakdowns, and models five policy
+          responses.
         </p>
       </header>
 
@@ -1593,7 +1552,7 @@ export default function Dashboard() {
         warn a prolonged closure could push the cap to
         £2,500.<a href="#fn-3"><sup>3</sup></a> The Resolution Foundation estimates a sustained
         rise could add £500 to typical annual energy bills, offsetting the
-        £300 growth in living standards expected in 2026.<a href="#fn-4"><sup>4</sup></a>
+        £300 growth in living standards expected in 2026-27.<a href="#fn-4"><sup>4</sup></a>
       </p>
       <p className="section-description">
         Under current Ofgem rules,<a href="#fn-5"><sup>5</sup></a> the
@@ -1604,17 +1563,16 @@ export default function Dashboard() {
         price shock scenarios, from a 10% increase to
         a return to 2022-level prices. For each, it estimates the extra
         cost per household across income deciles, the impact on fuel
-        poverty rates, and the distributional effects of seven policy
-        responses: an Energy Price Guarantee, a flat transfer, a council
+        poverty rates, and the distributional effects of five policy
+        responses: a flat transfer, a council
         tax band rebate, two
-        budget-neutral variants, a National Energy Guarantee, and a rising
-        block tariff. All modelling uses the PolicyEngine
+        budget-neutral variants, and a National Energy Guarantee. All modelling uses the PolicyEngine
         UK microsimulation model with separate electricity and gas
         imputations calibrated to NEED 2023 admin
         data.<a href="#fn-6"><sup>6</sup></a>
       </p>
 
-      <h3 className="section-title" style={{ fontSize: "1.05rem", marginTop: 24 }}>Related literature</h3>
+      <h3 className="section-title" style={{ fontSize: "1.05rem", marginTop: 24 }}>Previous studies</h3>
       <p className="section-description">
         The most recent comparable episode, the 2022 European energy
         crisis, raised household living costs by around 7% of
@@ -1635,12 +1593,52 @@ export default function Dashboard() {
         the absence of a crisis, energy price volatility alone costs around
         0.8% of consumption per year (<a href="#ref-manzano">Manzano and Rey, 2013</a>).
       </p>
+      <p className="section-description">
+        The results below first establish the baseline energy burden across
+        UK households, then model five shock scenarios ranging from +10% to
+        2022-level prices. For each scenario, we estimate the extra cost by
+        income decile, tenure, and household type, with and without behavioural
+        demand response. We then evaluate five policy responses and compare
+        their exchequer cost against their effectiveness in reducing fuel poverty.
+      </p>
       </section>
 
       <BaselineSection />
       <ShockSection />
       <PolicyNetSection />
       <PolicyComparisonSection />
+
+      <section className="section" id="conclusion">
+        <h2 className="section-title">Conclusion</h2>
+        <p className="section-description">
+          Even a modest 10% price shock adds £156 per year to the average household
+          energy bill and pushes the fuel poverty rate from 9.3% to 10.3%, affecting
+          an additional 300,000 households. At 2022-level prices, the average hit
+          rises to £2,019 per year and the fuel poverty rate reaches 27.6% (8.8 million
+          households). The burden is regressive throughout: the lowest-income decile
+          spends 6.9% of net income on energy compared with 1.4% for the highest.
+        </p>
+        <p className="section-description">
+          Of the five policies modelled, the budget-neutral EPG (D) achieves the
+          largest fuel poverty reduction (18.3 percentage points at 2022-level prices,
+          lifting 5.8 million households out of fuel poverty) but at the highest
+          exchequer cost. The budget-neutral flat transfer (C) reduces fuel poverty by
+          14.9 percentage points at the same scenario. The National Energy
+          Guarantee (E) offers a middle path, reducing fuel poverty by 9.0 percentage
+          points while targeting support towards lower-consuming households.
+          The fixed-amount policies (A, B) provide smaller fuel poverty reductions
+          but at lower and predictable exchequer costs.
+        </p>
+        <p className="section-description">
+          The choice between policies depends on the scale of the shock and the
+          weight placed on fiscal cost versus household protection. For smaller
+          shocks, fixed-amount transfers may be sufficient. For larger shocks,
+          consumption-based or budget-neutral designs provide broader coverage.
+          Behavioural responses (households reducing consumption) lower the fiscal
+          cost of consumption-based policies but cannot prevent large increases in
+          fuel poverty at severe shock levels.
+        </p>
+      </section>
 
       <hr style={{ border: "none", borderTop: "1px solid #e2e8f0", margin: "48px 0" }} />
 
