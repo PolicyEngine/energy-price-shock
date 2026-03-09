@@ -309,7 +309,7 @@ function BaselineSection() {
           ))}
         </div>
       </div>
-      <div className="pill-row" style={{ justifyContent: "center" }}>
+      <div className="pill-row">
         <span className="pill-row-label">BREAKDOWN</span>
         <div className="scenario-pills">
           {[
@@ -527,7 +527,7 @@ function ShockSection() {
         prices, so wholesale gas price shocks feed through to the cap and
         to all household bills.
       </p>
-      <div className="chart-title" style={{ marginBottom: 8 }}>Table 1: Price shock scenarios</div>
+      <div className="chart-title" style={{ marginBottom: 8, textAlign: "center" }}>Table 1: Price shock scenarios</div>
       <table className="scenario-table">
         <thead>
           <tr>
@@ -563,8 +563,8 @@ function ShockSection() {
         on energy. The official UK definition
         (LILEE)<a href="#fn-8"><sup>8</sup></a> is more complex, but the 10%
         threshold captures the same dynamic and is straightforward to apply
-        across the income distribution. Use the "FP rate (%)" and "FP
-        households (m)" metric toggles below to see how each scenario pushes
+        across the income distribution. The "FP rate (%)" and "FP
+        households (m)" metric toggles show how each scenario pushes
         households into fuel poverty. At current prices,{" "}
         {results.fuel_poverty[0].households_m}m households
         ({results.fuel_poverty[0].fuel_poverty_rate_pct}%) are fuel poor. Even
@@ -623,7 +623,7 @@ function ShockSection() {
           ))}
         </div>
       </div>
-      <div className="pill-row" style={{ justifyContent: "center" }}>
+      <div className="pill-row">
         <span className="pill-row-label">BREAKDOWN</span>
         <div className="scenario-pills">
           {[
@@ -781,9 +781,9 @@ function PolicyNetSection() {
   const rbt = resultsV2.rising_block_tariff;
   const policyKeys = ["flat_transfer", "ct_rebate", "bn_transfer", "bn_epg", "neg"];
   const policyLabels = {
-    flat_transfer: "A. Flat transfer", ct_rebate: "B. CT rebate",
-    bn_transfer: "C. BN transfer", bn_epg: "D. BN EPG",
-    neg: "E. Energy Guarantee",
+    flat_transfer: "Flat transfer", ct_rebate: "CT rebate",
+    bn_transfer: "BN transfer", bn_epg: "BN EPG",
+    neg: "Energy Guarantee",
   };
   const TENURE_LABELS = {
     OWNED_OUTRIGHT: "Owned outright", OWNED_WITH_MORTGAGE: "Mortgage",
@@ -951,11 +951,32 @@ function PolicyNetSection() {
     // BN EPG fully offsets every household, so all breakdowns show £0
     chartMode = "message";
     chartMessage = `The ${policyLabels[selectedNet]} fully offsets the ${scenarioName} shock for all households. Every household's net extra cost is £0.`;
-  } else {
-    // Non-decile breakdowns (tenure, hh_type) with shock: policy-adjusted data not available
-    chartMode = "message";
-    const breakdownLabel = bk === "tenure" ? "tenure" : bk === "hh_type" ? "household type" : "constituency";
-    chartMessage = `Post-policy breakdown by ${breakdownLabel} is not available. Select "By decile" to see the policy effect.`;
+  } else if (bk === "constituency") {
+    chartMode = "constituency";
+  } else if (bk === "tenure") {
+    // Show shock data by tenure (policy adjustment only available by decile)
+    xLabel = "Tenure";
+    barData = scenario.by_tenure.map((d) => {
+      const bd = results.behavioral[selectedScenario].by_tenure.find((b) => b.tenure === d.tenure);
+      return {
+        label: TENURE_LABELS[d.tenure] || d.tenure,
+        staticVal: isFPMetric ? (policyMetric === "fp_rate" ? d.fp_rate : d.fp_households_m) : (policyMetric === "pct_of_income" ? d.pct_of_income : d.extra_cost),
+        behavVal: bd ? (isFPMetric ? (policyMetric === "fp_rate" ? bd.behavioral_fp_rate : bd.behavioral_fp_households_m) : (policyMetric === "pct_of_income" ? bd.behavioral_pct_of_income : bd.behavioral_extra_cost)) : 0,
+      };
+    });
+    barData.sort((a, b) => b.staticVal - a.staticVal);
+  } else if (bk === "hh_type") {
+    // Show shock data by household type (policy adjustment only available by decile)
+    xLabel = "Household type";
+    barData = scenario.by_hh_type.map((d) => {
+      const bd = results.behavioral[selectedScenario].by_hh_type.find((b) => b.hh_type === d.hh_type);
+      return {
+        label: HH_TYPE_LABELS[d.hh_type] || d.hh_type,
+        staticVal: isFPMetric ? (policyMetric === "fp_rate" ? d.fp_rate : d.fp_households_m) : (policyMetric === "pct_of_income" ? d.pct_of_income : d.extra_cost),
+        behavVal: bd ? (isFPMetric ? (policyMetric === "fp_rate" ? bd.behavioral_fp_rate : bd.behavioral_fp_households_m) : (policyMetric === "pct_of_income" ? bd.behavioral_pct_of_income : bd.behavioral_extra_cost)) : 0,
+      };
+    });
+    barData.sort((a, b) => b.staticVal - a.staticVal);
   }
 
   // Determine chart title/subtitle for "standard" mode
@@ -991,7 +1012,7 @@ function PolicyNetSection() {
       <ul className="policy-bullet-list">
         {policyKeys.map((key) => (
           <li key={key}>
-            <strong>{POLICY_META[key].letter}. {POLICY_META[key].fullName}</strong>{" "}
+            <strong>{POLICY_META[key].fullName}</strong>{" "}
             {POLICY_META[key].description}
           </li>
         ))}
@@ -1038,7 +1059,7 @@ function PolicyNetSection() {
           ))}
         </div>
       </div>
-      <div className="pill-row" style={{ justifyContent: "center" }}>
+      <div className="pill-row">
         <span className="pill-row-label">BREAKDOWN</span>
         <div className="scenario-pills">
           {[
@@ -1333,8 +1354,7 @@ function PolicyNetSection() {
         fully offset the average hit but still leave some deciles worse off.
         Fixed-cost policies cover a larger share when the shock is
         milder. The National Energy Guarantee subsidises consumption below
-        a threshold. Use the breakdown toggles to see how the shock distributes
-        across tenure, household type and constituency.
+        a threshold.
       </p>
     </section>
   );
@@ -1351,9 +1371,9 @@ function PolicyComparisonSection() {
 
   const policyKeys = ["flat_transfer", "ct_rebate", "bn_transfer", "bn_epg", "neg"];
   const policyLabels = {
-    flat_transfer: "A. Flat transfer", ct_rebate: "B. CT rebate",
-    bn_transfer: "C. BN transfer", bn_epg: "D. BN EPG",
-    neg: "E. Energy Guarantee",
+    flat_transfer: "Flat transfer", ct_rebate: "CT rebate",
+    bn_transfer: "BN transfer", bn_epg: "BN EPG",
+    neg: "Energy Guarantee",
   };
   const policyBarLabels = {
     flat_transfer: "Flat transfer", ct_rebate: "CT rebate",
@@ -1454,8 +1474,8 @@ function PolicyComparisonSection() {
     <section className="section" id="policy-comparison">
       <h2 className="section-title">Policy at a glance</h2>
       <p className="section-description">
-        This chart compares all five policies side by side for the 2026-27 fiscal year. Use the metric toggle to switch
-        between exchequer cost, reduction in fuel poverty rate, and reduction in fuel poor households.
+        This section compares all five policies side by side. Use the metric toggle to switch
+        between exchequer cost, fuel poverty rate reduction, and fuel poor household reduction.
       </p>
 
       <div className="pill-row">
@@ -1647,12 +1667,12 @@ export default function Dashboard() {
         0.8% of consumption per year (<a href="#ref-manzano">Manzano and Rey, 2013</a>).
       </p>
       <p className="section-description">
-        The results below first establish the baseline energy burden across
-        UK households, then model five shock scenarios ranging from +10% to
-        2022-level prices. For each scenario, we estimate the extra cost by
-        income decile, tenure, and household type, with and without behavioural
-        demand response. We then evaluate five policy responses and compare
-        their exchequer cost against their effectiveness in reducing fuel poverty.
+        The following sections first establish the baseline energy burden
+        across UK households, then model five shock scenarios ranging from
+        +10% to 2022-level prices with and without behavioural demand
+        response. The analysis then evaluates five policy responses and
+        compares their exchequer cost against their effectiveness in
+        reducing fuel poverty.
       </p>
       </section>
 

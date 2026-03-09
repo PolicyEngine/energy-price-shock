@@ -524,16 +524,59 @@ def policy_net_position(data):
 
 # ── 10b. Post-policy fuel poverty ────────────────────────────────────────
 
-def policy_fuel_poverty(data):
-    """Compute fuel poverty rates after each policy for every scenario × decile.
+def _fp_by_group(energy, income, weights, payment, group_arr, groups, pct, behavioral_factor):
+    """Compute post-policy FP rates grouped by an arbitrary categorical array."""
+    result = []
+    for g in groups:
+        mask = group_arr == g
+        e_g, i_g, w_g, p_g = energy[mask], income[mask], weights[mask], payment[mask]
+        n_hh = float(w_g.sum()) / 1e6
+        if n_hh == 0:
+            result.append({"group": g, "extra_cost": 0, "pct_of_income": 0,
+                           "fp_rate": 0, "fp_households_m": 0,
+                           "behavioral_extra_cost": 0, "behavioral_pct_of_income": 0,
+                           "behavioral_fp_rate": 0, "behavioral_fp_households_m": 0})
+            continue
+        # Static
+        shocked_e = e_g * (1 + pct)
+        net_s = np.maximum(shocked_e - p_g, 0)
+        extra_s = float(weighted_mean(net_s - e_g, w_g))
+        pct_inc_s = float(weighted_mean(net_s / np.where(i_g > 0, i_g, 1) * 100, w_g))
+        fp_s = float(np.average((net_s / np.where(i_g > 0, i_g, 1)) > 0.10, weights=w_g)) * 100
+        # Behavioural
+        behav_e = e_g * behavioral_factor
+        net_b = np.maximum(behav_e - p_g, 0)
+        extra_b = float(weighted_mean(net_b - e_g, w_g))
+        pct_inc_b = float(weighted_mean(net_b / np.where(i_g > 0, i_g, 1) * 100, w_g))
+        fp_b = float(np.average((net_b / np.where(i_g > 0, i_g, 1)) > 0.10, weights=w_g)) * 100
+        result.append({
+            "group": str(g),
+            "extra_cost": round(extra_s),
+            "pct_of_income": round(pct_inc_s, 1),
+            "fp_rate": round(fp_s, 1),
+            "fp_households_m": round(fp_s / 100 * n_hh, 2),
+            "behavioral_extra_cost": round(extra_b),
+            "behavioral_pct_of_income": round(pct_inc_b, 1),
+            "behavioral_fp_rate": round(fp_b, 1),
+            "behavioral_fp_households_m": round(fp_b / 100 * n_hh, 2),
+        })
+    return result
 
-    Returns dict keyed by policy name, each containing a list of scenario dicts
-    with per-decile static and behavioural FP rates after policy offset.
+
+def policy_fuel_poverty(data):
+    """Compute fuel poverty rates after each policy for every scenario,
+    broken down by decile, tenure, and household type.
+
+    Returns dict keyed by policy name, each containing a list of scenario dicts.
     """
     energy = data["energy"]
     income = data["income"]
     weights = data["weights"]
     decile_arr = data["decile"]
+    tenure_arr = data["tenure"]
+    hh_type_arr = data["hh_type"]
+    tenure_groups = sorted(np.unique(tenure_arr))
+    hh_type_groups = sorted(np.unique(hh_type_arr))
     epsilon = SHORT_RUN_ELASTICITY
 
     # --- Get household-level payment arrays for PE policies (A-C) ---
@@ -638,6 +681,16 @@ def policy_fuel_poverty(data):
             )) * 100
             n_total = float(weights.sum()) / 1e6
 
+            # Tenure and household type breakdowns
+            by_tenure = _fp_by_group(energy, income, weights, payment,
+                                     tenure_arr, tenure_groups, pct, behavioral_factor)
+            for t in by_tenure:
+                t["tenure"] = t.pop("group")
+            by_hh_type = _fp_by_group(energy, income, weights, payment,
+                                      hh_type_arr, hh_type_groups, pct, behavioral_factor)
+            for h in by_hh_type:
+                h["hh_type"] = h.pop("group")
+
             scenario_list.append({
                 "scenario": name,
                 "fp_rate": round(fp_all_s, 1),
@@ -645,6 +698,8 @@ def policy_fuel_poverty(data):
                 "behavioral_fp_rate": round(fp_all_b, 1),
                 "behavioral_fp_households_m": round(fp_all_b / 100 * n_total, 2),
                 "deciles": deciles,
+                "by_tenure": by_tenure,
+                "by_hh_type": by_hh_type,
             })
         results[policy_key] = scenario_list
 
