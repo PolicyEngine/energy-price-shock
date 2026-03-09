@@ -159,7 +159,6 @@ def shock_scenarios(data):
             "deciles": deciles,
             "by_tenure": _grouped_shock(data, "tenure", "tenure", pct),
             "by_hh_type": _grouped_shock(data, "hh_type", "hh_type", pct),
-            "by_region": _grouped_shock(data, "region", "region", pct),
         })
     return scenarios
 
@@ -267,7 +266,6 @@ def behavioral_responses(data):
             "deciles": deciles,
             "by_tenure": _grouped_shock(data, "tenure", "tenure", price_pct, epsilon),
             "by_hh_type": _grouped_shock(data, "hh_type", "hh_type", price_pct, epsilon),
-            "by_region": _grouped_shock(data, "region", "region", price_pct, epsilon),
         })
     return results_list
 
@@ -522,6 +520,227 @@ def policy_net_position(data):
             "deciles": deciles,
         }
     return results_dict
+
+
+# ── 10b. Post-policy fuel poverty ────────────────────────────────────────
+
+def policy_fuel_poverty(data):
+    """Compute fuel poverty rates after each policy for every scenario × decile.
+
+    Returns dict keyed by policy name, each containing a list of scenario dicts
+    with per-decile static and behavioural FP rates after policy offset.
+    """
+    energy = data["energy"]
+    income = data["income"]
+    weights = data["weights"]
+    decile_arr = data["decile"]
+    epsilon = SHORT_RUN_ELASTICITY
+
+    # --- Get household-level payment arrays for PE policies (A-C) ---
+    pe_policies = {
+        "epg": {
+            "reform": {
+                "gov.ofgem.energy_price_cap": {"2026-01-01": SHOCK_CAP},
+                "gov.ofgem.energy_price_guarantee": {"2026-01-01": EPG_TARGET},
+            },
+            "variable": "epg_subsidy",
+        },
+        "flat_transfer": {
+            "reform": {
+                "gov.treasury.energy_bills_rebate.energy_bills_credit": {"2026-01-01": FLAT_TRANSFER},
+            },
+            "variable": "ebr_energy_bills_credit",
+        },
+        "ct_rebate": {
+            "reform": {
+                "gov.treasury.energy_bills_rebate.council_tax_rebate.amount": {"2026-01-01": CT_REBATE},
+            },
+            "variable": "ebr_council_tax_rebate",
+        },
+    }
+
+    # Household-level payment arrays for A-C (fixed, don't vary by scenario)
+    hh_payments = {}
+    for key, cfg in pe_policies.items():
+        sim = Microsimulation(reform=cfg["reform"])
+        pay = sim.calculate(cfg["variable"], YEAR)
+        hh_payments[key] = pay.values if hasattr(pay, "values") else np.array(pay)
+
+    # EPG scales by scenario: only activates above EPG_TARGET
+    # The microsim was run at SHOCK_CAP (+60%), so we scale the subsidy
+    epg_ref_pct = (SHOCK_CAP - CURRENT_CAP) / CURRENT_CAP
+
+    results = {}
+    for policy_key in ["epg", "flat_transfer", "ct_rebate", "bn_transfer", "bn_epg"]:
+        scenario_list = []
+        for name, new_cap in PRICE_SCENARIOS.items():
+            pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
+            behavioral_factor = (1 + pct) * (1 + epsilon * pct)
+
+            # Compute household-level payment for this scenario
+            if policy_key == "epg":
+                # Scale EPG: only activates when cap > EPG_TARGET
+                epg_scale = max(0, new_cap - EPG_TARGET) / (SHOCK_CAP - EPG_TARGET)
+                payment = hh_payments["epg"] * epg_scale
+            elif policy_key in hh_payments:
+                payment = hh_payments[policy_key]
+            elif policy_key == "bn_transfer":
+                # Flat payment = average extra cost
+                avg_extra = float(weighted_mean(energy, weights) * pct)
+                payment = np.full_like(energy, avg_extra)
+            elif policy_key == "bn_epg":
+                # Full offset: payment = each household's extra cost
+                payment = energy * pct
+            else:
+                payment = np.zeros_like(energy)
+
+            deciles = []
+            for d in range(1, 11):
+                mask = decile_arr == d
+                e_d = energy[mask]
+                i_d = income[mask]
+                w_d = weights[mask]
+                p_d = payment[mask]
+                n_hh = float(w_d.sum()) / 1e6
+
+                # Static: shocked energy minus policy payment
+                shocked_e = e_d * (1 + pct)
+                net_e_static = np.maximum(shocked_e - p_d, 0)
+                ratio_s = net_e_static / np.where(i_d > 0, i_d, 1)
+                fp_static = float(np.average(ratio_s > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
+
+                # Behavioural: reduced consumption minus policy payment
+                behav_e = e_d * behavioral_factor
+                net_e_behav = np.maximum(behav_e - p_d, 0)
+                ratio_b = net_e_behav / np.where(i_d > 0, i_d, 1)
+                fp_behav = float(np.average(ratio_b > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
+
+                deciles.append({
+                    "decile": d,
+                    "fp_rate": round(fp_static, 1),
+                    "fp_households_m": round(fp_static / 100 * n_hh, 2),
+                    "behavioral_fp_rate": round(fp_behav, 1),
+                    "behavioral_fp_households_m": round(fp_behav / 100 * n_hh, 2),
+                })
+
+            # Aggregate
+            shocked_all = energy * (1 + pct)
+            net_all_s = np.maximum(shocked_all - payment, 0)
+            fp_all_s = float(np.average(
+                (net_all_s / np.where(income > 0, income, 1)) > 0.10,
+                weights=weights,
+            )) * 100
+            behav_all = energy * behavioral_factor
+            net_all_b = np.maximum(behav_all - payment, 0)
+            fp_all_b = float(np.average(
+                (net_all_b / np.where(income > 0, income, 1)) > 0.10,
+                weights=weights,
+            )) * 100
+            n_total = float(weights.sum()) / 1e6
+
+            scenario_list.append({
+                "scenario": name,
+                "fp_rate": round(fp_all_s, 1),
+                "fp_households_m": round(fp_all_s / 100 * n_total, 2),
+                "behavioral_fp_rate": round(fp_all_b, 1),
+                "behavioral_fp_households_m": round(fp_all_b / 100 * n_total, 2),
+                "deciles": deciles,
+            })
+        results[policy_key] = scenario_list
+
+    # --- NEG: household-level benefit = min(elec, threshold) at shocked prices ---
+    elec, gas = data["elec"], data["gas"]
+    neg_baseline_benefit = np.minimum(elec, NEG_ELEC_SPEND)
+
+    neg_scenarios = []
+    for name, new_cap in PRICE_SCENARIOS.items():
+        pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
+        behavioral_factor = (1 + pct) * (1 + epsilon * pct)
+        shocked_elec = elec * (1 + pct)
+        neg_threshold_shocked = NEG_ELEC_SPEND * (1 + pct)
+        benefit_shocked = np.minimum(shocked_elec, neg_threshold_shocked)
+        # NEG payment = extra benefit vs baseline
+        payment = benefit_shocked - neg_baseline_benefit
+
+        deciles = []
+        for d in range(1, 11):
+            mask = decile_arr == d
+            e_d, i_d, w_d, p_d = energy[mask], income[mask], weights[mask], payment[mask]
+            n_hh = float(w_d.sum()) / 1e6
+            shocked_e = e_d * (1 + pct)
+            net_s = np.maximum(shocked_e - p_d, 0)
+            fp_s = float(np.average((net_s / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
+            behav_e = e_d * behavioral_factor
+            net_b = np.maximum(behav_e - p_d, 0)
+            fp_b = float(np.average((net_b / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
+            deciles.append({
+                "decile": d,
+                "fp_rate": round(fp_s, 1), "fp_households_m": round(fp_s / 100 * n_hh, 2),
+                "behavioral_fp_rate": round(fp_b, 1), "behavioral_fp_households_m": round(fp_b / 100 * n_hh, 2),
+            })
+        n_total = float(weights.sum()) / 1e6
+        shocked_all = energy * (1 + pct)
+        net_all_s = np.maximum(shocked_all - payment, 0)
+        fp_all_s = float(np.average((net_all_s / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
+        behav_all = energy * behavioral_factor
+        net_all_b = np.maximum(behav_all - payment, 0)
+        fp_all_b = float(np.average((net_all_b / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
+        neg_scenarios.append({
+            "scenario": name,
+            "fp_rate": round(fp_all_s, 1), "fp_households_m": round(fp_all_s / 100 * n_total, 2),
+            "behavioral_fp_rate": round(fp_all_b, 1), "behavioral_fp_households_m": round(fp_all_b / 100 * n_total, 2),
+            "deciles": deciles,
+        })
+    results["neg"] = neg_scenarios
+
+    # --- RBT: household-level net effect (negative = saving) ---
+    threshold = NEG_ELEC_SPEND
+    discount_rate = 0.50
+    block1 = np.minimum(elec, threshold)
+    block1_subsidy = block1 * discount_rate
+    block2 = np.maximum(elec - threshold, 0)
+    total_subsidy = float(np.sum(block1_subsidy * weights))
+    total_block2 = float(np.sum(block2 * weights))
+    surcharge_rate = total_subsidy / total_block2 if total_block2 > 0 else 0
+    rbt_payment = block1_subsidy - block2 * surcharge_rate  # positive = saving
+
+    rbt_scenarios = []
+    for name, new_cap in PRICE_SCENARIOS.items():
+        pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
+        behavioral_factor = (1 + pct) * (1 + epsilon * pct)
+
+        deciles = []
+        for d in range(1, 11):
+            mask = decile_arr == d
+            e_d, i_d, w_d, p_d = energy[mask], income[mask], weights[mask], rbt_payment[mask]
+            n_hh = float(w_d.sum()) / 1e6
+            shocked_e = e_d * (1 + pct)
+            net_s = np.maximum(shocked_e - p_d, 0)
+            fp_s = float(np.average((net_s / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
+            behav_e = e_d * behavioral_factor
+            net_b = np.maximum(behav_e - p_d, 0)
+            fp_b = float(np.average((net_b / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
+            deciles.append({
+                "decile": d,
+                "fp_rate": round(fp_s, 1), "fp_households_m": round(fp_s / 100 * n_hh, 2),
+                "behavioral_fp_rate": round(fp_b, 1), "behavioral_fp_households_m": round(fp_b / 100 * n_hh, 2),
+            })
+        n_total = float(weights.sum()) / 1e6
+        shocked_all = energy * (1 + pct)
+        net_all_s = np.maximum(shocked_all - rbt_payment, 0)
+        fp_all_s = float(np.average((net_all_s / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
+        behav_all = energy * behavioral_factor
+        net_all_b = np.maximum(behav_all - rbt_payment, 0)
+        fp_all_b = float(np.average((net_all_b / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
+        rbt_scenarios.append({
+            "scenario": name,
+            "fp_rate": round(fp_all_s, 1), "fp_households_m": round(fp_all_s / 100 * n_total, 2),
+            "behavioral_fp_rate": round(fp_all_b, 1), "behavioral_fp_households_m": round(fp_all_b / 100 * n_total, 2),
+            "deciles": deciles,
+        })
+    results["rbt"] = rbt_scenarios
+
+    return results
 
 
 # ── 11. Electricity vs gas split ─────────────────────────────────────────

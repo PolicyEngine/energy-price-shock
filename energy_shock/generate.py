@@ -54,14 +54,14 @@ def run_all():
     print("  Policy C: CT rebate...")
     pol_ct = sections.policy_ct_rebate(data)
 
-    print("  Policy D: Winter fuel...")
-    pol_wfa = sections.policy_wfa(data)
-
     print("  Policy E: Combined...")
     pol_combined = sections.policy_combined(data)
 
     print("  Policy net positions...")
     pol_net = sections.policy_net_position(data)
+
+    print("  Post-policy fuel poverty...")
+    pol_fp = sections.policy_fuel_poverty(data)
 
     results = {
         "baseline": baseline,
@@ -72,10 +72,10 @@ def run_all():
             "epg": pol_epg,
             "flat_transfer": pol_flat,
             "ct_rebate": pol_ct,
-            "winter_fuel": pol_wfa,
             "combined": pol_combined,
         },
         "policy_net_position": pol_net,
+        "policy_fuel_poverty": pol_fp,
         "config": {
             "year": YEAR,
             "current_cap": CURRENT_CAP,
@@ -98,9 +98,6 @@ def run_all():
     print("  Electricity/gas split...")
     split = sections.energy_split(data)
 
-    print("  Regional breakdown...")
-    regional = sections.regional_breakdown(data)
-
     print("  Tenure breakdown...")
     tenure = sections.tenure_breakdown(data)
 
@@ -113,17 +110,12 @@ def run_all():
     print("  Rising block tariff...")
     rbt = sections.rising_block_tariff(data)
 
-    print("  Gas-only price cap...")
-    gas_cap = sections.gas_price_cap(data)
-
     results_v2 = {
         "energy_split": split,
-        "regional": regional,
         "tenure": tenure,
         "household_type": hh_type,
         "neg_policy": neg,
         "rising_block_tariff": rbt,
-        "gas_price_cap": gas_cap,
     }
 
     path_v2 = OUTPUT_DIR / "results_v2.json"

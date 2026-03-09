@@ -120,6 +120,65 @@ html {
   margin-left: 2px;
 }
 
+.kpi-info-wrap {
+  position: relative;
+  display: inline-block;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.kpi-info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid #cbd5e1;
+  font-size: 0.55rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #94a3b8;
+  cursor: help;
+  line-height: 1;
+}
+
+.kpi-info-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #f1f5f9;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.45;
+  padding: 8px 12px;
+  border-radius: 6px;
+  white-space: normal;
+  width: 220px;
+  z-index: 30;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  pointer-events: none;
+}
+
+.kpi-info-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1e293b;
+}
+
+.kpi-info-wrap:hover .kpi-info-tooltip {
+  display: block;
+}
+
 /* Data tables */
 .data-table-wrapper {
   background: white;

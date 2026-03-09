@@ -235,92 +235,6 @@
           "fp_rate": 18.1,
           "fp_households_m": 1.03
         }
-      ],
-      "by_region": [
-        {
-          "region": "EAST_MIDLANDS",
-          "extra_cost": 153,
-          "pct_of_income": 0.3,
-          "fp_rate": 7.2,
-          "fp_households_m": 0.17
-        },
-        {
-          "region": "EAST_OF_ENGLAND",
-          "extra_cost": 178,
-          "pct_of_income": 0.3,
-          "fp_rate": 9.7,
-          "fp_households_m": 0.29
-        },
-        {
-          "region": "LONDON",
-          "extra_cost": 151,
-          "pct_of_income": 0.2,
-          "fp_rate": 13.3,
-          "fp_households_m": 0.54
-        },
-        {
-          "region": "NORTHERN_IRELAND",
-          "extra_cost": 191,
-          "pct_of_income": 0.3,
-          "fp_rate": 12.6,
-          "fp_households_m": 0.1
-        },
-        {
-          "region": "NORTH_EAST",
-          "extra_cost": 157,
-          "pct_of_income": 0.3,
-          "fp_rate": 11.4,
-          "fp_households_m": 0.15
-        },
-        {
-          "region": "NORTH_WEST",
-          "extra_cost": 161,
-          "pct_of_income": 0.4,
-          "fp_rate": 13.5,
-          "fp_households_m": 0.48
-        },
-        {
-          "region": "SCOTLAND",
-          "extra_cost": 157,
-          "pct_of_income": 0.3,
-          "fp_rate": 10.2,
-          "fp_households_m": 0.28
-        },
-        {
-          "region": "SOUTH_EAST",
-          "extra_cost": 142,
-          "pct_of_income": 0.3,
-          "fp_rate": 9.0,
-          "fp_households_m": 0.39
-        },
-        {
-          "region": "SOUTH_WEST",
-          "extra_cost": 151,
-          "pct_of_income": 0.3,
-          "fp_rate": 10.3,
-          "fp_households_m": 0.29
-        },
-        {
-          "region": "WALES",
-          "extra_cost": 131,
-          "pct_of_income": 0.3,
-          "fp_rate": 8.1,
-          "fp_households_m": 0.13
-        },
-        {
-          "region": "WEST_MIDLANDS",
-          "extra_cost": 156,
-          "pct_of_income": 0.3,
-          "fp_rate": 6.6,
-          "fp_households_m": 0.18
-        },
-        {
-          "region": "YORKSHIRE",
-          "extra_cost": 164,
-          "pct_of_income": 0.3,
-          "fp_rate": 11.1,
-          "fp_households_m": 0.29
-        }
       ]
     },
     {
@@ -488,92 +402,6 @@
           "pct_of_income": 0.9,
           "fp_rate": 19.9,
           "fp_households_m": 1.13
-        }
-      ],
-      "by_region": [
-        {
-          "region": "EAST_MIDLANDS",
-          "extra_cost": 307,
-          "pct_of_income": 0.6,
-          "fp_rate": 8.0,
-          "fp_households_m": 0.19
-        },
-        {
-          "region": "EAST_OF_ENGLAND",
-          "extra_cost": 357,
-          "pct_of_income": 0.7,
-          "fp_rate": 12.2,
-          "fp_households_m": 0.36
-        },
-        {
-          "region": "LONDON",
-          "extra_cost": 302,
-          "pct_of_income": 0.4,
-          "fp_rate": 14.3,
-          "fp_households_m": 0.57
-        },
-        {
-          "region": "NORTHERN_IRELAND",
-          "extra_cost": 383,
-          "pct_of_income": 0.7,
-          "fp_rate": 13.9,
-          "fp_households_m": 0.11
-        },
-        {
-          "region": "NORTH_EAST",
-          "extra_cost": 314,
-          "pct_of_income": 0.6,
-          "fp_rate": 11.9,
-          "fp_households_m": 0.16
-        },
-        {
-          "region": "NORTH_WEST",
-          "extra_cost": 323,
-          "pct_of_income": 0.7,
-          "fp_rate": 14.1,
-          "fp_households_m": 0.51
-        },
-        {
-          "region": "SCOTLAND",
-          "extra_cost": 314,
-          "pct_of_income": 0.6,
-          "fp_rate": 11.0,
-          "fp_households_m": 0.3
-        },
-        {
-          "region": "SOUTH_EAST",
-          "extra_cost": 284,
-          "pct_of_income": 0.5,
-          "fp_rate": 9.8,
-          "fp_households_m": 0.42
-        },
-        {
-          "region": "SOUTH_WEST",
-          "extra_cost": 303,
-          "pct_of_income": 0.6,
-          "fp_rate": 11.2,
-          "fp_households_m": 0.32
-        },
-        {
-          "region": "WALES",
-          "extra_cost": 262,
-          "pct_of_income": 0.5,
-          "fp_rate": 9.1,
-          "fp_households_m": 0.14
-        },
-        {
-          "region": "WEST_MIDLANDS",
-          "extra_cost": 312,
-          "pct_of_income": 0.6,
-          "fp_rate": 11.6,
-          "fp_households_m": 0.32
-        },
-        {
-          "region": "YORKSHIRE",
-          "extra_cost": 327,
-          "pct_of_income": 0.7,
-          "fp_rate": 12.2,
-          "fp_households_m": 0.32
         }
       ]
     },
@@ -743,92 +571,6 @@
           "fp_rate": 21.5,
           "fp_households_m": 1.22
         }
-      ],
-      "by_region": [
-        {
-          "region": "EAST_MIDLANDS",
-          "extra_cost": 460,
-          "pct_of_income": 0.8,
-          "fp_rate": 9.1,
-          "fp_households_m": 0.21
-        },
-        {
-          "region": "EAST_OF_ENGLAND",
-          "extra_cost": 535,
-          "pct_of_income": 1.0,
-          "fp_rate": 13.2,
-          "fp_households_m": 0.39
-        },
-        {
-          "region": "LONDON",
-          "extra_cost": 454,
-          "pct_of_income": 0.6,
-          "fp_rate": 15.5,
-          "fp_households_m": 0.62
-        },
-        {
-          "region": "NORTHERN_IRELAND",
-          "extra_cost": 574,
-          "pct_of_income": 1.0,
-          "fp_rate": 16.8,
-          "fp_households_m": 0.13
-        },
-        {
-          "region": "NORTH_EAST",
-          "extra_cost": 470,
-          "pct_of_income": 1.0,
-          "fp_rate": 12.3,
-          "fp_households_m": 0.17
-        },
-        {
-          "region": "NORTH_WEST",
-          "extra_cost": 484,
-          "pct_of_income": 1.1,
-          "fp_rate": 15.2,
-          "fp_households_m": 0.54
-        },
-        {
-          "region": "SCOTLAND",
-          "extra_cost": 470,
-          "pct_of_income": 0.9,
-          "fp_rate": 12.1,
-          "fp_households_m": 0.33
-        },
-        {
-          "region": "SOUTH_EAST",
-          "extra_cost": 426,
-          "pct_of_income": 0.8,
-          "fp_rate": 10.5,
-          "fp_households_m": 0.46
-        },
-        {
-          "region": "SOUTH_WEST",
-          "extra_cost": 454,
-          "pct_of_income": 0.8,
-          "fp_rate": 11.9,
-          "fp_households_m": 0.33
-        },
-        {
-          "region": "WALES",
-          "extra_cost": 393,
-          "pct_of_income": 0.8,
-          "fp_rate": 9.9,
-          "fp_households_m": 0.15
-        },
-        {
-          "region": "WEST_MIDLANDS",
-          "extra_cost": 468,
-          "pct_of_income": 0.9,
-          "fp_rate": 13.6,
-          "fp_households_m": 0.38
-        },
-        {
-          "region": "YORKSHIRE",
-          "extra_cost": 491,
-          "pct_of_income": 1.0,
-          "fp_rate": 13.0,
-          "fp_households_m": 0.34
-        }
       ]
     },
     {
@@ -997,92 +739,6 @@
           "fp_rate": 26.6,
           "fp_households_m": 1.51
         }
-      ],
-      "by_region": [
-        {
-          "region": "EAST_MIDLANDS",
-          "extra_cost": 920,
-          "pct_of_income": 1.7,
-          "fp_rate": 14.6,
-          "fp_households_m": 0.34
-        },
-        {
-          "region": "EAST_OF_ENGLAND",
-          "extra_cost": 1070,
-          "pct_of_income": 2.0,
-          "fp_rate": 19.2,
-          "fp_households_m": 0.57
-        },
-        {
-          "region": "LONDON",
-          "extra_cost": 907,
-          "pct_of_income": 1.2,
-          "fp_rate": 18.5,
-          "fp_households_m": 0.74
-        },
-        {
-          "region": "NORTHERN_IRELAND",
-          "extra_cost": 1148,
-          "pct_of_income": 2.1,
-          "fp_rate": 25.2,
-          "fp_households_m": 0.19
-        },
-        {
-          "region": "NORTH_EAST",
-          "extra_cost": 941,
-          "pct_of_income": 1.9,
-          "fp_rate": 16.4,
-          "fp_households_m": 0.22
-        },
-        {
-          "region": "NORTH_WEST",
-          "extra_cost": 968,
-          "pct_of_income": 2.1,
-          "fp_rate": 18.9,
-          "fp_households_m": 0.68
-        },
-        {
-          "region": "SCOTLAND",
-          "extra_cost": 941,
-          "pct_of_income": 1.9,
-          "fp_rate": 17.5,
-          "fp_households_m": 0.48
-        },
-        {
-          "region": "SOUTH_EAST",
-          "extra_cost": 852,
-          "pct_of_income": 1.5,
-          "fp_rate": 12.8,
-          "fp_households_m": 0.56
-        },
-        {
-          "region": "SOUTH_WEST",
-          "extra_cost": 909,
-          "pct_of_income": 1.7,
-          "fp_rate": 15.4,
-          "fp_households_m": 0.43
-        },
-        {
-          "region": "WALES",
-          "extra_cost": 786,
-          "pct_of_income": 1.6,
-          "fp_rate": 13.1,
-          "fp_households_m": 0.2
-        },
-        {
-          "region": "WEST_MIDLANDS",
-          "extra_cost": 937,
-          "pct_of_income": 1.9,
-          "fp_rate": 17.7,
-          "fp_households_m": 0.49
-        },
-        {
-          "region": "YORKSHIRE",
-          "extra_cost": 982,
-          "pct_of_income": 2.0,
-          "fp_rate": 15.1,
-          "fp_households_m": 0.4
-        }
       ]
     },
     {
@@ -1250,92 +906,6 @@
           "pct_of_income": 5.7,
           "fp_rate": 42.7,
           "fp_households_m": 2.42
-        }
-      ],
-      "by_region": [
-        {
-          "region": "EAST_MIDLANDS",
-          "extra_cost": 1985,
-          "pct_of_income": 3.7,
-          "fp_rate": 28.1,
-          "fp_households_m": 0.65
-        },
-        {
-          "region": "EAST_OF_ENGLAND",
-          "extra_cost": 2309,
-          "pct_of_income": 4.3,
-          "fp_rate": 32.5,
-          "fp_households_m": 0.97
-        },
-        {
-          "region": "LONDON",
-          "extra_cost": 1957,
-          "pct_of_income": 2.7,
-          "fp_rate": 27.9,
-          "fp_households_m": 1.12
-        },
-        {
-          "region": "NORTHERN_IRELAND",
-          "extra_cost": 2477,
-          "pct_of_income": 4.5,
-          "fp_rate": 35.8,
-          "fp_households_m": 0.27
-        },
-        {
-          "region": "NORTH_EAST",
-          "extra_cost": 2030,
-          "pct_of_income": 4.2,
-          "fp_rate": 31.2,
-          "fp_households_m": 0.42
-        },
-        {
-          "region": "NORTH_WEST",
-          "extra_cost": 2088,
-          "pct_of_income": 4.6,
-          "fp_rate": 34.9,
-          "fp_households_m": 1.25
-        },
-        {
-          "region": "SCOTLAND",
-          "extra_cost": 2030,
-          "pct_of_income": 4.0,
-          "fp_rate": 28.1,
-          "fp_households_m": 0.76
-        },
-        {
-          "region": "SOUTH_EAST",
-          "extra_cost": 1838,
-          "pct_of_income": 3.3,
-          "fp_rate": 20.6,
-          "fp_households_m": 0.9
-        },
-        {
-          "region": "SOUTH_WEST",
-          "extra_cost": 1960,
-          "pct_of_income": 3.7,
-          "fp_rate": 21.9,
-          "fp_households_m": 0.62
-        },
-        {
-          "region": "WALES",
-          "extra_cost": 1696,
-          "pct_of_income": 3.4,
-          "fp_rate": 21.8,
-          "fp_households_m": 0.34
-        },
-        {
-          "region": "WEST_MIDLANDS",
-          "extra_cost": 2021,
-          "pct_of_income": 4.1,
-          "fp_rate": 28.0,
-          "fp_households_m": 0.77
-        },
-        {
-          "region": "YORKSHIRE",
-          "extra_cost": 2119,
-          "pct_of_income": 4.4,
-          "fp_rate": 26.6,
-          "fp_households_m": 0.7
         }
       ]
     }
@@ -1660,140 +1230,6 @@
           "behavioral_fp_rate": 17.8,
           "behavioral_fp_households_m": 1.01
         }
-      ],
-      "by_region": [
-        {
-          "region": "EAST_MIDLANDS",
-          "extra_cost": 153,
-          "pct_of_income": 0.3,
-          "fp_rate": 7.2,
-          "fp_households_m": 0.17,
-          "behavioral_extra_cost": 128,
-          "behavioral_pct_of_income": 0.2,
-          "behavioral_fp_rate": 7.2,
-          "behavioral_fp_households_m": 0.17
-        },
-        {
-          "region": "EAST_OF_ENGLAND",
-          "extra_cost": 178,
-          "pct_of_income": 0.3,
-          "fp_rate": 9.7,
-          "fp_households_m": 0.29,
-          "behavioral_extra_cost": 149,
-          "behavioral_pct_of_income": 0.3,
-          "behavioral_fp_rate": 9.4,
-          "behavioral_fp_households_m": 0.28
-        },
-        {
-          "region": "LONDON",
-          "extra_cost": 151,
-          "pct_of_income": 0.2,
-          "fp_rate": 13.3,
-          "fp_households_m": 0.54,
-          "behavioral_extra_cost": 126,
-          "behavioral_pct_of_income": 0.2,
-          "behavioral_fp_rate": 13.1,
-          "behavioral_fp_households_m": 0.53
-        },
-        {
-          "region": "NORTHERN_IRELAND",
-          "extra_cost": 191,
-          "pct_of_income": 0.3,
-          "fp_rate": 12.6,
-          "fp_households_m": 0.1,
-          "behavioral_extra_cost": 160,
-          "behavioral_pct_of_income": 0.3,
-          "behavioral_fp_rate": 12.5,
-          "behavioral_fp_households_m": 0.1
-        },
-        {
-          "region": "NORTH_EAST",
-          "extra_cost": 157,
-          "pct_of_income": 0.3,
-          "fp_rate": 11.4,
-          "fp_households_m": 0.15,
-          "behavioral_extra_cost": 131,
-          "behavioral_pct_of_income": 0.3,
-          "behavioral_fp_rate": 11.4,
-          "behavioral_fp_households_m": 0.15
-        },
-        {
-          "region": "NORTH_WEST",
-          "extra_cost": 161,
-          "pct_of_income": 0.4,
-          "fp_rate": 13.5,
-          "fp_households_m": 0.48,
-          "behavioral_extra_cost": 135,
-          "behavioral_pct_of_income": 0.3,
-          "behavioral_fp_rate": 13.5,
-          "behavioral_fp_households_m": 0.48
-        },
-        {
-          "region": "SCOTLAND",
-          "extra_cost": 157,
-          "pct_of_income": 0.3,
-          "fp_rate": 10.2,
-          "fp_households_m": 0.28,
-          "behavioral_extra_cost": 131,
-          "behavioral_pct_of_income": 0.3,
-          "behavioral_fp_rate": 9.9,
-          "behavioral_fp_households_m": 0.27
-        },
-        {
-          "region": "SOUTH_EAST",
-          "extra_cost": 142,
-          "pct_of_income": 0.3,
-          "fp_rate": 9.0,
-          "fp_households_m": 0.39,
-          "behavioral_extra_cost": 119,
-          "behavioral_pct_of_income": 0.2,
-          "behavioral_fp_rate": 8.9,
-          "behavioral_fp_households_m": 0.39
-        },
-        {
-          "region": "SOUTH_WEST",
-          "extra_cost": 151,
-          "pct_of_income": 0.3,
-          "fp_rate": 10.3,
-          "fp_households_m": 0.29,
-          "behavioral_extra_cost": 126,
-          "behavioral_pct_of_income": 0.2,
-          "behavioral_fp_rate": 10.3,
-          "behavioral_fp_households_m": 0.29
-        },
-        {
-          "region": "WALES",
-          "extra_cost": 131,
-          "pct_of_income": 0.3,
-          "fp_rate": 8.1,
-          "fp_households_m": 0.13,
-          "behavioral_extra_cost": 109,
-          "behavioral_pct_of_income": 0.2,
-          "behavioral_fp_rate": 8.0,
-          "behavioral_fp_households_m": 0.12
-        },
-        {
-          "region": "WEST_MIDLANDS",
-          "extra_cost": 156,
-          "pct_of_income": 0.3,
-          "fp_rate": 6.6,
-          "fp_households_m": 0.18,
-          "behavioral_extra_cost": 130,
-          "behavioral_pct_of_income": 0.3,
-          "behavioral_fp_rate": 6.4,
-          "behavioral_fp_households_m": 0.18
-        },
-        {
-          "region": "YORKSHIRE",
-          "extra_cost": 164,
-          "pct_of_income": 0.3,
-          "fp_rate": 11.1,
-          "fp_households_m": 0.29,
-          "behavioral_extra_cost": 137,
-          "behavioral_pct_of_income": 0.3,
-          "behavioral_fp_rate": 11.0,
-          "behavioral_fp_households_m": 0.29
-        }
       ]
     },
     {
@@ -2076,140 +1512,6 @@
           "behavioral_pct_of_income": 0.7,
           "behavioral_fp_rate": 19.4,
           "behavioral_fp_households_m": 1.1
-        }
-      ],
-      "by_region": [
-        {
-          "region": "EAST_MIDLANDS",
-          "extra_cost": 307,
-          "pct_of_income": 0.6,
-          "fp_rate": 8.0,
-          "fp_households_m": 0.19,
-          "behavioral_extra_cost": 251,
-          "behavioral_pct_of_income": 0.5,
-          "behavioral_fp_rate": 7.9,
-          "behavioral_fp_households_m": 0.18
-        },
-        {
-          "region": "EAST_OF_ENGLAND",
-          "extra_cost": 357,
-          "pct_of_income": 0.7,
-          "fp_rate": 12.2,
-          "fp_households_m": 0.36,
-          "behavioral_extra_cost": 292,
-          "behavioral_pct_of_income": 0.6,
-          "behavioral_fp_rate": 11.8,
-          "behavioral_fp_households_m": 0.35
-        },
-        {
-          "region": "LONDON",
-          "extra_cost": 302,
-          "pct_of_income": 0.4,
-          "fp_rate": 14.3,
-          "fp_households_m": 0.57,
-          "behavioral_extra_cost": 248,
-          "behavioral_pct_of_income": 0.3,
-          "behavioral_fp_rate": 14.0,
-          "behavioral_fp_households_m": 0.56
-        },
-        {
-          "region": "NORTHERN_IRELAND",
-          "extra_cost": 383,
-          "pct_of_income": 0.7,
-          "fp_rate": 13.9,
-          "fp_households_m": 0.11,
-          "behavioral_extra_cost": 314,
-          "behavioral_pct_of_income": 0.6,
-          "behavioral_fp_rate": 13.3,
-          "behavioral_fp_households_m": 0.1
-        },
-        {
-          "region": "NORTH_EAST",
-          "extra_cost": 314,
-          "pct_of_income": 0.6,
-          "fp_rate": 11.9,
-          "fp_households_m": 0.16,
-          "behavioral_extra_cost": 257,
-          "behavioral_pct_of_income": 0.5,
-          "behavioral_fp_rate": 11.7,
-          "behavioral_fp_households_m": 0.16
-        },
-        {
-          "region": "NORTH_WEST",
-          "extra_cost": 323,
-          "pct_of_income": 0.7,
-          "fp_rate": 14.1,
-          "fp_households_m": 0.51,
-          "behavioral_extra_cost": 264,
-          "behavioral_pct_of_income": 0.6,
-          "behavioral_fp_rate": 13.9,
-          "behavioral_fp_households_m": 0.5
-        },
-        {
-          "region": "SCOTLAND",
-          "extra_cost": 314,
-          "pct_of_income": 0.6,
-          "fp_rate": 11.0,
-          "fp_households_m": 0.3,
-          "behavioral_extra_cost": 257,
-          "behavioral_pct_of_income": 0.5,
-          "behavioral_fp_rate": 10.7,
-          "behavioral_fp_households_m": 0.29
-        },
-        {
-          "region": "SOUTH_EAST",
-          "extra_cost": 284,
-          "pct_of_income": 0.5,
-          "fp_rate": 9.8,
-          "fp_households_m": 0.42,
-          "behavioral_extra_cost": 233,
-          "behavioral_pct_of_income": 0.4,
-          "behavioral_fp_rate": 9.6,
-          "behavioral_fp_households_m": 0.42
-        },
-        {
-          "region": "SOUTH_WEST",
-          "extra_cost": 303,
-          "pct_of_income": 0.6,
-          "fp_rate": 11.2,
-          "fp_households_m": 0.32,
-          "behavioral_extra_cost": 248,
-          "behavioral_pct_of_income": 0.5,
-          "behavioral_fp_rate": 10.7,
-          "behavioral_fp_households_m": 0.3
-        },
-        {
-          "region": "WALES",
-          "extra_cost": 262,
-          "pct_of_income": 0.5,
-          "fp_rate": 9.1,
-          "fp_households_m": 0.14,
-          "behavioral_extra_cost": 215,
-          "behavioral_pct_of_income": 0.4,
-          "behavioral_fp_rate": 8.9,
-          "behavioral_fp_households_m": 0.14
-        },
-        {
-          "region": "WEST_MIDLANDS",
-          "extra_cost": 312,
-          "pct_of_income": 0.6,
-          "fp_rate": 11.6,
-          "fp_households_m": 0.32,
-          "behavioral_extra_cost": 256,
-          "behavioral_pct_of_income": 0.5,
-          "behavioral_fp_rate": 11.5,
-          "behavioral_fp_households_m": 0.32
-        },
-        {
-          "region": "YORKSHIRE",
-          "extra_cost": 327,
-          "pct_of_income": 0.7,
-          "fp_rate": 12.2,
-          "fp_households_m": 0.32,
-          "behavioral_extra_cost": 268,
-          "behavioral_pct_of_income": 0.6,
-          "behavioral_fp_rate": 12.1,
-          "behavioral_fp_households_m": 0.32
         }
       ]
     },
@@ -2494,140 +1796,6 @@
           "behavioral_fp_rate": 20.2,
           "behavioral_fp_households_m": 1.15
         }
-      ],
-      "by_region": [
-        {
-          "region": "EAST_MIDLANDS",
-          "extra_cost": 460,
-          "pct_of_income": 0.8,
-          "fp_rate": 9.1,
-          "fp_households_m": 0.21,
-          "behavioral_extra_cost": 370,
-          "behavioral_pct_of_income": 0.7,
-          "behavioral_fp_rate": 8.3,
-          "behavioral_fp_households_m": 0.19
-        },
-        {
-          "region": "EAST_OF_ENGLAND",
-          "extra_cost": 535,
-          "pct_of_income": 1.0,
-          "fp_rate": 13.2,
-          "fp_households_m": 0.39,
-          "behavioral_extra_cost": 431,
-          "behavioral_pct_of_income": 0.8,
-          "behavioral_fp_rate": 12.8,
-          "behavioral_fp_households_m": 0.38
-        },
-        {
-          "region": "LONDON",
-          "extra_cost": 454,
-          "pct_of_income": 0.6,
-          "fp_rate": 15.5,
-          "fp_households_m": 0.62,
-          "behavioral_extra_cost": 365,
-          "behavioral_pct_of_income": 0.5,
-          "behavioral_fp_rate": 14.4,
-          "behavioral_fp_households_m": 0.58
-        },
-        {
-          "region": "NORTHERN_IRELAND",
-          "extra_cost": 574,
-          "pct_of_income": 1.0,
-          "fp_rate": 16.8,
-          "fp_households_m": 0.13,
-          "behavioral_extra_cost": 462,
-          "behavioral_pct_of_income": 0.8,
-          "behavioral_fp_rate": 13.9,
-          "behavioral_fp_households_m": 0.11
-        },
-        {
-          "region": "NORTH_EAST",
-          "extra_cost": 470,
-          "pct_of_income": 1.0,
-          "fp_rate": 12.3,
-          "fp_households_m": 0.17,
-          "behavioral_extra_cost": 379,
-          "behavioral_pct_of_income": 0.8,
-          "behavioral_fp_rate": 12.1,
-          "behavioral_fp_households_m": 0.16
-        },
-        {
-          "region": "NORTH_WEST",
-          "extra_cost": 484,
-          "pct_of_income": 1.1,
-          "fp_rate": 15.2,
-          "fp_households_m": 0.54,
-          "behavioral_extra_cost": 389,
-          "behavioral_pct_of_income": 0.9,
-          "behavioral_fp_rate": 14.7,
-          "behavioral_fp_households_m": 0.52
-        },
-        {
-          "region": "SCOTLAND",
-          "extra_cost": 470,
-          "pct_of_income": 0.9,
-          "fp_rate": 12.1,
-          "fp_households_m": 0.33,
-          "behavioral_extra_cost": 379,
-          "behavioral_pct_of_income": 0.7,
-          "behavioral_fp_rate": 11.4,
-          "behavioral_fp_households_m": 0.31
-        },
-        {
-          "region": "SOUTH_EAST",
-          "extra_cost": 426,
-          "pct_of_income": 0.8,
-          "fp_rate": 10.5,
-          "fp_households_m": 0.46,
-          "behavioral_extra_cost": 343,
-          "behavioral_pct_of_income": 0.6,
-          "behavioral_fp_rate": 9.8,
-          "behavioral_fp_households_m": 0.43
-        },
-        {
-          "region": "SOUTH_WEST",
-          "extra_cost": 454,
-          "pct_of_income": 0.8,
-          "fp_rate": 11.9,
-          "fp_households_m": 0.33,
-          "behavioral_extra_cost": 366,
-          "behavioral_pct_of_income": 0.7,
-          "behavioral_fp_rate": 11.4,
-          "behavioral_fp_households_m": 0.32
-        },
-        {
-          "region": "WALES",
-          "extra_cost": 393,
-          "pct_of_income": 0.8,
-          "fp_rate": 9.9,
-          "fp_households_m": 0.15,
-          "behavioral_extra_cost": 316,
-          "behavioral_pct_of_income": 0.6,
-          "behavioral_fp_rate": 9.6,
-          "behavioral_fp_households_m": 0.15
-        },
-        {
-          "region": "WEST_MIDLANDS",
-          "extra_cost": 468,
-          "pct_of_income": 0.9,
-          "fp_rate": 13.6,
-          "fp_households_m": 0.38,
-          "behavioral_extra_cost": 377,
-          "behavioral_pct_of_income": 0.8,
-          "behavioral_fp_rate": 11.8,
-          "behavioral_fp_households_m": 0.33
-        },
-        {
-          "region": "YORKSHIRE",
-          "extra_cost": 491,
-          "pct_of_income": 1.0,
-          "fp_rate": 13.0,
-          "fp_households_m": 0.34,
-          "behavioral_extra_cost": 395,
-          "behavioral_pct_of_income": 0.8,
-          "behavioral_fp_rate": 12.5,
-          "behavioral_fp_households_m": 0.33
-        }
       ]
     },
     {
@@ -2910,140 +2078,6 @@
           "behavioral_pct_of_income": 2.0,
           "behavioral_fp_rate": 23.9,
           "behavioral_fp_households_m": 1.36
-        }
-      ],
-      "by_region": [
-        {
-          "region": "EAST_MIDLANDS",
-          "extra_cost": 920,
-          "pct_of_income": 1.7,
-          "fp_rate": 14.6,
-          "fp_households_m": 0.34,
-          "behavioral_extra_cost": 699,
-          "behavioral_pct_of_income": 1.3,
-          "behavioral_fp_rate": 11.5,
-          "behavioral_fp_households_m": 0.27
-        },
-        {
-          "region": "EAST_OF_ENGLAND",
-          "extra_cost": 1070,
-          "pct_of_income": 2.0,
-          "fp_rate": 19.2,
-          "fp_households_m": 0.57,
-          "behavioral_extra_cost": 813,
-          "behavioral_pct_of_income": 1.5,
-          "behavioral_fp_rate": 17.8,
-          "behavioral_fp_households_m": 0.53
-        },
-        {
-          "region": "LONDON",
-          "extra_cost": 907,
-          "pct_of_income": 1.2,
-          "fp_rate": 18.5,
-          "fp_households_m": 0.74,
-          "behavioral_extra_cost": 689,
-          "behavioral_pct_of_income": 0.9,
-          "behavioral_fp_rate": 16.0,
-          "behavioral_fp_households_m": 0.64
-        },
-        {
-          "region": "NORTHERN_IRELAND",
-          "extra_cost": 1148,
-          "pct_of_income": 2.1,
-          "fp_rate": 25.2,
-          "fp_households_m": 0.19,
-          "behavioral_extra_cost": 873,
-          "behavioral_pct_of_income": 1.6,
-          "behavioral_fp_rate": 20.7,
-          "behavioral_fp_households_m": 0.16
-        },
-        {
-          "region": "NORTH_EAST",
-          "extra_cost": 941,
-          "pct_of_income": 1.9,
-          "fp_rate": 16.4,
-          "fp_households_m": 0.22,
-          "behavioral_extra_cost": 715,
-          "behavioral_pct_of_income": 1.5,
-          "behavioral_fp_rate": 14.1,
-          "behavioral_fp_households_m": 0.19
-        },
-        {
-          "region": "NORTH_WEST",
-          "extra_cost": 968,
-          "pct_of_income": 2.1,
-          "fp_rate": 18.9,
-          "fp_households_m": 0.68,
-          "behavioral_extra_cost": 735,
-          "behavioral_pct_of_income": 1.6,
-          "behavioral_fp_rate": 17.3,
-          "behavioral_fp_households_m": 0.62
-        },
-        {
-          "region": "SCOTLAND",
-          "extra_cost": 941,
-          "pct_of_income": 1.9,
-          "fp_rate": 17.5,
-          "fp_households_m": 0.48,
-          "behavioral_extra_cost": 715,
-          "behavioral_pct_of_income": 1.4,
-          "behavioral_fp_rate": 16.3,
-          "behavioral_fp_households_m": 0.44
-        },
-        {
-          "region": "SOUTH_EAST",
-          "extra_cost": 852,
-          "pct_of_income": 1.5,
-          "fp_rate": 12.8,
-          "fp_households_m": 0.56,
-          "behavioral_extra_cost": 647,
-          "behavioral_pct_of_income": 1.2,
-          "behavioral_fp_rate": 11.8,
-          "behavioral_fp_households_m": 0.51
-        },
-        {
-          "region": "SOUTH_WEST",
-          "extra_cost": 909,
-          "pct_of_income": 1.7,
-          "fp_rate": 15.4,
-          "fp_households_m": 0.43,
-          "behavioral_extra_cost": 691,
-          "behavioral_pct_of_income": 1.3,
-          "behavioral_fp_rate": 14.0,
-          "behavioral_fp_households_m": 0.39
-        },
-        {
-          "region": "WALES",
-          "extra_cost": 786,
-          "pct_of_income": 1.6,
-          "fp_rate": 13.1,
-          "fp_households_m": 0.2,
-          "behavioral_extra_cost": 597,
-          "behavioral_pct_of_income": 1.2,
-          "behavioral_fp_rate": 10.6,
-          "behavioral_fp_households_m": 0.16
-        },
-        {
-          "region": "WEST_MIDLANDS",
-          "extra_cost": 937,
-          "pct_of_income": 1.9,
-          "fp_rate": 17.7,
-          "fp_households_m": 0.49,
-          "behavioral_extra_cost": 712,
-          "behavioral_pct_of_income": 1.4,
-          "behavioral_fp_rate": 14.4,
-          "behavioral_fp_households_m": 0.4
-        },
-        {
-          "region": "YORKSHIRE",
-          "extra_cost": 982,
-          "pct_of_income": 2.0,
-          "fp_rate": 15.1,
-          "fp_households_m": 0.4,
-          "behavioral_extra_cost": 746,
-          "behavioral_pct_of_income": 1.6,
-          "behavioral_fp_rate": 13.7,
-          "behavioral_fp_households_m": 0.36
         }
       ]
     },
@@ -3328,140 +2362,6 @@
           "behavioral_fp_rate": 34.8,
           "behavioral_fp_households_m": 1.97
         }
-      ],
-      "by_region": [
-        {
-          "region": "EAST_MIDLANDS",
-          "extra_cost": 1985,
-          "pct_of_income": 3.7,
-          "fp_rate": 28.1,
-          "fp_households_m": 0.65,
-          "behavioral_extra_cost": 1302,
-          "behavioral_pct_of_income": 2.4,
-          "behavioral_fp_rate": 18.4,
-          "behavioral_fp_households_m": 0.43
-        },
-        {
-          "region": "EAST_OF_ENGLAND",
-          "extra_cost": 2309,
-          "pct_of_income": 4.3,
-          "fp_rate": 32.5,
-          "fp_households_m": 0.97,
-          "behavioral_extra_cost": 1514,
-          "behavioral_pct_of_income": 2.8,
-          "behavioral_fp_rate": 24.7,
-          "behavioral_fp_households_m": 0.74
-        },
-        {
-          "region": "LONDON",
-          "extra_cost": 1957,
-          "pct_of_income": 2.7,
-          "fp_rate": 27.9,
-          "fp_households_m": 1.12,
-          "behavioral_extra_cost": 1284,
-          "behavioral_pct_of_income": 1.7,
-          "behavioral_fp_rate": 23.6,
-          "behavioral_fp_households_m": 0.95
-        },
-        {
-          "region": "NORTHERN_IRELAND",
-          "extra_cost": 2477,
-          "pct_of_income": 4.5,
-          "fp_rate": 35.8,
-          "fp_households_m": 0.27,
-          "behavioral_extra_cost": 1625,
-          "behavioral_pct_of_income": 3.0,
-          "behavioral_fp_rate": 28.6,
-          "behavioral_fp_households_m": 0.22
-        },
-        {
-          "region": "NORTH_EAST",
-          "extra_cost": 2030,
-          "pct_of_income": 4.2,
-          "fp_rate": 31.2,
-          "fp_households_m": 0.42,
-          "behavioral_extra_cost": 1331,
-          "behavioral_pct_of_income": 2.7,
-          "behavioral_fp_rate": 21.5,
-          "behavioral_fp_households_m": 0.29
-        },
-        {
-          "region": "NORTH_WEST",
-          "extra_cost": 2088,
-          "pct_of_income": 4.6,
-          "fp_rate": 34.9,
-          "fp_households_m": 1.25,
-          "behavioral_extra_cost": 1369,
-          "behavioral_pct_of_income": 3.0,
-          "behavioral_fp_rate": 27.9,
-          "behavioral_fp_households_m": 1.0
-        },
-        {
-          "region": "SCOTLAND",
-          "extra_cost": 2030,
-          "pct_of_income": 4.0,
-          "fp_rate": 28.1,
-          "fp_households_m": 0.76,
-          "behavioral_extra_cost": 1331,
-          "behavioral_pct_of_income": 2.6,
-          "behavioral_fp_rate": 20.3,
-          "behavioral_fp_households_m": 0.55
-        },
-        {
-          "region": "SOUTH_EAST",
-          "extra_cost": 1838,
-          "pct_of_income": 3.3,
-          "fp_rate": 20.6,
-          "fp_households_m": 0.9,
-          "behavioral_extra_cost": 1205,
-          "behavioral_pct_of_income": 2.2,
-          "behavioral_fp_rate": 15.0,
-          "behavioral_fp_households_m": 0.65
-        },
-        {
-          "region": "SOUTH_WEST",
-          "extra_cost": 1960,
-          "pct_of_income": 3.7,
-          "fp_rate": 21.9,
-          "fp_households_m": 0.62,
-          "behavioral_extra_cost": 1286,
-          "behavioral_pct_of_income": 2.4,
-          "behavioral_fp_rate": 17.0,
-          "behavioral_fp_households_m": 0.48
-        },
-        {
-          "region": "WALES",
-          "extra_cost": 1696,
-          "pct_of_income": 3.4,
-          "fp_rate": 21.8,
-          "fp_households_m": 0.34,
-          "behavioral_extra_cost": 1112,
-          "behavioral_pct_of_income": 2.3,
-          "behavioral_fp_rate": 17.6,
-          "behavioral_fp_households_m": 0.27
-        },
-        {
-          "region": "WEST_MIDLANDS",
-          "extra_cost": 2021,
-          "pct_of_income": 4.1,
-          "fp_rate": 28.0,
-          "fp_households_m": 0.77,
-          "behavioral_extra_cost": 1326,
-          "behavioral_pct_of_income": 2.7,
-          "behavioral_fp_rate": 22.5,
-          "behavioral_fp_households_m": 0.62
-        },
-        {
-          "region": "YORKSHIRE",
-          "extra_cost": 2119,
-          "pct_of_income": 4.4,
-          "fp_rate": 26.6,
-          "fp_households_m": 0.7,
-          "behavioral_extra_cost": 1390,
-          "behavioral_pct_of_income": 2.9,
-          "behavioral_fp_rate": 17.9,
-          "behavioral_fp_households_m": 0.47
-        }
       ]
     }
   ],
@@ -3637,65 +2537,6 @@
           "decile": 10,
           "payment": 185,
           "shock_offset_pct": 18
-        }
-      ]
-    },
-    "winter_fuel": {
-      "name": "Expanded winter fuel",
-      "description": "Universal for pensioners, 350/500",
-      "exchequer_cost_bn": 1.5,
-      "total_spending_bn": 3.3,
-      "avg_hh_benefit": 103,
-      "deciles": [
-        {
-          "decile": 1,
-          "payment": 137,
-          "extra_vs_baseline": 57
-        },
-        {
-          "decile": 2,
-          "payment": 183,
-          "extra_vs_baseline": 76
-        },
-        {
-          "decile": 3,
-          "payment": 118,
-          "extra_vs_baseline": 43
-        },
-        {
-          "decile": 4,
-          "payment": 119,
-          "extra_vs_baseline": 56
-        },
-        {
-          "decile": 5,
-          "payment": 114,
-          "extra_vs_baseline": 51
-        },
-        {
-          "decile": 6,
-          "payment": 100,
-          "extra_vs_baseline": 50
-        },
-        {
-          "decile": 7,
-          "payment": 82,
-          "extra_vs_baseline": 45
-        },
-        {
-          "decile": 8,
-          "payment": 53,
-          "extra_vs_baseline": 30
-        },
-        {
-          "decile": 9,
-          "payment": 50,
-          "extra_vs_baseline": 30
-        },
-        {
-          "decile": 10,
-          "payment": 62,
-          "extra_vs_baseline": 36
         }
       ]
     },
@@ -4128,6 +2969,2787 @@
         }
       ]
     }
+  },
+  "policy_fuel_poverty": {
+    "epg": [
+      {
+        "scenario": "+10%",
+        "fp_rate": 10.3,
+        "fp_households_m": 3.28,
+        "behavioral_fp_rate": 10.2,
+        "behavioral_fp_households_m": 3.25,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 29.7,
+            "fp_households_m": 1.14,
+            "behavioral_fp_rate": 29.6,
+            "behavioral_fp_households_m": 1.13
+          },
+          {
+            "decile": 2,
+            "fp_rate": 15.0,
+            "fp_households_m": 0.51,
+            "behavioral_fp_rate": 14.7,
+            "behavioral_fp_households_m": 0.5
+          },
+          {
+            "decile": 3,
+            "fp_rate": 7.8,
+            "fp_households_m": 0.24,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.24
+          },
+          {
+            "decile": 4,
+            "fp_rate": 9.6,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 9.3,
+            "behavioral_fp_households_m": 0.28
+          },
+          {
+            "decile": 5,
+            "fp_rate": 10.1,
+            "fp_households_m": 0.31,
+            "behavioral_fp_rate": 9.9,
+            "behavioral_fp_households_m": 0.3
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.7,
+            "fp_households_m": 0.2,
+            "behavioral_fp_rate": 6.7,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.7,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 3.7,
+            "behavioral_fp_households_m": 0.12
+          },
+          {
+            "decile": 8,
+            "fp_rate": 4.9,
+            "fp_households_m": 0.14,
+            "behavioral_fp_rate": 4.9,
+            "behavioral_fp_households_m": 0.14
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.4,
+            "fp_households_m": 0.23,
+            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_households_m": 0.23
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.0,
+            "fp_households_m": 0.03,
+            "behavioral_fp_rate": 1.0,
+            "behavioral_fp_households_m": 0.03
+          }
+        ]
+      },
+      {
+        "scenario": "+20%",
+        "fp_rate": 11.7,
+        "fp_households_m": 3.72,
+        "behavioral_fp_rate": 11.4,
+        "behavioral_fp_households_m": 3.64,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 32.2,
+            "fp_households_m": 1.23,
+            "behavioral_fp_rate": 31.6,
+            "behavioral_fp_households_m": 1.21
+          },
+          {
+            "decile": 2,
+            "fp_rate": 19.5,
+            "fp_households_m": 0.66,
+            "behavioral_fp_rate": 19.2,
+            "behavioral_fp_households_m": 0.65
+          },
+          {
+            "decile": 3,
+            "fp_rate": 9.6,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 9.5,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 4,
+            "fp_rate": 10.2,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 9.8,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 5,
+            "fp_rate": 10.7,
+            "fp_households_m": 0.33,
+            "behavioral_fp_rate": 10.4,
+            "behavioral_fp_households_m": 0.32
+          },
+          {
+            "decile": 6,
+            "fp_rate": 7.9,
+            "fp_households_m": 0.24,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.24
+          },
+          {
+            "decile": 7,
+            "fp_rate": 4.0,
+            "fp_households_m": 0.13,
+            "behavioral_fp_rate": 3.8,
+            "behavioral_fp_households_m": 0.12
+          },
+          {
+            "decile": 8,
+            "fp_rate": 5.8,
+            "fp_households_m": 0.17,
+            "behavioral_fp_rate": 5.8,
+            "behavioral_fp_households_m": 0.17
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.7,
+            "fp_households_m": 0.24,
+            "behavioral_fp_rate": 7.6,
+            "behavioral_fp_households_m": 0.23
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.4,
+            "fp_households_m": 0.05,
+            "behavioral_fp_rate": 1.3,
+            "behavioral_fp_households_m": 0.04
+          }
+        ]
+      },
+      {
+        "scenario": "+30%",
+        "fp_rate": 12.7,
+        "fp_households_m": 4.06,
+        "behavioral_fp_rate": 12.0,
+        "behavioral_fp_households_m": 3.81,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 35.2,
+            "fp_households_m": 1.34,
+            "behavioral_fp_rate": 32.7,
+            "behavioral_fp_households_m": 1.25
+          },
+          {
+            "decile": 2,
+            "fp_rate": 21.4,
+            "fp_households_m": 0.72,
+            "behavioral_fp_rate": 20.0,
+            "behavioral_fp_households_m": 0.68
+          },
+          {
+            "decile": 3,
+            "fp_rate": 10.8,
+            "fp_households_m": 0.33,
+            "behavioral_fp_rate": 10.4,
+            "behavioral_fp_households_m": 0.32
+          },
+          {
+            "decile": 4,
+            "fp_rate": 11.2,
+            "fp_households_m": 0.33,
+            "behavioral_fp_rate": 10.4,
+            "behavioral_fp_households_m": 0.31
+          },
+          {
+            "decile": 5,
+            "fp_rate": 11.1,
+            "fp_households_m": 0.34,
+            "behavioral_fp_rate": 10.8,
+            "behavioral_fp_households_m": 0.33
+          },
+          {
+            "decile": 6,
+            "fp_rate": 8.4,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 8.3,
+            "behavioral_fp_households_m": 0.25
+          },
+          {
+            "decile": 7,
+            "fp_rate": 4.2,
+            "fp_households_m": 0.13,
+            "behavioral_fp_rate": 4.1,
+            "behavioral_fp_households_m": 0.13
+          },
+          {
+            "decile": 8,
+            "fp_rate": 6.5,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 5.9,
+            "behavioral_fp_households_m": 0.17
+          },
+          {
+            "decile": 9,
+            "fp_rate": 9.0,
+            "fp_households_m": 0.28,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.24
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.5,
+            "fp_households_m": 0.05,
+            "behavioral_fp_rate": 1.5,
+            "behavioral_fp_households_m": 0.05
+          }
+        ]
+      },
+      {
+        "scenario": "+60%",
+        "fp_rate": 16.5,
+        "fp_households_m": 5.25,
+        "behavioral_fp_rate": 14.7,
+        "behavioral_fp_households_m": 4.67,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 42.6,
+            "fp_households_m": 1.63,
+            "behavioral_fp_rate": 38.4,
+            "behavioral_fp_households_m": 1.47
+          },
+          {
+            "decile": 2,
+            "fp_rate": 25.1,
+            "fp_households_m": 0.85,
+            "behavioral_fp_rate": 23.8,
+            "behavioral_fp_households_m": 0.8
+          },
+          {
+            "decile": 3,
+            "fp_rate": 15.8,
+            "fp_households_m": 0.49,
+            "behavioral_fp_rate": 12.1,
+            "behavioral_fp_households_m": 0.37
+          },
+          {
+            "decile": 4,
+            "fp_rate": 15.0,
+            "fp_households_m": 0.45,
+            "behavioral_fp_rate": 13.6,
+            "behavioral_fp_households_m": 0.41
+          },
+          {
+            "decile": 5,
+            "fp_rate": 14.5,
+            "fp_households_m": 0.44,
+            "behavioral_fp_rate": 12.9,
+            "behavioral_fp_households_m": 0.39
+          },
+          {
+            "decile": 6,
+            "fp_rate": 14.3,
+            "fp_households_m": 0.44,
+            "behavioral_fp_rate": 11.7,
+            "behavioral_fp_households_m": 0.36
+          },
+          {
+            "decile": 7,
+            "fp_rate": 8.1,
+            "fp_households_m": 0.25,
+            "behavioral_fp_rate": 7.1,
+            "behavioral_fp_households_m": 0.22
+          },
+          {
+            "decile": 8,
+            "fp_rate": 7.9,
+            "fp_households_m": 0.23,
+            "behavioral_fp_rate": 7.2,
+            "behavioral_fp_households_m": 0.21
+          },
+          {
+            "decile": 9,
+            "fp_rate": 10.4,
+            "fp_households_m": 0.32,
+            "behavioral_fp_rate": 9.8,
+            "behavioral_fp_households_m": 0.3
+          },
+          {
+            "decile": 10,
+            "fp_rate": 2.2,
+            "fp_households_m": 0.07,
+            "behavioral_fp_rate": 1.8,
+            "behavioral_fp_households_m": 0.06
+          }
+        ]
+      },
+      {
+        "scenario": "2022-level",
+        "fp_rate": 26.6,
+        "fp_households_m": 8.48,
+        "behavioral_fp_rate": 19.9,
+        "behavioral_fp_households_m": 6.33,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 56.0,
+            "fp_households_m": 2.14,
+            "behavioral_fp_rate": 46.9,
+            "behavioral_fp_households_m": 1.79
+          },
+          {
+            "decile": 2,
+            "fp_rate": 41.5,
+            "fp_households_m": 1.41,
+            "behavioral_fp_rate": 35.1,
+            "behavioral_fp_households_m": 1.19
+          },
+          {
+            "decile": 3,
+            "fp_rate": 35.8,
+            "fp_households_m": 1.1,
+            "behavioral_fp_rate": 19.0,
+            "behavioral_fp_households_m": 0.58
+          },
+          {
+            "decile": 4,
+            "fp_rate": 27.4,
+            "fp_households_m": 0.82,
+            "behavioral_fp_rate": 22.2,
+            "behavioral_fp_households_m": 0.66
+          },
+          {
+            "decile": 5,
+            "fp_rate": 21.4,
+            "fp_households_m": 0.66,
+            "behavioral_fp_rate": 16.3,
+            "behavioral_fp_households_m": 0.5
+          },
+          {
+            "decile": 6,
+            "fp_rate": 25.7,
+            "fp_households_m": 0.79,
+            "behavioral_fp_rate": 15.1,
+            "behavioral_fp_households_m": 0.46
+          },
+          {
+            "decile": 7,
+            "fp_rate": 16.4,
+            "fp_households_m": 0.52,
+            "behavioral_fp_rate": 10.2,
+            "behavioral_fp_households_m": 0.32
+          },
+          {
+            "decile": 8,
+            "fp_rate": 13.7,
+            "fp_households_m": 0.4,
+            "behavioral_fp_rate": 10.5,
+            "behavioral_fp_households_m": 0.31
+          },
+          {
+            "decile": 9,
+            "fp_rate": 14.3,
+            "fp_households_m": 0.44,
+            "behavioral_fp_rate": 11.7,
+            "behavioral_fp_households_m": 0.36
+          },
+          {
+            "decile": 10,
+            "fp_rate": 4.2,
+            "fp_households_m": 0.13,
+            "behavioral_fp_rate": 2.5,
+            "behavioral_fp_households_m": 0.08
+          }
+        ]
+      }
+    ],
+    "flat_transfer": [
+      {
+        "scenario": "+10%",
+        "fp_rate": 8.2,
+        "fp_households_m": 2.62,
+        "behavioral_fp_rate": 8.1,
+        "behavioral_fp_households_m": 2.57,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 18.4,
+            "fp_households_m": 0.7,
+            "behavioral_fp_rate": 18.2,
+            "behavioral_fp_households_m": 0.7
+          },
+          {
+            "decile": 2,
+            "fp_rate": 13.1,
+            "fp_households_m": 0.44,
+            "behavioral_fp_rate": 12.9,
+            "behavioral_fp_households_m": 0.44
+          },
+          {
+            "decile": 3,
+            "fp_rate": 6.0,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 5.9,
+            "behavioral_fp_households_m": 0.18
+          },
+          {
+            "decile": 4,
+            "fp_rate": 8.5,
+            "fp_households_m": 0.25,
+            "behavioral_fp_rate": 8.5,
+            "behavioral_fp_households_m": 0.25
+          },
+          {
+            "decile": 5,
+            "fp_rate": 9.3,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 9.1,
+            "behavioral_fp_households_m": 0.28
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.4,
+            "fp_households_m": 0.2,
+            "behavioral_fp_rate": 6.2,
+            "behavioral_fp_households_m": 0.19
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.3,
+            "fp_households_m": 0.1,
+            "behavioral_fp_rate": 3.3,
+            "behavioral_fp_households_m": 0.1
+          },
+          {
+            "decile": 8,
+            "fp_rate": 4.5,
+            "fp_households_m": 0.13,
+            "behavioral_fp_rate": 4.0,
+            "behavioral_fp_households_m": 0.12
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.1,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 7.0,
+            "behavioral_fp_households_m": 0.22
+          },
+          {
+            "decile": 10,
+            "fp_rate": 0.9,
+            "fp_households_m": 0.03,
+            "behavioral_fp_rate": 0.9,
+            "behavioral_fp_households_m": 0.03
+          }
+        ]
+      },
+      {
+        "scenario": "+20%",
+        "fp_rate": 9.0,
+        "fp_households_m": 2.87,
+        "behavioral_fp_rate": 8.6,
+        "behavioral_fp_households_m": 2.74,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 21.2,
+            "fp_households_m": 0.81,
+            "behavioral_fp_rate": 19.3,
+            "behavioral_fp_households_m": 0.74
+          },
+          {
+            "decile": 2,
+            "fp_rate": 14.0,
+            "fp_households_m": 0.48,
+            "behavioral_fp_rate": 13.8,
+            "behavioral_fp_households_m": 0.47
+          },
+          {
+            "decile": 3,
+            "fp_rate": 6.4,
+            "fp_households_m": 0.2,
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 4,
+            "fp_rate": 8.9,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 8.8,
+            "behavioral_fp_households_m": 0.26
+          },
+          {
+            "decile": 5,
+            "fp_rate": 9.7,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 0.3
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.7,
+            "fp_households_m": 0.2,
+            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.6,
+            "fp_households_m": 0.11,
+            "behavioral_fp_rate": 3.5,
+            "behavioral_fp_households_m": 0.11
+          },
+          {
+            "decile": 8,
+            "fp_rate": 5.6,
+            "fp_households_m": 0.17,
+            "behavioral_fp_rate": 4.7,
+            "behavioral_fp_households_m": 0.14
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.4,
+            "fp_households_m": 0.23,
+            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_households_m": 0.22
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.2,
+            "fp_households_m": 0.04,
+            "behavioral_fp_rate": 1.0,
+            "behavioral_fp_households_m": 0.03
+          }
+        ]
+      },
+      {
+        "scenario": "+30%",
+        "fp_rate": 10.4,
+        "fp_households_m": 3.3,
+        "behavioral_fp_rate": 9.3,
+        "behavioral_fp_households_m": 2.96,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 26.4,
+            "fp_households_m": 1.01,
+            "behavioral_fp_rate": 21.7,
+            "behavioral_fp_households_m": 0.83
+          },
+          {
+            "decile": 2,
+            "fp_rate": 15.3,
+            "fp_households_m": 0.52,
+            "behavioral_fp_rate": 14.3,
+            "behavioral_fp_households_m": 0.48
+          },
+          {
+            "decile": 3,
+            "fp_rate": 8.5,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 7.2,
+            "behavioral_fp_households_m": 0.22
+          },
+          {
+            "decile": 4,
+            "fp_rate": 9.8,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 9.2,
+            "behavioral_fp_households_m": 0.28
+          },
+          {
+            "decile": 5,
+            "fp_rate": 10.5,
+            "fp_households_m": 0.32,
+            "behavioral_fp_rate": 10.1,
+            "behavioral_fp_households_m": 0.31
+          },
+          {
+            "decile": 6,
+            "fp_rate": 7.9,
+            "fp_households_m": 0.24,
+            "behavioral_fp_rate": 6.7,
+            "behavioral_fp_households_m": 0.21
+          },
+          {
+            "decile": 7,
+            "fp_rate": 4.0,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 3.8,
+            "behavioral_fp_households_m": 0.12
+          },
+          {
+            "decile": 8,
+            "fp_rate": 5.8,
+            "fp_households_m": 0.17,
+            "behavioral_fp_rate": 5.7,
+            "behavioral_fp_households_m": 0.17
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.8,
+            "fp_households_m": 0.24,
+            "behavioral_fp_rate": 7.6,
+            "behavioral_fp_households_m": 0.23
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.5,
+            "fp_households_m": 0.05,
+            "behavioral_fp_rate": 1.3,
+            "behavioral_fp_households_m": 0.04
+          }
+        ]
+      },
+      {
+        "scenario": "+60%",
+        "fp_rate": 13.9,
+        "fp_households_m": 4.42,
+        "behavioral_fp_rate": 12.2,
+        "behavioral_fp_households_m": 3.89,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 33.9,
+            "fp_households_m": 1.3,
+            "behavioral_fp_rate": 30.7,
+            "behavioral_fp_households_m": 1.17
+          },
+          {
+            "decile": 2,
+            "fp_rate": 23.1,
+            "fp_households_m": 0.78,
+            "behavioral_fp_rate": 21.0,
+            "behavioral_fp_households_m": 0.71
+          },
+          {
+            "decile": 3,
+            "fp_rate": 11.9,
+            "fp_households_m": 0.37,
+            "behavioral_fp_rate": 10.6,
+            "behavioral_fp_households_m": 0.33
+          },
+          {
+            "decile": 4,
+            "fp_rate": 12.2,
+            "fp_households_m": 0.36,
+            "behavioral_fp_rate": 11.0,
+            "behavioral_fp_households_m": 0.33
+          },
+          {
+            "decile": 5,
+            "fp_rate": 12.4,
+            "fp_households_m": 0.38,
+            "behavioral_fp_rate": 11.1,
+            "behavioral_fp_households_m": 0.34
+          },
+          {
+            "decile": 6,
+            "fp_rate": 10.9,
+            "fp_households_m": 0.33,
+            "behavioral_fp_rate": 8.8,
+            "behavioral_fp_households_m": 0.27
+          },
+          {
+            "decile": 7,
+            "fp_rate": 7.1,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 4.2,
+            "behavioral_fp_households_m": 0.13
+          },
+          {
+            "decile": 8,
+            "fp_rate": 7.5,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 6.7,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 9,
+            "fp_rate": 9.8,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 10,
+            "fp_rate": 2.1,
+            "fp_households_m": 0.07,
+            "behavioral_fp_rate": 1.6,
+            "behavioral_fp_households_m": 0.05
+          }
+        ]
+      },
+      {
+        "scenario": "2022-level",
+        "fp_rate": 23.5,
+        "fp_households_m": 7.5,
+        "behavioral_fp_rate": 16.8,
+        "behavioral_fp_households_m": 5.36,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 49.0,
+            "fp_households_m": 1.87,
+            "behavioral_fp_rate": 38.8,
+            "behavioral_fp_households_m": 1.48
+          },
+          {
+            "decile": 2,
+            "fp_rate": 37.8,
+            "fp_households_m": 1.28,
+            "behavioral_fp_rate": 25.3,
+            "behavioral_fp_households_m": 0.86
+          },
+          {
+            "decile": 3,
+            "fp_rate": 28.7,
+            "fp_households_m": 0.88,
+            "behavioral_fp_rate": 16.5,
+            "behavioral_fp_households_m": 0.51
+          },
+          {
+            "decile": 4,
+            "fp_rate": 24.3,
+            "fp_households_m": 0.72,
+            "behavioral_fp_rate": 17.5,
+            "behavioral_fp_households_m": 0.52
+          },
+          {
+            "decile": 5,
+            "fp_rate": 19.3,
+            "fp_households_m": 0.59,
+            "behavioral_fp_rate": 14.9,
+            "behavioral_fp_households_m": 0.46
+          },
+          {
+            "decile": 6,
+            "fp_rate": 22.5,
+            "fp_households_m": 0.69,
+            "behavioral_fp_rate": 14.7,
+            "behavioral_fp_households_m": 0.45
+          },
+          {
+            "decile": 7,
+            "fp_rate": 14.5,
+            "fp_households_m": 0.46,
+            "behavioral_fp_rate": 8.8,
+            "behavioral_fp_households_m": 0.28
+          },
+          {
+            "decile": 8,
+            "fp_rate": 12.5,
+            "fp_households_m": 0.37,
+            "behavioral_fp_rate": 10.2,
+            "behavioral_fp_households_m": 0.3
+          },
+          {
+            "decile": 9,
+            "fp_rate": 13.8,
+            "fp_households_m": 0.43,
+            "behavioral_fp_rate": 11.2,
+            "behavioral_fp_households_m": 0.35
+          },
+          {
+            "decile": 10,
+            "fp_rate": 4.0,
+            "fp_households_m": 0.13,
+            "behavioral_fp_rate": 2.4,
+            "behavioral_fp_households_m": 0.08
+          }
+        ]
+      }
+    ],
+    "ct_rebate": [
+      {
+        "scenario": "+10%",
+        "fp_rate": 9.1,
+        "fp_households_m": 2.9,
+        "behavioral_fp_rate": 9.0,
+        "behavioral_fp_households_m": 2.86,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 23.5,
+            "fp_households_m": 0.9,
+            "behavioral_fp_rate": 23.3,
+            "behavioral_fp_households_m": 0.89
+          },
+          {
+            "decile": 2,
+            "fp_rate": 13.7,
+            "fp_households_m": 0.46,
+            "behavioral_fp_rate": 13.4,
+            "behavioral_fp_households_m": 0.45
+          },
+          {
+            "decile": 3,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 6.1,
+            "behavioral_fp_households_m": 0.19
+          },
+          {
+            "decile": 4,
+            "fp_rate": 9.2,
+            "fp_households_m": 0.27,
+            "behavioral_fp_rate": 9.0,
+            "behavioral_fp_households_m": 0.27
+          },
+          {
+            "decile": 5,
+            "fp_rate": 9.6,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.5,
+            "fp_households_m": 0.2,
+            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.5,
+            "fp_households_m": 0.11,
+            "behavioral_fp_rate": 3.4,
+            "behavioral_fp_households_m": 0.11
+          },
+          {
+            "decile": 8,
+            "fp_rate": 4.6,
+            "fp_households_m": 0.14,
+            "behavioral_fp_rate": 4.5,
+            "behavioral_fp_households_m": 0.13
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.2,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 7.1,
+            "behavioral_fp_households_m": 0.22
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.0,
+            "fp_households_m": 0.03,
+            "behavioral_fp_rate": 1.0,
+            "behavioral_fp_households_m": 0.03
+          }
+        ]
+      },
+      {
+        "scenario": "+20%",
+        "fp_rate": 10.2,
+        "fp_households_m": 3.24,
+        "behavioral_fp_rate": 9.8,
+        "behavioral_fp_households_m": 3.12,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 27.8,
+            "fp_households_m": 1.06,
+            "behavioral_fp_rate": 25.7,
+            "behavioral_fp_households_m": 0.98
+          },
+          {
+            "decile": 2,
+            "fp_rate": 14.8,
+            "fp_households_m": 0.5,
+            "behavioral_fp_rate": 14.5,
+            "behavioral_fp_households_m": 0.49
+          },
+          {
+            "decile": 3,
+            "fp_rate": 6.8,
+            "fp_households_m": 0.21,
+            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 4,
+            "fp_rate": 9.5,
+            "fp_households_m": 0.28,
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.28
+          },
+          {
+            "decile": 5,
+            "fp_rate": 10.1,
+            "fp_households_m": 0.31,
+            "behavioral_fp_rate": 9.9,
+            "behavioral_fp_households_m": 0.3
+          },
+          {
+            "decile": 6,
+            "fp_rate": 7.8,
+            "fp_households_m": 0.24,
+            "behavioral_fp_rate": 7.7,
+            "behavioral_fp_households_m": 0.24
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.8,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 3.7,
+            "behavioral_fp_households_m": 0.12
+          },
+          {
+            "decile": 8,
+            "fp_rate": 5.7,
+            "fp_households_m": 0.17,
+            "behavioral_fp_rate": 5.6,
+            "behavioral_fp_households_m": 0.16
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.7,
+            "fp_households_m": 0.24,
+            "behavioral_fp_rate": 7.5,
+            "behavioral_fp_households_m": 0.23
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.3,
+            "fp_households_m": 0.04,
+            "behavioral_fp_rate": 1.2,
+            "behavioral_fp_households_m": 0.04
+          }
+        ]
+      },
+      {
+        "scenario": "+30%",
+        "fp_rate": 11.2,
+        "fp_households_m": 3.57,
+        "behavioral_fp_rate": 10.6,
+        "behavioral_fp_households_m": 3.39,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 30.1,
+            "fp_households_m": 1.15,
+            "behavioral_fp_rate": 28.6,
+            "behavioral_fp_households_m": 1.09
+          },
+          {
+            "decile": 2,
+            "fp_rate": 17.0,
+            "fp_households_m": 0.58,
+            "behavioral_fp_rate": 15.7,
+            "behavioral_fp_households_m": 0.53
+          },
+          {
+            "decile": 3,
+            "fp_rate": 9.4,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 8.5,
+            "behavioral_fp_households_m": 0.26
+          },
+          {
+            "decile": 4,
+            "fp_rate": 10.0,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 9.8,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 5,
+            "fp_rate": 10.7,
+            "fp_households_m": 0.33,
+            "behavioral_fp_rate": 10.6,
+            "behavioral_fp_households_m": 0.32
+          },
+          {
+            "decile": 6,
+            "fp_rate": 8.3,
+            "fp_households_m": 0.25,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.24
+          },
+          {
+            "decile": 7,
+            "fp_rate": 4.1,
+            "fp_households_m": 0.13,
+            "behavioral_fp_rate": 3.8,
+            "behavioral_fp_households_m": 0.12
+          },
+          {
+            "decile": 8,
+            "fp_rate": 5.9,
+            "fp_households_m": 0.17,
+            "behavioral_fp_rate": 5.8,
+            "behavioral_fp_households_m": 0.17
+          },
+          {
+            "decile": 9,
+            "fp_rate": 8.1,
+            "fp_households_m": 0.25,
+            "behavioral_fp_rate": 7.7,
+            "behavioral_fp_households_m": 0.24
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.5,
+            "fp_households_m": 0.05,
+            "behavioral_fp_rate": 1.4,
+            "behavioral_fp_households_m": 0.05
+          }
+        ]
+      },
+      {
+        "scenario": "+60%",
+        "fp_rate": 14.8,
+        "fp_households_m": 4.71,
+        "behavioral_fp_rate": 13.5,
+        "behavioral_fp_households_m": 4.31,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 36.2,
+            "fp_households_m": 1.38,
+            "behavioral_fp_rate": 34.0,
+            "behavioral_fp_households_m": 1.3
+          },
+          {
+            "decile": 2,
+            "fp_rate": 23.6,
+            "fp_households_m": 0.8,
+            "behavioral_fp_rate": 22.6,
+            "behavioral_fp_households_m": 0.76
+          },
+          {
+            "decile": 3,
+            "fp_rate": 12.5,
+            "fp_households_m": 0.39,
+            "behavioral_fp_rate": 11.4,
+            "behavioral_fp_households_m": 0.35
+          },
+          {
+            "decile": 4,
+            "fp_rate": 15.3,
+            "fp_households_m": 0.46,
+            "behavioral_fp_rate": 12.5,
+            "behavioral_fp_households_m": 0.37
+          },
+          {
+            "decile": 5,
+            "fp_rate": 13.3,
+            "fp_households_m": 0.41,
+            "behavioral_fp_rate": 12.3,
+            "behavioral_fp_households_m": 0.38
+          },
+          {
+            "decile": 6,
+            "fp_rate": 12.0,
+            "fp_households_m": 0.37,
+            "behavioral_fp_rate": 10.0,
+            "behavioral_fp_households_m": 0.31
+          },
+          {
+            "decile": 7,
+            "fp_rate": 7.2,
+            "fp_households_m": 0.23,
+            "behavioral_fp_rate": 6.9,
+            "behavioral_fp_households_m": 0.22
+          },
+          {
+            "decile": 8,
+            "fp_rate": 7.8,
+            "fp_households_m": 0.23,
+            "behavioral_fp_rate": 6.8,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 9,
+            "fp_rate": 9.9,
+            "fp_households_m": 0.31,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 0.3
+          },
+          {
+            "decile": 10,
+            "fp_rate": 2.1,
+            "fp_households_m": 0.07,
+            "behavioral_fp_rate": 1.8,
+            "behavioral_fp_households_m": 0.06
+          }
+        ]
+      },
+      {
+        "scenario": "2022-level",
+        "fp_rate": 24.9,
+        "fp_households_m": 7.92,
+        "behavioral_fp_rate": 17.8,
+        "behavioral_fp_households_m": 5.67,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 51.2,
+            "fp_households_m": 1.95,
+            "behavioral_fp_rate": 41.1,
+            "behavioral_fp_households_m": 1.57
+          },
+          {
+            "decile": 2,
+            "fp_rate": 39.9,
+            "fp_households_m": 1.35,
+            "behavioral_fp_rate": 25.9,
+            "behavioral_fp_households_m": 0.88
+          },
+          {
+            "decile": 3,
+            "fp_rate": 31.0,
+            "fp_households_m": 0.96,
+            "behavioral_fp_rate": 20.3,
+            "behavioral_fp_households_m": 0.63
+          },
+          {
+            "decile": 4,
+            "fp_rate": 25.1,
+            "fp_households_m": 0.75,
+            "behavioral_fp_rate": 18.6,
+            "behavioral_fp_households_m": 0.56
+          },
+          {
+            "decile": 5,
+            "fp_rate": 20.4,
+            "fp_households_m": 0.62,
+            "behavioral_fp_rate": 15.6,
+            "behavioral_fp_households_m": 0.48
+          },
+          {
+            "decile": 6,
+            "fp_rate": 24.0,
+            "fp_households_m": 0.73,
+            "behavioral_fp_rate": 14.8,
+            "behavioral_fp_households_m": 0.45
+          },
+          {
+            "decile": 7,
+            "fp_rate": 16.1,
+            "fp_households_m": 0.51,
+            "behavioral_fp_rate": 9.1,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 8,
+            "fp_rate": 13.3,
+            "fp_households_m": 0.39,
+            "behavioral_fp_rate": 10.6,
+            "behavioral_fp_households_m": 0.31
+          },
+          {
+            "decile": 9,
+            "fp_rate": 14.1,
+            "fp_households_m": 0.43,
+            "behavioral_fp_rate": 11.5,
+            "behavioral_fp_households_m": 0.36
+          },
+          {
+            "decile": 10,
+            "fp_rate": 4.4,
+            "fp_households_m": 0.14,
+            "behavioral_fp_rate": 2.6,
+            "behavioral_fp_households_m": 0.08
+          }
+        ]
+      }
+    ],
+    "bn_transfer": [
+      {
+        "scenario": "+10%",
+        "fp_rate": 9.5,
+        "fp_households_m": 3.02,
+        "behavioral_fp_rate": 9.1,
+        "behavioral_fp_households_m": 2.9,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 26.1,
+            "fp_households_m": 1.0,
+            "behavioral_fp_rate": 23.5,
+            "behavioral_fp_households_m": 0.9
+          },
+          {
+            "decile": 2,
+            "fp_rate": 14.0,
+            "fp_households_m": 0.48,
+            "behavioral_fp_rate": 14.0,
+            "behavioral_fp_households_m": 0.47
+          },
+          {
+            "decile": 3,
+            "fp_rate": 6.6,
+            "fp_households_m": 0.2,
+            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 4,
+            "fp_rate": 8.8,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 8.8,
+            "behavioral_fp_households_m": 0.26
+          },
+          {
+            "decile": 5,
+            "fp_rate": 9.6,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 9.5,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.5,
+            "fp_households_m": 0.2,
+            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.6,
+            "fp_households_m": 0.11,
+            "behavioral_fp_rate": 3.5,
+            "behavioral_fp_households_m": 0.11
+          },
+          {
+            "decile": 8,
+            "fp_rate": 4.8,
+            "fp_households_m": 0.14,
+            "behavioral_fp_rate": 4.6,
+            "behavioral_fp_households_m": 0.14
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.2,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 7.1,
+            "behavioral_fp_households_m": 0.22
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.0,
+            "fp_households_m": 0.03,
+            "behavioral_fp_rate": 1.0,
+            "behavioral_fp_households_m": 0.03
+          }
+        ]
+      },
+      {
+        "scenario": "+20%",
+        "fp_rate": 9.7,
+        "fp_households_m": 3.1,
+        "behavioral_fp_rate": 9.0,
+        "behavioral_fp_households_m": 2.86,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 26.0,
+            "fp_households_m": 0.99,
+            "behavioral_fp_rate": 21.2,
+            "behavioral_fp_households_m": 0.81
+          },
+          {
+            "decile": 2,
+            "fp_rate": 14.2,
+            "fp_households_m": 0.48,
+            "behavioral_fp_rate": 14.1,
+            "behavioral_fp_households_m": 0.48
+          },
+          {
+            "decile": 3,
+            "fp_rate": 6.6,
+            "fp_households_m": 0.2,
+            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 4,
+            "fp_rate": 9.2,
+            "fp_households_m": 0.28,
+            "behavioral_fp_rate": 8.8,
+            "behavioral_fp_households_m": 0.26
+          },
+          {
+            "decile": 5,
+            "fp_rate": 10.0,
+            "fp_households_m": 0.31,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 0.3
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.7,
+            "fp_households_m": 0.21,
+            "behavioral_fp_rate": 6.7,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.7,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 3.6,
+            "behavioral_fp_households_m": 0.11
+          },
+          {
+            "decile": 8,
+            "fp_rate": 5.7,
+            "fp_households_m": 0.17,
+            "behavioral_fp_rate": 5.5,
+            "behavioral_fp_households_m": 0.16
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.5,
+            "fp_households_m": 0.23,
+            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_households_m": 0.23
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.2,
+            "fp_households_m": 0.04,
+            "behavioral_fp_rate": 1.1,
+            "behavioral_fp_households_m": 0.04
+          }
+        ]
+      },
+      {
+        "scenario": "+30%",
+        "fp_rate": 10.0,
+        "fp_households_m": 3.19,
+        "behavioral_fp_rate": 9.1,
+        "behavioral_fp_households_m": 2.91,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 25.7,
+            "fp_households_m": 0.98,
+            "behavioral_fp_rate": 21.3,
+            "behavioral_fp_households_m": 0.82
+          },
+          {
+            "decile": 2,
+            "fp_rate": 14.4,
+            "fp_households_m": 0.49,
+            "behavioral_fp_rate": 14.2,
+            "behavioral_fp_households_m": 0.48
+          },
+          {
+            "decile": 3,
+            "fp_rate": 8.3,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 7.0,
+            "behavioral_fp_households_m": 0.21
+          },
+          {
+            "decile": 4,
+            "fp_rate": 9.5,
+            "fp_households_m": 0.28,
+            "behavioral_fp_rate": 8.9,
+            "behavioral_fp_households_m": 0.26
+          },
+          {
+            "decile": 5,
+            "fp_rate": 10.3,
+            "fp_households_m": 0.32,
+            "behavioral_fp_rate": 9.9,
+            "behavioral_fp_households_m": 0.3
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.7,
+            "fp_households_m": 0.21,
+            "behavioral_fp_rate": 6.7,
+            "behavioral_fp_households_m": 0.21
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.9,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 3.7,
+            "behavioral_fp_households_m": 0.12
+          },
+          {
+            "decile": 8,
+            "fp_rate": 5.8,
+            "fp_households_m": 0.17,
+            "behavioral_fp_rate": 5.7,
+            "behavioral_fp_households_m": 0.17
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.7,
+            "fp_households_m": 0.24,
+            "behavioral_fp_rate": 7.5,
+            "behavioral_fp_households_m": 0.23
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.4,
+            "fp_households_m": 0.05,
+            "behavioral_fp_rate": 1.3,
+            "behavioral_fp_households_m": 0.04
+          }
+        ]
+      },
+      {
+        "scenario": "+60%",
+        "fp_rate": 10.5,
+        "fp_households_m": 3.35,
+        "behavioral_fp_rate": 9.3,
+        "behavioral_fp_households_m": 2.97,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 24.2,
+            "fp_households_m": 0.93,
+            "behavioral_fp_rate": 20.2,
+            "behavioral_fp_households_m": 0.77
+          },
+          {
+            "decile": 2,
+            "fp_rate": 15.2,
+            "fp_households_m": 0.52,
+            "behavioral_fp_rate": 14.2,
+            "behavioral_fp_households_m": 0.48
+          },
+          {
+            "decile": 3,
+            "fp_rate": 8.7,
+            "fp_households_m": 0.27,
+            "behavioral_fp_rate": 7.2,
+            "behavioral_fp_households_m": 0.22
+          },
+          {
+            "decile": 4,
+            "fp_rate": 10.4,
+            "fp_households_m": 0.31,
+            "behavioral_fp_rate": 9.1,
+            "behavioral_fp_households_m": 0.27
+          },
+          {
+            "decile": 5,
+            "fp_rate": 10.8,
+            "fp_households_m": 0.33,
+            "behavioral_fp_rate": 10.2,
+            "behavioral_fp_households_m": 0.31
+          },
+          {
+            "decile": 6,
+            "fp_rate": 8.4,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 8.1,
+            "behavioral_fp_households_m": 0.25
+          },
+          {
+            "decile": 7,
+            "fp_rate": 4.2,
+            "fp_households_m": 0.13,
+            "behavioral_fp_rate": 3.9,
+            "behavioral_fp_households_m": 0.12
+          },
+          {
+            "decile": 8,
+            "fp_rate": 6.4,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 6.0,
+            "behavioral_fp_households_m": 0.18
+          },
+          {
+            "decile": 9,
+            "fp_rate": 9.5,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 8.1,
+            "behavioral_fp_households_m": 0.25
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.8,
+            "fp_households_m": 0.06,
+            "behavioral_fp_rate": 1.5,
+            "behavioral_fp_households_m": 0.05
+          }
+        ]
+      },
+      {
+        "scenario": "2022-level",
+        "fp_rate": 12.7,
+        "fp_households_m": 4.03,
+        "behavioral_fp_rate": 9.2,
+        "behavioral_fp_households_m": 2.92,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 24.4,
+            "fp_households_m": 0.93,
+            "behavioral_fp_rate": 17.1,
+            "behavioral_fp_households_m": 0.65
+          },
+          {
+            "decile": 2,
+            "fp_rate": 18.3,
+            "fp_households_m": 0.62,
+            "behavioral_fp_rate": 13.5,
+            "behavioral_fp_households_m": 0.46
+          },
+          {
+            "decile": 3,
+            "fp_rate": 11.6,
+            "fp_households_m": 0.36,
+            "behavioral_fp_rate": 7.2,
+            "behavioral_fp_households_m": 0.22
+          },
+          {
+            "decile": 4,
+            "fp_rate": 12.1,
+            "fp_households_m": 0.36,
+            "behavioral_fp_rate": 9.1,
+            "behavioral_fp_households_m": 0.27
+          },
+          {
+            "decile": 5,
+            "fp_rate": 13.2,
+            "fp_households_m": 0.4,
+            "behavioral_fp_rate": 10.3,
+            "behavioral_fp_households_m": 0.32
+          },
+          {
+            "decile": 6,
+            "fp_rate": 11.8,
+            "fp_households_m": 0.36,
+            "behavioral_fp_rate": 8.2,
+            "behavioral_fp_households_m": 0.25
+          },
+          {
+            "decile": 7,
+            "fp_rate": 8.1,
+            "fp_households_m": 0.25,
+            "behavioral_fp_rate": 4.1,
+            "behavioral_fp_households_m": 0.13
+          },
+          {
+            "decile": 8,
+            "fp_rate": 8.1,
+            "fp_households_m": 0.24,
+            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 9,
+            "fp_rate": 11.2,
+            "fp_households_m": 0.34,
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 10,
+            "fp_rate": 2.9,
+            "fp_households_m": 0.09,
+            "behavioral_fp_rate": 2.0,
+            "behavioral_fp_households_m": 0.06
+          }
+        ]
+      }
+    ],
+    "bn_epg": [
+      {
+        "scenario": "+10%",
+        "fp_rate": 9.3,
+        "fp_households_m": 2.97,
+        "behavioral_fp_rate": 8.9,
+        "behavioral_fp_households_m": 2.85,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 26.9,
+            "fp_households_m": 1.03,
+            "behavioral_fp_rate": 24.2,
+            "behavioral_fp_households_m": 0.92
+          },
+          {
+            "decile": 2,
+            "fp_rate": 13.7,
+            "fp_households_m": 0.46,
+            "behavioral_fp_rate": 13.6,
+            "behavioral_fp_households_m": 0.46
+          },
+          {
+            "decile": 3,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 6.2,
+            "behavioral_fp_households_m": 0.19
+          },
+          {
+            "decile": 4,
+            "fp_rate": 8.7,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 8.7,
+            "behavioral_fp_households_m": 0.26
+          },
+          {
+            "decile": 5,
+            "fp_rate": 9.4,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 9.3,
+            "behavioral_fp_households_m": 0.28
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.19
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.3,
+            "fp_households_m": 0.1,
+            "behavioral_fp_rate": 3.3,
+            "behavioral_fp_households_m": 0.1
+          },
+          {
+            "decile": 8,
+            "fp_rate": 4.0,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 3.8,
+            "behavioral_fp_households_m": 0.11
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.0,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 6.9,
+            "behavioral_fp_households_m": 0.21
+          },
+          {
+            "decile": 10,
+            "fp_rate": 0.8,
+            "fp_households_m": 0.03,
+            "behavioral_fp_rate": 0.8,
+            "behavioral_fp_households_m": 0.03
+          }
+        ]
+      },
+      {
+        "scenario": "+20%",
+        "fp_rate": 9.3,
+        "fp_households_m": 2.97,
+        "behavioral_fp_rate": 8.4,
+        "behavioral_fp_households_m": 2.68,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 26.9,
+            "fp_households_m": 1.03,
+            "behavioral_fp_rate": 21.7,
+            "behavioral_fp_households_m": 0.83
+          },
+          {
+            "decile": 2,
+            "fp_rate": 13.7,
+            "fp_households_m": 0.46,
+            "behavioral_fp_rate": 13.5,
+            "behavioral_fp_households_m": 0.46
+          },
+          {
+            "decile": 3,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 6.1,
+            "behavioral_fp_households_m": 0.19
+          },
+          {
+            "decile": 4,
+            "fp_rate": 8.7,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 8.4,
+            "behavioral_fp_households_m": 0.25
+          },
+          {
+            "decile": 5,
+            "fp_rate": 9.4,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 9.2,
+            "behavioral_fp_households_m": 0.28
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 4.9,
+            "behavioral_fp_households_m": 0.15
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.3,
+            "fp_households_m": 0.1,
+            "behavioral_fp_rate": 3.2,
+            "behavioral_fp_households_m": 0.1
+          },
+          {
+            "decile": 8,
+            "fp_rate": 4.0,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 3.8,
+            "behavioral_fp_households_m": 0.11
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.0,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 6.9,
+            "behavioral_fp_households_m": 0.21
+          },
+          {
+            "decile": 10,
+            "fp_rate": 0.8,
+            "fp_households_m": 0.03,
+            "behavioral_fp_rate": 0.8,
+            "behavioral_fp_households_m": 0.03
+          }
+        ]
+      },
+      {
+        "scenario": "+30%",
+        "fp_rate": 9.3,
+        "fp_households_m": 2.97,
+        "behavioral_fp_rate": 7.9,
+        "behavioral_fp_households_m": 2.51,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 26.9,
+            "fp_households_m": 1.03,
+            "behavioral_fp_rate": 20.3,
+            "behavioral_fp_households_m": 0.77
+          },
+          {
+            "decile": 2,
+            "fp_rate": 13.7,
+            "fp_households_m": 0.46,
+            "behavioral_fp_rate": 13.1,
+            "behavioral_fp_households_m": 0.44
+          },
+          {
+            "decile": 3,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 6.0,
+            "behavioral_fp_households_m": 0.19
+          },
+          {
+            "decile": 4,
+            "fp_rate": 8.7,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 8.3,
+            "behavioral_fp_households_m": 0.25
+          },
+          {
+            "decile": 5,
+            "fp_rate": 9.4,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 9.1,
+            "behavioral_fp_households_m": 0.28
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 4.2,
+            "behavioral_fp_households_m": 0.13
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.3,
+            "fp_households_m": 0.1,
+            "behavioral_fp_rate": 3.2,
+            "behavioral_fp_households_m": 0.1
+          },
+          {
+            "decile": 8,
+            "fp_rate": 4.0,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 3.5,
+            "behavioral_fp_households_m": 0.1
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.0,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 4.6,
+            "behavioral_fp_households_m": 0.14
+          },
+          {
+            "decile": 10,
+            "fp_rate": 0.8,
+            "fp_households_m": 0.03,
+            "behavioral_fp_rate": 0.8,
+            "behavioral_fp_households_m": 0.02
+          }
+        ]
+      },
+      {
+        "scenario": "+60%",
+        "fp_rate": 9.3,
+        "fp_households_m": 2.97,
+        "behavioral_fp_rate": 7.2,
+        "behavioral_fp_households_m": 2.3,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 26.9,
+            "fp_households_m": 1.03,
+            "behavioral_fp_rate": 19.2,
+            "behavioral_fp_households_m": 0.73
+          },
+          {
+            "decile": 2,
+            "fp_rate": 13.7,
+            "fp_households_m": 0.46,
+            "behavioral_fp_rate": 12.1,
+            "behavioral_fp_households_m": 0.41
+          },
+          {
+            "decile": 3,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 5.4,
+            "behavioral_fp_households_m": 0.17
+          },
+          {
+            "decile": 4,
+            "fp_rate": 8.7,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 6.8,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 5,
+            "fp_rate": 9.4,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 8.5,
+            "behavioral_fp_households_m": 0.26
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 3.9,
+            "behavioral_fp_households_m": 0.12
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.3,
+            "fp_households_m": 0.1,
+            "behavioral_fp_rate": 2.8,
+            "behavioral_fp_households_m": 0.09
+          },
+          {
+            "decile": 8,
+            "fp_rate": 4.0,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 3.2,
+            "behavioral_fp_households_m": 0.09
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.0,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 4.4,
+            "behavioral_fp_households_m": 0.13
+          },
+          {
+            "decile": 10,
+            "fp_rate": 0.8,
+            "fp_households_m": 0.03,
+            "behavioral_fp_rate": 0.5,
+            "behavioral_fp_households_m": 0.02
+          }
+        ]
+      },
+      {
+        "scenario": "2022-level",
+        "fp_rate": 9.3,
+        "fp_households_m": 2.97,
+        "behavioral_fp_rate": 3.9,
+        "behavioral_fp_households_m": 1.25,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 26.9,
+            "fp_households_m": 1.03,
+            "behavioral_fp_rate": 13.0,
+            "behavioral_fp_households_m": 0.5
+          },
+          {
+            "decile": 2,
+            "fp_rate": 13.7,
+            "fp_households_m": 0.46,
+            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_households_m": 0.25
+          },
+          {
+            "decile": 3,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 2.5,
+            "behavioral_fp_households_m": 0.08
+          },
+          {
+            "decile": 4,
+            "fp_rate": 8.7,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 4.2,
+            "behavioral_fp_households_m": 0.13
+          },
+          {
+            "decile": 5,
+            "fp_rate": 9.4,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 4.5,
+            "behavioral_fp_households_m": 0.14
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 0.7,
+            "behavioral_fp_households_m": 0.02
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.3,
+            "fp_households_m": 0.1,
+            "behavioral_fp_rate": 1.1,
+            "behavioral_fp_households_m": 0.04
+          },
+          {
+            "decile": 8,
+            "fp_rate": 4.0,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 0.6,
+            "behavioral_fp_households_m": 0.02
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.0,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 0.3,
+            "behavioral_fp_households_m": 0.01
+          },
+          {
+            "decile": 10,
+            "fp_rate": 0.8,
+            "fp_households_m": 0.03,
+            "behavioral_fp_rate": 0.3,
+            "behavioral_fp_households_m": 0.01
+          }
+        ]
+      }
+    ],
+    "neg": [
+      {
+        "scenario": "+10%",
+        "fp_rate": 10.0,
+        "fp_households_m": 3.18,
+        "behavioral_fp_rate": 9.7,
+        "behavioral_fp_households_m": 3.09,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 28.2,
+            "fp_households_m": 1.08,
+            "behavioral_fp_rate": 27.3,
+            "behavioral_fp_households_m": 1.04
+          },
+          {
+            "decile": 2,
+            "fp_rate": 14.6,
+            "fp_households_m": 0.5,
+            "behavioral_fp_rate": 14.6,
+            "behavioral_fp_households_m": 0.49
+          },
+          {
+            "decile": 3,
+            "fp_rate": 7.7,
+            "fp_households_m": 0.24,
+            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 4,
+            "fp_rate": 9.2,
+            "fp_households_m": 0.28,
+            "behavioral_fp_rate": 9.2,
+            "behavioral_fp_households_m": 0.27
+          },
+          {
+            "decile": 5,
+            "fp_rate": 9.8,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.7,
+            "fp_households_m": 0.2,
+            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.6,
+            "fp_households_m": 0.11,
+            "behavioral_fp_rate": 3.6,
+            "behavioral_fp_households_m": 0.11
+          },
+          {
+            "decile": 8,
+            "fp_rate": 4.9,
+            "fp_households_m": 0.14,
+            "behavioral_fp_rate": 4.8,
+            "behavioral_fp_households_m": 0.14
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.3,
+            "fp_households_m": 0.23,
+            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_households_m": 0.22
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.0,
+            "fp_households_m": 0.03,
+            "behavioral_fp_rate": 1.0,
+            "behavioral_fp_households_m": 0.03
+          }
+        ]
+      },
+      {
+        "scenario": "+20%",
+        "fp_rate": 10.5,
+        "fp_households_m": 3.36,
+        "behavioral_fp_rate": 10.2,
+        "behavioral_fp_households_m": 3.26,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 29.3,
+            "fp_households_m": 1.12,
+            "behavioral_fp_rate": 28.5,
+            "behavioral_fp_households_m": 1.09
+          },
+          {
+            "decile": 2,
+            "fp_rate": 15.3,
+            "fp_households_m": 0.52,
+            "behavioral_fp_rate": 14.9,
+            "behavioral_fp_households_m": 0.5
+          },
+          {
+            "decile": 3,
+            "fp_rate": 8.5,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 7.9,
+            "behavioral_fp_households_m": 0.24
+          },
+          {
+            "decile": 4,
+            "fp_rate": 9.7,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.28
+          },
+          {
+            "decile": 5,
+            "fp_rate": 10.4,
+            "fp_households_m": 0.32,
+            "behavioral_fp_rate": 10.0,
+            "behavioral_fp_households_m": 0.31
+          },
+          {
+            "decile": 6,
+            "fp_rate": 6.7,
+            "fp_households_m": 0.21,
+            "behavioral_fp_rate": 6.7,
+            "behavioral_fp_households_m": 0.21
+          },
+          {
+            "decile": 7,
+            "fp_rate": 3.8,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 3.7,
+            "behavioral_fp_households_m": 0.12
+          },
+          {
+            "decile": 8,
+            "fp_rate": 5.8,
+            "fp_households_m": 0.17,
+            "behavioral_fp_rate": 5.6,
+            "behavioral_fp_households_m": 0.17
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.6,
+            "fp_households_m": 0.23,
+            "behavioral_fp_rate": 7.5,
+            "behavioral_fp_households_m": 0.23
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.3,
+            "fp_households_m": 0.04,
+            "behavioral_fp_rate": 1.2,
+            "behavioral_fp_households_m": 0.04
+          }
+        ]
+      },
+      {
+        "scenario": "+30%",
+        "fp_rate": 11.6,
+        "fp_households_m": 3.68,
+        "behavioral_fp_rate": 10.7,
+        "behavioral_fp_households_m": 3.4,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 30.8,
+            "fp_households_m": 1.18,
+            "behavioral_fp_rate": 29.1,
+            "behavioral_fp_households_m": 1.11
+          },
+          {
+            "decile": 2,
+            "fp_rate": 19.3,
+            "fp_households_m": 0.65,
+            "behavioral_fp_rate": 15.3,
+            "behavioral_fp_households_m": 0.52
+          },
+          {
+            "decile": 3,
+            "fp_rate": 9.7,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 8.5,
+            "behavioral_fp_households_m": 0.26
+          },
+          {
+            "decile": 4,
+            "fp_rate": 10.0,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 9.8,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 5,
+            "fp_rate": 10.7,
+            "fp_households_m": 0.33,
+            "behavioral_fp_rate": 10.5,
+            "behavioral_fp_households_m": 0.32
+          },
+          {
+            "decile": 6,
+            "fp_rate": 8.3,
+            "fp_households_m": 0.25,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.24
+          },
+          {
+            "decile": 7,
+            "fp_rate": 4.1,
+            "fp_households_m": 0.13,
+            "behavioral_fp_rate": 3.8,
+            "behavioral_fp_households_m": 0.12
+          },
+          {
+            "decile": 8,
+            "fp_rate": 6.0,
+            "fp_households_m": 0.18,
+            "behavioral_fp_rate": 5.8,
+            "behavioral_fp_households_m": 0.17
+          },
+          {
+            "decile": 9,
+            "fp_rate": 7.8,
+            "fp_households_m": 0.24,
+            "behavioral_fp_rate": 7.7,
+            "behavioral_fp_households_m": 0.24
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.5,
+            "fp_households_m": 0.05,
+            "behavioral_fp_rate": 1.4,
+            "behavioral_fp_households_m": 0.05
+          }
+        ]
+      },
+      {
+        "scenario": "+60%",
+        "fp_rate": 13.6,
+        "fp_households_m": 4.35,
+        "behavioral_fp_rate": 11.9,
+        "behavioral_fp_households_m": 3.79,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 34.4,
+            "fp_households_m": 1.31,
+            "behavioral_fp_rate": 30.7,
+            "behavioral_fp_households_m": 1.17
+          },
+          {
+            "decile": 2,
+            "fp_rate": 22.3,
+            "fp_households_m": 0.76,
+            "behavioral_fp_rate": 19.7,
+            "behavioral_fp_households_m": 0.67
+          },
+          {
+            "decile": 3,
+            "fp_rate": 11.7,
+            "fp_households_m": 0.36,
+            "behavioral_fp_rate": 9.9,
+            "behavioral_fp_households_m": 0.31
+          },
+          {
+            "decile": 4,
+            "fp_rate": 12.0,
+            "fp_households_m": 0.36,
+            "behavioral_fp_rate": 10.8,
+            "behavioral_fp_households_m": 0.32
+          },
+          {
+            "decile": 5,
+            "fp_rate": 11.7,
+            "fp_households_m": 0.36,
+            "behavioral_fp_rate": 10.9,
+            "behavioral_fp_households_m": 0.33
+          },
+          {
+            "decile": 6,
+            "fp_rate": 10.2,
+            "fp_households_m": 0.31,
+            "behavioral_fp_rate": 8.3,
+            "behavioral_fp_households_m": 0.26
+          },
+          {
+            "decile": 7,
+            "fp_rate": 7.1,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 4.2,
+            "behavioral_fp_households_m": 0.13
+          },
+          {
+            "decile": 8,
+            "fp_rate": 7.5,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.19
+          },
+          {
+            "decile": 9,
+            "fp_rate": 9.8,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 9.3,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 10,
+            "fp_rate": 2.1,
+            "fp_households_m": 0.07,
+            "behavioral_fp_rate": 1.6,
+            "behavioral_fp_households_m": 0.05
+          }
+        ]
+      },
+      {
+        "scenario": "2022-level",
+        "fp_rate": 18.6,
+        "fp_households_m": 5.93,
+        "behavioral_fp_rate": 13.5,
+        "behavioral_fp_households_m": 4.31,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 42.8,
+            "fp_households_m": 1.63,
+            "behavioral_fp_rate": 31.2,
+            "behavioral_fp_households_m": 1.19
+          },
+          {
+            "decile": 2,
+            "fp_rate": 27.4,
+            "fp_households_m": 0.93,
+            "behavioral_fp_rate": 22.3,
+            "behavioral_fp_households_m": 0.75
+          },
+          {
+            "decile": 3,
+            "fp_rate": 18.0,
+            "fp_households_m": 0.55,
+            "behavioral_fp_rate": 11.7,
+            "behavioral_fp_households_m": 0.36
+          },
+          {
+            "decile": 4,
+            "fp_rate": 19.1,
+            "fp_households_m": 0.57,
+            "behavioral_fp_rate": 12.0,
+            "behavioral_fp_households_m": 0.36
+          },
+          {
+            "decile": 5,
+            "fp_rate": 16.4,
+            "fp_households_m": 0.5,
+            "behavioral_fp_rate": 11.9,
+            "behavioral_fp_households_m": 0.37
+          },
+          {
+            "decile": 6,
+            "fp_rate": 16.2,
+            "fp_households_m": 0.5,
+            "behavioral_fp_rate": 11.4,
+            "behavioral_fp_households_m": 0.35
+          },
+          {
+            "decile": 7,
+            "fp_rate": 10.6,
+            "fp_households_m": 0.33,
+            "behavioral_fp_rate": 7.2,
+            "behavioral_fp_households_m": 0.23
+          },
+          {
+            "decile": 8,
+            "fp_rate": 10.9,
+            "fp_households_m": 0.32,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.23
+          },
+          {
+            "decile": 9,
+            "fp_rate": 12.8,
+            "fp_households_m": 0.39,
+            "behavioral_fp_rate": 10.4,
+            "behavioral_fp_households_m": 0.32
+          },
+          {
+            "decile": 10,
+            "fp_rate": 3.7,
+            "fp_households_m": 0.12,
+            "behavioral_fp_rate": 2.3,
+            "behavioral_fp_households_m": 0.07
+          }
+        ]
+      }
+    ],
+    "rbt": [
+      {
+        "scenario": "+10%",
+        "fp_rate": 10.3,
+        "fp_households_m": 3.29,
+        "behavioral_fp_rate": 10.3,
+        "behavioral_fp_households_m": 3.27,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 23.4,
+            "fp_households_m": 0.89,
+            "behavioral_fp_rate": 23.2,
+            "behavioral_fp_households_m": 0.89
+          },
+          {
+            "decile": 2,
+            "fp_rate": 14.9,
+            "fp_households_m": 0.5,
+            "behavioral_fp_rate": 14.8,
+            "behavioral_fp_households_m": 0.5
+          },
+          {
+            "decile": 3,
+            "fp_rate": 8.4,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 8.4,
+            "behavioral_fp_households_m": 0.26
+          },
+          {
+            "decile": 4,
+            "fp_rate": 9.9,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 9.8,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 5,
+            "fp_rate": 11.0,
+            "fp_households_m": 0.34,
+            "behavioral_fp_rate": 11.0,
+            "behavioral_fp_households_m": 0.34
+          },
+          {
+            "decile": 6,
+            "fp_rate": 8.3,
+            "fp_households_m": 0.26,
+            "behavioral_fp_rate": 8.3,
+            "behavioral_fp_households_m": 0.25
+          },
+          {
+            "decile": 7,
+            "fp_rate": 4.1,
+            "fp_households_m": 0.13,
+            "behavioral_fp_rate": 4.1,
+            "behavioral_fp_households_m": 0.13
+          },
+          {
+            "decile": 8,
+            "fp_rate": 6.6,
+            "fp_households_m": 0.19,
+            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_households_m": 0.19
+          },
+          {
+            "decile": 9,
+            "fp_rate": 9.4,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 9.3,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.7,
+            "fp_households_m": 0.05,
+            "behavioral_fp_rate": 1.6,
+            "behavioral_fp_households_m": 0.05
+          }
+        ]
+      },
+      {
+        "scenario": "+20%",
+        "fp_rate": 11.3,
+        "fp_households_m": 3.58,
+        "behavioral_fp_rate": 10.8,
+        "behavioral_fp_households_m": 3.43,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 27.2,
+            "fp_households_m": 1.04,
+            "behavioral_fp_rate": 24.4,
+            "behavioral_fp_households_m": 0.93
+          },
+          {
+            "decile": 2,
+            "fp_rate": 15.7,
+            "fp_households_m": 0.53,
+            "behavioral_fp_rate": 15.6,
+            "behavioral_fp_households_m": 0.53
+          },
+          {
+            "decile": 3,
+            "fp_rate": 9.0,
+            "fp_households_m": 0.28,
+            "behavioral_fp_rate": 8.7,
+            "behavioral_fp_households_m": 0.27
+          },
+          {
+            "decile": 4,
+            "fp_rate": 10.8,
+            "fp_households_m": 0.32,
+            "behavioral_fp_rate": 10.5,
+            "behavioral_fp_households_m": 0.31
+          },
+          {
+            "decile": 5,
+            "fp_rate": 11.2,
+            "fp_households_m": 0.34,
+            "behavioral_fp_rate": 11.1,
+            "behavioral_fp_households_m": 0.34
+          },
+          {
+            "decile": 6,
+            "fp_rate": 9.6,
+            "fp_households_m": 0.29,
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.29
+          },
+          {
+            "decile": 7,
+            "fp_rate": 4.3,
+            "fp_households_m": 0.14,
+            "behavioral_fp_rate": 4.3,
+            "behavioral_fp_households_m": 0.13
+          },
+          {
+            "decile": 8,
+            "fp_rate": 6.9,
+            "fp_households_m": 0.2,
+            "behavioral_fp_rate": 6.7,
+            "behavioral_fp_households_m": 0.2
+          },
+          {
+            "decile": 9,
+            "fp_rate": 9.7,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 0.3
+          },
+          {
+            "decile": 10,
+            "fp_rate": 1.9,
+            "fp_households_m": 0.06,
+            "behavioral_fp_rate": 1.9,
+            "behavioral_fp_households_m": 0.06
+          }
+        ]
+      },
+      {
+        "scenario": "+30%",
+        "fp_rate": 13.0,
+        "fp_households_m": 4.13,
+        "behavioral_fp_rate": 12.0,
+        "behavioral_fp_households_m": 3.82,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 29.4,
+            "fp_households_m": 1.12,
+            "behavioral_fp_rate": 27.9,
+            "behavioral_fp_households_m": 1.07
+          },
+          {
+            "decile": 2,
+            "fp_rate": 21.7,
+            "fp_households_m": 0.73,
+            "behavioral_fp_rate": 16.7,
+            "behavioral_fp_households_m": 0.57
+          },
+          {
+            "decile": 3,
+            "fp_rate": 11.2,
+            "fp_households_m": 0.34,
+            "behavioral_fp_rate": 10.1,
+            "behavioral_fp_households_m": 0.31
+          },
+          {
+            "decile": 4,
+            "fp_rate": 11.8,
+            "fp_households_m": 0.35,
+            "behavioral_fp_rate": 11.1,
+            "behavioral_fp_households_m": 0.33
+          },
+          {
+            "decile": 5,
+            "fp_rate": 11.7,
+            "fp_households_m": 0.36,
+            "behavioral_fp_rate": 11.6,
+            "behavioral_fp_households_m": 0.36
+          },
+          {
+            "decile": 6,
+            "fp_rate": 10.2,
+            "fp_households_m": 0.31,
+            "behavioral_fp_rate": 10.1,
+            "behavioral_fp_households_m": 0.31
+          },
+          {
+            "decile": 7,
+            "fp_rate": 7.1,
+            "fp_households_m": 0.22,
+            "behavioral_fp_rate": 7.0,
+            "behavioral_fp_households_m": 0.22
+          },
+          {
+            "decile": 8,
+            "fp_rate": 7.8,
+            "fp_households_m": 0.23,
+            "behavioral_fp_rate": 7.2,
+            "behavioral_fp_households_m": 0.21
+          },
+          {
+            "decile": 9,
+            "fp_rate": 9.9,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 9.8,
+            "behavioral_fp_households_m": 0.3
+          },
+          {
+            "decile": 10,
+            "fp_rate": 2.2,
+            "fp_households_m": 0.07,
+            "behavioral_fp_rate": 2.1,
+            "behavioral_fp_households_m": 0.07
+          }
+        ]
+      },
+      {
+        "scenario": "+60%",
+        "fp_rate": 16.3,
+        "fp_households_m": 5.19,
+        "behavioral_fp_rate": 14.4,
+        "behavioral_fp_households_m": 4.59,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 37.1,
+            "fp_households_m": 1.42,
+            "behavioral_fp_rate": 33.5,
+            "behavioral_fp_households_m": 1.28
+          },
+          {
+            "decile": 2,
+            "fp_rate": 24.2,
+            "fp_households_m": 0.82,
+            "behavioral_fp_rate": 22.9,
+            "behavioral_fp_households_m": 0.78
+          },
+          {
+            "decile": 3,
+            "fp_rate": 14.3,
+            "fp_households_m": 0.44,
+            "behavioral_fp_rate": 12.7,
+            "behavioral_fp_households_m": 0.39
+          },
+          {
+            "decile": 4,
+            "fp_rate": 16.7,
+            "fp_households_m": 0.5,
+            "behavioral_fp_rate": 12.6,
+            "behavioral_fp_households_m": 0.37
+          },
+          {
+            "decile": 5,
+            "fp_rate": 14.7,
+            "fp_households_m": 0.45,
+            "behavioral_fp_rate": 13.5,
+            "behavioral_fp_households_m": 0.41
+          },
+          {
+            "decile": 6,
+            "fp_rate": 14.4,
+            "fp_households_m": 0.44,
+            "behavioral_fp_rate": 12.6,
+            "behavioral_fp_households_m": 0.39
+          },
+          {
+            "decile": 7,
+            "fp_rate": 8.8,
+            "fp_households_m": 0.28,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.25
+          },
+          {
+            "decile": 8,
+            "fp_rate": 10.3,
+            "fp_households_m": 0.3,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.23
+          },
+          {
+            "decile": 9,
+            "fp_rate": 12.3,
+            "fp_households_m": 0.38,
+            "behavioral_fp_rate": 10.7,
+            "behavioral_fp_households_m": 0.33
+          },
+          {
+            "decile": 10,
+            "fp_rate": 2.8,
+            "fp_households_m": 0.09,
+            "behavioral_fp_rate": 2.4,
+            "behavioral_fp_households_m": 0.08
+          }
+        ]
+      },
+      {
+        "scenario": "2022-level",
+        "fp_rate": 25.5,
+        "fp_households_m": 8.12,
+        "behavioral_fp_rate": 18.9,
+        "behavioral_fp_households_m": 6.01,
+        "deciles": [
+          {
+            "decile": 1,
+            "fp_rate": 52.2,
+            "fp_households_m": 1.99,
+            "behavioral_fp_rate": 42.2,
+            "behavioral_fp_households_m": 1.61
+          },
+          {
+            "decile": 2,
+            "fp_rate": 39.5,
+            "fp_households_m": 1.34,
+            "behavioral_fp_rate": 27.6,
+            "behavioral_fp_households_m": 0.93
+          },
+          {
+            "decile": 3,
+            "fp_rate": 31.1,
+            "fp_households_m": 0.96,
+            "behavioral_fp_rate": 18.0,
+            "behavioral_fp_households_m": 0.55
+          },
+          {
+            "decile": 4,
+            "fp_rate": 25.8,
+            "fp_households_m": 0.77,
+            "behavioral_fp_rate": 19.2,
+            "behavioral_fp_households_m": 0.57
+          },
+          {
+            "decile": 5,
+            "fp_rate": 21.0,
+            "fp_households_m": 0.65,
+            "behavioral_fp_rate": 16.7,
+            "behavioral_fp_households_m": 0.51
+          },
+          {
+            "decile": 6,
+            "fp_rate": 24.7,
+            "fp_households_m": 0.75,
+            "behavioral_fp_rate": 16.5,
+            "behavioral_fp_households_m": 0.5
+          },
+          {
+            "decile": 7,
+            "fp_rate": 16.5,
+            "fp_households_m": 0.52,
+            "behavioral_fp_rate": 12.3,
+            "behavioral_fp_households_m": 0.39
+          },
+          {
+            "decile": 8,
+            "fp_rate": 15.1,
+            "fp_households_m": 0.44,
+            "behavioral_fp_rate": 11.1,
+            "behavioral_fp_households_m": 0.33
+          },
+          {
+            "decile": 9,
+            "fp_rate": 15.0,
+            "fp_households_m": 0.46,
+            "behavioral_fp_rate": 13.3,
+            "behavioral_fp_households_m": 0.41
+          },
+          {
+            "decile": 10,
+            "fp_rate": 5.0,
+            "fp_households_m": 0.16,
+            "behavioral_fp_rate": 3.8,
+            "behavioral_fp_households_m": 0.12
+          }
+        ]
+      }
+    ]
   },
   "config": {
     "year": 2026,
