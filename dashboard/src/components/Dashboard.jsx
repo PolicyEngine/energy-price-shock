@@ -1223,23 +1223,24 @@ function PolicyNetSection() {
           );
         }
 
-        // Constituency map
+        // Constituency map — post-policy data
         if (chartMode === "constituency") {
           const SCENARIO_KEY_MAP = { "+10%": "plus_10pct", "+20%": "plus_20pct", "+30%": "plus_30pct", "+60%": "plus_60pct", "2022-level": "2022_level" };
           const suffix = SCENARIO_KEY_MAP[scenario.name] || "plus_10pct";
           const useBehav = policyResponse === "behavioural";
+          const pk = selectedNet;
           let constMetricKey, constLabel;
           const responseLabel = useBehav ? "behavioural" : "static";
           if (policyMetric === "fp_rate" || policyMetric === "fp_households") {
-            constMetricKey = `fp_pct_${suffix}`;
-            constLabel = `Fuel poverty rate %: ${scenario.name}`;
+            constMetricKey = useBehav ? `pp_${pk}_bfp_${suffix}` : `pp_${pk}_fp_${suffix}`;
+            constLabel = `Post-policy FP rate % (${responseLabel}): ${scenario.name}`;
           } else {
-            const costPrefix = useBehav ? "behav_cost" : "extra_cost";
-            const pctPrefix = useBehav ? "behav_pct" : "extra_pct";
-            constMetricKey = policyMetric === "pct_of_income" ? `${pctPrefix}_${suffix}` : `${costPrefix}_${suffix}`;
+            const costKey = useBehav ? `pp_${pk}_bcost_${suffix}` : `pp_${pk}_cost_${suffix}`;
+            const pctKey = useBehav ? `pp_${pk}_bpct_${suffix}` : `pp_${pk}_pct_${suffix}`;
+            constMetricKey = policyMetric === "pct_of_income" ? pctKey : costKey;
             constLabel = policyMetric === "pct_of_income"
-              ? `Extra cost as % of income (${responseLabel}): ${scenario.name}`
-              : `Extra cost £ (${responseLabel}): ${scenario.name}`;
+              ? `Post-policy extra cost % (${responseLabel}): ${scenario.name}`
+              : `Post-policy extra cost £ (${responseLabel}): ${scenario.name}`;
           }
           return (
             <div className="chart-wrapper">

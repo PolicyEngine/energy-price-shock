@@ -10,8 +10,15 @@ import numpy as np
 import h5py
 from pathlib import Path
 
-from .config import CURRENT_CAP, PRICE_SCENARIOS, SHORT_RUN_ELASTICITY
+from policyengine_uk import Microsimulation
+
+from .config import (
+    CURRENT_CAP, PRICE_SCENARIOS, SHORT_RUN_ELASTICITY,
+    YEAR, SHOCK_CAP, EPG_TARGET, FLAT_TRANSFER, CT_REBATE,
+)
 from .baseline import weighted_mean
+
+NEG_ELEC_SPEND = 764  # median electricity spend threshold for NEG
 
 WEIGHTS_PATH = (
     Path.home()
@@ -42,6 +49,26 @@ def constituency_analysis(data):
     elec = data["elec"]
     gas = data["gas"]
     income = data["income"]
+
+    # Pre-compute household-level policy payments (same as policy_fuel_poverty)
+    pe_policies = {
+        "flat_transfer": {
+            "reform": {"gov.treasury.energy_bills_rebate.energy_bills_credit": {"2026-01-01": FLAT_TRANSFER}},
+            "variable": "ebr_energy_bills_credit",
+        },
+        "ct_rebate": {
+            "reform": {"gov.treasury.energy_bills_rebate.council_tax_rebate.amount": {"2026-01-01": CT_REBATE}},
+            "variable": "ebr_council_tax_rebate",
+        },
+    }
+    hh_payments_fixed = {}
+    for key, cfg in pe_policies.items():
+        sim = Microsimulation(reform=cfg["reform"])
+        pay = sim.calculate(cfg["variable"], YEAR)
+        hh_payments_fixed[key] = pay.values if hasattr(pay, "values") else np.array(pay)
+
+    # NEG baseline benefit
+    neg_baseline_benefit = np.minimum(elec, NEG_ELEC_SPEND)
 
     n_const = len(constituencies)
     print(f"Computing impacts for {n_const} constituencies...")
@@ -101,6 +128,39 @@ def constituency_analysis(data):
             base_row[f"behav_pct_{key}"] = round(behav_extra_pct, 2)
             base_row[f"burden_pct_{key}"] = round((avg_energy * (1 + pct)) / avg_income * 100 if avg_income > 0 else 0, 2)
             base_row[f"fp_pct_{key}"] = round(shocked_fp, 1)
+
+            # Post-policy metrics per policy
+            safe_inc = np.where(income > 0, income, 1)
+            policy_payments = {
+                "flat_transfer": hh_payments_fixed["flat_transfer"],
+                "ct_rebate": hh_payments_fixed["ct_rebate"],
+                "bn_transfer": np.full_like(energy, float(np.average(energy, weights=data["weights"]) * pct)),
+                "bn_epg": energy * pct,
+            }
+            # NEG payment
+            shocked_elec = elec * (1 + pct)
+            neg_threshold_shocked = NEG_ELEC_SPEND * (1 + pct)
+            neg_benefit_shocked = np.minimum(shocked_elec, neg_threshold_shocked)
+            policy_payments["neg"] = neg_benefit_shocked - neg_baseline_benefit
+
+            for pk, pay in policy_payments.items():
+                net_s = np.maximum(shocked_energy - pay, 0)
+                net_extra_s = float(np.average(np.maximum(net_s - energy, 0), weights=w))
+                pct_s = net_extra_s / avg_income * 100 if avg_income > 0 else 0
+                fp_s = float(np.average((net_s / safe_inc) > 0.10, weights=w)) * 100
+
+                behav_e = energy * behav_factor
+                net_b = np.maximum(behav_e - pay, 0)
+                net_extra_b = float(np.average(np.maximum(net_b - energy, 0), weights=w))
+                pct_b = net_extra_b / avg_income * 100 if avg_income > 0 else 0
+                fp_b = float(np.average((net_b / safe_inc) > 0.10, weights=w)) * 100
+
+                base_row[f"pp_{pk}_cost_{key}"] = round(net_extra_s)
+                base_row[f"pp_{pk}_pct_{key}"] = round(pct_s, 2)
+                base_row[f"pp_{pk}_fp_{key}"] = round(fp_s, 1)
+                base_row[f"pp_{pk}_bcost_{key}"] = round(net_extra_b)
+                base_row[f"pp_{pk}_bpct_{key}"] = round(pct_b, 2)
+                base_row[f"pp_{pk}_bfp_{key}"] = round(fp_b, 1)
 
         rows.append(base_row)
 
