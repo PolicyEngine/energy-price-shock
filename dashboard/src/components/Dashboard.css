@@ -137,7 +137,7 @@ html {
   border: 1px solid #cbd5e1;
   font-size: 0.55rem;
   font-weight: 700;
-  font-style: italic;
+  font-style: normal;
   color: #94a3b8;
   cursor: help;
   line-height: 1;
@@ -653,6 +653,50 @@ html {
   color: #1e293b;
 }
 
+/* Scenario table */
+.scenario-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 24px 0;
+  font-size: 0.95rem;
+}
+
+.scenario-table th {
+  text-align: left;
+  font-weight: 600;
+  color: #1e293b;
+  padding: 10px 16px;
+  border-bottom: 2px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.scenario-table td {
+  padding: 10px 16px;
+  color: #475569;
+  border-bottom: 1px solid #f1f5f9;
+  line-height: 1.5;
+}
+
+.scenario-table td strong {
+  color: #1e293b;
+}
+
+.scenario-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.scenario-table td:first-child {
+  white-space: nowrap;
+  width: 100px;
+}
+
+.scenario-table td:last-child,
+.scenario-table th:last-child {
+  white-space: nowrap;
+  text-align: right;
+  width: 90px;
+}
+
 /* Chart mode toggle — uses pill style */
 .chart-mode-toggle {
   display: flex;
@@ -828,4 +872,41 @@ ol.ref-list li a {
   .col-chart-bars {
     height: 140px;
   }
+}
+
+/* Collapsible references */
+.references-details {
+  margin: 0;
+}
+
+.references-summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.references-summary::-webkit-details-marker {
+  display: none;
+}
+
+.references-summary::before {
+  content: "▶";
+  font-size: 0.7rem;
+  color: #64748b;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.references-details[open] > .references-summary::before {
+  transform: rotate(90deg);
+}
+
+.references-summary:hover .section-title {
+  color: #2563eb;
+}
+
+.references-summary .section-title {
+  margin: 0;
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import results from "../data/results.json";
 import resultsV2 from "../data/results_v2.json";
 import constituencyData from "../data/constituency_results.json";
@@ -527,13 +527,42 @@ function ShockSection() {
         prices, so wholesale gas price shocks feed through to the cap and
         to all household bills.
       </p>
-      <ul className="policy-bullet-list">
-        <li><strong>+10%</strong> Short-lived supply disruption or moderate market uncertainty. Cap rises to £1,805.</li>
-        <li><strong>+20%</strong> Sustained disruption or extended uncertainty in shipping routes. Cap rises to £1,969.</li>
-        <li><strong>+30%</strong> Prolonged conflict affecting gas supply, such as extended Strait of Hormuz disruption. Cap rises to £2,133.</li>
-        <li><strong>+60%</strong> Major escalation comparable to the initial impact of the 2022 crisis. Cap rises to £2,625.</li>
-        <li><strong>2022-level</strong> Matches the October 2022 peak of £3,764, when wholesale gas prices reached record highs.</li>
-      </ul>
+      <table className="scenario-table">
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>Description</th>
+            <th>New cap</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>+10%</strong></td>
+            <td>Short-lived supply disruption or moderate market uncertainty</td>
+            <td>£1,805</td>
+          </tr>
+          <tr>
+            <td><strong>+20%</strong></td>
+            <td>Sustained disruption or extended uncertainty in shipping routes</td>
+            <td>£1,969</td>
+          </tr>
+          <tr>
+            <td><strong>+30%</strong></td>
+            <td>Prolonged conflict affecting gas supply, such as extended Strait of Hormuz disruption</td>
+            <td>£2,133</td>
+          </tr>
+          <tr>
+            <td><strong>+60%</strong></td>
+            <td>Major escalation comparable to the initial impact of the 2022 crisis</td>
+            <td>£2,625</td>
+          </tr>
+          <tr>
+            <td><strong>2022-level</strong></td>
+            <td>Matches the October 2022 peak of £3,764, when wholesale gas prices reached record highs</td>
+            <td>£3,764</td>
+          </tr>
+        </tbody>
+      </table>
       <h3 className="section-title" style={{ fontSize: "1.1rem", marginTop: 32 }}>Behavioural response</h3>
       <p className="section-description">
         Each chart below shows two estimates side by side. The <strong>static</strong>{" "}
@@ -1481,7 +1510,7 @@ function PolicyComparisonSection() {
       <div className="chart-wrapper">
         <div className="chart-header">
           <div>
-            <div className="chart-title">Figure 5: {activeSubtitle} by policy ({scenarioName})</div>
+            <div className="chart-title">Figure 5: Policy comparison</div>
             <div className="chart-subtitle">Sorted by selected metric, highest first</div>
           </div>
         </div>
@@ -1524,11 +1553,52 @@ function PolicyComparisonSection() {
         </div>
 
       </div>
+
+      <p className="section-description" style={{ marginTop: 24 }}>
+        Even a modest 10% price shock adds £156 per year to the average household
+        energy bill and pushes the fuel poverty rate from 9.3% to 10.3%, affecting
+        an additional 300,000 households. At 2022-level prices, the average hit
+        rises to £2,019 per year and the fuel poverty rate reaches 27.6% (8.8 million
+        households). The burden is regressive throughout: the lowest-income decile
+        spends 6.9% of net income on energy compared with 1.4% for the highest.
+      </p>
+      <p className="section-description">
+        Of the five policies modelled, the budget-neutral EPG (D) achieves the
+        largest fuel poverty reduction (18.3 percentage points at 2022-level prices,
+        lifting 5.8 million households out of fuel poverty) but at the highest
+        exchequer cost. The budget-neutral flat transfer (C) reduces fuel poverty by
+        14.9 percentage points at the same scenario. The National Energy
+        Guarantee (E) offers a middle path, reducing fuel poverty by 9.0 percentage
+        points while targeting support towards lower-consuming households.
+        The fixed-amount policies (A, B) provide smaller fuel poverty reductions
+        but at lower and predictable exchequer costs.
+      </p>
+      <p className="section-description">
+        The choice between policies depends on the scale of the shock and the
+        weight placed on fiscal cost versus household protection. For smaller
+        shocks, fixed-amount transfers may be sufficient. For larger shocks,
+        consumption-based or budget-neutral designs provide broader coverage.
+        Behavioural responses (households reducing consumption) lower the fiscal
+        cost of consumption-based policies but cannot prevent large increases in
+        fuel poverty at severe shock levels.
+      </p>
     </section>
   );
 }
 
 export default function Dashboard() {
+  // Auto-open References <details> when clicking in-text reference links
+  useEffect(() => {
+    const handler = (e) => {
+      const link = e.target.closest('a[href^="#ref-"], a[href^="#fn-"]');
+      if (!link) return;
+      const details = document.querySelector(".references-details");
+      if (details && !details.open) details.open = true;
+    };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
+  }, []);
+
   return (
     <div className="narrative-container">
       <header className="narrative-hero">
@@ -1611,41 +1681,24 @@ export default function Dashboard() {
       <section className="section" id="conclusion">
         <h2 className="section-title">Conclusion</h2>
         <p className="section-description">
-          Even a modest 10% price shock adds £156 per year to the average household
-          energy bill and pushes the fuel poverty rate from 9.3% to 10.3%, affecting
-          an additional 300,000 households. At 2022-level prices, the average hit
-          rises to £2,019 per year and the fuel poverty rate reaches 27.6% (8.8 million
-          households). The burden is regressive throughout: the lowest-income decile
-          spends 6.9% of net income on energy compared with 1.4% for the highest.
-        </p>
-        <p className="section-description">
-          Of the five policies modelled, the budget-neutral EPG (D) achieves the
-          largest fuel poverty reduction (18.3 percentage points at 2022-level prices,
-          lifting 5.8 million households out of fuel poverty) but at the highest
-          exchequer cost. The budget-neutral flat transfer (C) reduces fuel poverty by
-          14.9 percentage points at the same scenario. The National Energy
-          Guarantee (E) offers a middle path, reducing fuel poverty by 9.0 percentage
-          points while targeting support towards lower-consuming households.
-          The fixed-amount policies (A, B) provide smaller fuel poverty reductions
-          but at lower and predictable exchequer costs.
-        </p>
-        <p className="section-description">
-          The choice between policies depends on the scale of the shock and the
-          weight placed on fiscal cost versus household protection. For smaller
-          shocks, fixed-amount transfers may be sufficient. For larger shocks,
-          consumption-based or budget-neutral designs provide broader coverage.
-          Behavioural responses (households reducing consumption) lower the fiscal
-          cost of consumption-based policies but cannot prevent large increases in
-          fuel poverty at severe shock levels.
+          Energy price shocks remain a significant risk to UK household living
+          standards, with effects that fall disproportionately on low-income
+          households. The five policies modelled here offer different trade-offs
+          between fiscal cost and household protection. Policymakers should
+          consider pre-designing and legislating a preferred mechanism now, so
+          that support can be deployed quickly if wholesale prices spike again.
         </p>
       </section>
 
       <hr style={{ border: "none", borderTop: "1px solid #e2e8f0", margin: "48px 0" }} />
 
       <section className="section" id="references">
-        <h2 className="section-title">References</h2>
+        <details className="references-details">
+          <summary className="references-summary">
+            <h2 className="section-title" style={{ display: "inline", cursor: "pointer" }}>References</h2>
+          </summary>
 
-        <div className="chart-title" style={{ marginBottom: 12 }}>Academic literature</div>
+        <div className="chart-title" style={{ marginBottom: 12, marginTop: 16 }}>Academic literature</div>
         <ul className="policy-bullet-list" style={{ fontSize: "0.82rem", color: "#64748b", lineHeight: 1.8 }}>
           <li id="ref-ari">
             Ari, A., Arregui, N., Black, S., Celasun, O., Iakova, D., Mineshima, A., Mylonas, V., Parry, I., Teodoru, I. and Zhunussova, K. (2022). "Surging Energy Prices in Europe in the Aftermath of the War: How to Support the Vulnerable and Speed up the Transition Away from Fossil Fuels." <em>IMF Working Paper</em>, No. 22/152.{" "}
@@ -1740,6 +1793,7 @@ export default function Dashboard() {
             <a href="https://www.gov.uk/government/statistics/council-tax-stock-of-properties-2024" target="_blank" rel="noopener noreferrer">gov.uk</a>
           </li>
         </ol>
+        </details>
       </section>
     </div>
   );
