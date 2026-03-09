@@ -928,24 +928,17 @@ function PolicyNetSection() {
         });
       }
     } else {
-      // Standard policies (A-E) with extra_cost or pct_of_income
-      const epgScale = selectedNet === "epg" ? Math.max(0, scenario.new_cap - EPG_TARGET) / (EPG_REF_CAP - EPG_TARGET) : 1;
-      barData = scenario.deciles.map((d, i) => {
-        let payment;
-        if (selectedNet === "bn_transfer") payment = scenario.avg_hh_hit_yr;
-        else if (selectedNet === "bn_epg") payment = d.extra_cost;
-        else {
-          const pd = policies[selectedNet].deciles[i];
-          payment = selectedNet === "epg" ? Math.round(pd.payment * epgScale) : pd.payment;
-        }
-        const sr = Math.max(0, d.extra_cost - payment);
-        const br = Math.max(0, behav.deciles[i].behavioral_extra_cost - payment);
-        if (policyMetric === "pct_of_income") {
-          const income = results.baseline.deciles[i].net_income;
-          return { label: `${d.decile}`, staticVal: income > 0 ? +((sr / income * 100).toFixed(2)) : 0, behavVal: income > 0 ? +((br / income * 100).toFixed(2)) : 0 };
-        }
-        return { label: `${d.decile}`, staticVal: sr, behavVal: br };
-      });
+      // Standard policies with extra_cost or pct_of_income — use policy_fuel_poverty data
+      const pfp = results.policy_fuel_poverty?.[selectedNet]?.[selectedScenario];
+      if (pfp) {
+        barData = pfp.deciles.map((d) => {
+          const sVal = policyMetric === "pct_of_income" ? d.pct_of_income : d.extra_cost;
+          const bVal = policyMetric === "pct_of_income" ? d.behavioral_pct_of_income : d.behavioral_extra_cost;
+          return { label: `${d.decile}`, staticVal: sVal, behavVal: bVal };
+        });
+      } else {
+        barData = scenario.deciles.map((d) => ({ label: `${d.decile}`, staticVal: 0, behavVal: 0 }));
+      }
     }
   } else if (selectedNet === "bn_epg" && !isFPMetric) {
     // BN EPG fully offsets every household, so all breakdowns show £0
@@ -953,30 +946,27 @@ function PolicyNetSection() {
     chartMessage = `The ${policyLabels[selectedNet]} fully offsets the ${scenarioName} shock for all households. Every household's net extra cost is £0.`;
   } else if (bk === "constituency") {
     chartMode = "constituency";
-  } else if (bk === "tenure") {
-    // Show shock data by tenure (policy adjustment only available by decile)
-    xLabel = "Tenure";
-    barData = scenario.by_tenure.map((d) => {
-      const bd = results.behavioral[selectedScenario].by_tenure.find((b) => b.tenure === d.tenure);
-      return {
-        label: TENURE_LABELS[d.tenure] || d.tenure,
-        staticVal: isFPMetric ? (policyMetric === "fp_rate" ? d.fp_rate : d.fp_households_m) : (policyMetric === "pct_of_income" ? d.pct_of_income : d.extra_cost),
-        behavVal: bd ? (isFPMetric ? (policyMetric === "fp_rate" ? bd.behavioral_fp_rate : bd.behavioral_fp_households_m) : (policyMetric === "pct_of_income" ? bd.behavioral_pct_of_income : bd.behavioral_extra_cost)) : 0,
-      };
-    });
-    barData.sort((a, b) => b.staticVal - a.staticVal);
-  } else if (bk === "hh_type") {
-    // Show shock data by household type (policy adjustment only available by decile)
-    xLabel = "Household type";
-    barData = scenario.by_hh_type.map((d) => {
-      const bd = results.behavioral[selectedScenario].by_hh_type.find((b) => b.hh_type === d.hh_type);
-      return {
-        label: HH_TYPE_LABELS[d.hh_type] || d.hh_type,
-        staticVal: isFPMetric ? (policyMetric === "fp_rate" ? d.fp_rate : d.fp_households_m) : (policyMetric === "pct_of_income" ? d.pct_of_income : d.extra_cost),
-        behavVal: bd ? (isFPMetric ? (policyMetric === "fp_rate" ? bd.behavioral_fp_rate : bd.behavioral_fp_households_m) : (policyMetric === "pct_of_income" ? bd.behavioral_pct_of_income : bd.behavioral_extra_cost)) : 0,
-      };
-    });
-    barData.sort((a, b) => b.staticVal - a.staticVal);
+  } else if (bk === "tenure" || bk === "hh_type") {
+    // Post-policy tenure/hh_type breakdown from policy_fuel_poverty data
+    xLabel = bk === "tenure" ? "Tenure" : "Household type";
+    const pfp = results.policy_fuel_poverty?.[selectedNet]?.[selectedScenario];
+    const groupData = pfp ? (bk === "tenure" ? pfp.by_tenure : pfp.by_hh_type) : null;
+    if (groupData) {
+      const LABELS = bk === "tenure" ? TENURE_LABELS : HH_TYPE_LABELS;
+      const groupKey = bk === "tenure" ? "tenure" : "hh_type";
+      barData = groupData.map((d) => {
+        const sVal = isFPMetric
+          ? (policyMetric === "fp_rate" ? d.fp_rate : d.fp_households_m)
+          : (policyMetric === "pct_of_income" ? d.pct_of_income : d.extra_cost);
+        const bVal = isFPMetric
+          ? (policyMetric === "fp_rate" ? d.behavioral_fp_rate : d.behavioral_fp_households_m)
+          : (policyMetric === "pct_of_income" ? d.behavioral_pct_of_income : d.behavioral_extra_cost);
+        return { label: LABELS[d[groupKey]] || d[groupKey], staticVal: sVal, behavVal: bVal };
+      });
+      barData.sort((a, b) => b.staticVal - a.staticVal);
+    } else {
+      barData = [];
+    }
   }
 
   // Determine chart title/subtitle for "standard" mode

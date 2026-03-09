@@ -540,14 +540,16 @@ def _fp_by_group(energy, income, weights, payment, group_arr, groups, pct, behav
         # Static
         shocked_e = e_g * (1 + pct)
         net_s = np.maximum(shocked_e - p_g, 0)
-        extra_s = float(weighted_mean(net_s - e_g, w_g))
-        pct_inc_s = float(weighted_mean(net_s / np.where(i_g > 0, i_g, 1) * 100, w_g))
-        fp_s = float(np.average((net_s / np.where(i_g > 0, i_g, 1)) > 0.10, weights=w_g)) * 100
+        extra_s = float(weighted_mean(np.maximum(net_s - e_g, 0), w_g))
+        safe_inc = np.where(i_g > 0, i_g, 1)
+        mean_inc = float(weighted_mean(i_g, w_g))
+        pct_inc_s = round(extra_s / mean_inc * 100, 1) if mean_inc > 0 else 0
+        fp_s = float(np.average((net_s / safe_inc) > 0.10, weights=w_g)) * 100
         # Behavioural
         behav_e = e_g * behavioral_factor
         net_b = np.maximum(behav_e - p_g, 0)
-        extra_b = float(weighted_mean(net_b - e_g, w_g))
-        pct_inc_b = float(weighted_mean(net_b / np.where(i_g > 0, i_g, 1) * 100, w_g))
+        extra_b = float(weighted_mean(np.maximum(net_b - e_g, 0), w_g))
+        pct_inc_b = round(extra_b / mean_inc * 100, 1) if mean_inc > 0 else 0
         fp_b = float(np.average((net_b / np.where(i_g > 0, i_g, 1)) > 0.10, weights=w_g)) * 100
         result.append({
             "group": str(g),
@@ -658,10 +660,20 @@ def policy_fuel_poverty(data):
                 ratio_b = net_e_behav / np.where(i_d > 0, i_d, 1)
                 fp_behav = float(np.average(ratio_b > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
 
+                extra_s = float(weighted_mean(np.maximum(net_e_static - e_d, 0), w_d))
+                extra_b = float(weighted_mean(np.maximum(net_e_behav - e_d, 0), w_d))
+                mean_inc_d = float(weighted_mean(i_d, w_d))
+                pct_s = round(extra_s / mean_inc_d * 100, 1) if mean_inc_d > 0 else 0
+                pct_b = round(extra_b / mean_inc_d * 100, 1) if mean_inc_d > 0 else 0
+
                 deciles.append({
                     "decile": d,
+                    "extra_cost": round(extra_s),
+                    "pct_of_income": pct_s,
                     "fp_rate": round(fp_static, 1),
                     "fp_households_m": round(fp_static / 100 * n_hh, 2),
+                    "behavioral_extra_cost": round(extra_b),
+                    "behavioral_pct_of_income": pct_b,
                     "behavioral_fp_rate": round(fp_behav, 1),
                     "behavioral_fp_households_m": round(fp_behav / 100 * n_hh, 2),
                 })
@@ -728,9 +740,18 @@ def policy_fuel_poverty(data):
             behav_e = e_d * behavioral_factor
             net_b = np.maximum(behav_e - p_d, 0)
             fp_b = float(np.average((net_b / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
+            extra_s_neg = float(weighted_mean(np.maximum(net_s - e_d, 0), w_d))
+            extra_b_neg = float(weighted_mean(np.maximum(net_b - e_d, 0), w_d))
+            mean_inc_neg = float(weighted_mean(i_d, w_d))
+            pct_s_neg = round(extra_s_neg / mean_inc_neg * 100, 1) if mean_inc_neg > 0 else 0
+            pct_b_neg = round(extra_b_neg / mean_inc_neg * 100, 1) if mean_inc_neg > 0 else 0
             deciles.append({
                 "decile": d,
+                "extra_cost": round(extra_s_neg),
+                "pct_of_income": pct_s_neg,
                 "fp_rate": round(fp_s, 1), "fp_households_m": round(fp_s / 100 * n_hh, 2),
+                "behavioral_extra_cost": round(extra_b_neg),
+                "behavioral_pct_of_income": pct_b_neg,
                 "behavioral_fp_rate": round(fp_b, 1), "behavioral_fp_households_m": round(fp_b / 100 * n_hh, 2),
             })
         n_total = float(weights.sum()) / 1e6
@@ -740,11 +761,22 @@ def policy_fuel_poverty(data):
         behav_all = energy * behavioral_factor
         net_all_b = np.maximum(behav_all - payment, 0)
         fp_all_b = float(np.average((net_all_b / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
+        by_tenure = _fp_by_group(energy, income, weights, payment,
+                                 tenure_arr, tenure_groups, pct, behavioral_factor)
+        for t in by_tenure:
+            t["tenure"] = t.pop("group")
+        by_hh_type = _fp_by_group(energy, income, weights, payment,
+                                  hh_type_arr, hh_type_groups, pct, behavioral_factor)
+        for h in by_hh_type:
+            h["hh_type"] = h.pop("group")
+
         neg_scenarios.append({
             "scenario": name,
             "fp_rate": round(fp_all_s, 1), "fp_households_m": round(fp_all_s / 100 * n_total, 2),
             "behavioral_fp_rate": round(fp_all_b, 1), "behavioral_fp_households_m": round(fp_all_b / 100 * n_total, 2),
             "deciles": deciles,
+            "by_tenure": by_tenure,
+            "by_hh_type": by_hh_type,
         })
     results["neg"] = neg_scenarios
 
