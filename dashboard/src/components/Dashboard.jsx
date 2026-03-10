@@ -34,10 +34,10 @@ const POLICY_META = {
     letter: "B",
     fullName: "Council tax band rebate (£300 for bands A–D)",
     description: <>
-      A £300 payment to households in council tax bands A through D, replicating the Council Tax Rebate paid in April
-      2022.<a href="#fn-13"><sup>13</sup></a> We assign council tax bands using the PolicyEngine UK microsimulation
+      A £300 payment to households in council tax bands A through D, modelled on the £150 Council Tax Rebate paid in April
+      2022<a href="#fn-13"><sup>13</sup></a> but doubled to reflect a larger shock. We assign council tax bands using the PolicyEngine UK microsimulation
       model<a href="#fn-6"><sup>6</sup></a> and apply the payment to qualifying households. Bands A–D cover roughly 63% of English
-      dwellings,<a href="#fn-14"><sup>14</sup></a> using property value as a proxy for income. More targeted than a flat transfer but an imprecise proxy:
+      dwellings,<a href="#fn-14"><sup>14</sup></a> so the policy uses council tax band as a rough proxy for income. More targeted than a flat transfer but imprecise:
       some high-income households in low-band properties receive it, while some low-income households in higher bands do not.
     </>,
   },
@@ -56,8 +56,8 @@ const POLICY_META = {
     fullName: "Budget-neutral EPG (cap at £1,641)",
     description: <>
       A hypothetical policy: the government caps every household's bill at the current Ofgem level (£1,641/yr)<a href="#fn-5"><sup>5</sup></a> and
-      subsidises the full price increase. Each household is compensated in exact proportion to its consumption, so every decile's net extra cost
-      is zero. This is the most expensive option, as the exchequer cost equals the total shock cost, but it achieves 100% offset for all households.
+      subsidises the full price increase. Each household's subsidy equals its actual bill increase, so every decile's net extra cost
+      is zero. The exchequer cost equals the total shock cost, but it achieves 100% offset for all households.
       We model it by setting each household's bill to the pre-shock level and computing the subsidy as the difference.
     </>,
   },
@@ -65,7 +65,7 @@ const POLICY_META = {
     letter: "E",
     fullName: "National Energy Guarantee",
     description: <>
-      Based on the NEF proposal discussed in <a href="#ref-bangham">Bangham (2026)</a>: the government subsidises all energy consumption below a
+      Based on the proposal discussed in <a href="#ref-bangham">Bangham (2026)</a>: the government subsidises all energy consumption below a
       kWh threshold at the pre-shock unit price. The threshold is set at the median household consumption level. Households consuming below the
       threshold are fully shielded; those above pay the shocked price on the margin. We compute each household's subsidy as min(consumption,
       threshold) × (shocked unit price − baseline unit price). Progressive by design because low-income households tend to consume less energy, so
@@ -437,9 +437,7 @@ function BaselineSection() {
         These figures are consistent with{" "}
         <a href="https://www.ons.gov.uk/economy/inflationandpriceindices/articles/energypricesandtheireffectonhouseholds/2022-02-01" target="_blank" rel="noopener noreferrer">ONS estimates</a>{" "}
         of ~7% for the lowest decile and ~2% for the highest.
-        Gas accounts for {(100 - split.elec_share_pct).toFixed(0)}% of energy
-        spending but drives most price volatility. The next section models
-        what happens when prices rise.
+        The next section models what happens when prices rise.
       </p>
     </section>
   );
@@ -524,12 +522,8 @@ function ShockSection() {
     <section className="section" id="shocks">
       <h2 className="section-title">Price shock scenarios</h2>
       <p className="section-description">
-        Given the baseline distribution above, we model five scenarios in
-        which the Ofgem price cap rises by a given percentage from the
-        current level of £1,641. Gas accounts for {(100 - resultsV2.energy_split.elec_share_pct).toFixed(0)}% of
-        household energy spending and gas-fired power stations set electricity
-        prices, so wholesale gas price shocks feed through to the cap and
-        to all household bills.
+        We model five scenarios in which the Ofgem price cap rises by a
+        given percentage from the current level of £1,641.
       </p>
       <div className="chart-title" style={{ marginBottom: 8, textAlign: "center" }}>Table 1: Price shock scenarios</div>
       <table className="scenario-table">
@@ -563,13 +557,11 @@ function ShockSection() {
 
       <h3 className="section-title" style={{ fontSize: "1.1rem", marginTop: 32 }}>Fuel poverty</h3>
       <p className="section-description">
-        A household is fuel poor if it spends more than 10% of its net income
+        We define a household as fuel poor if it spends more than 10% of its net income
         on energy. The official UK definition
         (LILEE)<a href="#fn-8"><sup>8</sup></a> is more complex, but the 10%
         threshold captures the same dynamic and is straightforward to apply
-        across the income distribution. The "FP rate (%)" and "FP
-        households (m)" metric toggles show how each scenario pushes
-        households into fuel poverty. At current prices,{" "}
+        across the income distribution. At current prices,{" "}
         {results.fuel_poverty[0].households_m}m households
         ({results.fuel_poverty[0].fuel_poverty_rate_pct}%) are fuel poor. Even
         a modest +10% shock pushes the rate
@@ -773,6 +765,17 @@ function ShockSection() {
         extra cost from {fmt(scenario.avg_hh_hit_yr)}/yr to{" "}
         {fmt(behav.behavioral_avg_extra)}/yr, a saving of{" "}
         {fmt(scenario.avg_hh_hit_yr - behav.behavioral_avg_extra)}/yr.
+        The total cost across all households is {fmt(scenario.total_cost_bn)}bn.
+        The fuel poverty rate rises
+        from {results.fuel_poverty[0].fuel_poverty_rate_pct}% to{" "}
+        {scenario.deciles ? behav.static_fp_rate : "—"}% ({behav.behavioral_fp_rate}% with
+        demand response), pushing an
+        additional {results.fuel_poverty[selected + 1]?.extra_households_m ?? 0}m
+        households into fuel poverty. The lowest-income decile faces an
+        extra {fmt(scenario.deciles[0].extra_cost)}/yr
+        ({scenario.deciles[0].pct_of_income}% of income), while the
+        highest faces {fmt(scenario.deciles[9].extra_cost)}/yr
+        ({scenario.deciles[9].pct_of_income}%).
         The next section evaluates policy tools that could offset these costs.
       </p>
     </section>
@@ -997,15 +1000,13 @@ function PolicyNetSection() {
       <h2 className="section-title">Policy responses</h2>
       <p className="section-description">
         The flat transfer and CT rebate reflect the toolkit the UK government deployed
-        during the 2022 energy crisis.<a href="#fn-10"><sup>10</sup></a> They
-        are the instruments available in
-        the <a href="https://policyengine.org/uk" target="_blank" rel="noopener noreferrer">PolicyEngine UK</a> microsimulation
-        model. The budget-neutral variants are <strong>budget-neutral</strong> designs
-        that fully offset the extra cost so that households are no
+        during the 2022 energy crisis.<a href="#fn-10"><sup>10</sup></a> The
+        budget-neutral variants fully offset the extra cost so
+        that households are no
         worse off on average. The National Energy Guarantee is an <strong>alternative
         design</strong> that exploits the new electricity/gas data split,
         responding to <a href="#ref-bangham">Bangham's (2026)</a> call for
-        better infrastructure built before the next price cap change.
+        better data infrastructure built before the next price cap change.
       </p>
 
       <ul className="policy-bullet-list">
@@ -1101,9 +1102,9 @@ function PolicyNetSection() {
       )}
       {!isAlt && (
         <div className="kpi-row">
-          <KpiCard label="Avg extra cost" value={fmt(avgStaticShock)} unit="/yr" info="Average annual extra energy cost per household under the selected shock scenario, before any policy intervention (static estimate)." />
+          <KpiCard label="Avg extra cost" value={fmt(policyResponse === "static" ? avgStaticShock : avgBehavShock)} unit="/yr" info="Average annual extra energy cost per household under the selected shock scenario, before any policy intervention." />
           <KpiCard label="Policy benefit" value={fmt(avgBenefit)} unit="/yr" color="teal" info="Average annual payment or subsidy each household receives from the selected policy. For budget-neutral policies this equals the average shock." />
-          <KpiCard label="Net cost" value={fmt(Math.max(0, avgBehavShock - avgBenefit))} unit="/yr" info="Average remaining cost per household after the policy benefit and behavioural demand response are accounted for. Zero means the policy fully offsets the shock." />
+          <KpiCard label="Net cost" value={fmt(Math.max(0, (policyResponse === "static" ? avgStaticShock : avgBehavShock) - avgBenefit))} unit="/yr" info="Average remaining cost per household after the policy benefit is applied. Zero means the policy fully offsets the shock." />
           <KpiCard label="Exchequer cost" value={fmtBn(exchequerCost)} info="Total annual cost to the government of funding this policy across all UK households." />
         </div>
       )}
@@ -1645,9 +1646,7 @@ export default function Dashboard() {
       </p>
       <p className="section-description">
         Under current Ofgem rules,<a href="#fn-5"><sup>5</sup></a> the
-        price cap for April to June 2026 is already set at £1,641, so
-        household bills would not change before 1 July 2026. From July,
-        the cap will reflect wholesale market conditions. All estimates
+        price cap for April to June 2026 is set at £1,641. All estimates
         in this analysis are annualised. This analysis models five
         price shock scenarios, from a 10% increase to
         a return to 2022-level prices. For each, it estimates the extra
@@ -1781,21 +1780,9 @@ export default function Dashboard() {
             PolicyEngine, "Energy price shock: distributional impact and policy options," GitHub repository.{" "}
             <a href="https://github.com/PolicyEngine/energy-price-shock" target="_blank" rel="noopener noreferrer">github.com</a>
           </li>
-          <li id="fn-7">
-            <em>Financial Times</em>, "Iran conflict pushes gas prices higher," March 2026.{" "}
-            <a href="https://www.ft.com/content/13f5e566-83c0-4d94-9338-9d418053c290" target="_blank" rel="noopener noreferrer">ft.com</a>
-          </li>
           <li id="fn-8">
             DESNZ, "Fuel poverty statistics," GOV.UK, accessed March 2026.{" "}
             <a href="https://www.gov.uk/government/collections/fuel-poverty-statistics" target="_blank" rel="noopener noreferrer">gov.uk</a>
-          </li>
-          <li id="fn-ons-energy">
-            ONS, "Energy prices and their effect on households," February 2022. Bottom income decile spends ~7% of disposable income on gas and electricity; top decile ~2%.{" "}
-            <a href="https://www.ons.gov.uk/economy/inflationandpriceindices/articles/energypricesandtheireffectonhouseholds/2022-02-01" target="_blank" rel="noopener noreferrer">ons.gov.uk</a>
-          </li>
-          <li id="fn-9">
-            Bangham, G., "Now is the time to prepare for another energy price shock," Substack, March 2026.{" "}
-            <a href="https://georgebangham.substack.com/p/now-is-the-time-to-prepare-for-another" target="_blank" rel="noopener noreferrer">substack.com</a>
           </li>
           <li id="fn-10">
             HM Treasury, "Energy bills support factsheet," GOV.UK, updated 2023. Details the Energy Price Guarantee, Energy Bills Support Scheme (£400 flat transfer), and Council Tax Rebate.{" "}
