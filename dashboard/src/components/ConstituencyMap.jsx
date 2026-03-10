@@ -157,12 +157,19 @@ export default function ConstituencyMap({ data, activeView = "elec_gas", customM
 
   const selectedLabel = customLabel || VIEW_TO_LABEL[activeView] || metricKey;
   // Determine format: keys starting with "extra_cost" or "behav_cost" are £, not %
-  const isCostKey = metricKey.startsWith("extra_cost") || metricKey.startsWith("behav_cost")
-    || metricKey.includes("energy") || metricKey.includes("income") || metricKey.includes("electricity") || metricKey.includes("gas");
-  const isPct = !isCostKey && metricKey.includes("pct");
+  const isFPChange = metricKey.startsWith("_fp_change_");
+  const isPctKey = !isFPChange && (metricKey.includes("_pct") || metricKey.includes("_fp_") || metricKey.includes("_bfp_")
+    || metricKey.includes("_bpct_")
+    || metricKey.startsWith("burden_pct") || metricKey.startsWith("fp_pct") || metricKey.startsWith("fuel_poverty")
+    || metricKey === "energy_burden_pct");
+  const isCostKey = !isPctKey && !isFPChange && (metricKey.startsWith("extra_cost") || metricKey.startsWith("behav_cost")
+    || metricKey.includes("energy") || metricKey.includes("income") || metricKey.includes("electricity") || metricKey.includes("gas")
+    || metricKey.includes("_cost_") || metricKey.includes("_bcost_"));
+  const isPct = isPctKey;
 
   const fmtVal = (v) => {
     if (v == null) return "N/A";
+    if (isFPChange) return `${v}pp`;
     if (isCostKey) return `£${v.toLocaleString("en-GB")}`;
     if (isPct) return `${v}%`;
     return String(v);

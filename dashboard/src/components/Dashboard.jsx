@@ -316,7 +316,7 @@ function BaselineSection() {
             { key: "decile", label: "By decile" },
             { key: "tenure", label: "By tenure" },
             { key: "hh_type", label: "By household type" },
-            { key: "constituency", label: "By constituency" },
+            // { key: "constituency", label: "By constituency" },
           ].map((v) => (
             <button
               key={v.key}
@@ -433,6 +433,9 @@ function BaselineSection() {
         Decile 1 households spend {baseline.deciles[0].energy_share_pct}% of
         net income on energy. Decile 10 households
         spend {baseline.deciles[9].energy_share_pct}%.
+        These figures are consistent with{" "}
+        <a href="https://www.ons.gov.uk/economy/inflationandpriceindices/articles/energypricesandtheireffectonhouseholds/2022-02-01" target="_blank" rel="noopener noreferrer">ONS estimates</a>{" "}
+        of ~7% for the lowest decile and ~2% for the highest.
         Gas accounts for {(100 - split.elec_share_pct).toFixed(0)}% of energy
         spending but drives most price volatility. The next section models
         what happens when prices rise.
@@ -601,7 +604,7 @@ function ShockSection() {
             { key: "pct_of_income", label: "% of income" },
             { key: "extra_cost", label: "Extra cost (£/yr)" },
             { key: "fp_rate", label: "FP rate (%)" },
-            { key: "fp_households", label: "FP households (m)" },
+            ...(shockBreakdown !== "constituency" ? [{ key: "fp_households", label: "FP households (m)" }] : []),
           ].map((m) => (
             <button key={m.key} className={`scenario-pill${shockMetric === m.key ? " active" : ""}`} onClick={() => setShockMetric(m.key)}>
               {m.label}
@@ -630,9 +633,12 @@ function ShockSection() {
             { key: "decile", label: "By decile" },
             { key: "tenure", label: "By tenure" },
             { key: "hh_type", label: "By household type" },
-            { key: "constituency", label: "By constituency" },
+            // { key: "constituency", label: "By constituency" },
           ].map((v) => (
-            <button key={v.key} className={`scenario-pill${shockBreakdown === v.key ? " active" : ""}`} onClick={() => setShockBreakdown(v.key)}>
+            <button key={v.key} className={`scenario-pill${shockBreakdown === v.key ? " active" : ""}`} onClick={() => {
+              setShockBreakdown(v.key);
+              if (v.key === "constituency" && shockMetric === "fp_households") setShockMetric("fp_rate");
+            }}>
               {v.label}
             </button>
           ))}
@@ -654,9 +660,8 @@ function ShockSection() {
         let constMetricKey, constLabel;
         const responseLabel = useBehav ? "behavioural" : "static";
         if (shockMetric === "fp_rate" || shockMetric === "fp_households") {
-          // Constituency data only has static FP rate (no behavioural or household counts)
-          constMetricKey = `fp_pct_${suffix}`;
-          constLabel = `Fuel poverty rate %: ${scenario.name}`;
+          constMetricKey = useBehav ? `behav_fp_pct_${suffix}` : `fp_pct_${suffix}`;
+          constLabel = `Fuel poverty rate % (${responseLabel}): ${scenario.name}`;
         } else {
           const costPrefix = useBehav ? "behav_cost" : "extra_cost";
           const pctPrefix = useBehav ? "behav_pct" : "extra_pct";
@@ -986,17 +991,17 @@ function PolicyNetSection() {
     <section className="section" id="policy-net">
       <h2 className="section-title">Policy responses</h2>
       <p className="section-description">
-        Policies A and B reflect the toolkit the UK government deployed
-        during the 2022 energy crisis<a href="#fn-10"><sup>10</sup></a> and
+        The flat transfer and CT rebate reflect the toolkit the UK government deployed
+        during the 2022 energy crisis.<a href="#fn-10"><sup>10</sup></a> They
         are the instruments available in
         the <a href="https://policyengine.org/uk" target="_blank" rel="noopener noreferrer">PolicyEngine UK</a> microsimulation
-        model. Policies C and D are <strong>budget-neutral</strong> variants
-        designed to fully offset the extra cost so that households are no
-        worse off on average. Policy E is an <strong>alternative
+        model. The budget-neutral variants are <strong>budget-neutral</strong> designs
+        that fully offset the extra cost so that households are no
+        worse off on average. The National Energy Guarantee is an <strong>alternative
         design</strong> that exploits the new electricity/gas data split,
         responding to <a href="#ref-bangham">Bangham's (2026)</a> call for
         better infrastructure built before the next price cap change.
-        All estimates are for the 2026-27 fiscal year. Select a scenario and policy to explore the distributional effects.
+        Select a scenario and policy to explore the distributional effects.
       </p>
 
       <ul className="policy-bullet-list">
@@ -1031,7 +1036,7 @@ function PolicyNetSection() {
             { key: "extra_cost", label: "Extra cost (£/yr)" },
             { key: "pct_of_income", label: "% of income" },
             { key: "fp_rate", label: "FP rate change (pp)" },
-            { key: "fp_households", label: "FP households change (m)" },
+            ...(bk !== "constituency" ? [{ key: "fp_households", label: "FP households change (m)" }] : []),
           ].map((m) => (
             <button key={m.key} className={`scenario-pill${policyMetric === m.key ? " active" : ""}`} onClick={() => setPolicyMetric(m.key)}>{m.label}</button>
           ))}
@@ -1056,9 +1061,12 @@ function PolicyNetSection() {
             { key: "decile", label: "By decile" },
             { key: "tenure", label: "By tenure" },
             { key: "hh_type", label: "By household type" },
-            { key: "constituency", label: "By constituency" },
+            // { key: "constituency", label: "By constituency" },
           ].map((v) => (
-            <button key={v.key} className={`scenario-pill${bk === v.key ? " active" : ""}`} onClick={() => setPolicyBreakdown(v.key)}>{v.label}</button>
+            <button key={v.key} className={`scenario-pill${bk === v.key ? " active" : ""}`} onClick={() => {
+              setPolicyBreakdown(v.key);
+              if (v.key === "constituency" && policyMetric === "fp_households") setPolicyMetric("fp_rate");
+            }}>{v.label}</button>
           ))}
         </div>
       </div>
@@ -1071,7 +1079,7 @@ function PolicyNetSection() {
             <KpiCard label="Threshold" value={`${neg.threshold_kwh.toLocaleString()} kWh`} info="Energy consumption threshold below which all usage is subsidised at the pre-shock price. Set at the median household level." />
             <KpiCard label="Threshold (£)" value={fmt(neg.threshold_spend)} unit="/yr" info="The annual energy bill corresponding to the kWh threshold at current prices." />
             <KpiCard label="Exchequer cost" value={fmtBn(scen.exchequer_cost_bn)} info="Total annual cost to the government of subsidising below-threshold consumption for all households." />
-            <KpiCard label="Avg benefit" value={fmt(scen.avg_benefit)} unit="/yr" color="teal" info="Average annual subsidy received per household under the National Energy Guarantee." />
+            <KpiCard label="Avg extra benefit" value={fmt(scen.avg_benefit - neg.avg_benefit_baseline)} unit="/yr" color="teal" info="Additional annual subsidy per household due to the price shock, above the baseline NEG benefit." />
           </div>
         );
       })()}
@@ -1231,9 +1239,18 @@ function PolicyNetSection() {
           const pk = selectedNet;
           let constMetricKey, constLabel;
           const responseLabel = useBehav ? "behavioural" : "static";
-          if (policyMetric === "fp_rate" || policyMetric === "fp_households") {
-            constMetricKey = useBehav ? `pp_${pk}_bfp_${suffix}` : `pp_${pk}_fp_${suffix}`;
-            constLabel = `Post-policy FP rate % (${responseLabel}): ${scenario.name}`;
+          if (policyMetric === "fp_rate") {
+            // Show FP rate CHANGE (pp): pre-policy FP minus post-policy FP
+            const preKey = useBehav ? `behav_fp_pct_${suffix}` : `fp_pct_${suffix}`;
+            const postKey = useBehav ? `pp_${pk}_bfp_${suffix}` : `pp_${pk}_fp_${suffix}`;
+            constMetricKey = `_fp_change_${pk}_${suffix}`;
+            constLabel = `FP rate reduction (pp, ${responseLabel}): ${scenario.name}`;
+            // Inject computed change into constituency data
+            if (constituencyData?.constituencies) {
+              constituencyData.constituencies.forEach((c) => {
+                c[constMetricKey] = +((c[preKey] || 0) - (c[postKey] || 0)).toFixed(1);
+              });
+            }
           } else {
             const costKey = useBehav ? `pp_${pk}_bcost_${suffix}` : `pp_${pk}_cost_${suffix}`;
             const pctKey = useBehav ? `pp_${pk}_bpct_${suffix}` : `pp_${pk}_pct_${suffix}`;
@@ -1569,7 +1586,7 @@ function PolicyComparisonSection() {
       <p className="section-description">
         The budget-neutral EPG delivers the largest fuel poverty reduction
         (18.3 pp at 2022-level) but costs the most. The budget-neutral transfer
-        reduces fuel poverty by 14.9 pp. The National Energy Guarantee sits
+        reduces fuel poverty by 14.3 pp. The National Energy Guarantee sits
         between the two, cutting fuel poverty by 9.0 pp while targeting
         lower-consuming households. The fixed-amount policies have lower
         exchequer costs but smaller fuel poverty reductions. The trade-off
@@ -1616,14 +1633,14 @@ export default function Dashboard() {
         warn a prolonged closure could push the cap to
         £2,500.<a href="#fn-3"><sup>3</sup></a> The Resolution Foundation estimates a sustained
         rise could add £500 to typical annual energy bills, offsetting the
-        £300 growth in living standards expected in 2026-27.<a href="#fn-4"><sup>4</sup></a>
+        £300 growth in living standards.<a href="#fn-4"><sup>4</sup></a>
       </p>
       <p className="section-description">
         Under current Ofgem rules,<a href="#fn-5"><sup>5</sup></a> the
         price cap for April to June 2026 is already set at £1,641, so
         household bills would not change before 1 July 2026. From July,
         the cap will reflect wholesale market conditions. All estimates
-        in this analysis are for the 2026-27 fiscal year. This analysis models five
+        in this analysis are annualised. This analysis models five
         price shock scenarios, from a 10% increase to
         a return to 2022-level prices. For each, it estimates the extra
         cost per household across income deciles, the impact on fuel
@@ -1763,6 +1780,10 @@ export default function Dashboard() {
           <li id="fn-8">
             DESNZ, "Fuel poverty statistics," GOV.UK, accessed March 2026.{" "}
             <a href="https://www.gov.uk/government/collections/fuel-poverty-statistics" target="_blank" rel="noopener noreferrer">gov.uk</a>
+          </li>
+          <li id="fn-ons-energy">
+            ONS, "Energy prices and their effect on households," February 2022. Bottom income decile spends ~7% of disposable income on gas and electricity; top decile ~2%.{" "}
+            <a href="https://www.ons.gov.uk/economy/inflationandpriceindices/articles/energypricesandtheireffectonhouseholds/2022-02-01" target="_blank" rel="noopener noreferrer">ons.gov.uk</a>
           </li>
           <li id="fn-9">
             Bangham, G., "Now is the time to prepare for another energy price shock," Substack, March 2026.{" "}

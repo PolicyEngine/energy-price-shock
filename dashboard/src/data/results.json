@@ -4251,65 +4251,65 @@
     "flat_transfer": [
       {
         "scenario": "+10%",
-        "fp_rate": 8.2,
-        "fp_households_m": 2.62,
-        "behavioral_fp_rate": 8.1,
-        "behavioral_fp_households_m": 2.57,
+        "fp_rate": 9.4,
+        "fp_households_m": 3.0,
+        "behavioral_fp_rate": 9.3,
+        "behavioral_fp_households_m": 2.97,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 12,
             "pct_of_income": 0.1,
-            "fp_rate": 18.4,
-            "fp_households_m": 0.7,
+            "fp_rate": 26.9,
+            "fp_households_m": 1.03,
             "behavioral_extra_cost": 5,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 18.2,
-            "behavioral_fp_households_m": 0.7
+            "behavioral_fp_rate": 26.9,
+            "behavioral_fp_households_m": 1.03
           },
           {
             "decile": 2,
             "extra_cost": 9,
             "pct_of_income": 0.0,
-            "fp_rate": 13.1,
-            "fp_households_m": 0.44,
+            "fp_rate": 13.7,
+            "fp_households_m": 0.46,
             "behavioral_extra_cost": 5,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 12.9,
-            "behavioral_fp_households_m": 0.44
+            "behavioral_fp_rate": 13.7,
+            "behavioral_fp_households_m": 0.46
           },
           {
             "decile": 3,
             "extra_cost": 10,
             "pct_of_income": 0.0,
-            "fp_rate": 6.0,
-            "fp_households_m": 0.19,
+            "fp_rate": 6.4,
+            "fp_households_m": 0.2,
             "behavioral_extra_cost": 5,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.9,
-            "behavioral_fp_households_m": 0.18
+            "behavioral_fp_rate": 6.4,
+            "behavioral_fp_households_m": 0.2
           },
           {
             "decile": 4,
             "extra_cost": 17,
             "pct_of_income": 0.0,
-            "fp_rate": 8.5,
-            "fp_households_m": 0.25,
+            "fp_rate": 8.7,
+            "fp_households_m": 0.26,
             "behavioral_extra_cost": 10,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 8.5,
-            "behavioral_fp_households_m": 0.25
+            "behavioral_fp_rate": 8.7,
+            "behavioral_fp_households_m": 0.26
           },
           {
             "decile": 5,
             "extra_cost": 12,
             "pct_of_income": 0.0,
-            "fp_rate": 9.3,
+            "fp_rate": 9.4,
             "fp_households_m": 0.29,
             "behavioral_extra_cost": 6,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 9.1,
-            "behavioral_fp_households_m": 0.28
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.29
           },
           {
             "decile": 6,
@@ -4319,7 +4319,7 @@
             "fp_households_m": 0.2,
             "behavioral_extra_cost": 5,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.2,
+            "behavioral_fp_rate": 6.3,
             "behavioral_fp_households_m": 0.19
           },
           {
@@ -4327,7 +4327,7 @@
             "extra_cost": 9,
             "pct_of_income": 0.0,
             "fp_rate": 3.3,
-            "fp_households_m": 0.1,
+            "fp_households_m": 0.11,
             "behavioral_extra_cost": 5,
             "behavioral_pct_of_income": 0.0,
             "behavioral_fp_rate": 3.3,
@@ -4371,56 +4371,56 @@
           {
             "extra_cost": 21,
             "pct_of_income": 0.0,
-            "fp_rate": 13.2,
-            "fp_households_m": 1.43,
+            "fp_rate": 15.3,
+            "fp_households_m": 1.66,
             "behavioral_extra_cost": 12,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 13.1,
-            "behavioral_fp_households_m": 1.42,
+            "behavioral_fp_rate": 15.3,
+            "behavioral_fp_households_m": 1.65,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
             "extra_cost": 11,
             "pct_of_income": 0.0,
-            "fp_rate": 4.7,
-            "fp_households_m": 0.39,
+            "fp_rate": 4.8,
+            "fp_households_m": 0.4,
             "behavioral_extra_cost": 6,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.6,
-            "behavioral_fp_households_m": 0.38,
+            "behavioral_fp_rate": 4.8,
+            "behavioral_fp_households_m": 0.4,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
             "extra_cost": 6,
             "pct_of_income": 0.0,
-            "fp_rate": 5.7,
-            "fp_households_m": 0.14,
+            "fp_rate": 6.7,
+            "fp_households_m": 0.16,
             "behavioral_extra_cost": 3,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.1,
-            "behavioral_fp_households_m": 0.12,
+            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_households_m": 0.16,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
             "extra_cost": 8,
             "pct_of_income": 0.0,
-            "fp_rate": 6.0,
-            "fp_households_m": 0.2,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.21,
             "behavioral_extra_cost": 4,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.6,
-            "behavioral_fp_households_m": 0.19,
+            "behavioral_fp_rate": 6.0,
+            "behavioral_fp_households_m": 0.2,
             "tenure": "RENT_FROM_HA"
           },
           {
             "extra_cost": 12,
             "pct_of_income": 0.0,
-            "fp_rate": 6.7,
-            "fp_households_m": 0.47,
+            "fp_rate": 8.0,
+            "fp_households_m": 0.56,
             "behavioral_extra_cost": 8,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.6,
-            "behavioral_fp_households_m": 0.46,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.56,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -4428,120 +4428,120 @@
           {
             "extra_cost": 16,
             "pct_of_income": 0.0,
-            "fp_rate": 6.6,
-            "fp_households_m": 0.52,
+            "fp_rate": 6.8,
+            "fp_households_m": 0.53,
             "behavioral_extra_cost": 9,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.6,
-            "behavioral_fp_households_m": 0.51,
+            "behavioral_fp_rate": 6.8,
+            "behavioral_fp_households_m": 0.53,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
             "extra_cost": 16,
             "pct_of_income": 0.0,
-            "fp_rate": 8.1,
-            "fp_households_m": 0.36,
+            "fp_rate": 8.2,
+            "fp_households_m": 0.37,
             "behavioral_extra_cost": 8,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.7,
+            "behavioral_fp_rate": 7.8,
             "behavioral_fp_households_m": 0.35,
             "hh_type": "COUPLE_PENSIONER"
           },
           {
             "extra_cost": 12,
             "pct_of_income": 0.0,
-            "fp_rate": 2.7,
-            "fp_households_m": 0.15,
+            "fp_rate": 2.8,
+            "fp_households_m": 0.16,
             "behavioral_extra_cost": 7,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.6,
-            "behavioral_fp_households_m": 0.15,
+            "behavioral_fp_rate": 2.8,
+            "behavioral_fp_households_m": 0.16,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
             "extra_cost": 13,
             "pct_of_income": 0.0,
-            "fp_rate": 7.7,
-            "fp_households_m": 0.16,
+            "fp_rate": 8.0,
+            "fp_households_m": 0.17,
             "behavioral_extra_cost": 7,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.7,
-            "behavioral_fp_households_m": 0.16,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.17,
             "hh_type": "LONE_PARENT"
           },
           {
             "extra_cost": 15,
             "pct_of_income": 0.0,
-            "fp_rate": 2.8,
+            "fp_rate": 2.9,
             "fp_households_m": 0.06,
             "behavioral_extra_cost": 8,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.5,
+            "behavioral_fp_rate": 2.6,
             "behavioral_fp_households_m": 0.06,
             "hh_type": "OTHER"
           },
           {
             "extra_cost": 12,
             "pct_of_income": 0.1,
-            "fp_rate": 15.9,
-            "fp_households_m": 0.61,
+            "fp_rate": 20.4,
+            "fp_households_m": 0.79,
             "behavioral_extra_cost": 6,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 15.8,
-            "behavioral_fp_households_m": 0.61,
+            "behavioral_fp_rate": 20.4,
+            "behavioral_fp_households_m": 0.79,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
             "extra_cost": 13,
             "pct_of_income": 0.0,
-            "fp_rate": 13.3,
-            "fp_households_m": 0.75,
+            "fp_rate": 16.1,
+            "fp_households_m": 0.91,
             "behavioral_extra_cost": 8,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 13.0,
-            "behavioral_fp_households_m": 0.73,
+            "behavioral_fp_rate": 16.1,
+            "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
       },
       {
         "scenario": "+20%",
-        "fp_rate": 9.0,
-        "fp_households_m": 2.87,
-        "behavioral_fp_rate": 8.6,
-        "behavioral_fp_households_m": 2.74,
+        "fp_rate": 9.8,
+        "fp_households_m": 3.12,
+        "behavioral_fp_rate": 9.6,
+        "behavioral_fp_households_m": 3.05,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 70,
             "pct_of_income": 0.4,
-            "fp_rate": 21.2,
-            "fp_households_m": 0.81,
+            "fp_rate": 27.6,
+            "fp_households_m": 1.05,
             "behavioral_extra_cost": 46,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 19.3,
-            "behavioral_fp_households_m": 0.74
+            "behavioral_fp_rate": 27.0,
+            "behavioral_fp_households_m": 1.03
           },
           {
             "decile": 2,
             "extra_cost": 66,
             "pct_of_income": 0.2,
-            "fp_rate": 14.0,
+            "fp_rate": 14.1,
             "fp_households_m": 0.48,
             "behavioral_extra_cost": 42,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 13.8,
+            "behavioral_fp_rate": 13.9,
             "behavioral_fp_households_m": 0.47
           },
           {
             "decile": 3,
             "extra_cost": 50,
             "pct_of_income": 0.1,
-            "fp_rate": 6.4,
+            "fp_rate": 6.6,
             "fp_households_m": 0.2,
             "behavioral_extra_cost": 33,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_rate": 6.5,
             "behavioral_fp_households_m": 0.2
           },
           {
@@ -4626,56 +4626,56 @@
           {
             "extra_cost": 110,
             "pct_of_income": 0.2,
-            "fp_rate": 14.3,
-            "fp_households_m": 1.55,
+            "fp_rate": 15.7,
+            "fp_households_m": 1.69,
             "behavioral_extra_cost": 71,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 13.7,
-            "behavioral_fp_households_m": 1.48,
+            "behavioral_fp_rate": 15.5,
+            "behavioral_fp_households_m": 1.68,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
             "extra_cost": 65,
             "pct_of_income": 0.1,
-            "fp_rate": 5.5,
+            "fp_rate": 5.6,
             "fp_households_m": 0.46,
             "behavioral_extra_cost": 40,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 4.9,
+            "behavioral_fp_rate": 5.0,
             "behavioral_fp_households_m": 0.41,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
             "extra_cost": 38,
             "pct_of_income": 0.1,
-            "fp_rate": 6.3,
-            "fp_households_m": 0.15,
+            "fp_rate": 7.0,
+            "fp_households_m": 0.17,
             "behavioral_extra_cost": 24,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.1,
-            "behavioral_fp_households_m": 0.15,
+            "behavioral_fp_rate": 6.8,
+            "behavioral_fp_households_m": 0.16,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
             "extra_cost": 41,
             "pct_of_income": 0.1,
-            "fp_rate": 6.5,
+            "fp_rate": 6.6,
             "fp_households_m": 0.22,
             "behavioral_extra_cost": 28,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.3,
-            "behavioral_fp_households_m": 0.21,
+            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_households_m": 0.22,
             "tenure": "RENT_FROM_HA"
           },
           {
             "extra_cost": 55,
             "pct_of_income": 0.1,
-            "fp_rate": 7.1,
-            "fp_households_m": 0.5,
+            "fp_rate": 8.3,
+            "fp_households_m": 0.58,
             "behavioral_extra_cost": 37,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 7.0,
-            "behavioral_fp_households_m": 0.49,
+            "behavioral_fp_rate": 8.2,
+            "behavioral_fp_households_m": 0.57,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -4683,11 +4683,11 @@
           {
             "extra_cost": 83,
             "pct_of_income": 0.1,
-            "fp_rate": 7.2,
-            "fp_households_m": 0.56,
+            "fp_rate": 7.3,
+            "fp_households_m": 0.57,
             "behavioral_extra_cost": 53,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.9,
+            "behavioral_fp_rate": 7.0,
             "behavioral_fp_households_m": 0.54,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
@@ -4716,12 +4716,12 @@
           {
             "extra_cost": 62,
             "pct_of_income": 0.2,
-            "fp_rate": 8.3,
-            "fp_households_m": 0.17,
+            "fp_rate": 8.4,
+            "fp_households_m": 0.18,
             "behavioral_extra_cost": 41,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 8.2,
-            "behavioral_fp_households_m": 0.17,
+            "behavioral_fp_rate": 8.3,
+            "behavioral_fp_households_m": 0.18,
             "hh_type": "LONE_PARENT"
           },
           {
@@ -4738,44 +4738,44 @@
           {
             "extra_cost": 76,
             "pct_of_income": 0.3,
-            "fp_rate": 17.9,
-            "fp_households_m": 0.69,
+            "fp_rate": 20.6,
+            "fp_households_m": 0.79,
             "behavioral_extra_cost": 50,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 16.4,
-            "behavioral_fp_households_m": 0.63,
+            "behavioral_fp_rate": 20.4,
+            "behavioral_fp_households_m": 0.79,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
             "extra_cost": 63,
             "pct_of_income": 0.2,
-            "fp_rate": 13.9,
-            "fp_households_m": 0.79,
+            "fp_rate": 16.3,
+            "fp_households_m": 0.93,
             "behavioral_extra_cost": 42,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 13.7,
-            "behavioral_fp_households_m": 0.78,
+            "behavioral_fp_rate": 16.2,
+            "behavioral_fp_households_m": 0.92,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
       },
       {
         "scenario": "+30%",
-        "fp_rate": 10.4,
-        "fp_households_m": 3.3,
-        "behavioral_fp_rate": 9.3,
-        "behavioral_fp_households_m": 2.96,
+        "fp_rate": 10.6,
+        "fp_households_m": 3.37,
+        "behavioral_fp_rate": 10.0,
+        "behavioral_fp_households_m": 3.2,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 153,
             "pct_of_income": 0.8,
-            "fp_rate": 26.4,
-            "fp_households_m": 1.01,
+            "fp_rate": 28.0,
+            "fp_households_m": 1.07,
             "behavioral_extra_cost": 101,
             "behavioral_pct_of_income": 0.5,
-            "behavioral_fp_rate": 21.7,
-            "behavioral_fp_households_m": 0.83
+            "behavioral_fp_rate": 27.8,
+            "behavioral_fp_households_m": 1.06
           },
           {
             "decile": 2,
@@ -4807,7 +4807,7 @@
             "fp_households_m": 0.29,
             "behavioral_extra_cost": 110,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 9.2,
+            "behavioral_fp_rate": 9.3,
             "behavioral_fp_households_m": 0.28
           },
           {
@@ -4881,12 +4881,12 @@
           {
             "extra_cost": 248,
             "pct_of_income": 0.5,
-            "fp_rate": 16.1,
-            "fp_households_m": 1.74,
+            "fp_rate": 16.3,
+            "fp_households_m": 1.76,
             "behavioral_extra_cost": 162,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 14.7,
-            "behavioral_fp_households_m": 1.59,
+            "behavioral_fp_rate": 15.9,
+            "behavioral_fp_households_m": 1.72,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
@@ -4897,40 +4897,40 @@
             "behavioral_extra_cost": 103,
             "behavioral_pct_of_income": 0.1,
             "behavioral_fp_rate": 5.7,
-            "behavioral_fp_households_m": 0.47,
+            "behavioral_fp_households_m": 0.48,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
             "extra_cost": 95,
             "pct_of_income": 0.3,
-            "fp_rate": 7.7,
-            "fp_households_m": 0.18,
+            "fp_rate": 8.1,
+            "fp_households_m": 0.19,
             "behavioral_extra_cost": 59,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 7.2,
-            "behavioral_fp_households_m": 0.17,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.19,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
             "extra_cost": 94,
             "pct_of_income": 0.3,
-            "fp_rate": 6.9,
+            "fp_rate": 7.0,
             "fp_households_m": 0.23,
             "behavioral_extra_cost": 61,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_rate": 6.7,
             "behavioral_fp_households_m": 0.22,
             "tenure": "RENT_FROM_HA"
           },
           {
             "extra_cost": 128,
             "pct_of_income": 0.2,
-            "fp_rate": 9.4,
-            "fp_households_m": 0.66,
+            "fp_rate": 9.7,
+            "fp_households_m": 0.68,
             "behavioral_extra_cost": 82,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 7.2,
-            "behavioral_fp_households_m": 0.51,
+            "behavioral_fp_rate": 8.4,
+            "behavioral_fp_households_m": 0.59,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -4943,7 +4943,7 @@
             "behavioral_extra_cost": 127,
             "behavioral_pct_of_income": 0.2,
             "behavioral_fp_rate": 7.4,
-            "behavioral_fp_households_m": 0.57,
+            "behavioral_fp_households_m": 0.58,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
@@ -4972,10 +4972,10 @@
             "extra_cost": 141,
             "pct_of_income": 0.4,
             "fp_rate": 10.2,
-            "fp_households_m": 0.21,
+            "fp_households_m": 0.22,
             "behavioral_extra_cost": 92,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 8.4,
+            "behavioral_fp_rate": 8.5,
             "behavioral_fp_households_m": 0.18,
             "hh_type": "LONE_PARENT"
           },
@@ -4993,23 +4993,23 @@
           {
             "extra_cost": 170,
             "pct_of_income": 0.7,
-            "fp_rate": 21.3,
+            "fp_rate": 21.4,
             "fp_households_m": 0.82,
             "behavioral_extra_cost": 110,
             "behavioral_pct_of_income": 0.5,
-            "behavioral_fp_rate": 18.6,
-            "behavioral_fp_households_m": 0.72,
+            "behavioral_fp_rate": 21.1,
+            "behavioral_fp_households_m": 0.81,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
             "extra_cost": 142,
             "pct_of_income": 0.5,
-            "fp_rate": 16.7,
-            "fp_households_m": 0.95,
+            "fp_rate": 17.8,
+            "fp_households_m": 1.01,
             "behavioral_extra_cost": 93,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 14.1,
-            "behavioral_fp_households_m": 0.8,
+            "behavioral_fp_rate": 16.5,
+            "behavioral_fp_households_m": 0.93,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
@@ -5019,18 +5019,18 @@
         "fp_rate": 13.9,
         "fp_households_m": 4.42,
         "behavioral_fp_rate": 12.2,
-        "behavioral_fp_households_m": 3.89,
+        "behavioral_fp_households_m": 3.9,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 499,
             "pct_of_income": 2.5,
-            "fp_rate": 33.9,
+            "fp_rate": 34.1,
             "fp_households_m": 1.3,
             "behavioral_extra_cost": 322,
             "behavioral_pct_of_income": 1.6,
-            "behavioral_fp_rate": 30.7,
-            "behavioral_fp_households_m": 1.17
+            "behavioral_fp_rate": 30.9,
+            "behavioral_fp_households_m": 1.18
           },
           {
             "decile": 2,
@@ -5162,7 +5162,7 @@
             "fp_households_m": 0.25,
             "behavioral_extra_cost": 221,
             "behavioral_pct_of_income": 0.6,
-            "behavioral_fp_rate": 8.6,
+            "behavioral_fp_rate": 8.7,
             "behavioral_fp_households_m": 0.21,
             "tenure": "RENT_FROM_COUNCIL"
           },
@@ -5184,7 +5184,7 @@
             "fp_households_m": 0.8,
             "behavioral_extra_cost": 301,
             "behavioral_pct_of_income": 0.6,
-            "behavioral_fp_rate": 10.4,
+            "behavioral_fp_rate": 10.5,
             "behavioral_fp_households_m": 0.73,
             "tenure": "RENT_PRIVATELY"
           }
@@ -5241,7 +5241,7 @@
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 380,
             "behavioral_pct_of_income": 0.4,
-            "behavioral_fp_rate": 4.9,
+            "behavioral_fp_rate": 5.0,
             "behavioral_fp_households_m": 0.11,
             "hh_type": "OTHER"
           },
@@ -5259,11 +5259,11 @@
           {
             "extra_cost": 483,
             "pct_of_income": 1.6,
-            "fp_rate": 21.1,
+            "fp_rate": 21.2,
             "fp_households_m": 1.2,
             "behavioral_extra_cost": 308,
             "behavioral_pct_of_income": 1.0,
-            "behavioral_fp_rate": 19.4,
+            "behavioral_fp_rate": 19.5,
             "behavioral_fp_households_m": 1.1,
             "hh_type": "SINGLE_WORKING_AGE"
           }
@@ -5284,8 +5284,8 @@
             "fp_households_m": 1.87,
             "behavioral_extra_cost": 823,
             "behavioral_pct_of_income": 4.1,
-            "behavioral_fp_rate": 38.8,
-            "behavioral_fp_households_m": 1.48
+            "behavioral_fp_rate": 38.9,
+            "behavioral_fp_households_m": 1.49
           },
           {
             "decile": 2,
@@ -5528,43 +5528,43 @@
     "ct_rebate": [
       {
         "scenario": "+10%",
-        "fp_rate": 9.1,
-        "fp_households_m": 2.9,
-        "behavioral_fp_rate": 9.0,
-        "behavioral_fp_households_m": 2.86,
+        "fp_rate": 9.7,
+        "fp_households_m": 3.08,
+        "behavioral_fp_rate": 9.6,
+        "behavioral_fp_households_m": 3.06,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 44,
             "pct_of_income": 0.2,
-            "fp_rate": 23.5,
-            "fp_households_m": 0.9,
+            "fp_rate": 27.9,
+            "fp_households_m": 1.07,
             "behavioral_extra_cost": 33,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 23.3,
-            "behavioral_fp_households_m": 0.89
+            "behavioral_fp_rate": 27.9,
+            "behavioral_fp_households_m": 1.06
           },
           {
             "decile": 2,
             "extra_cost": 42,
             "pct_of_income": 0.1,
-            "fp_rate": 13.7,
-            "fp_households_m": 0.46,
+            "fp_rate": 14.0,
+            "fp_households_m": 0.47,
             "behavioral_extra_cost": 31,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 13.4,
-            "behavioral_fp_households_m": 0.45
+            "behavioral_fp_rate": 13.8,
+            "behavioral_fp_households_m": 0.47
           },
           {
             "decile": 3,
             "extra_cost": 28,
             "pct_of_income": 0.1,
-            "fp_rate": 6.3,
-            "fp_households_m": 0.19,
+            "fp_rate": 6.5,
+            "fp_households_m": 0.2,
             "behavioral_extra_cost": 21,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.1,
-            "behavioral_fp_households_m": 0.19
+            "behavioral_fp_rate": 6.4,
+            "behavioral_fp_households_m": 0.2
           },
           {
             "decile": 4,
@@ -5574,7 +5574,7 @@
             "fp_households_m": 0.27,
             "behavioral_extra_cost": 43,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 9.0,
+            "behavioral_fp_rate": 9.2,
             "behavioral_fp_households_m": 0.27
           },
           {
@@ -5648,56 +5648,56 @@
           {
             "extra_cost": 95,
             "pct_of_income": 0.2,
-            "fp_rate": 15.4,
-            "fp_households_m": 1.66,
+            "fp_rate": 16.0,
+            "fp_households_m": 1.73,
             "behavioral_extra_cost": 76,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 15.1,
-            "behavioral_fp_households_m": 1.64,
+            "behavioral_fp_rate": 15.9,
+            "behavioral_fp_households_m": 1.71,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
             "extra_cost": 43,
             "pct_of_income": 0.1,
-            "fp_rate": 4.8,
-            "fp_households_m": 0.4,
+            "fp_rate": 4.9,
+            "fp_households_m": 0.41,
             "behavioral_extra_cost": 33,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.8,
+            "behavioral_fp_rate": 4.9,
             "behavioral_fp_households_m": 0.4,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
             "extra_cost": 12,
             "pct_of_income": 0.0,
-            "fp_rate": 5.9,
-            "fp_households_m": 0.14,
+            "fp_rate": 6.8,
+            "fp_households_m": 0.16,
             "behavioral_extra_cost": 7,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.8,
-            "behavioral_fp_households_m": 0.14,
+            "behavioral_fp_rate": 6.7,
+            "behavioral_fp_households_m": 0.16,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
             "extra_cost": 17,
             "pct_of_income": 0.0,
-            "fp_rate": 6.3,
-            "fp_households_m": 0.21,
+            "fp_rate": 6.5,
+            "fp_households_m": 0.22,
             "behavioral_extra_cost": 12,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.2,
-            "behavioral_fp_households_m": 0.21,
+            "behavioral_fp_rate": 6.4,
+            "behavioral_fp_households_m": 0.22,
             "tenure": "RENT_FROM_HA"
           },
           {
             "extra_cost": 34,
             "pct_of_income": 0.1,
-            "fp_rate": 6.9,
-            "fp_households_m": 0.48,
+            "fp_rate": 8.1,
+            "fp_households_m": 0.57,
             "behavioral_extra_cost": 27,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.8,
-            "behavioral_fp_households_m": 0.48,
+            "behavioral_fp_rate": 8.1,
+            "behavioral_fp_households_m": 0.57,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -5705,12 +5705,12 @@
           {
             "extra_cost": 56,
             "pct_of_income": 0.1,
-            "fp_rate": 6.9,
+            "fp_rate": 7.0,
             "fp_households_m": 0.54,
             "behavioral_extra_cost": 44,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.8,
-            "behavioral_fp_households_m": 0.53,
+            "behavioral_fp_rate": 6.9,
+            "behavioral_fp_households_m": 0.54,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
@@ -5720,37 +5720,37 @@
             "fp_households_m": 0.38,
             "behavioral_extra_cost": 69,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 8.2,
+            "behavioral_fp_rate": 8.3,
             "behavioral_fp_households_m": 0.37,
             "hh_type": "COUPLE_PENSIONER"
           },
           {
             "extra_cost": 45,
             "pct_of_income": 0.1,
-            "fp_rate": 2.8,
+            "fp_rate": 2.9,
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 36,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.8,
+            "behavioral_fp_rate": 2.9,
             "behavioral_fp_households_m": 0.16,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
             "extra_cost": 33,
             "pct_of_income": 0.1,
-            "fp_rate": 7.9,
+            "fp_rate": 8.1,
             "fp_households_m": 0.17,
             "behavioral_extra_cost": 24,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 7.8,
-            "behavioral_fp_households_m": 0.16,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.17,
             "hh_type": "LONE_PARENT"
           },
           {
             "extra_cost": 60,
             "pct_of_income": 0.1,
             "fp_rate": 2.9,
-            "fp_households_m": 0.06,
+            "fp_households_m": 0.07,
             "behavioral_extra_cost": 47,
             "behavioral_pct_of_income": 0.0,
             "behavioral_fp_rate": 2.9,
@@ -5760,44 +5760,44 @@
           {
             "extra_cost": 56,
             "pct_of_income": 0.2,
-            "fp_rate": 20.4,
-            "fp_households_m": 0.79,
+            "fp_rate": 21.6,
+            "fp_households_m": 0.83,
             "behavioral_extra_cost": 42,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 20.1,
-            "behavioral_fp_households_m": 0.78,
+            "behavioral_fp_rate": 21.5,
+            "behavioral_fp_households_m": 0.83,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
             "extra_cost": 36,
             "pct_of_income": 0.1,
-            "fp_rate": 14.2,
-            "fp_households_m": 0.81,
+            "fp_rate": 16.4,
+            "fp_households_m": 0.93,
             "behavioral_extra_cost": 28,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 14.0,
-            "behavioral_fp_households_m": 0.8,
+            "behavioral_fp_rate": 16.3,
+            "behavioral_fp_households_m": 0.93,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
       },
       {
         "scenario": "+20%",
-        "fp_rate": 10.2,
-        "fp_households_m": 3.24,
-        "behavioral_fp_rate": 9.8,
-        "behavioral_fp_households_m": 3.12,
+        "fp_rate": 10.3,
+        "fp_households_m": 3.29,
+        "behavioral_fp_rate": 10.2,
+        "behavioral_fp_households_m": 3.24,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 129,
             "pct_of_income": 0.6,
-            "fp_rate": 27.8,
-            "fp_households_m": 1.06,
+            "fp_rate": 29.0,
+            "fp_households_m": 1.11,
             "behavioral_extra_cost": 95,
             "behavioral_pct_of_income": 0.5,
-            "behavioral_fp_rate": 25.7,
-            "behavioral_fp_households_m": 0.98
+            "behavioral_fp_rate": 28.7,
+            "behavioral_fp_households_m": 1.1
           },
           {
             "decile": 2,
@@ -5807,7 +5807,7 @@
             "fp_households_m": 0.5,
             "behavioral_extra_cost": 90,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 14.5,
+            "behavioral_fp_rate": 14.6,
             "behavioral_fp_households_m": 0.49
           },
           {
@@ -5904,55 +5904,55 @@
             "extra_cost": 237,
             "pct_of_income": 0.5,
             "fp_rate": 16.5,
-            "fp_households_m": 1.78,
+            "fp_households_m": 1.79,
             "behavioral_extra_cost": 181,
             "behavioral_pct_of_income": 0.4,
-            "behavioral_fp_rate": 16.2,
-            "behavioral_fp_households_m": 1.75,
+            "behavioral_fp_rate": 16.4,
+            "behavioral_fp_households_m": 1.77,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
             "extra_cost": 133,
             "pct_of_income": 0.2,
-            "fp_rate": 5.7,
+            "fp_rate": 5.8,
             "fp_households_m": 0.48,
             "behavioral_extra_cost": 94,
             "behavioral_pct_of_income": 0.1,
             "behavioral_fp_rate": 5.6,
-            "behavioral_fp_households_m": 0.46,
+            "behavioral_fp_households_m": 0.47,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
             "extra_cost": 57,
             "pct_of_income": 0.2,
-            "fp_rate": 6.8,
-            "fp_households_m": 0.16,
+            "fp_rate": 7.2,
+            "fp_households_m": 0.17,
             "behavioral_extra_cost": 37,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.4,
-            "behavioral_fp_households_m": 0.15,
+            "behavioral_fp_rate": 7.0,
+            "behavioral_fp_households_m": 0.17,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
             "extra_cost": 64,
             "pct_of_income": 0.2,
             "fp_rate": 6.7,
-            "fp_households_m": 0.22,
+            "fp_households_m": 0.23,
             "behavioral_extra_cost": 44,
             "behavioral_pct_of_income": 0.1,
             "behavioral_fp_rate": 6.7,
-            "behavioral_fp_households_m": 0.22,
+            "behavioral_fp_households_m": 0.23,
             "tenure": "RENT_FROM_HA"
           },
           {
             "extra_cost": 100,
             "pct_of_income": 0.2,
-            "fp_rate": 8.6,
-            "fp_households_m": 0.6,
+            "fp_rate": 9.0,
+            "fp_households_m": 0.63,
             "behavioral_extra_cost": 72,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 7.6,
-            "behavioral_fp_households_m": 0.53,
+            "behavioral_fp_rate": 8.8,
+            "behavioral_fp_households_m": 0.61,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -5960,7 +5960,7 @@
           {
             "extra_cost": 161,
             "pct_of_income": 0.2,
-            "fp_rate": 7.4,
+            "fp_rate": 7.5,
             "fp_households_m": 0.58,
             "behavioral_extra_cost": 118,
             "behavioral_pct_of_income": 0.2,
@@ -5997,14 +5997,14 @@
             "fp_households_m": 0.21,
             "behavioral_extra_cost": 72,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 9.8,
+            "behavioral_fp_rate": 9.9,
             "behavioral_fp_households_m": 0.21,
             "hh_type": "LONE_PARENT"
           },
           {
             "extra_cost": 153,
             "pct_of_income": 0.2,
-            "fp_rate": 3.1,
+            "fp_rate": 3.2,
             "fp_households_m": 0.07,
             "behavioral_extra_cost": 116,
             "behavioral_pct_of_income": 0.1,
@@ -6015,44 +6015,44 @@
           {
             "extra_cost": 152,
             "pct_of_income": 0.6,
-            "fp_rate": 22.0,
+            "fp_rate": 22.1,
             "fp_households_m": 0.85,
             "behavioral_extra_cost": 114,
             "behavioral_pct_of_income": 0.5,
-            "behavioral_fp_rate": 21.8,
-            "behavioral_fp_households_m": 0.84,
+            "behavioral_fp_rate": 22.0,
+            "behavioral_fp_households_m": 0.85,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
             "extra_cost": 107,
             "pct_of_income": 0.3,
-            "fp_rate": 16.1,
-            "fp_households_m": 0.91,
+            "fp_rate": 16.9,
+            "fp_households_m": 0.96,
             "behavioral_extra_cost": 78,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 14.8,
-            "behavioral_fp_households_m": 0.84,
+            "behavioral_fp_rate": 16.7,
+            "behavioral_fp_households_m": 0.95,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
       },
       {
         "scenario": "+30%",
-        "fp_rate": 11.2,
-        "fp_households_m": 3.57,
-        "behavioral_fp_rate": 10.6,
-        "behavioral_fp_households_m": 3.39,
+        "fp_rate": 11.3,
+        "fp_households_m": 3.6,
+        "behavioral_fp_rate": 10.7,
+        "behavioral_fp_households_m": 3.42,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 236,
             "pct_of_income": 1.2,
-            "fp_rate": 30.1,
-            "fp_households_m": 1.15,
+            "fp_rate": 30.8,
+            "fp_households_m": 1.18,
             "behavioral_extra_cost": 171,
             "behavioral_pct_of_income": 0.9,
-            "behavioral_fp_rate": 28.6,
-            "behavioral_fp_households_m": 1.09
+            "behavioral_fp_rate": 29.4,
+            "behavioral_fp_households_m": 1.12
           },
           {
             "decile": 2,
@@ -6158,7 +6158,7 @@
           {
             "extra_cost": 406,
             "pct_of_income": 0.8,
-            "fp_rate": 17.6,
+            "fp_rate": 17.7,
             "fp_households_m": 1.91,
             "behavioral_extra_cost": 305,
             "behavioral_pct_of_income": 0.6,
@@ -6169,12 +6169,12 @@
           {
             "extra_cost": 263,
             "pct_of_income": 0.4,
-            "fp_rate": 6.3,
-            "fp_households_m": 0.52,
+            "fp_rate": 6.4,
+            "fp_households_m": 0.53,
             "behavioral_extra_cost": 185,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 5.8,
-            "behavioral_fp_households_m": 0.48,
+            "behavioral_fp_rate": 5.9,
+            "behavioral_fp_households_m": 0.49,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
@@ -6196,18 +6196,18 @@
             "behavioral_extra_cost": 90,
             "behavioral_pct_of_income": 0.2,
             "behavioral_fp_rate": 7.0,
-            "behavioral_fp_households_m": 0.23,
+            "behavioral_fp_households_m": 0.24,
             "tenure": "RENT_FROM_HA"
           },
           {
             "extra_cost": 203,
             "pct_of_income": 0.4,
-            "fp_rate": 9.8,
-            "fp_households_m": 0.69,
+            "fp_rate": 10.2,
+            "fp_households_m": 0.71,
             "behavioral_extra_cost": 138,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 9.4,
-            "behavioral_fp_households_m": 0.66,
+            "behavioral_fp_rate": 9.8,
+            "behavioral_fp_households_m": 0.68,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -6275,18 +6275,18 @@
             "behavioral_extra_cost": 200,
             "behavioral_pct_of_income": 0.8,
             "behavioral_fp_rate": 22.4,
-            "behavioral_fp_households_m": 0.86,
+            "behavioral_fp_households_m": 0.87,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
             "extra_cost": 208,
             "pct_of_income": 0.7,
-            "fp_rate": 18.2,
-            "fp_households_m": 1.03,
+            "fp_rate": 18.7,
+            "fp_households_m": 1.06,
             "behavioral_extra_cost": 146,
             "behavioral_pct_of_income": 0.5,
-            "behavioral_fp_rate": 17.5,
-            "behavioral_fp_households_m": 0.99,
+            "behavioral_fp_rate": 18.0,
+            "behavioral_fp_households_m": 1.02,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
@@ -6295,18 +6295,18 @@
         "scenario": "+60%",
         "fp_rate": 14.8,
         "fp_households_m": 4.71,
-        "behavioral_fp_rate": 13.5,
-        "behavioral_fp_households_m": 4.31,
+        "behavioral_fp_rate": 13.6,
+        "behavioral_fp_households_m": 4.32,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 618,
             "pct_of_income": 3.1,
-            "fp_rate": 36.2,
+            "fp_rate": 36.3,
             "fp_households_m": 1.38,
             "behavioral_extra_cost": 430,
             "behavioral_pct_of_income": 2.1,
-            "behavioral_fp_rate": 34.0,
+            "behavioral_fp_rate": 34.1,
             "behavioral_fp_households_m": 1.3
           },
           {
@@ -6424,8 +6424,8 @@
           {
             "extra_cost": 709,
             "pct_of_income": 1.0,
-            "fp_rate": 7.6,
-            "fp_households_m": 0.63,
+            "fp_rate": 7.7,
+            "fp_households_m": 0.64,
             "behavioral_extra_cost": 491,
             "behavioral_pct_of_income": 0.7,
             "behavioral_fp_rate": 7.1,
@@ -6536,7 +6536,7 @@
           {
             "extra_cost": 584,
             "pct_of_income": 1.9,
-            "fp_rate": 22.4,
+            "fp_rate": 22.5,
             "fp_households_m": 1.27,
             "behavioral_extra_cost": 397,
             "behavioral_pct_of_income": 1.3,
@@ -6705,7 +6705,7 @@
             "fp_households_m": 0.82,
             "behavioral_extra_cost": 735,
             "behavioral_pct_of_income": 2.0,
-            "behavioral_fp_rate": 13.2,
+            "behavioral_fp_rate": 13.3,
             "behavioral_fp_households_m": 0.44,
             "tenure": "RENT_FROM_HA"
           },
@@ -6805,27 +6805,27 @@
     "bn_transfer": [
       {
         "scenario": "+10%",
-        "fp_rate": 9.5,
-        "fp_households_m": 3.02,
-        "behavioral_fp_rate": 9.1,
-        "behavioral_fp_households_m": 2.9,
+        "fp_rate": 9.6,
+        "fp_households_m": 3.05,
+        "behavioral_fp_rate": 9.5,
+        "behavioral_fp_households_m": 3.03,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 44,
             "pct_of_income": 0.2,
-            "fp_rate": 26.1,
-            "fp_households_m": 1.0,
+            "fp_rate": 27.1,
+            "fp_households_m": 1.03,
             "behavioral_extra_cost": 31,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 23.5,
-            "behavioral_fp_households_m": 0.9
+            "behavioral_fp_rate": 27.0,
+            "behavioral_fp_households_m": 1.03
           },
           {
             "decile": 2,
             "extra_cost": 44,
             "pct_of_income": 0.1,
-            "fp_rate": 14.0,
+            "fp_rate": 14.1,
             "fp_households_m": 0.48,
             "behavioral_extra_cost": 30,
             "behavioral_pct_of_income": 0.1,
@@ -6929,30 +6929,30 @@
             "fp_households_m": 1.68,
             "behavioral_extra_cost": 49,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 14.6,
-            "behavioral_fp_households_m": 1.58,
+            "behavioral_fp_rate": 15.5,
+            "behavioral_fp_households_m": 1.67,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
             "extra_cost": 46,
             "pct_of_income": 0.1,
-            "fp_rate": 4.9,
+            "fp_rate": 5.0,
             "fp_households_m": 0.41,
             "behavioral_extra_cost": 30,
             "behavioral_pct_of_income": 0.0,
             "behavioral_fp_rate": 4.9,
-            "behavioral_fp_households_m": 0.4,
+            "behavioral_fp_households_m": 0.41,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
             "extra_cost": 26,
             "pct_of_income": 0.1,
-            "fp_rate": 6.6,
-            "fp_households_m": 0.16,
+            "fp_rate": 6.9,
+            "fp_households_m": 0.17,
             "behavioral_extra_cost": 17,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.5,
-            "behavioral_fp_households_m": 0.16,
+            "behavioral_fp_rate": 6.9,
+            "behavioral_fp_households_m": 0.17,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
@@ -6962,19 +6962,19 @@
             "fp_households_m": 0.22,
             "behavioral_extra_cost": 19,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.4,
+            "behavioral_fp_rate": 6.5,
             "behavioral_fp_households_m": 0.22,
             "tenure": "RENT_FROM_HA"
           },
           {
             "extra_cost": 36,
             "pct_of_income": 0.1,
-            "fp_rate": 7.9,
-            "fp_households_m": 0.55,
+            "fp_rate": 8.2,
+            "fp_households_m": 0.58,
             "behavioral_extra_cost": 25,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.8,
-            "behavioral_fp_households_m": 0.55,
+            "behavioral_fp_rate": 8.2,
+            "behavioral_fp_households_m": 0.57,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -7015,12 +7015,12 @@
           {
             "extra_cost": 41,
             "pct_of_income": 0.1,
-            "fp_rate": 8.3,
+            "fp_rate": 8.4,
             "fp_households_m": 0.18,
             "behavioral_extra_cost": 28,
             "behavioral_pct_of_income": 0.1,
             "behavioral_fp_rate": 8.3,
-            "behavioral_fp_households_m": 0.17,
+            "behavioral_fp_households_m": 0.18,
             "hh_type": "LONE_PARENT"
           },
           {
@@ -7030,7 +7030,7 @@
             "fp_households_m": 0.07,
             "behavioral_extra_cost": 35,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.9,
+            "behavioral_fp_rate": 3.0,
             "behavioral_fp_households_m": 0.07,
             "hh_type": "OTHER"
           },
@@ -7041,40 +7041,40 @@
             "fp_households_m": 0.79,
             "behavioral_extra_cost": 34,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 18.1,
-            "behavioral_fp_households_m": 0.7,
+            "behavioral_fp_rate": 20.5,
+            "behavioral_fp_households_m": 0.79,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
             "extra_cost": 41,
             "pct_of_income": 0.1,
-            "fp_rate": 15.6,
-            "fp_households_m": 0.89,
+            "fp_rate": 16.3,
+            "fp_households_m": 0.92,
             "behavioral_extra_cost": 29,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 15.5,
-            "behavioral_fp_households_m": 0.88,
+            "behavioral_fp_rate": 16.2,
+            "behavioral_fp_households_m": 0.92,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
       },
       {
         "scenario": "+20%",
-        "fp_rate": 9.7,
-        "fp_households_m": 3.1,
-        "behavioral_fp_rate": 9.0,
-        "behavioral_fp_households_m": 2.86,
+        "fp_rate": 9.9,
+        "fp_households_m": 3.17,
+        "behavioral_fp_rate": 9.7,
+        "behavioral_fp_households_m": 3.09,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 89,
             "pct_of_income": 0.4,
-            "fp_rate": 26.0,
-            "fp_households_m": 0.99,
+            "fp_rate": 27.8,
+            "fp_households_m": 1.06,
             "behavioral_extra_cost": 60,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 21.2,
-            "behavioral_fp_households_m": 0.81
+            "behavioral_fp_rate": 27.1,
+            "behavioral_fp_households_m": 1.03
           },
           {
             "decile": 2,
@@ -7095,7 +7095,7 @@
             "fp_households_m": 0.2,
             "behavioral_extra_cost": 44,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_rate": 6.6,
             "behavioral_fp_households_m": 0.2
           },
           {
@@ -7106,7 +7106,7 @@
             "fp_households_m": 0.28,
             "behavioral_extra_cost": 65,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 8.8,
+            "behavioral_fp_rate": 8.9,
             "behavioral_fp_households_m": 0.26
           },
           {
@@ -7180,34 +7180,34 @@
           {
             "extra_cost": 143,
             "pct_of_income": 0.3,
-            "fp_rate": 15.6,
-            "fp_households_m": 1.69,
+            "fp_rate": 15.9,
+            "fp_households_m": 1.71,
             "behavioral_extra_cost": 95,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 14.5,
-            "behavioral_fp_households_m": 1.57,
+            "behavioral_fp_rate": 15.6,
+            "behavioral_fp_households_m": 1.69,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
             "extra_cost": 92,
             "pct_of_income": 0.1,
-            "fp_rate": 5.6,
+            "fp_rate": 5.7,
             "fp_households_m": 0.47,
             "behavioral_extra_cost": 57,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 5.2,
-            "behavioral_fp_households_m": 0.43,
+            "behavioral_fp_rate": 5.3,
+            "behavioral_fp_households_m": 0.44,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
             "extra_cost": 52,
             "pct_of_income": 0.1,
-            "fp_rate": 6.5,
-            "fp_households_m": 0.16,
+            "fp_rate": 7.2,
+            "fp_households_m": 0.17,
             "behavioral_extra_cost": 33,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.3,
-            "behavioral_fp_households_m": 0.15,
+            "behavioral_fp_rate": 6.9,
+            "behavioral_fp_households_m": 0.17,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
@@ -7217,19 +7217,19 @@
             "fp_households_m": 0.22,
             "behavioral_extra_cost": 36,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_rate": 6.6,
             "behavioral_fp_households_m": 0.22,
             "tenure": "RENT_FROM_HA"
           },
           {
             "extra_cost": 72,
             "pct_of_income": 0.1,
-            "fp_rate": 8.0,
-            "fp_households_m": 0.56,
+            "fp_rate": 8.4,
+            "fp_households_m": 0.59,
             "behavioral_extra_cost": 48,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 7.1,
-            "behavioral_fp_households_m": 0.5,
+            "behavioral_fp_rate": 8.3,
+            "behavioral_fp_households_m": 0.58,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -7237,12 +7237,12 @@
           {
             "extra_cost": 112,
             "pct_of_income": 0.2,
-            "fp_rate": 7.3,
+            "fp_rate": 7.4,
             "fp_households_m": 0.57,
             "behavioral_extra_cost": 73,
             "behavioral_pct_of_income": 0.1,
             "behavioral_fp_rate": 7.2,
-            "behavioral_fp_households_m": 0.56,
+            "behavioral_fp_households_m": 0.57,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
@@ -7270,12 +7270,12 @@
           {
             "extra_cost": 81,
             "pct_of_income": 0.2,
-            "fp_rate": 8.3,
+            "fp_rate": 8.4,
             "fp_households_m": 0.18,
             "behavioral_extra_cost": 54,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 8.3,
-            "behavioral_fp_households_m": 0.17,
+            "behavioral_fp_rate": 8.4,
+            "behavioral_fp_households_m": 0.18,
             "hh_type": "LONE_PARENT"
           },
           {
@@ -7292,44 +7292,44 @@
           {
             "extra_cost": 97,
             "pct_of_income": 0.4,
-            "fp_rate": 21.0,
+            "fp_rate": 21.1,
             "fp_households_m": 0.81,
             "behavioral_extra_cost": 66,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 18.1,
-            "behavioral_fp_households_m": 0.7,
+            "behavioral_fp_rate": 20.6,
+            "behavioral_fp_households_m": 0.8,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
             "extra_cost": 82,
             "pct_of_income": 0.3,
-            "fp_rate": 15.3,
-            "fp_households_m": 0.87,
+            "fp_rate": 16.4,
+            "fp_households_m": 0.93,
             "behavioral_extra_cost": 55,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 14.1,
-            "behavioral_fp_households_m": 0.8,
+            "behavioral_fp_rate": 16.3,
+            "behavioral_fp_households_m": 0.92,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
       },
       {
         "scenario": "+30%",
-        "fp_rate": 10.0,
-        "fp_households_m": 3.19,
-        "behavioral_fp_rate": 9.1,
-        "behavioral_fp_households_m": 2.91,
+        "fp_rate": 10.3,
+        "fp_households_m": 3.27,
+        "behavioral_fp_rate": 9.9,
+        "behavioral_fp_households_m": 3.17,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 133,
             "pct_of_income": 0.7,
-            "fp_rate": 25.7,
-            "fp_households_m": 0.98,
+            "fp_rate": 27.9,
+            "fp_households_m": 1.07,
             "behavioral_extra_cost": 87,
             "behavioral_pct_of_income": 0.4,
-            "behavioral_fp_rate": 21.3,
-            "behavioral_fp_households_m": 0.82
+            "behavioral_fp_rate": 27.7,
+            "behavioral_fp_households_m": 1.06
           },
           {
             "decile": 2,
@@ -7346,12 +7346,12 @@
             "decile": 3,
             "extra_cost": 102,
             "pct_of_income": 0.3,
-            "fp_rate": 8.3,
+            "fp_rate": 8.4,
             "fp_households_m": 0.26,
             "behavioral_extra_cost": 63,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 7.0,
-            "behavioral_fp_households_m": 0.21
+            "behavioral_fp_rate": 7.1,
+            "behavioral_fp_households_m": 0.22
           },
           {
             "decile": 4,
@@ -7435,12 +7435,12 @@
           {
             "extra_cost": 214,
             "pct_of_income": 0.4,
-            "fp_rate": 15.8,
-            "fp_households_m": 1.71,
+            "fp_rate": 16.1,
+            "fp_households_m": 1.74,
             "behavioral_extra_cost": 137,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 14.4,
-            "behavioral_fp_households_m": 1.56,
+            "behavioral_fp_rate": 15.7,
+            "behavioral_fp_households_m": 1.7,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
@@ -7450,41 +7450,41 @@
             "fp_households_m": 0.48,
             "behavioral_extra_cost": 82,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 5.6,
-            "behavioral_fp_households_m": 0.46,
+            "behavioral_fp_rate": 5.7,
+            "behavioral_fp_households_m": 0.47,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
             "extra_cost": 79,
             "pct_of_income": 0.2,
-            "fp_rate": 7.4,
-            "fp_households_m": 0.18,
+            "fp_rate": 8.0,
+            "fp_households_m": 0.19,
             "behavioral_extra_cost": 48,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 7.1,
-            "behavioral_fp_households_m": 0.17,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.19,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
             "extra_cost": 81,
             "pct_of_income": 0.2,
-            "fp_rate": 6.7,
-            "fp_households_m": 0.22,
+            "fp_rate": 6.8,
+            "fp_households_m": 0.23,
             "behavioral_extra_cost": 52,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_rate": 6.6,
             "behavioral_fp_households_m": 0.22,
             "tenure": "RENT_FROM_HA"
           },
           {
             "extra_cost": 108,
             "pct_of_income": 0.2,
-            "fp_rate": 8.6,
-            "fp_households_m": 0.6,
+            "fp_rate": 8.9,
+            "fp_households_m": 0.63,
             "behavioral_extra_cost": 69,
             "behavioral_pct_of_income": 0.1,
-            "behavioral_fp_rate": 7.2,
-            "behavioral_fp_households_m": 0.5,
+            "behavioral_fp_rate": 8.4,
+            "behavioral_fp_households_m": 0.59,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -7496,7 +7496,7 @@
             "fp_households_m": 0.58,
             "behavioral_extra_cost": 105,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_rate": 7.4,
             "behavioral_fp_households_m": 0.57,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
@@ -7525,11 +7525,11 @@
           {
             "extra_cost": 122,
             "pct_of_income": 0.3,
-            "fp_rate": 8.6,
+            "fp_rate": 8.7,
             "fp_households_m": 0.18,
             "behavioral_extra_cost": 78,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 8.3,
+            "behavioral_fp_rate": 8.4,
             "behavioral_fp_households_m": 0.18,
             "hh_type": "LONE_PARENT"
           },
@@ -7541,72 +7541,72 @@
             "behavioral_extra_cost": 97,
             "behavioral_pct_of_income": 0.1,
             "behavioral_fp_rate": 3.8,
-            "behavioral_fp_households_m": 0.08,
+            "behavioral_fp_households_m": 0.09,
             "hh_type": "OTHER"
           },
           {
             "extra_cost": 146,
             "pct_of_income": 0.6,
-            "fp_rate": 21.0,
+            "fp_rate": 21.1,
             "fp_households_m": 0.81,
             "behavioral_extra_cost": 95,
             "behavioral_pct_of_income": 0.4,
-            "behavioral_fp_rate": 18.0,
-            "behavioral_fp_households_m": 0.7,
+            "behavioral_fp_rate": 20.7,
+            "behavioral_fp_households_m": 0.8,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
             "extra_cost": 123,
             "pct_of_income": 0.4,
-            "fp_rate": 15.7,
-            "fp_households_m": 0.89,
+            "fp_rate": 17.1,
+            "fp_households_m": 0.97,
             "behavioral_extra_cost": 79,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 14.0,
-            "behavioral_fp_households_m": 0.79,
+            "behavioral_fp_rate": 16.4,
+            "behavioral_fp_households_m": 0.93,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
       },
       {
         "scenario": "+60%",
-        "fp_rate": 10.5,
-        "fp_households_m": 3.35,
-        "behavioral_fp_rate": 9.3,
-        "behavioral_fp_households_m": 2.97,
+        "fp_rate": 11.0,
+        "fp_households_m": 3.52,
+        "behavioral_fp_rate": 10.3,
+        "behavioral_fp_households_m": 3.28,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 266,
             "pct_of_income": 1.3,
-            "fp_rate": 24.2,
-            "fp_households_m": 0.93,
+            "fp_rate": 28.2,
+            "fp_households_m": 1.08,
             "behavioral_extra_cost": 156,
             "behavioral_pct_of_income": 0.8,
-            "behavioral_fp_rate": 20.2,
-            "behavioral_fp_households_m": 0.77
+            "behavioral_fp_rate": 27.8,
+            "behavioral_fp_households_m": 1.06
           },
           {
             "decile": 2,
             "extra_cost": 262,
             "pct_of_income": 0.8,
-            "fp_rate": 15.2,
+            "fp_rate": 15.3,
             "fp_households_m": 0.52,
             "behavioral_extra_cost": 145,
             "behavioral_pct_of_income": 0.5,
-            "behavioral_fp_rate": 14.2,
+            "behavioral_fp_rate": 14.3,
             "behavioral_fp_households_m": 0.48
           },
           {
             "decile": 3,
             "extra_cost": 203,
             "pct_of_income": 0.5,
-            "fp_rate": 8.7,
+            "fp_rate": 8.9,
             "fp_households_m": 0.27,
             "behavioral_extra_cost": 112,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 7.2,
-            "behavioral_fp_households_m": 0.22
+            "behavioral_fp_rate": 7.4,
+            "behavioral_fp_households_m": 0.23
           },
           {
             "decile": 4,
@@ -7627,7 +7627,7 @@
             "fp_households_m": 0.33,
             "behavioral_extra_cost": 147,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 10.2,
+            "behavioral_fp_rate": 10.3,
             "behavioral_fp_households_m": 0.31
           },
           {
@@ -7690,56 +7690,56 @@
           {
             "extra_cost": 428,
             "pct_of_income": 0.9,
-            "fp_rate": 16.6,
-            "fp_households_m": 1.8,
+            "fp_rate": 17.1,
+            "fp_households_m": 1.85,
             "behavioral_extra_cost": 244,
             "behavioral_pct_of_income": 0.5,
-            "behavioral_fp_rate": 14.4,
-            "behavioral_fp_households_m": 1.56,
+            "behavioral_fp_rate": 16.0,
+            "behavioral_fp_households_m": 1.73,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
             "extra_cost": 276,
             "pct_of_income": 0.4,
-            "fp_rate": 6.4,
-            "fp_households_m": 0.53,
+            "fp_rate": 6.5,
+            "fp_households_m": 0.54,
             "behavioral_extra_cost": 142,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 5.8,
-            "behavioral_fp_households_m": 0.48,
+            "behavioral_fp_rate": 6.0,
+            "behavioral_fp_households_m": 0.5,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
             "extra_cost": 157,
             "pct_of_income": 0.4,
-            "fp_rate": 7.6,
-            "fp_households_m": 0.18,
+            "fp_rate": 8.3,
+            "fp_households_m": 0.2,
             "behavioral_extra_cost": 84,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 7.1,
-            "behavioral_fp_households_m": 0.17,
+            "behavioral_fp_rate": 7.9,
+            "behavioral_fp_households_m": 0.19,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
             "extra_cost": 163,
             "pct_of_income": 0.4,
-            "fp_rate": 7.2,
-            "fp_households_m": 0.24,
+            "fp_rate": 7.3,
+            "fp_households_m": 0.25,
             "behavioral_extra_cost": 91,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 6.8,
-            "behavioral_fp_households_m": 0.23,
+            "behavioral_fp_rate": 7.0,
+            "behavioral_fp_households_m": 0.24,
             "tenure": "RENT_FROM_HA"
           },
           {
             "extra_cost": 217,
             "pct_of_income": 0.4,
-            "fp_rate": 8.5,
-            "fp_households_m": 0.6,
+            "fp_rate": 9.8,
+            "fp_households_m": 0.69,
             "behavioral_extra_cost": 123,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 7.7,
-            "behavioral_fp_households_m": 0.54,
+            "behavioral_fp_rate": 9.0,
+            "behavioral_fp_households_m": 0.63,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -7748,11 +7748,11 @@
             "extra_cost": 337,
             "pct_of_income": 0.5,
             "fp_rate": 7.9,
-            "fp_households_m": 0.61,
+            "fp_households_m": 0.62,
             "behavioral_extra_cost": 184,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 7.4,
-            "behavioral_fp_households_m": 0.58,
+            "behavioral_fp_rate": 7.5,
+            "behavioral_fp_households_m": 0.59,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
@@ -7762,7 +7762,7 @@
             "fp_households_m": 0.46,
             "behavioral_extra_cost": 195,
             "behavioral_pct_of_income": 0.4,
-            "behavioral_fp_rate": 8.9,
+            "behavioral_fp_rate": 9.0,
             "behavioral_fp_households_m": 0.4,
             "hh_type": "COUPLE_PENSIONER"
           },
@@ -7773,73 +7773,73 @@
             "fp_households_m": 0.26,
             "behavioral_extra_cost": 131,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 4.2,
+            "behavioral_fp_rate": 4.3,
             "behavioral_fp_households_m": 0.24,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
             "extra_cost": 244,
             "pct_of_income": 0.6,
-            "fp_rate": 10.2,
+            "fp_rate": 10.4,
             "fp_households_m": 0.22,
             "behavioral_extra_cost": 138,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 9.8,
+            "behavioral_fp_rate": 10.0,
             "behavioral_fp_households_m": 0.21,
             "hh_type": "LONE_PARENT"
           },
           {
             "extra_cost": 297,
             "pct_of_income": 0.3,
-            "fp_rate": 4.8,
+            "fp_rate": 4.9,
             "fp_households_m": 0.11,
             "behavioral_extra_cost": 172,
             "behavioral_pct_of_income": 0.2,
-            "behavioral_fp_rate": 4.5,
+            "behavioral_fp_rate": 4.6,
             "behavioral_fp_households_m": 0.1,
             "hh_type": "OTHER"
           },
           {
             "extra_cost": 292,
             "pct_of_income": 1.2,
-            "fp_rate": 21.4,
+            "fp_rate": 21.6,
             "fp_households_m": 0.83,
             "behavioral_extra_cost": 169,
             "behavioral_pct_of_income": 0.7,
-            "behavioral_fp_rate": 17.4,
-            "behavioral_fp_households_m": 0.67,
+            "behavioral_fp_rate": 20.8,
+            "behavioral_fp_households_m": 0.8,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
             "extra_cost": 246,
             "pct_of_income": 0.8,
-            "fp_rate": 15.2,
-            "fp_households_m": 0.86,
+            "fp_rate": 17.8,
+            "fp_households_m": 1.01,
             "behavioral_extra_cost": 141,
             "behavioral_pct_of_income": 0.5,
-            "behavioral_fp_rate": 13.6,
-            "behavioral_fp_households_m": 0.77,
+            "behavioral_fp_rate": 16.5,
+            "behavioral_fp_households_m": 0.94,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
       },
       {
         "scenario": "2022-level",
-        "fp_rate": 12.7,
-        "fp_households_m": 4.03,
-        "behavioral_fp_rate": 9.2,
-        "behavioral_fp_households_m": 2.92,
+        "fp_rate": 13.3,
+        "fp_households_m": 4.23,
+        "behavioral_fp_rate": 10.6,
+        "behavioral_fp_households_m": 3.38,
         "deciles": [
           {
             "decile": 1,
             "extra_cost": 573,
             "pct_of_income": 2.9,
-            "fp_rate": 24.4,
-            "fp_households_m": 0.93,
+            "fp_rate": 29.1,
+            "fp_households_m": 1.11,
             "behavioral_extra_cost": 247,
             "behavioral_pct_of_income": 1.2,
-            "behavioral_fp_rate": 17.1,
-            "behavioral_fp_households_m": 0.65
+            "behavioral_fp_rate": 27.9,
+            "behavioral_fp_households_m": 1.06
           },
           {
             "decile": 2,
@@ -7849,19 +7849,19 @@
             "fp_households_m": 0.62,
             "behavioral_extra_cost": 223,
             "behavioral_pct_of_income": 0.7,
-            "behavioral_fp_rate": 13.5,
-            "behavioral_fp_households_m": 0.46
+            "behavioral_fp_rate": 14.3,
+            "behavioral_fp_households_m": 0.48
           },
           {
             "decile": 3,
             "extra_cost": 439,
             "pct_of_income": 1.2,
-            "fp_rate": 11.6,
+            "fp_rate": 11.8,
             "fp_households_m": 0.36,
             "behavioral_extra_cost": 176,
             "behavioral_pct_of_income": 0.5,
-            "behavioral_fp_rate": 7.2,
-            "behavioral_fp_households_m": 0.22
+            "behavioral_fp_rate": 7.5,
+            "behavioral_fp_households_m": 0.23
           },
           {
             "decile": 4,
@@ -7871,7 +7871,7 @@
             "fp_households_m": 0.36,
             "behavioral_extra_cost": 268,
             "behavioral_pct_of_income": 0.6,
-            "behavioral_fp_rate": 9.1,
+            "behavioral_fp_rate": 9.2,
             "behavioral_fp_households_m": 0.27
           },
           {
@@ -7879,7 +7879,7 @@
             "extra_cost": 584,
             "pct_of_income": 1.3,
             "fp_rate": 13.2,
-            "fp_households_m": 0.4,
+            "fp_households_m": 0.41,
             "behavioral_extra_cost": 224,
             "behavioral_pct_of_income": 0.5,
             "behavioral_fp_rate": 10.3,
@@ -7893,7 +7893,7 @@
             "fp_households_m": 0.36,
             "behavioral_extra_cost": 218,
             "behavioral_pct_of_income": 0.4,
-            "behavioral_fp_rate": 8.2,
+            "behavioral_fp_rate": 8.3,
             "behavioral_fp_households_m": 0.25
           },
           {
@@ -7915,7 +7915,7 @@
             "fp_households_m": 0.24,
             "behavioral_extra_cost": 254,
             "behavioral_pct_of_income": 0.4,
-            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_rate": 6.7,
             "behavioral_fp_households_m": 0.2
           },
           {
@@ -7945,56 +7945,56 @@
           {
             "extra_cost": 923,
             "pct_of_income": 1.9,
-            "fp_rate": 20.1,
-            "fp_households_m": 2.18,
+            "fp_rate": 20.8,
+            "fp_households_m": 2.24,
             "behavioral_extra_cost": 381,
             "behavioral_pct_of_income": 0.8,
-            "behavioral_fp_rate": 14.3,
-            "behavioral_fp_households_m": 1.54,
+            "behavioral_fp_rate": 16.6,
+            "behavioral_fp_households_m": 1.8,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
             "extra_cost": 595,
             "pct_of_income": 0.8,
-            "fp_rate": 7.9,
-            "fp_households_m": 0.65,
+            "fp_rate": 8.0,
+            "fp_households_m": 0.67,
             "behavioral_extra_cost": 215,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 6.0,
-            "behavioral_fp_households_m": 0.49,
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.52,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
             "extra_cost": 340,
             "pct_of_income": 0.9,
-            "fp_rate": 9.3,
-            "fp_households_m": 0.22,
+            "fp_rate": 10.0,
+            "fp_households_m": 0.24,
             "behavioral_extra_cost": 129,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 6.3,
-            "behavioral_fp_households_m": 0.15,
+            "behavioral_fp_rate": 7.9,
+            "behavioral_fp_households_m": 0.19,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
             "extra_cost": 351,
             "pct_of_income": 0.9,
-            "fp_rate": 8.6,
-            "fp_households_m": 0.29,
+            "fp_rate": 8.8,
+            "fp_households_m": 0.3,
             "behavioral_extra_cost": 146,
             "behavioral_pct_of_income": 0.4,
-            "behavioral_fp_rate": 6.4,
-            "behavioral_fp_households_m": 0.22,
+            "behavioral_fp_rate": 7.1,
+            "behavioral_fp_households_m": 0.24,
             "tenure": "RENT_FROM_HA"
           },
           {
             "extra_cost": 468,
             "pct_of_income": 0.9,
-            "fp_rate": 9.8,
-            "fp_households_m": 0.69,
+            "fp_rate": 11.2,
+            "fp_households_m": 0.78,
             "behavioral_extra_cost": 195,
             "behavioral_pct_of_income": 0.4,
-            "behavioral_fp_rate": 7.3,
-            "behavioral_fp_households_m": 0.51,
+            "behavioral_fp_rate": 9.1,
+            "behavioral_fp_households_m": 0.63,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -8002,18 +8002,18 @@
           {
             "extra_cost": 727,
             "pct_of_income": 1.1,
-            "fp_rate": 10.1,
-            "fp_households_m": 0.79,
+            "fp_rate": 10.2,
+            "fp_households_m": 0.8,
             "behavioral_extra_cost": 282,
             "behavioral_pct_of_income": 0.4,
-            "behavioral_fp_rate": 7.6,
-            "behavioral_fp_households_m": 0.59,
+            "behavioral_fp_rate": 7.7,
+            "behavioral_fp_households_m": 0.6,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
             "extra_cost": 772,
             "pct_of_income": 1.5,
-            "fp_rate": 14.3,
+            "fp_rate": 14.4,
             "fp_households_m": 0.65,
             "behavioral_extra_cost": 303,
             "behavioral_pct_of_income": 0.6,
@@ -8024,56 +8024,56 @@
           {
             "extra_cost": 539,
             "pct_of_income": 0.7,
-            "fp_rate": 6.7,
+            "fp_rate": 6.8,
             "fp_households_m": 0.38,
             "behavioral_extra_cost": 204,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 4.4,
-            "behavioral_fp_households_m": 0.25,
+            "behavioral_fp_rate": 4.7,
+            "behavioral_fp_households_m": 0.27,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
             "extra_cost": 527,
             "pct_of_income": 1.3,
-            "fp_rate": 11.7,
+            "fp_rate": 11.8,
             "fp_households_m": 0.25,
             "behavioral_extra_cost": 218,
             "behavioral_pct_of_income": 0.6,
-            "behavioral_fp_rate": 9.7,
-            "behavioral_fp_households_m": 0.2,
+            "behavioral_fp_rate": 10.1,
+            "behavioral_fp_households_m": 0.21,
             "hh_type": "LONE_PARENT"
           },
           {
             "extra_cost": 641,
             "pct_of_income": 0.7,
             "fp_rate": 7.9,
-            "fp_households_m": 0.17,
+            "fp_households_m": 0.18,
             "behavioral_extra_cost": 269,
             "behavioral_pct_of_income": 0.3,
-            "behavioral_fp_rate": 4.7,
-            "behavioral_fp_households_m": 0.1,
+            "behavioral_fp_rate": 4.8,
+            "behavioral_fp_households_m": 0.11,
             "hh_type": "OTHER"
           },
           {
             "extra_cost": 629,
             "pct_of_income": 2.6,
-            "fp_rate": 22.9,
-            "fp_households_m": 0.88,
+            "fp_rate": 23.2,
+            "fp_households_m": 0.89,
             "behavioral_extra_cost": 266,
             "behavioral_pct_of_income": 1.1,
-            "behavioral_fp_rate": 16.0,
-            "behavioral_fp_households_m": 0.62,
+            "behavioral_fp_rate": 20.7,
+            "behavioral_fp_households_m": 0.8,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
             "extra_cost": 530,
             "pct_of_income": 1.7,
-            "fp_rate": 16.1,
-            "fp_households_m": 0.91,
+            "fp_rate": 19.1,
+            "fp_households_m": 1.08,
             "behavioral_extra_cost": 222,
             "behavioral_pct_of_income": 0.7,
-            "behavioral_fp_rate": 12.4,
-            "behavioral_fp_households_m": 0.71,
+            "behavioral_fp_rate": 16.7,
+            "behavioral_fp_households_m": 0.94,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
@@ -8084,8 +8084,8 @@
         "scenario": "+10%",
         "fp_rate": 9.3,
         "fp_households_m": 2.97,
-        "behavioral_fp_rate": 8.9,
-        "behavioral_fp_households_m": 2.85,
+        "behavioral_fp_rate": 9.3,
+        "behavioral_fp_households_m": 2.97,
         "deciles": [
           {
             "decile": 1,
@@ -8095,8 +8095,8 @@
             "fp_households_m": 1.03,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 24.2,
-            "behavioral_fp_households_m": 0.92
+            "behavioral_fp_rate": 26.9,
+            "behavioral_fp_households_m": 1.03
           },
           {
             "decile": 2,
@@ -8106,7 +8106,7 @@
             "fp_households_m": 0.46,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 13.6,
+            "behavioral_fp_rate": 13.7,
             "behavioral_fp_households_m": 0.46
           },
           {
@@ -8117,7 +8117,7 @@
             "fp_households_m": 0.19,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.2,
+            "behavioral_fp_rate": 6.3,
             "behavioral_fp_households_m": 0.19
           },
           {
@@ -8139,8 +8139,8 @@
             "fp_households_m": 0.29,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 9.3,
-            "behavioral_fp_households_m": 0.28
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.29
           },
           {
             "decile": 6,
@@ -8172,8 +8172,8 @@
             "fp_households_m": 0.12,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 3.8,
-            "behavioral_fp_households_m": 0.11
+            "behavioral_fp_rate": 4.0,
+            "behavioral_fp_households_m": 0.12
           },
           {
             "decile": 9,
@@ -8183,8 +8183,8 @@
             "fp_households_m": 0.22,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.9,
-            "behavioral_fp_households_m": 0.21
+            "behavioral_fp_rate": 7.0,
+            "behavioral_fp_households_m": 0.22
           },
           {
             "decile": 10,
@@ -8206,8 +8206,8 @@
             "fp_households_m": 1.65,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 14.3,
-            "behavioral_fp_households_m": 1.54,
+            "behavioral_fp_rate": 15.3,
+            "behavioral_fp_households_m": 1.65,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
@@ -8217,8 +8217,8 @@
             "fp_households_m": 0.4,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.7,
-            "behavioral_fp_households_m": 0.39,
+            "behavioral_fp_rate": 4.8,
+            "behavioral_fp_households_m": 0.4,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
@@ -8228,8 +8228,8 @@
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.4,
-            "behavioral_fp_households_m": 0.15,
+            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_households_m": 0.16,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
@@ -8239,7 +8239,7 @@
             "fp_households_m": 0.2,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.9,
+            "behavioral_fp_rate": 6.0,
             "behavioral_fp_households_m": 0.2,
             "tenure": "RENT_FROM_HA"
           },
@@ -8263,7 +8263,7 @@
             "fp_households_m": 0.53,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.7,
+            "behavioral_fp_rate": 6.8,
             "behavioral_fp_households_m": 0.53,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
@@ -8274,7 +8274,7 @@
             "fp_households_m": 0.35,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.7,
+            "behavioral_fp_rate": 7.8,
             "behavioral_fp_households_m": 0.35,
             "hh_type": "COUPLE_PENSIONER"
           },
@@ -8285,8 +8285,8 @@
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.7,
-            "behavioral_fp_households_m": 0.15,
+            "behavioral_fp_rate": 2.8,
+            "behavioral_fp_households_m": 0.16,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
@@ -8296,7 +8296,7 @@
             "fp_households_m": 0.17,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.9,
+            "behavioral_fp_rate": 8.0,
             "behavioral_fp_households_m": 0.17,
             "hh_type": "LONE_PARENT"
           },
@@ -8318,8 +8318,8 @@
             "fp_households_m": 0.79,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 17.9,
-            "behavioral_fp_households_m": 0.69,
+            "behavioral_fp_rate": 20.4,
+            "behavioral_fp_households_m": 0.79,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
@@ -8329,7 +8329,7 @@
             "fp_households_m": 0.91,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 16.0,
+            "behavioral_fp_rate": 16.1,
             "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
           }
@@ -8339,8 +8339,8 @@
         "scenario": "+20%",
         "fp_rate": 9.3,
         "fp_households_m": 2.97,
-        "behavioral_fp_rate": 8.4,
-        "behavioral_fp_households_m": 2.68,
+        "behavioral_fp_rate": 9.3,
+        "behavioral_fp_households_m": 2.97,
         "deciles": [
           {
             "decile": 1,
@@ -8350,8 +8350,8 @@
             "fp_households_m": 1.03,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 21.7,
-            "behavioral_fp_households_m": 0.83
+            "behavioral_fp_rate": 26.9,
+            "behavioral_fp_households_m": 1.03
           },
           {
             "decile": 2,
@@ -8361,7 +8361,7 @@
             "fp_households_m": 0.46,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 13.5,
+            "behavioral_fp_rate": 13.7,
             "behavioral_fp_households_m": 0.46
           },
           {
@@ -8372,7 +8372,7 @@
             "fp_households_m": 0.19,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.1,
+            "behavioral_fp_rate": 6.3,
             "behavioral_fp_households_m": 0.19
           },
           {
@@ -8383,8 +8383,8 @@
             "fp_households_m": 0.26,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 8.4,
-            "behavioral_fp_households_m": 0.25
+            "behavioral_fp_rate": 8.7,
+            "behavioral_fp_households_m": 0.26
           },
           {
             "decile": 5,
@@ -8394,8 +8394,8 @@
             "fp_households_m": 0.29,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 9.2,
-            "behavioral_fp_households_m": 0.28
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.29
           },
           {
             "decile": 6,
@@ -8405,8 +8405,8 @@
             "fp_households_m": 0.19,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.9,
-            "behavioral_fp_households_m": 0.15
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.19
           },
           {
             "decile": 7,
@@ -8416,7 +8416,7 @@
             "fp_households_m": 0.1,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 3.2,
+            "behavioral_fp_rate": 3.3,
             "behavioral_fp_households_m": 0.1
           },
           {
@@ -8427,8 +8427,8 @@
             "fp_households_m": 0.12,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 3.8,
-            "behavioral_fp_households_m": 0.11
+            "behavioral_fp_rate": 4.0,
+            "behavioral_fp_households_m": 0.12
           },
           {
             "decile": 9,
@@ -8438,8 +8438,8 @@
             "fp_households_m": 0.22,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.9,
-            "behavioral_fp_households_m": 0.21
+            "behavioral_fp_rate": 7.0,
+            "behavioral_fp_households_m": 0.22
           },
           {
             "decile": 10,
@@ -8461,8 +8461,8 @@
             "fp_households_m": 1.65,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 14.1,
-            "behavioral_fp_households_m": 1.53,
+            "behavioral_fp_rate": 15.3,
+            "behavioral_fp_households_m": 1.65,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
@@ -8472,8 +8472,8 @@
             "fp_households_m": 0.4,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.6,
-            "behavioral_fp_households_m": 0.38,
+            "behavioral_fp_rate": 4.8,
+            "behavioral_fp_households_m": 0.4,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
@@ -8483,8 +8483,8 @@
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.0,
-            "behavioral_fp_households_m": 0.14,
+            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_households_m": 0.16,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
@@ -8494,7 +8494,7 @@
             "fp_households_m": 0.2,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.9,
+            "behavioral_fp_rate": 6.0,
             "behavioral_fp_households_m": 0.2,
             "tenure": "RENT_FROM_HA"
           },
@@ -8505,8 +8505,8 @@
             "fp_households_m": 0.56,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.2,
-            "behavioral_fp_households_m": 0.43,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.56,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -8518,8 +8518,8 @@
             "fp_households_m": 0.53,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.2,
-            "behavioral_fp_households_m": 0.48,
+            "behavioral_fp_rate": 6.8,
+            "behavioral_fp_households_m": 0.53,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
@@ -8529,8 +8529,8 @@
             "fp_households_m": 0.35,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.6,
-            "behavioral_fp_households_m": 0.34,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.35,
             "hh_type": "COUPLE_PENSIONER"
           },
           {
@@ -8540,8 +8540,8 @@
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.5,
-            "behavioral_fp_households_m": 0.14,
+            "behavioral_fp_rate": 2.8,
+            "behavioral_fp_households_m": 0.16,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
@@ -8551,7 +8551,7 @@
             "fp_households_m": 0.17,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_rate": 8.0,
             "behavioral_fp_households_m": 0.17,
             "hh_type": "LONE_PARENT"
           },
@@ -8562,7 +8562,7 @@
             "fp_households_m": 0.05,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.3,
+            "behavioral_fp_rate": 2.4,
             "behavioral_fp_households_m": 0.05,
             "hh_type": "OTHER"
           },
@@ -8573,8 +8573,8 @@
             "fp_households_m": 0.79,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 17.7,
-            "behavioral_fp_households_m": 0.68,
+            "behavioral_fp_rate": 20.4,
+            "behavioral_fp_households_m": 0.79,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
@@ -8584,8 +8584,8 @@
             "fp_households_m": 0.91,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 14.4,
-            "behavioral_fp_households_m": 0.82,
+            "behavioral_fp_rate": 16.1,
+            "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
@@ -8594,8 +8594,8 @@
         "scenario": "+30%",
         "fp_rate": 9.3,
         "fp_households_m": 2.97,
-        "behavioral_fp_rate": 7.9,
-        "behavioral_fp_households_m": 2.51,
+        "behavioral_fp_rate": 9.3,
+        "behavioral_fp_households_m": 2.97,
         "deciles": [
           {
             "decile": 1,
@@ -8605,8 +8605,8 @@
             "fp_households_m": 1.03,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 20.3,
-            "behavioral_fp_households_m": 0.77
+            "behavioral_fp_rate": 26.9,
+            "behavioral_fp_households_m": 1.03
           },
           {
             "decile": 2,
@@ -8616,8 +8616,8 @@
             "fp_households_m": 0.46,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 13.1,
-            "behavioral_fp_households_m": 0.44
+            "behavioral_fp_rate": 13.7,
+            "behavioral_fp_households_m": 0.46
           },
           {
             "decile": 3,
@@ -8627,7 +8627,7 @@
             "fp_households_m": 0.19,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.0,
+            "behavioral_fp_rate": 6.3,
             "behavioral_fp_households_m": 0.19
           },
           {
@@ -8638,8 +8638,8 @@
             "fp_households_m": 0.26,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 8.3,
-            "behavioral_fp_households_m": 0.25
+            "behavioral_fp_rate": 8.7,
+            "behavioral_fp_households_m": 0.26
           },
           {
             "decile": 5,
@@ -8649,8 +8649,8 @@
             "fp_households_m": 0.29,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 9.1,
-            "behavioral_fp_households_m": 0.28
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.29
           },
           {
             "decile": 6,
@@ -8660,8 +8660,8 @@
             "fp_households_m": 0.19,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.2,
-            "behavioral_fp_households_m": 0.13
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.19
           },
           {
             "decile": 7,
@@ -8671,7 +8671,7 @@
             "fp_households_m": 0.1,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 3.2,
+            "behavioral_fp_rate": 3.3,
             "behavioral_fp_households_m": 0.1
           },
           {
@@ -8682,8 +8682,8 @@
             "fp_households_m": 0.12,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 3.5,
-            "behavioral_fp_households_m": 0.1
+            "behavioral_fp_rate": 4.0,
+            "behavioral_fp_households_m": 0.12
           },
           {
             "decile": 9,
@@ -8693,8 +8693,8 @@
             "fp_households_m": 0.22,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.6,
-            "behavioral_fp_households_m": 0.14
+            "behavioral_fp_rate": 7.0,
+            "behavioral_fp_households_m": 0.22
           },
           {
             "decile": 10,
@@ -8705,7 +8705,7 @@
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
             "behavioral_fp_rate": 0.8,
-            "behavioral_fp_households_m": 0.02
+            "behavioral_fp_households_m": 0.03
           }
         ],
         "by_tenure": [
@@ -8716,8 +8716,8 @@
             "fp_households_m": 1.65,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 12.9,
-            "behavioral_fp_households_m": 1.39,
+            "behavioral_fp_rate": 15.3,
+            "behavioral_fp_households_m": 1.65,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
@@ -8727,8 +8727,8 @@
             "fp_households_m": 0.4,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.4,
-            "behavioral_fp_households_m": 0.36,
+            "behavioral_fp_rate": 4.8,
+            "behavioral_fp_households_m": 0.4,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
@@ -8738,8 +8738,8 @@
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.5,
-            "behavioral_fp_households_m": 0.13,
+            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_households_m": 0.16,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
@@ -8749,8 +8749,8 @@
             "fp_households_m": 0.2,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.8,
-            "behavioral_fp_households_m": 0.19,
+            "behavioral_fp_rate": 6.0,
+            "behavioral_fp_households_m": 0.2,
             "tenure": "RENT_FROM_HA"
           },
           {
@@ -8760,8 +8760,8 @@
             "fp_households_m": 0.56,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.1,
-            "behavioral_fp_households_m": 0.43,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.56,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -8773,8 +8773,8 @@
             "fp_households_m": 0.53,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.9,
-            "behavioral_fp_households_m": 0.46,
+            "behavioral_fp_rate": 6.8,
+            "behavioral_fp_households_m": 0.53,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
@@ -8784,8 +8784,8 @@
             "fp_households_m": 0.35,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.5,
-            "behavioral_fp_households_m": 0.34,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.35,
             "hh_type": "COUPLE_PENSIONER"
           },
           {
@@ -8795,8 +8795,8 @@
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.4,
-            "behavioral_fp_households_m": 0.14,
+            "behavioral_fp_rate": 2.8,
+            "behavioral_fp_households_m": 0.16,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
@@ -8806,8 +8806,8 @@
             "fp_households_m": 0.17,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.8,
-            "behavioral_fp_households_m": 0.16,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.17,
             "hh_type": "LONE_PARENT"
           },
           {
@@ -8817,7 +8817,7 @@
             "fp_households_m": 0.05,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.1,
+            "behavioral_fp_rate": 2.4,
             "behavioral_fp_households_m": 0.05,
             "hh_type": "OTHER"
           },
@@ -8828,8 +8828,8 @@
             "fp_households_m": 0.79,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 16.3,
-            "behavioral_fp_households_m": 0.63,
+            "behavioral_fp_rate": 20.4,
+            "behavioral_fp_households_m": 0.79,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
@@ -8839,8 +8839,8 @@
             "fp_households_m": 0.91,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 13.0,
-            "behavioral_fp_households_m": 0.73,
+            "behavioral_fp_rate": 16.1,
+            "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
@@ -8849,8 +8849,8 @@
         "scenario": "+60%",
         "fp_rate": 9.3,
         "fp_households_m": 2.97,
-        "behavioral_fp_rate": 7.2,
-        "behavioral_fp_households_m": 2.3,
+        "behavioral_fp_rate": 9.3,
+        "behavioral_fp_households_m": 2.97,
         "deciles": [
           {
             "decile": 1,
@@ -8860,8 +8860,8 @@
             "fp_households_m": 1.03,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 19.2,
-            "behavioral_fp_households_m": 0.73
+            "behavioral_fp_rate": 26.9,
+            "behavioral_fp_households_m": 1.03
           },
           {
             "decile": 2,
@@ -8871,8 +8871,8 @@
             "fp_households_m": 0.46,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 12.1,
-            "behavioral_fp_households_m": 0.41
+            "behavioral_fp_rate": 13.7,
+            "behavioral_fp_households_m": 0.46
           },
           {
             "decile": 3,
@@ -8882,8 +8882,8 @@
             "fp_households_m": 0.19,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.4,
-            "behavioral_fp_households_m": 0.17
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.19
           },
           {
             "decile": 4,
@@ -8893,8 +8893,8 @@
             "fp_households_m": 0.26,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 6.8,
-            "behavioral_fp_households_m": 0.2
+            "behavioral_fp_rate": 8.7,
+            "behavioral_fp_households_m": 0.26
           },
           {
             "decile": 5,
@@ -8904,8 +8904,8 @@
             "fp_households_m": 0.29,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 8.5,
-            "behavioral_fp_households_m": 0.26
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.29
           },
           {
             "decile": 6,
@@ -8915,8 +8915,8 @@
             "fp_households_m": 0.19,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 3.9,
-            "behavioral_fp_households_m": 0.12
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.19
           },
           {
             "decile": 7,
@@ -8926,8 +8926,8 @@
             "fp_households_m": 0.1,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.8,
-            "behavioral_fp_households_m": 0.09
+            "behavioral_fp_rate": 3.3,
+            "behavioral_fp_households_m": 0.1
           },
           {
             "decile": 8,
@@ -8937,8 +8937,8 @@
             "fp_households_m": 0.12,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 3.2,
-            "behavioral_fp_households_m": 0.09
+            "behavioral_fp_rate": 4.0,
+            "behavioral_fp_households_m": 0.12
           },
           {
             "decile": 9,
@@ -8948,8 +8948,8 @@
             "fp_households_m": 0.22,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.4,
-            "behavioral_fp_households_m": 0.13
+            "behavioral_fp_rate": 7.0,
+            "behavioral_fp_households_m": 0.22
           },
           {
             "decile": 10,
@@ -8959,8 +8959,8 @@
             "fp_households_m": 0.03,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 0.5,
-            "behavioral_fp_households_m": 0.02
+            "behavioral_fp_rate": 0.8,
+            "behavioral_fp_households_m": 0.03
           }
         ],
         "by_tenure": [
@@ -8971,8 +8971,8 @@
             "fp_households_m": 1.65,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 12.1,
-            "behavioral_fp_households_m": 1.31,
+            "behavioral_fp_rate": 15.3,
+            "behavioral_fp_households_m": 1.65,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
@@ -8982,8 +8982,8 @@
             "fp_households_m": 0.4,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 3.8,
-            "behavioral_fp_households_m": 0.32,
+            "behavioral_fp_rate": 4.8,
+            "behavioral_fp_households_m": 0.4,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
@@ -8993,8 +8993,8 @@
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.7,
-            "behavioral_fp_households_m": 0.11,
+            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_households_m": 0.16,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
@@ -9004,8 +9004,8 @@
             "fp_households_m": 0.2,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.5,
-            "behavioral_fp_households_m": 0.19,
+            "behavioral_fp_rate": 6.0,
+            "behavioral_fp_households_m": 0.2,
             "tenure": "RENT_FROM_HA"
           },
           {
@@ -9015,8 +9015,8 @@
             "fp_households_m": 0.56,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.3,
-            "behavioral_fp_households_m": 0.37,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.56,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -9028,8 +9028,8 @@
             "fp_households_m": 0.53,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 5.1,
-            "behavioral_fp_households_m": 0.39,
+            "behavioral_fp_rate": 6.8,
+            "behavioral_fp_households_m": 0.53,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
@@ -9039,8 +9039,8 @@
             "fp_households_m": 0.35,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.0,
-            "behavioral_fp_households_m": 0.31,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.35,
             "hh_type": "COUPLE_PENSIONER"
           },
           {
@@ -9050,8 +9050,8 @@
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.2,
-            "behavioral_fp_households_m": 0.13,
+            "behavioral_fp_rate": 2.8,
+            "behavioral_fp_households_m": 0.16,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
@@ -9061,8 +9061,8 @@
             "fp_households_m": 0.17,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.4,
-            "behavioral_fp_households_m": 0.16,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.17,
             "hh_type": "LONE_PARENT"
           },
           {
@@ -9072,8 +9072,8 @@
             "fp_households_m": 0.05,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 1.9,
-            "behavioral_fp_households_m": 0.04,
+            "behavioral_fp_rate": 2.4,
+            "behavioral_fp_households_m": 0.05,
             "hh_type": "OTHER"
           },
           {
@@ -9083,8 +9083,8 @@
             "fp_households_m": 0.79,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 15.0,
-            "behavioral_fp_households_m": 0.58,
+            "behavioral_fp_rate": 20.4,
+            "behavioral_fp_households_m": 0.79,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
@@ -9094,8 +9094,8 @@
             "fp_households_m": 0.91,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 12.2,
-            "behavioral_fp_households_m": 0.69,
+            "behavioral_fp_rate": 16.1,
+            "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
@@ -9104,8 +9104,8 @@
         "scenario": "2022-level",
         "fp_rate": 9.3,
         "fp_households_m": 2.97,
-        "behavioral_fp_rate": 3.9,
-        "behavioral_fp_households_m": 1.25,
+        "behavioral_fp_rate": 9.3,
+        "behavioral_fp_households_m": 2.97,
         "deciles": [
           {
             "decile": 1,
@@ -9115,8 +9115,8 @@
             "fp_households_m": 1.03,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 13.0,
-            "behavioral_fp_households_m": 0.5
+            "behavioral_fp_rate": 26.9,
+            "behavioral_fp_households_m": 1.03
           },
           {
             "decile": 2,
@@ -9126,8 +9126,8 @@
             "fp_households_m": 0.46,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.3,
-            "behavioral_fp_households_m": 0.25
+            "behavioral_fp_rate": 13.7,
+            "behavioral_fp_households_m": 0.46
           },
           {
             "decile": 3,
@@ -9137,8 +9137,8 @@
             "fp_households_m": 0.19,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.5,
-            "behavioral_fp_households_m": 0.08
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.19
           },
           {
             "decile": 4,
@@ -9148,8 +9148,8 @@
             "fp_households_m": 0.26,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.2,
-            "behavioral_fp_households_m": 0.13
+            "behavioral_fp_rate": 8.7,
+            "behavioral_fp_households_m": 0.26
           },
           {
             "decile": 5,
@@ -9159,8 +9159,8 @@
             "fp_households_m": 0.29,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 4.5,
-            "behavioral_fp_households_m": 0.14
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.29
           },
           {
             "decile": 6,
@@ -9170,8 +9170,8 @@
             "fp_households_m": 0.19,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 0.7,
-            "behavioral_fp_households_m": 0.02
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.19
           },
           {
             "decile": 7,
@@ -9181,8 +9181,8 @@
             "fp_households_m": 0.1,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 1.1,
-            "behavioral_fp_households_m": 0.04
+            "behavioral_fp_rate": 3.3,
+            "behavioral_fp_households_m": 0.1
           },
           {
             "decile": 8,
@@ -9192,8 +9192,8 @@
             "fp_households_m": 0.12,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 0.6,
-            "behavioral_fp_households_m": 0.02
+            "behavioral_fp_rate": 4.0,
+            "behavioral_fp_households_m": 0.12
           },
           {
             "decile": 9,
@@ -9203,8 +9203,8 @@
             "fp_households_m": 0.22,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 0.3,
-            "behavioral_fp_households_m": 0.01
+            "behavioral_fp_rate": 7.0,
+            "behavioral_fp_households_m": 0.22
           },
           {
             "decile": 10,
@@ -9214,8 +9214,8 @@
             "fp_households_m": 0.03,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 0.3,
-            "behavioral_fp_households_m": 0.01
+            "behavioral_fp_rate": 0.8,
+            "behavioral_fp_households_m": 0.03
           }
         ],
         "by_tenure": [
@@ -9226,8 +9226,8 @@
             "fp_households_m": 1.65,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.5,
-            "behavioral_fp_households_m": 0.81,
+            "behavioral_fp_rate": 15.3,
+            "behavioral_fp_households_m": 1.65,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
@@ -9237,8 +9237,8 @@
             "fp_households_m": 0.4,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 1.4,
-            "behavioral_fp_households_m": 0.12,
+            "behavioral_fp_rate": 4.8,
+            "behavioral_fp_households_m": 0.4,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
@@ -9248,8 +9248,8 @@
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 1.9,
-            "behavioral_fp_households_m": 0.05,
+            "behavioral_fp_rate": 6.5,
+            "behavioral_fp_households_m": 0.16,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
@@ -9259,8 +9259,8 @@
             "fp_households_m": 0.2,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 1.9,
-            "behavioral_fp_households_m": 0.06,
+            "behavioral_fp_rate": 6.0,
+            "behavioral_fp_households_m": 0.2,
             "tenure": "RENT_FROM_HA"
           },
           {
@@ -9270,8 +9270,8 @@
             "fp_households_m": 0.56,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 3.0,
-            "behavioral_fp_households_m": 0.21,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.56,
             "tenure": "RENT_PRIVATELY"
           }
         ],
@@ -9283,8 +9283,8 @@
             "fp_households_m": 0.53,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 1.6,
-            "behavioral_fp_households_m": 0.12,
+            "behavioral_fp_rate": 6.8,
+            "behavioral_fp_households_m": 0.53,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
@@ -9294,8 +9294,8 @@
             "fp_households_m": 0.35,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 2.4,
-            "behavioral_fp_households_m": 0.11,
+            "behavioral_fp_rate": 7.8,
+            "behavioral_fp_households_m": 0.35,
             "hh_type": "COUPLE_PENSIONER"
           },
           {
@@ -9305,8 +9305,8 @@
             "fp_households_m": 0.16,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 1.0,
-            "behavioral_fp_households_m": 0.06,
+            "behavioral_fp_rate": 2.8,
+            "behavioral_fp_households_m": 0.16,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
@@ -9316,8 +9316,8 @@
             "fp_households_m": 0.17,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 3.9,
-            "behavioral_fp_households_m": 0.08,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.17,
             "hh_type": "LONE_PARENT"
           },
           {
@@ -9327,8 +9327,8 @@
             "fp_households_m": 0.05,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 0.6,
-            "behavioral_fp_households_m": 0.01,
+            "behavioral_fp_rate": 2.4,
+            "behavioral_fp_households_m": 0.05,
             "hh_type": "OTHER"
           },
           {
@@ -9338,8 +9338,8 @@
             "fp_households_m": 0.79,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 12.0,
-            "behavioral_fp_households_m": 0.46,
+            "behavioral_fp_rate": 20.4,
+            "behavioral_fp_households_m": 0.79,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
@@ -9349,8 +9349,8 @@
             "fp_households_m": 0.91,
             "behavioral_extra_cost": 0,
             "behavioral_pct_of_income": 0.0,
-            "behavioral_fp_rate": 7.1,
-            "behavioral_fp_households_m": 0.4,
+            "behavioral_fp_rate": 16.1,
+            "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
@@ -10627,7 +10627,7 @@
             "behavioral_extra_cost": 495,
             "behavioral_pct_of_income": 1.6,
             "behavioral_fp_rate": 20.2,
-            "behavioral_fp_households_m": 1.14,
+            "behavioral_fp_households_m": 1.15,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ]
@@ -10636,17 +10636,17 @@
     "rbt": [
       {
         "scenario": "+10%",
-        "fp_rate": 10.3,
-        "fp_households_m": 3.29,
-        "behavioral_fp_rate": 10.3,
-        "behavioral_fp_households_m": 3.27,
+        "fp_rate": 10.9,
+        "fp_households_m": 3.47,
+        "behavioral_fp_rate": 10.8,
+        "behavioral_fp_households_m": 3.45,
         "deciles": [
           {
             "decile": 1,
-            "fp_rate": 23.4,
-            "fp_households_m": 0.89,
-            "behavioral_fp_rate": 23.2,
-            "behavioral_fp_households_m": 0.89
+            "fp_rate": 28.0,
+            "fp_households_m": 1.07,
+            "behavioral_fp_rate": 28.0,
+            "behavioral_fp_households_m": 1.07
           },
           {
             "decile": 2,
@@ -10657,9 +10657,9 @@
           },
           {
             "decile": 3,
-            "fp_rate": 8.4,
+            "fp_rate": 8.6,
             "fp_households_m": 0.26,
-            "behavioral_fp_rate": 8.4,
+            "behavioral_fp_rate": 8.5,
             "behavioral_fp_households_m": 0.26
           },
           {
@@ -10715,17 +10715,17 @@
       },
       {
         "scenario": "+20%",
-        "fp_rate": 11.3,
-        "fp_households_m": 3.58,
-        "behavioral_fp_rate": 10.8,
-        "behavioral_fp_households_m": 3.43,
+        "fp_rate": 11.4,
+        "fp_households_m": 3.63,
+        "behavioral_fp_rate": 11.3,
+        "behavioral_fp_households_m": 3.59,
         "deciles": [
           {
             "decile": 1,
-            "fp_rate": 27.2,
-            "fp_households_m": 1.04,
-            "behavioral_fp_rate": 24.4,
-            "behavioral_fp_households_m": 0.93
+            "fp_rate": 28.5,
+            "fp_households_m": 1.09,
+            "behavioral_fp_rate": 28.3,
+            "behavioral_fp_households_m": 1.08
           },
           {
             "decile": 2,
@@ -10738,7 +10738,7 @@
             "decile": 3,
             "fp_rate": 9.0,
             "fp_households_m": 0.28,
-            "behavioral_fp_rate": 8.7,
+            "behavioral_fp_rate": 8.8,
             "behavioral_fp_households_m": 0.27
           },
           {
@@ -10796,15 +10796,15 @@
         "scenario": "+30%",
         "fp_rate": 13.0,
         "fp_households_m": 4.13,
-        "behavioral_fp_rate": 12.0,
-        "behavioral_fp_households_m": 3.82,
+        "behavioral_fp_rate": 12.1,
+        "behavioral_fp_households_m": 3.86,
         "deciles": [
           {
             "decile": 1,
-            "fp_rate": 29.4,
-            "fp_households_m": 1.12,
-            "behavioral_fp_rate": 27.9,
-            "behavioral_fp_households_m": 1.07
+            "fp_rate": 29.5,
+            "fp_households_m": 1.13,
+            "behavioral_fp_rate": 29.0,
+            "behavioral_fp_households_m": 1.11
           },
           {
             "decile": 2,

@@ -537,17 +537,17 @@ def _fp_by_group(energy, income, weights, payment, group_arr, groups, pct, behav
                            "behavioral_extra_cost": 0, "behavioral_pct_of_income": 0,
                            "behavioral_fp_rate": 0, "behavioral_fp_households_m": 0})
             continue
-        # Static
+        # Static (floor at baseline energy)
         shocked_e = e_g * (1 + pct)
-        net_s = np.maximum(shocked_e - p_g, 0)
+        net_s = np.maximum(shocked_e - p_g, e_g)
         extra_s = float(weighted_mean(np.maximum(net_s - e_g, 0), w_g))
         safe_inc = np.where(i_g > 0, i_g, 1)
         mean_inc = float(weighted_mean(i_g, w_g))
         pct_inc_s = round(extra_s / mean_inc * 100, 1) if mean_inc > 0 else 0
         fp_s = float(np.average((net_s / safe_inc) > 0.10, weights=w_g)) * 100
-        # Behavioural
+        # Behavioural (floor at baseline energy)
         behav_e = e_g * behavioral_factor
-        net_b = np.maximum(behav_e - p_g, 0)
+        net_b = np.maximum(behav_e - p_g, e_g)
         extra_b = float(weighted_mean(np.maximum(net_b - e_g, 0), w_g))
         pct_inc_b = round(extra_b / mean_inc * 100, 1) if mean_inc > 0 else 0
         fp_b = float(np.average((net_b / np.where(i_g > 0, i_g, 1)) > 0.10, weights=w_g)) * 100
@@ -648,15 +648,15 @@ def policy_fuel_poverty(data):
                 p_d = payment[mask]
                 n_hh = float(w_d.sum()) / 1e6
 
-                # Static: shocked energy minus policy payment
+                # Static: shocked energy minus policy payment, floored at baseline
                 shocked_e = e_d * (1 + pct)
-                net_e_static = np.maximum(shocked_e - p_d, 0)
+                net_e_static = np.maximum(shocked_e - p_d, e_d)
                 ratio_s = net_e_static / np.where(i_d > 0, i_d, 1)
                 fp_static = float(np.average(ratio_s > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
 
-                # Behavioural: reduced consumption minus policy payment
+                # Behavioural: reduced consumption minus policy payment, floored at baseline
                 behav_e = e_d * behavioral_factor
-                net_e_behav = np.maximum(behav_e - p_d, 0)
+                net_e_behav = np.maximum(behav_e - p_d, e_d)
                 ratio_b = net_e_behav / np.where(i_d > 0, i_d, 1)
                 fp_behav = float(np.average(ratio_b > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
 
@@ -678,15 +678,15 @@ def policy_fuel_poverty(data):
                     "behavioral_fp_households_m": round(fp_behav / 100 * n_hh, 2),
                 })
 
-            # Aggregate
+            # Aggregate (floor at baseline energy)
             shocked_all = energy * (1 + pct)
-            net_all_s = np.maximum(shocked_all - payment, 0)
+            net_all_s = np.maximum(shocked_all - payment, energy)
             fp_all_s = float(np.average(
                 (net_all_s / np.where(income > 0, income, 1)) > 0.10,
                 weights=weights,
             )) * 100
             behav_all = energy * behavioral_factor
-            net_all_b = np.maximum(behav_all - payment, 0)
+            net_all_b = np.maximum(behav_all - payment, energy)
             fp_all_b = float(np.average(
                 (net_all_b / np.where(income > 0, income, 1)) > 0.10,
                 weights=weights,
@@ -735,10 +735,10 @@ def policy_fuel_poverty(data):
             e_d, i_d, w_d, p_d = energy[mask], income[mask], weights[mask], payment[mask]
             n_hh = float(w_d.sum()) / 1e6
             shocked_e = e_d * (1 + pct)
-            net_s = np.maximum(shocked_e - p_d, 0)
+            net_s = np.maximum(shocked_e - p_d, e_d)
             fp_s = float(np.average((net_s / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
             behav_e = e_d * behavioral_factor
-            net_b = np.maximum(behav_e - p_d, 0)
+            net_b = np.maximum(behav_e - p_d, e_d)
             fp_b = float(np.average((net_b / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
             extra_s_neg = float(weighted_mean(np.maximum(net_s - e_d, 0), w_d))
             extra_b_neg = float(weighted_mean(np.maximum(net_b - e_d, 0), w_d))
@@ -756,10 +756,10 @@ def policy_fuel_poverty(data):
             })
         n_total = float(weights.sum()) / 1e6
         shocked_all = energy * (1 + pct)
-        net_all_s = np.maximum(shocked_all - payment, 0)
+        net_all_s = np.maximum(shocked_all - payment, energy)
         fp_all_s = float(np.average((net_all_s / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
         behav_all = energy * behavioral_factor
-        net_all_b = np.maximum(behav_all - payment, 0)
+        net_all_b = np.maximum(behav_all - payment, energy)
         fp_all_b = float(np.average((net_all_b / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
         by_tenure = _fp_by_group(energy, income, weights, payment,
                                  tenure_arr, tenure_groups, pct, behavioral_factor)
@@ -802,10 +802,10 @@ def policy_fuel_poverty(data):
             e_d, i_d, w_d, p_d = energy[mask], income[mask], weights[mask], rbt_payment[mask]
             n_hh = float(w_d.sum()) / 1e6
             shocked_e = e_d * (1 + pct)
-            net_s = np.maximum(shocked_e - p_d, 0)
+            net_s = np.maximum(shocked_e - p_d, e_d)
             fp_s = float(np.average((net_s / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
             behav_e = e_d * behavioral_factor
-            net_b = np.maximum(behav_e - p_d, 0)
+            net_b = np.maximum(behav_e - p_d, e_d)
             fp_b = float(np.average((net_b / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
             deciles.append({
                 "decile": d,
@@ -814,10 +814,10 @@ def policy_fuel_poverty(data):
             })
         n_total = float(weights.sum()) / 1e6
         shocked_all = energy * (1 + pct)
-        net_all_s = np.maximum(shocked_all - rbt_payment, 0)
+        net_all_s = np.maximum(shocked_all - rbt_payment, energy)
         fp_all_s = float(np.average((net_all_s / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
         behav_all = energy * behavioral_factor
-        net_all_b = np.maximum(behav_all - rbt_payment, 0)
+        net_all_b = np.maximum(behav_all - rbt_payment, energy)
         fp_all_b = float(np.average((net_all_b / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
         rbt_scenarios.append({
             "scenario": name,

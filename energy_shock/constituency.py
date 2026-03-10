@@ -121,6 +121,10 @@ def constituency_analysis(data):
             shocked_ratio = shocked_energy / np.where(income > 0, income, 1)
             shocked_fp = float(np.average(shocked_ratio > 0.10, weights=w)) * 100
 
+            behav_energy = energy * behav_factor
+            behav_ratio = behav_energy / np.where(income > 0, income, 1)
+            behav_fp = float(np.average(behav_ratio > 0.10, weights=w)) * 100
+
             key = name.replace("+", "plus_").replace("-", "_").replace("%", "pct")
             base_row[f"extra_cost_{key}"] = round(extra_cost)
             base_row[f"extra_pct_{key}"] = round(extra_pct, 2)
@@ -128,6 +132,7 @@ def constituency_analysis(data):
             base_row[f"behav_pct_{key}"] = round(behav_extra_pct, 2)
             base_row[f"burden_pct_{key}"] = round((avg_energy * (1 + pct)) / avg_income * 100 if avg_income > 0 else 0, 2)
             base_row[f"fp_pct_{key}"] = round(shocked_fp, 1)
+            base_row[f"behav_fp_pct_{key}"] = round(behav_fp, 1)
 
             # Post-policy metrics per policy
             safe_inc = np.where(income > 0, income, 1)
@@ -144,13 +149,13 @@ def constituency_analysis(data):
             policy_payments["neg"] = neg_benefit_shocked - neg_baseline_benefit
 
             for pk, pay in policy_payments.items():
-                net_s = np.maximum(shocked_energy - pay, 0)
+                net_s = np.maximum(shocked_energy - pay, energy)
                 net_extra_s = float(np.average(np.maximum(net_s - energy, 0), weights=w))
                 pct_s = net_extra_s / avg_income * 100 if avg_income > 0 else 0
                 fp_s = float(np.average((net_s / safe_inc) > 0.10, weights=w)) * 100
 
                 behav_e = energy * behav_factor
-                net_b = np.maximum(behav_e - pay, 0)
+                net_b = np.maximum(behav_e - pay, energy)
                 net_extra_b = float(np.average(np.maximum(net_b - energy, 0), weights=w))
                 pct_b = net_extra_b / avg_income * 100 if avg_income > 0 else 0
                 fp_b = float(np.average((net_b / safe_inc) > 0.10, weights=w)) * 100
