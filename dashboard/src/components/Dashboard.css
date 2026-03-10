@@ -802,12 +802,12 @@ ol.ref-list li a {
   line-height: 0;
   margin-left: 1px;
 }
-.section-description a:has(sup) {
+a:has(sup) {
   color: #319795;
   text-decoration: none;
   cursor: pointer;
 }
-.section-description a:has(sup):hover {
+a:has(sup):hover {
   text-decoration: underline;
 }
 
@@ -862,15 +862,48 @@ ol.ref-list li a {
   .col-chart-val {
     font-size: 0.6rem;
   }
+
+  .pill-row {
+    flex-wrap: wrap;
+  }
+
+  .scenario-pill, .scenario-pill-sm {
+    font-size: 0.72rem;
+    padding: 5px 10px;
+  }
+
+  .section-description {
+    font-size: 0.85rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  .col-chart-label {
+    font-size: 0.6rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .kpi-row {
+    grid-template-columns: 1fr;
+  }
+
   .policy-detail-kpis {
     grid-template-columns: 1fr;
   }
 
   .col-chart-bars {
     height: 140px;
+  }
+
+  .narrative-hero h1 {
+    font-size: 1.3rem;
+  }
+
+  .narrative-hero .hero-subtitle {
+    font-size: 0.85rem;
   }
 }
 
