@@ -260,13 +260,13 @@ function BaselineSection() {
     stackedLegendA = "Electricity"; stackedLegendB = "Gas";
     stackedColorA = "#f59e0b"; stackedColorB = "#3b82f6";
     chartTitle = "Figure 1: Baseline energy burden";
-    chartSubtitle = bk === "decile" ? "decile 1 = lowest income, decile 10 = highest income" : "% of household net income spent on energy";
+    chartSubtitle = bk === "decile" ? "Decile 1 = lowest income, decile 10 = highest income" : "% of household net income spent on energy";
   } else {
     simpleBarData = items.map((it) => ({ label: it.label, value: it.net_income }));
     simpleMaxVal = Math.max(...simpleBarData.map((d) => d.value)) * 1.15;
     simpleFormat = (v) => fmt(v);
     chartTitle = "Figure 1: Baseline energy burden";
-    chartSubtitle = "annual household net income (earnings + benefits − taxes)";
+    chartSubtitle = "Annual household net income (earnings + benefits − taxes)";
   }
 
   return (
@@ -288,7 +288,8 @@ function BaselineSection() {
         more volatile because they are directly tied to wholesale markets, so
         a geopolitical shock feeds through primarily via gas. Electricity
         prices also rise because gas-fired power stations set the marginal
-        price.
+        price. Figure 1 below shows the baseline energy burden by decile,
+        tenure and household type.
       </p>
 
       <div className="pill-row">
@@ -413,7 +414,7 @@ function BaselineSection() {
         <div className="chart-wrapper" style={{ marginTop: 32 }}>
           <div className="chart-header">
             <div>
-              <div className="chart-title">Figure 2: Fuel poverty rate</div>
+              <div className="chart-title">Figure 1b: Fuel poverty rate</div>
               <div className="chart-subtitle">% of households spending &gt;10% of income on energy</div>
             </div>
           </div>
@@ -582,6 +583,10 @@ function ShockSection() {
         concentrated among low-income deciles, private renters, single
         pensioners and lone parents.
       </p>
+      <p className="section-description">
+        Figure 2 below shows the extra cost, income share and fuel poverty
+        impact of each scenario by decile, tenure and household type.
+      </p>
 
       <div className="pill-row">
         <span className="pill-row-label">SCENARIO</span>
@@ -674,7 +679,7 @@ function ShockSection() {
           <div className="chart-wrapper">
             <div className="chart-header">
               <div>
-                <div className="chart-title">Figure 3: Shock impact</div>
+                <div className="chart-title">Figure 2: Shock impact</div>
                 <div className="chart-subtitle">Search or hover to explore 650 constituencies</div>
               </div>
             </div>
@@ -686,7 +691,7 @@ function ShockSection() {
           <div className="chart-header">
             <div>
               <div className="chart-title">
-                {"Figure 3: Shock impact"}
+                {"Figure 2: Shock impact"}
               </div>
               <div className="chart-subtitle">
                 {shockResponse === "both" ? "Static vs behavioural (ε = −0.15)"
@@ -1001,7 +1006,6 @@ function PolicyNetSection() {
         design</strong> that exploits the new electricity/gas data split,
         responding to <a href="#ref-bangham">Bangham's (2026)</a> call for
         better infrastructure built before the next price cap change.
-        Select a scenario and policy to explore the distributional effects.
       </p>
 
       <ul className="policy-bullet-list">
@@ -1012,6 +1016,10 @@ function PolicyNetSection() {
           </li>
         ))}
       </ul>
+      <p className="section-description">
+        Figure 3 below shows the distributional effect of each policy by
+        decile, tenure and household type.
+      </p>
 
       <div className="pill-row">
         <span className="pill-row-label">SCENARIO</span>
@@ -1117,7 +1125,7 @@ function PolicyNetSection() {
             <div className="chart-wrapper">
               <div className="chart-header">
                 <div>
-                  <div className="chart-title">Figure 4: Policy effect</div>
+                  <div className="chart-title">Figure 3: Policy effect</div>
                   <div className="chart-subtitle">Annual £ received per household</div>
                 </div>
               </div>
@@ -1136,7 +1144,7 @@ function PolicyNetSection() {
             <div className="chart-wrapper">
               <div className="chart-header">
                 <div>
-                  <div className="chart-title">Figure 4: Policy effect</div>
+                  <div className="chart-title">Figure 3: Policy effect</div>
                   <div className="chart-subtitle">{isNoShock ? "Negative = saves, positive = pays more" : "Redistribution is independent of the shock"}</div>
                 </div>
               </div>
@@ -1183,7 +1191,7 @@ function PolicyNetSection() {
             <div className="chart-wrapper">
               <div className="chart-header">
                 <div>
-                  <div className="chart-title">Figure 4: Policy effect</div>
+                  <div className="chart-title">Figure 3: Policy effect</div>
                   <div className="chart-subtitle">Annual £ per household</div>
                 </div>
               </div>
@@ -1263,7 +1271,7 @@ function PolicyNetSection() {
             <div className="chart-wrapper">
               <div className="chart-header">
                 <div>
-                  <div className="chart-title">Figure 4: Policy effect</div>
+                  <div className="chart-title">Figure 3: Policy effect</div>
                   <div className="chart-subtitle">Search or hover to explore 650 constituencies</div>
                 </div>
               </div>
@@ -1286,7 +1294,7 @@ function PolicyNetSection() {
 
         const isDecilePolicy = bk === "decile" && !isAlt && !isFPMetric;
         const isPostPolicyFP = bk === "decile" && isFPMetric && results.policy_fuel_poverty?.[selectedNet]?.[selectedScenario];
-        const chartTitle = "Figure 4: Policy effect";
+        const chartTitle = "Figure 3: Policy effect";
 
         const maxVal = Math.max(...barData.map((d) => Math.max(showStatic ? d.staticVal : 0, showBehav ? d.behavVal : 0))) * 1.15;
         const ticks = niceTicks(maxVal);
@@ -1482,8 +1490,8 @@ function PolicyComparisonSection() {
     <section className="section" id="policy-comparison">
       <h2 className="section-title">Policy at a glance</h2>
       <p className="section-description">
-        This section compares all five policies side by side. Use the metric toggle to switch
-        between exchequer cost, fuel poverty rate reduction, and fuel poor household reduction.
+        Figure 4 below compares all five policies side by side on exchequer
+        cost, fuel poverty rate reduction and fuel poor household reduction.
       </p>
 
       <div className="pill-row">
@@ -1532,7 +1540,7 @@ function PolicyComparisonSection() {
       <div className="chart-wrapper">
         <div className="chart-header">
           <div>
-            <div className="chart-title">Figure 5: Policy comparison</div>
+            <div className="chart-title">Figure 4: Policy comparison</div>
             <div className="chart-subtitle">Sorted by selected metric, highest first</div>
           </div>
         </div>
@@ -1615,7 +1623,7 @@ export default function Dashboard() {
       <header className="narrative-hero">
         <h1>Energy price shock: distributional impact and policy options</h1>
         <p className="narrative-lead">
-          This analysis estimates the distributional impact of five
+          PolicyEngine estimates the distributional impact of five
           energy price shock scenarios on UK households, with
           separate electricity and gas breakdowns, and models five policy
           responses.
@@ -1629,7 +1637,7 @@ export default function Dashboard() {
         of Hormuz, which carries roughly 20% of the world's oil and
         gas. UK wholesale gas prices spiked over 90% in the first
         week.<a href="#fn-1"><sup>1</sup></a> Cornwall Insight forecasts the July 2026 Ofgem
-        price cap at £1,801, a 10% increase.<a href="#fn-2"><sup>2</sup></a> Stifel analysts
+        price cap at £1,801, roughly a 10% increase.<a href="#fn-2"><sup>2</sup></a> Stifel analysts
         warn a prolonged closure could push the cap to
         £2,500.<a href="#fn-3"><sup>3</sup></a> The Resolution Foundation estimates a sustained
         rise could add £500 to typical annual energy bills, offsetting the
