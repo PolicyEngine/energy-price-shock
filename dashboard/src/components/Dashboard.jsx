@@ -1720,7 +1720,9 @@ export default function Dashboard() {
         +10% to 2022-level prices with and without behavioural demand
         response. The analysis then evaluates five policy responses and
         compares their exchequer cost against their effectiveness in
-        reducing fuel poverty.
+        reducing fuel poverty. All results are available for the UK as a
+        whole and for England, Scotland, Wales and Northern Ireland
+        individually via the country selector in each section.
       </p>
       </section>
 
