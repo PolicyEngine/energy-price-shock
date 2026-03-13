@@ -38,6 +38,7 @@ html {
   font-weight: 400;
 }
 
+
 .narrative-lead strong {
   color: #319795;
   font-weight: 600;
@@ -287,12 +288,103 @@ html {
   font-size: 0.75rem;
 }
 
+/* Pill rows container — switches sit side by side */
+.pill-rows {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
 /* Pill row: label left, pills right */
 .pill-row {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 8px;
+}
+
+/* Expandable pill row — label on top, dropdown button below */
+.pill-row.expandable {
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.pill-row.expandable .pill-row-label {
+  font-size: 0.72rem;
+  min-width: 0;
+}
+
+.pill-row-collapsed {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.pill-row-collapsed:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.pill-row-active {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.pill-row-chevron {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  margin-left: 2px;
+}
+
+.pill-row-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  min-width: 180px;
+  padding: 4px 0;
+  overflow: hidden;
+}
+
+.pill-row-option {
+  display: block;
+  width: 100%;
+  padding: 9px 16px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #334155;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.1s ease;
+}
+
+.pill-row-option:hover {
+  background: #f1f5f9;
+}
+
+.pill-row-option.active {
+  color: #319795;
+  font-weight: 700;
+  background: #f0fdfa;
 }
 
 .pill-row-label {

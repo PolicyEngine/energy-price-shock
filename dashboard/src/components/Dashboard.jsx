@@ -1,9 +1,80 @@
-import { useState, useEffect } from "react";
-import results from "../data/results.json";
-import resultsV2 from "../data/results_v2.json";
-import constituencyData from "../data/constituency_results.json";
+import { useState, useEffect, useRef } from "react";
+import resultsUK from "../data/results.json";
+import resultsV2UK from "../data/results_v2.json";
+import constituencyUK from "../data/constituency_results.json";
+import resultsEngland from "../data/results_england.json";
+import resultsV2England from "../data/results_v2_england.json";
+import constituencyEngland from "../data/constituency_results_england.json";
+import resultsScotland from "../data/results_scotland.json";
+import resultsV2Scotland from "../data/results_v2_scotland.json";
+import constituencyScotland from "../data/constituency_results_scotland.json";
+import resultsWales from "../data/results_wales.json";
+import resultsV2Wales from "../data/results_v2_wales.json";
+import constituencyWales from "../data/constituency_results_wales.json";
+import resultsNI from "../data/results_northern_ireland.json";
+import resultsV2NI from "../data/results_v2_northern_ireland.json";
+import constituencyNI from "../data/constituency_results_northern_ireland.json";
 import ConstituencyMap from "./ConstituencyMap";
 import "./Dashboard.css";
+
+const ALL_DATA = {
+  UK: { results: resultsUK, v2: resultsV2UK, constituency: constituencyUK },
+  ENGLAND: { results: resultsEngland, v2: resultsV2England, constituency: constituencyEngland },
+  SCOTLAND: { results: resultsScotland, v2: resultsV2Scotland, constituency: constituencyScotland },
+  WALES: { results: resultsWales, v2: resultsV2Wales, constituency: constituencyWales },
+  NORTHERN_IRELAND: { results: resultsNI, v2: resultsV2NI, constituency: constituencyNI },
+};
+
+const COUNTRY_OPTIONS = [
+  { key: "UK", label: "UK" },
+  { key: "ENGLAND", label: "England" },
+  { key: "SCOTLAND", label: "Scotland" },
+  { key: "WALES", label: "Wales" },
+  { key: "NORTHERN_IRELAND", label: "N. Ireland" },
+];
+
+function useData(country) {
+  const d = ALL_DATA[country];
+  return { results: d.results, resultsV2: d.v2, constituencyData: d.constituency };
+}
+
+function ExpandablePillRow({ label, options, value, onChange }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const activeLabel = options.find((o) => o.key === value)?.label || value;
+
+  useEffect(() => {
+    if (!open) return;
+    const handle = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handle);
+    return () => document.removeEventListener("mousedown", handle);
+  }, [open]);
+
+  return (
+    <div className="pill-row expandable" ref={ref}>
+      <span className="pill-row-label">{label}</span>
+      <button className="pill-row-collapsed" onClick={() => setOpen(!open)}>
+        <span className="pill-row-active">{activeLabel}</span>
+        <span className="pill-row-chevron">{open ? "\u25B4" : "\u25BE"}</span>
+      </button>
+      {open && (
+        <div className="pill-row-dropdown">
+          {options.map((o) => (
+            <button
+              key={o.key}
+              className={`pill-row-option${value === o.key ? " active" : ""}`}
+              onClick={() => { onChange(o.key); setOpen(false); }}
+            >
+              {o.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 const fmt = (v) => `£${v.toLocaleString("en-GB")}`;
 const fmtBn = (v) => `£${v}bn`;
@@ -176,6 +247,8 @@ function ColumnChart({ data, maxValue, color, formatValue, colorFn, yLabel, xLab
 }
 
 function BaselineSection() {
+  const [country, setCountry] = useState("UK");
+  const { results, resultsV2, constituencyData } = useData(country);
   const { baseline } = results;
   const split = resultsV2.energy_split;
   const tenureData = resultsV2.tenure;
@@ -199,12 +272,20 @@ function BaselineSection() {
     LONE_PARENT: "Lone parent",
     OTHER: "Other",
   };
+  const COUNTRY_LABELS = {
+    ENGLAND: "England",
+    SCOTLAND: "Scotland",
+    WALES: "Wales",
+    NORTHERN_IRELAND: "N. Ireland",
+  };
+  const countryData = resultsV2.country;
   // Build chart data for current metric + breakdown combo
   let chartTitle, chartSubtitle, xLabel;
   const bk = breakdownView;
 
   if (bk === "decile") xLabel = "Decile";
   else if (bk === "hh_type") xLabel = "Household type";
+  else if (bk === "country") xLabel = "Country";
   else xLabel = "Tenure";
 
   // Helper: generic item list with .elec, .gas, .net_income, .energy_burden_pct
@@ -213,15 +294,23 @@ function BaselineSection() {
       label: `${d.decile}`,
       elec: split.deciles[i].electricity, gas: split.deciles[i].gas,
       net_income: d.net_income, energy_burden_pct: d.energy_share_pct,
+      fuel_poverty_pct: d.fuel_poverty_pct || 0,
       elec_burden_pct: split.deciles[i].elec_burden_pct, gas_burden_pct: split.deciles[i].gas_burden_pct,
     }));
     if (bk === "hh_type") return hhTypeData.map((h) => ({
       label: HH_TYPE_LABELS[h.hh_type] || h.hh_type,
       elec: h.electricity, gas: h.gas, net_income: h.net_income, energy_burden_pct: h.energy_burden_pct,
+      fuel_poverty_pct: h.fuel_poverty_pct || 0,
+    }));
+    if (bk === "country") return countryData.map((c) => ({
+      label: COUNTRY_LABELS[c.country] || c.country,
+      elec: c.electricity, gas: c.gas, net_income: c.net_income, energy_burden_pct: c.energy_burden_pct,
+      fuel_poverty_pct: c.fuel_poverty_pct || 0,
     }));
     return tenureData.map((t) => ({
       label: TENURE_LABELS[t.tenure] || t.tenure,
       elec: t.electricity, gas: t.gas, net_income: t.net_income, energy_burden_pct: t.energy_burden_pct,
+      fuel_poverty_pct: t.fuel_poverty_pct || 0,
     }));
   };
   const items = getItems();
@@ -230,10 +319,11 @@ function BaselineSection() {
   if (bk !== "decile") {
     if (baselineView === "elec_gas") items.sort((a, b) => (b.elec + b.gas) - (a.elec + a.gas));
     else if (baselineView === "energy_share") items.sort((a, b) => b.energy_burden_pct - a.energy_burden_pct);
+    else if (baselineView === "fuel_poverty") items.sort((a, b) => b.fuel_poverty_pct - a.fuel_poverty_pct);
     else items.sort((a, b) => b.net_income - a.net_income);
   }
 
-  // All views use stacked elec/gas bars except net_income
+  // All views use stacked elec/gas bars except net_income and fuel_poverty
   let stackedBarData, stackedMaxVal, stackedFmtVal, stackedLegendA, stackedLegendB, stackedColorA, stackedColorB;
   let simpleBarData, simpleMaxVal, simpleFormat;
   const isStacked = baselineView === "elec_gas" || baselineView === "energy_share";
@@ -258,6 +348,12 @@ function BaselineSection() {
     stackedColorA = "#f59e0b"; stackedColorB = "#3b82f6";
     chartTitle = "Figure 1: Baseline energy burden";
     chartSubtitle = bk === "decile" ? "Decile 1 = lowest income, decile 10 = highest income" : "% of household net income spent on energy";
+  } else if (baselineView === "fuel_poverty") {
+    simpleBarData = items.map((it) => ({ label: it.label, value: it.fuel_poverty_pct }));
+    simpleMaxVal = Math.max(...simpleBarData.map((d) => d.value)) * 1.2;
+    simpleFormat = (v) => `${v}%`;
+    chartTitle = "Figure 1: Fuel poverty rate";
+    chartSubtitle = "% of households spending >10% of income on energy";
   } else {
     simpleBarData = items.map((it) => ({ label: it.label, value: it.net_income }));
     simpleMaxVal = Math.max(...simpleBarData.map((d) => d.value)) * 1.15;
@@ -288,42 +384,29 @@ function BaselineSection() {
         tenure and household type.
       </p>
 
-      <div className="pill-row">
-        <span className="pill-row-label">METRIC</span>
-        <div className="scenario-pills">
-          {[
+      <div className="pill-rows">
+        <CountryPills value={country} onChange={setCountry} />
+        <ExpandablePillRow
+          label="METRIC"
+          options={[
             { key: "elec_gas", label: "Energy (£/yr)" },
             { key: "energy_share", label: "Energy / income (%)" },
+            { key: "fuel_poverty", label: "Fuel poverty (%)" },
             { key: "net_income", label: "Net income (£/yr)" },
-          ].map((v) => (
-            <button
-              key={v.key}
-              className={`scenario-pill${baselineView === v.key ? " active" : ""}`}
-              onClick={() => setBaselineView(v.key)}
-            >
-              {v.label}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="pill-row">
-        <span className="pill-row-label">BREAKDOWN</span>
-        <div className="scenario-pills">
-          {[
+          ]}
+          value={baselineView}
+          onChange={setBaselineView}
+        />
+        <ExpandablePillRow
+          label="BREAKDOWN"
+          options={[
             { key: "decile", label: "By decile" },
             { key: "tenure", label: "By tenure" },
             { key: "hh_type", label: "By household type" },
-            // { key: "constituency", label: "By constituency" },
-          ].map((v) => (
-            <button
-              key={v.key}
-              className={`scenario-pill${breakdownView === v.key ? " active" : ""}`}
-              onClick={() => setBreakdownView(v.key)}
-            >
-              {v.label}
-            </button>
-          ))}
-        </div>
+          ]}
+          value={breakdownView}
+          onChange={setBreakdownView}
+        />
       </div>
 
       {breakdownView === "constituency" ? (
@@ -406,26 +489,6 @@ function BaselineSection() {
         </div>
       )}
 
-      {(breakdownView === "tenure" || breakdownView === "hh_type") && baselineView !== "net_income" && (
-        <div className="chart-wrapper" style={{ marginTop: 32 }}>
-          <div className="chart-header">
-            <div>
-              <div className="chart-title">Figure 1b: Fuel poverty rate</div>
-              <div className="chart-subtitle">% of households spending &gt;10% of income on energy</div>
-            </div>
-          </div>
-          <ColumnChart
-            data={breakdownView === "hh_type"
-              ? hhTypeData.map((h) => ({ label: HH_TYPE_LABELS[h.hh_type] || h.hh_type, value: h.fuel_poverty_pct }))
-              : tenureData.map((t) => ({ label: TENURE_LABELS[t.tenure] || t.tenure, value: t.fuel_poverty_pct }))
-            }
-            maxValue={Math.max(...(breakdownView === "hh_type" ? hhTypeData : tenureData).map((d) => d.fuel_poverty_pct)) * 1.2}
-            colorFn={() => "#ef4444"}
-            formatValue={(v) => `${v}%`}
-          />
-        </div>
-      )}
-
       <p className="section-description">
         Decile 1 households spend {baseline.deciles[0].energy_share_pct}% of
         net income on energy. Decile 10 households
@@ -438,6 +501,8 @@ function BaselineSection() {
 }
 
 function ShockSection() {
+  const [country, setCountry] = useState("UK");
+  const { results, resultsV2, constituencyData } = useData(country);
   const [selected, setSelected] = useState(0);
   const [shockMetric, setShockMetric] = useState("pct_of_income");
   const [shockResponse, setShockResponse] = useState("behavioural");
@@ -453,6 +518,9 @@ function ShockSection() {
     SINGLE_PENSIONER: "Single pensioner", COUPLE_PENSIONER: "Couple pensioner",
     SINGLE_WORKING_AGE: "Single (WA)", COUPLE_NO_CHILDREN: "Couple, no kids",
     COUPLE_WITH_CHILDREN: "Couple + kids", LONE_PARENT: "Lone parent", OTHER: "Other",
+  };
+  const COUNTRY_LABELS = {
+    ENGLAND: "England", SCOTLAND: "Scotland", WALES: "Wales", NORTHERN_IRELAND: "N. Ireland",
   };
   // Build bar data based on breakdown
   const isPct = shockMetric === "pct_of_income" || shockMetric === "fp_rate";
@@ -501,6 +569,16 @@ function ShockSection() {
       const bd = behav.by_hh_type.find((b) => b.hh_type === d.hh_type);
       return {
         label: HH_TYPE_LABELS[d.hh_type] || d.hh_type,
+        staticVal: getStaticVal(d),
+        behavVal: getBehavVal(bd),
+      };
+    });
+  } else if (shockBreakdown === "country") {
+    xLabel = "Country";
+    barData = scenario.by_country.map((d) => {
+      const bd = behav.by_country.find((b) => b.country === d.country);
+      return {
+        label: COUNTRY_LABELS[d.country] || d.country,
         staticVal: getStaticVal(d),
         behavVal: getBehavVal(bd),
       };
@@ -568,66 +646,45 @@ function ShockSection() {
         impact of each scenario by decile, tenure and household type.
       </p>
 
-      <div className="pill-row">
-        <span className="pill-row-label">SCENARIO</span>
-        <div className="scenario-pills">
-          {results.shock_scenarios.map((s, i) => (
-            <button
-              key={i}
-              className={`scenario-pill${i === selected ? " active" : ""}`}
-              onClick={() => setSelected(i)}
-            >
-              {s.name}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="pill-row">
-        <span className="pill-row-label">METRIC</span>
-        <div className="scenario-pills">
-          {[
+      <div className="pill-rows">
+        <CountryPills value={country} onChange={setCountry} />
+        <ExpandablePillRow
+          label="SCENARIO"
+          options={results.shock_scenarios.map((s, i) => ({ key: String(i), label: s.name }))}
+          value={String(selected)}
+          onChange={(v) => setSelected(Number(v))}
+        />
+        <ExpandablePillRow
+          label="METRIC"
+          options={[
             { key: "pct_of_income", label: "% of income" },
             { key: "extra_cost", label: "Extra cost (£/yr)" },
             { key: "fp_rate", label: "FP rate (%)" },
-            ...(shockBreakdown !== "constituency" ? [{ key: "fp_households", label: "FP households (m)" }] : []),
-          ].map((m) => (
-            <button key={m.key} className={`scenario-pill${shockMetric === m.key ? " active" : ""}`} onClick={() => setShockMetric(m.key)}>
-              {m.label}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="pill-row">
-        <span className="pill-row-label">RESPONSE</span>
-        <div className="scenario-pills">
-          {[
+            { key: "fp_households", label: "FP households (m)" },
+          ]}
+          value={shockMetric}
+          onChange={setShockMetric}
+        />
+        <ExpandablePillRow
+          label="RESPONSE"
+          options={[
             { key: "behavioural", label: "Behavioural" },
             { key: "static", label: "Static" },
             { key: "both", label: "Both" },
-          ].map((m) => (
-            <button key={m.key} className={`scenario-pill${shockResponse === m.key ? " active" : ""}`} onClick={() => setShockResponse(m.key)}>
-              {m.label}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="pill-row">
-        <span className="pill-row-label">BREAKDOWN</span>
-        <div className="scenario-pills">
-          {[
+          ]}
+          value={shockResponse}
+          onChange={setShockResponse}
+        />
+        <ExpandablePillRow
+          label="BREAKDOWN"
+          options={[
             { key: "decile", label: "By decile" },
             { key: "tenure", label: "By tenure" },
             { key: "hh_type", label: "By household type" },
-            // { key: "constituency", label: "By constituency" },
-          ].map((v) => (
-            <button key={v.key} className={`scenario-pill${shockBreakdown === v.key ? " active" : ""}`} onClick={() => {
-              setShockBreakdown(v.key);
-              if (v.key === "constituency" && shockMetric === "fp_households") setShockMetric("fp_rate");
-            }}>
-              {v.label}
-            </button>
-          ))}
-        </div>
+          ]}
+          value={shockBreakdown}
+          onChange={setShockBreakdown}
+        />
       </div>
 
       <div className="kpi-row">
@@ -773,6 +830,8 @@ function ShockSection() {
 
 
 function PolicyNetSection() {
+  const [country, setCountry] = useState("UK");
+  const { results, resultsV2 } = useData(country);
   const { policies } = results;
   const EPG_TARGET = 2500;
   const EPG_REF_CAP = 2625;
@@ -793,6 +852,9 @@ function PolicyNetSection() {
     SINGLE_PENSIONER: "Single pensioner", COUPLE_PENSIONER: "Couple pensioner",
     SINGLE_WORKING_AGE: "Single (WA)", COUPLE_NO_CHILDREN: "Couple, no kids",
     COUPLE_WITH_CHILDREN: "Couple + kids", LONE_PARENT: "Lone parent", OTHER: "Other",
+  };
+  const COUNTRY_LABELS = {
+    ENGLAND: "England", SCOTLAND: "Scotland", WALES: "Wales", NORTHERN_IRELAND: "N. Ireland",
   };
   const [selectedScenario, setSelectedScenario] = useState(0);
   const [selectedNet, setSelectedNet] = useState("flat_transfer");
@@ -860,7 +922,7 @@ function PolicyNetSection() {
 
   if (isNoShock && bk !== "decile") {
     chartMode = "message";
-    chartMessage = "Select a shock scenario to see the impact by " + (bk === "tenure" ? "tenure" : bk === "hh_type" ? "household type" : "constituency") + ".";
+    chartMessage = "Select a shock scenario to see the impact by " + (bk === "tenure" ? "tenure" : bk === "hh_type" ? "household type" : bk === "country" ? "country" : "constituency") + ".";
   } else if (isNoShock) {
     // decile + no shock
     xLabel = "Decile";
@@ -946,14 +1008,14 @@ function PolicyNetSection() {
     chartMessage = `The ${policyLabels[selectedNet]} fully offsets the ${scenarioName} shock for all households. Every household's net extra cost is £0.`;
   } else if (bk === "constituency") {
     chartMode = "constituency";
-  } else if (bk === "tenure" || bk === "hh_type") {
-    // Post-policy tenure/hh_type breakdown from policy_fuel_poverty data
-    xLabel = bk === "tenure" ? "Tenure" : "Household type";
+  } else if (bk === "tenure" || bk === "hh_type" || bk === "country") {
+    // Post-policy tenure/hh_type/country breakdown from policy_fuel_poverty data
+    xLabel = bk === "tenure" ? "Tenure" : bk === "hh_type" ? "Household type" : "Country";
     const pfp = results.policy_fuel_poverty?.[selectedNet]?.[selectedScenario];
-    const groupData = pfp ? (bk === "tenure" ? pfp.by_tenure : pfp.by_hh_type) : null;
+    const groupData = pfp ? (bk === "tenure" ? pfp.by_tenure : bk === "hh_type" ? pfp.by_hh_type : pfp.by_country) : null;
     if (groupData) {
-      const LABELS = bk === "tenure" ? TENURE_LABELS : HH_TYPE_LABELS;
-      const groupKey = bk === "tenure" ? "tenure" : "hh_type";
+      const LABELS = bk === "tenure" ? TENURE_LABELS : bk === "hh_type" ? HH_TYPE_LABELS : COUNTRY_LABELS;
+      const groupKey = bk === "tenure" ? "tenure" : bk === "hh_type" ? "hh_type" : "country";
       barData = groupData.map((d) => {
         const sVal = isFPMetric
           ? (policyMetric === "fp_rate" ? d.fp_rate : d.fp_households_m)
@@ -1004,62 +1066,51 @@ function PolicyNetSection() {
         decile, tenure and household type.
       </p>
 
-      <div className="pill-row">
-        <span className="pill-row-label">SCENARIO</span>
-        <div className="scenario-pills">
-          {results.shock_scenarios.map((s, i) => (
-            <button key={i} className={`scenario-pill scenario-pill-sm${i === selectedScenario ? " active" : ""}`} onClick={() => setSelectedScenario(i)}>{s.name}</button>
-          ))}
-        </div>
-      </div>
-      <div className="pill-row">
-        <span className="pill-row-label">POLICY</span>
-        <div className="scenario-pills">
-          {policyKeys.map((key) => (
-            <button key={key} className={`scenario-pill${selectedNet === key ? " active" : ""}`} onClick={() => setSelectedNet(key)}>{policyLabels[key]}</button>
-          ))}
-        </div>
-      </div>
-      <div className="pill-row">
-        <span className="pill-row-label">METRIC</span>
-        <div className="scenario-pills">
-          {[
+      <div className="pill-rows">
+        <CountryPills value={country} onChange={setCountry} />
+        <ExpandablePillRow
+          label="SCENARIO"
+          options={results.shock_scenarios.map((s, i) => ({ key: String(i), label: s.name }))}
+          value={String(selectedScenario)}
+          onChange={(v) => setSelectedScenario(Number(v))}
+        />
+        <ExpandablePillRow
+          label="POLICY"
+          options={policyKeys.map((k) => ({ key: k, label: policyLabels[k] }))}
+          value={selectedNet}
+          onChange={setSelectedNet}
+        />
+        <ExpandablePillRow
+          label="METRIC"
+          options={[
             { key: "extra_cost", label: "Extra cost (£/yr)" },
             { key: "pct_of_income", label: "% of income" },
             { key: "fp_rate", label: "FP rate change (pp)" },
-            ...(bk !== "constituency" ? [{ key: "fp_households", label: "FP households change (m)" }] : []),
-          ].map((m) => (
-            <button key={m.key} className={`scenario-pill${policyMetric === m.key ? " active" : ""}`} onClick={() => setPolicyMetric(m.key)}>{m.label}</button>
-          ))}
-        </div>
-      </div>
-      <div className="pill-row">
-        <span className="pill-row-label">RESPONSE</span>
-        <div className="scenario-pills">
-          {[
+            { key: "fp_households", label: "FP households change (m)" },
+          ]}
+          value={policyMetric}
+          onChange={setPolicyMetric}
+        />
+        <ExpandablePillRow
+          label="RESPONSE"
+          options={[
             { key: "behavioural", label: "Behavioural" },
             { key: "static", label: "Static" },
             { key: "both", label: "Both" },
-          ].map((m) => (
-            <button key={m.key} className={`scenario-pill${policyResponse === m.key ? " active" : ""}`} onClick={() => setPolicyResponse(m.key)}>{m.label}</button>
-          ))}
-        </div>
-      </div>
-      <div className="pill-row">
-        <span className="pill-row-label">BREAKDOWN</span>
-        <div className="scenario-pills">
-          {[
+          ]}
+          value={policyResponse}
+          onChange={setPolicyResponse}
+        />
+        <ExpandablePillRow
+          label="BREAKDOWN"
+          options={[
             { key: "decile", label: "By decile" },
             { key: "tenure", label: "By tenure" },
             { key: "hh_type", label: "By household type" },
-            // { key: "constituency", label: "By constituency" },
-          ].map((v) => (
-            <button key={v.key} className={`scenario-pill${bk === v.key ? " active" : ""}`} onClick={() => {
-              setPolicyBreakdown(v.key);
-              if (v.key === "constituency" && policyMetric === "fp_households") setPolicyMetric("fp_rate");
-            }}>{v.label}</button>
-          ))}
-        </div>
+          ]}
+          value={policyBreakdown}
+          onChange={setPolicyBreakdown}
+        />
       </div>
 
       {/* KPI cards */}
@@ -1363,6 +1414,8 @@ function PolicyNetSection() {
 
 
 function PolicyComparisonSection() {
+  const [country, setCountry] = useState("UK");
+  const { results, resultsV2 } = useData(country);
   const { policies } = results;
   const EPG_TARGET = 2500;
   const EPG_REF_CAP = 2625;
@@ -1478,47 +1531,34 @@ function PolicyComparisonSection() {
         cost, fuel poverty rate reduction and fuel poor household reduction.
       </p>
 
-      <div className="pill-row">
-        <span className="pill-row-label">SCENARIO</span>
-        <div className="scenario-pills">
-          {scenarios.map((s, i) => (
-            <button
-              key={i}
-              className={`scenario-pill${i === compScenario ? " active" : ""}`}
-              onClick={() => setCompScenario(i)}
-            >
-              {s.name}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="pill-row">
-        <span className="pill-row-label">METRIC</span>
-        <div className="scenario-pills">
-          {[
+      <div className="pill-rows">
+        <CountryPills value={country} onChange={setCountry} />
+        <ExpandablePillRow
+          label="SCENARIO"
+          options={scenarios.map((s, i) => ({ key: String(i), label: s.name }))}
+          value={String(compScenario)}
+          onChange={(v) => setCompScenario(Number(v))}
+        />
+        <ExpandablePillRow
+          label="METRIC"
+          options={[
             { key: "exchequer", label: "Exchequer cost (£bn)" },
             { key: "fp_rate", label: "FP rate reduction (pp)" },
             { key: "fp_households", label: "FP households reduction (m)" },
-          ].map((m) => (
-            <button key={m.key} className={`scenario-pill${compMetric === m.key ? " active" : ""}`} onClick={() => setCompMetric(m.key)}>
-              {m.label}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="pill-row">
-        <span className="pill-row-label">RESPONSE</span>
-        <div className="scenario-pills">
-          {[
+          ]}
+          value={compMetric}
+          onChange={setCompMetric}
+        />
+        <ExpandablePillRow
+          label="RESPONSE"
+          options={[
             { key: "behavioural", label: "Behavioural" },
             { key: "static", label: "Static" },
             { key: "both", label: "Both" },
-          ].map((m) => (
-            <button key={m.key} className={`scenario-pill${compResponse === m.key ? " active" : ""}`} onClick={() => setCompResponse(m.key)}>
-              {m.label}
-            </button>
-          ))}
-        </div>
+          ]}
+          value={compResponse}
+          onChange={setCompResponse}
+        />
       </div>
 
       <div className="chart-wrapper">
@@ -1584,6 +1624,17 @@ function PolicyComparisonSection() {
         £12.7bn, and the council tax rebate by 2.7 pp at £7.7bn.
       </p>
     </section>
+  );
+}
+
+function CountryPills({ value, onChange }) {
+  return (
+    <ExpandablePillRow
+      label="COUNTRY"
+      options={COUNTRY_OPTIONS}
+      value={value}
+      onChange={onChange}
+    />
   );
 }
 

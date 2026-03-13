@@ -3,13 +3,16 @@ Single entry point: run all analyses and write dashboard JSON files.
 
 Usage:
     conda activate python313
-    python -m energy_shock.generate
+    python -m energy_shock                        # UK only (default)
+    python -m energy_shock --country SCOTLAND     # single country
+    python -m energy_shock --all-countries         # UK + all four nations
 """
 
+import argparse
 import json
 from pathlib import Path
 
-from .baseline import run_baseline
+from .baseline import run_baseline, filter_by_country
 from .config import (
     YEAR, CURRENT_CAP, SHOCK_CAP, EPG_TARGET,
     FLAT_TRANSFER, CT_REBATE, SHORT_RUN_ELASTICITY,
@@ -19,20 +22,19 @@ from .constituency import constituency_analysis
 
 OUTPUT_DIR = Path(__file__).parent.parent / "dashboard" / "src" / "data"
 
+VALID_COUNTRIES = ["UK", "ENGLAND", "SCOTLAND", "WALES", "NORTHERN_IRELAND"]
 
-def run_all():
-    """Run every analysis section from one shared baseline."""
+
+def _run_one(data, country, suffix, raw_data):
+    """Run full analysis for one country/nation and write JSON files."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # ── shared baseline (single microsimulation) ───────────────────────
-    print("Running baseline microsimulation...")
-    data = run_baseline()
-    print(f"  Households: {data['weights'].sum()/1e6:.1f}m")
-    print(f"  Mean energy (elec+gas): £{data['energy'].mean():.0f}")
+    print(f"\n{'='*50}")
+    print(f"  {country}: {data['weights'].sum()/1e6:.1f}m households")
+    print(f"  Mean energy: £{data['energy'].mean():.0f}")
+    print(f"{'='*50}")
 
-    # ── results.json (main dashboard data) ─────────────────────────────
-    print("\n=== Main analysis ===")
-
+    # ── results.json ─────────────────────────────────────────────────
     print("  Baseline summary...")
     baseline = sections.baseline_summary(data)
 
@@ -78,6 +80,7 @@ def run_all():
         "policy_fuel_poverty": pol_fp,
         "config": {
             "year": YEAR,
+            "country": country,
             "current_cap": CURRENT_CAP,
             "shock_cap": SHOCK_CAP,
             "epg_target": EPG_TARGET,
@@ -87,14 +90,12 @@ def run_all():
         },
     }
 
-    path = OUTPUT_DIR / "results.json"
+    path = OUTPUT_DIR / f"results{suffix}.json"
     with open(path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"  -> {path}")
 
-    # ── results_v2.json (extended: elec/gas split, regional, tenure, new policies)
-    print("\n=== Extended analysis ===")
-
+    # ── results_v2.json ──────────────────────────────────────────────
     print("  Electricity/gas split...")
     split = sections.energy_split(data)
 
@@ -110,30 +111,82 @@ def run_all():
     print("  Rising block tariff...")
     rbt = sections.rising_block_tariff(data)
 
+    print("  Country breakdown...")
+    country_bd = sections.country_breakdown(data)
+
     results_v2 = {
         "energy_split": split,
         "tenure": tenure,
         "household_type": hh_type,
+        "country": country_bd,
         "neg_policy": neg,
         "rising_block_tariff": rbt,
     }
 
-    path_v2 = OUTPUT_DIR / "results_v2.json"
+    path_v2 = OUTPUT_DIR / f"results_v2{suffix}.json"
     with open(path_v2, "w") as f:
         json.dump(results_v2, f, indent=2)
     print(f"  -> {path_v2}")
 
-    # ── constituency_results.json ──────────────────────────────────────
-    print("\n=== Constituency analysis ===")
-    const = constituency_analysis(data)
+    # ── constituency_results.json ────────────────────────────────────
+    # Constituency weights matrix is aligned to full dataset, so pass raw_data
+    print("  Constituency analysis...")
+    const = constituency_analysis(raw_data, country=country)
 
-    path_const = OUTPUT_DIR / "constituency_results.json"
+    path_const = OUTPUT_DIR / f"constituency_results{suffix}.json"
     with open(path_const, "w") as f:
         json.dump(const, f, indent=2)
     print(f"  -> {path_const}")
 
-    print("\nDone. All dashboard data regenerated.")
+
+def run_all(country="UK"):
+    """Run analysis for a single country."""
+    print("Running baseline microsimulation...")
+    raw_data = run_baseline()
+
+    if country == "UK":
+        _run_one(raw_data, "UK", "", raw_data)
+    else:
+        data = filter_by_country(raw_data, country)
+        suffix = f"_{country.lower()}"
+        _run_one(data, country, suffix, raw_data)
+
+    print("\nDone.")
+
+
+def run_all_countries():
+    """Run analysis for UK + all four nations."""
+    print("Running baseline microsimulation...")
+    raw_data = run_baseline()
+
+    # UK (full dataset)
+    _run_one(raw_data, "UK", "", raw_data)
+
+    # Each nation
+    for c in ["ENGLAND", "SCOTLAND", "WALES", "NORTHERN_IRELAND"]:
+        data = filter_by_country(raw_data, c)
+        _run_one(data, c, f"_{c.lower()}", raw_data)
+
+    print("\nDone. All countries generated.")
+
+
+def _cli():
+    parser = argparse.ArgumentParser(description="Generate energy-shock analysis")
+    parser.add_argument(
+        "--country", default="UK",
+        choices=VALID_COUNTRIES,
+        help="Country/nation to analyse (default: UK)",
+    )
+    parser.add_argument(
+        "--all-countries", action="store_true",
+        help="Generate data for UK + all four nations",
+    )
+    args = parser.parse_args()
+    if args.all_countries:
+        run_all_countries()
+    else:
+        run_all(country=args.country)
 
 
 if __name__ == "__main__":
-    run_all()
+    _cli()

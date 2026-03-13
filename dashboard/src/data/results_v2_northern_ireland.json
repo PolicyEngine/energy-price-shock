@@ -1,0 +1,825 @@
+{
+  "energy_split": {
+    "mean_electricity": 1049,
+    "mean_gas": 865,
+    "mean_total": 1915,
+    "elec_share_pct": 54.8,
+    "deciles": [
+      {
+        "decile": 1,
+        "electricity": 1261,
+        "gas": 1040,
+        "total_energy": 2301,
+        "net_income": 22934,
+        "elec_share_pct": 54.8,
+        "elec_burden_pct": 5.5,
+        "gas_burden_pct": 4.5
+      },
+      {
+        "decile": 2,
+        "electricity": 989,
+        "gas": 773,
+        "total_energy": 1761,
+        "net_income": 40133,
+        "elec_share_pct": 56.1,
+        "elec_burden_pct": 2.5,
+        "gas_burden_pct": 1.9
+      },
+      {
+        "decile": 3,
+        "electricity": 925,
+        "gas": 780,
+        "total_energy": 1706,
+        "net_income": 45014,
+        "elec_share_pct": 54.3,
+        "elec_burden_pct": 2.1,
+        "gas_burden_pct": 1.7
+      },
+      {
+        "decile": 4,
+        "electricity": 1126,
+        "gas": 948,
+        "total_energy": 2074,
+        "net_income": 48169,
+        "elec_share_pct": 54.3,
+        "elec_burden_pct": 2.3,
+        "gas_burden_pct": 2.0
+      },
+      {
+        "decile": 5,
+        "electricity": 592,
+        "gas": 485,
+        "total_energy": 1077,
+        "net_income": 50901,
+        "elec_share_pct": 55.0,
+        "elec_burden_pct": 1.2,
+        "gas_burden_pct": 1.0
+      },
+      {
+        "decile": 6,
+        "electricity": 1207,
+        "gas": 1003,
+        "total_energy": 2210,
+        "net_income": 60394,
+        "elec_share_pct": 54.6,
+        "elec_burden_pct": 2.0,
+        "gas_burden_pct": 1.7
+      },
+      {
+        "decile": 7,
+        "electricity": 1358,
+        "gas": 1138,
+        "total_energy": 2496,
+        "net_income": 57945,
+        "elec_share_pct": 54.4,
+        "elec_burden_pct": 2.3,
+        "gas_burden_pct": 2.0
+      },
+      {
+        "decile": 8,
+        "electricity": 1154,
+        "gas": 885,
+        "total_energy": 2040,
+        "net_income": 65903,
+        "elec_share_pct": 56.6,
+        "elec_burden_pct": 1.8,
+        "gas_burden_pct": 1.3
+      },
+      {
+        "decile": 9,
+        "electricity": 1169,
+        "gas": 1082,
+        "total_energy": 2251,
+        "net_income": 88529,
+        "elec_share_pct": 51.9,
+        "elec_burden_pct": 1.3,
+        "gas_burden_pct": 1.2
+      },
+      {
+        "decile": 10,
+        "electricity": 600,
+        "gas": 524,
+        "total_energy": 1124,
+        "net_income": 184816,
+        "elec_share_pct": 53.3,
+        "elec_burden_pct": 0.3,
+        "gas_burden_pct": 0.3
+      }
+    ]
+  },
+  "tenure": [
+    {
+      "tenure": "OWNED_OUTRIGHT",
+      "electricity": 1127,
+      "gas": 985,
+      "total_energy": 2112,
+      "net_income": 48570,
+      "energy_burden_pct": 4.3,
+      "fuel_poverty_pct": 21.8,
+      "households_m": 0.2
+    },
+    {
+      "tenure": "RENT_FROM_HA",
+      "electricity": 1118,
+      "gas": 894,
+      "total_energy": 2012,
+      "net_income": 51674,
+      "energy_burden_pct": 3.9,
+      "fuel_poverty_pct": 17.9,
+      "households_m": 0.0
+    },
+    {
+      "tenure": "RENT_FROM_COUNCIL",
+      "electricity": 889,
+      "gas": 642,
+      "total_energy": 1530,
+      "net_income": 41663,
+      "energy_burden_pct": 3.7,
+      "fuel_poverty_pct": 11.1,
+      "households_m": 0.2
+    },
+    {
+      "tenure": "RENT_PRIVATELY",
+      "electricity": 1148,
+      "gas": 853,
+      "total_energy": 2001,
+      "net_income": 55492,
+      "energy_burden_pct": 3.6,
+      "fuel_poverty_pct": 5.2,
+      "households_m": 0.1
+    },
+    {
+      "tenure": "OWNED_WITH_MORTGAGE",
+      "electricity": 1017,
+      "gas": 933,
+      "total_energy": 1950,
+      "net_income": 75000,
+      "energy_burden_pct": 2.6,
+      "fuel_poverty_pct": 4.2,
+      "households_m": 0.2
+    }
+  ],
+  "household_type": [
+    {
+      "hh_type": "SINGLE_WORKING_AGE",
+      "electricity": 1031,
+      "gas": 815,
+      "total_energy": 1846,
+      "net_income": 28377,
+      "energy_burden_pct": 6.5,
+      "fuel_poverty_pct": 31.4,
+      "households_m": 0.1
+    },
+    {
+      "hh_type": "SINGLE_PENSIONER",
+      "electricity": 869,
+      "gas": 679,
+      "total_energy": 1548,
+      "net_income": 27811,
+      "energy_burden_pct": 5.6,
+      "fuel_poverty_pct": 18.9,
+      "households_m": 0.0
+    },
+    {
+      "hh_type": "LONE_PARENT",
+      "electricity": 1026,
+      "gas": 864,
+      "total_energy": 1889,
+      "net_income": 45259,
+      "energy_burden_pct": 4.2,
+      "fuel_poverty_pct": 18.0,
+      "households_m": 0.0
+    },
+    {
+      "hh_type": "COUPLE_NO_CHILDREN",
+      "electricity": 1177,
+      "gas": 937,
+      "total_energy": 2115,
+      "net_income": 57590,
+      "energy_burden_pct": 3.7,
+      "fuel_poverty_pct": 11.8,
+      "households_m": 0.2
+    },
+    {
+      "hh_type": "COUPLE_WITH_CHILDREN",
+      "electricity": 1137,
+      "gas": 950,
+      "total_energy": 2087,
+      "net_income": 58133,
+      "energy_burden_pct": 3.6,
+      "fuel_poverty_pct": 6.2,
+      "households_m": 0.2
+    },
+    {
+      "hh_type": "OTHER",
+      "electricity": 1196,
+      "gas": 1023,
+      "total_energy": 2220,
+      "net_income": 80589,
+      "energy_burden_pct": 2.8,
+      "fuel_poverty_pct": 4.3,
+      "households_m": 0.1
+    },
+    {
+      "hh_type": "COUPLE_PENSIONER",
+      "electricity": 720,
+      "gas": 608,
+      "total_energy": 1328,
+      "net_income": 49768,
+      "energy_burden_pct": 2.7,
+      "fuel_poverty_pct": 9.8,
+      "households_m": 0.1
+    }
+  ],
+  "country": [
+    {
+      "country": "NORTHERN_IRELAND",
+      "electricity": 1049,
+      "gas": 865,
+      "total_energy": 1915,
+      "net_income": 54871,
+      "energy_burden_pct": 3.5,
+      "fuel_poverty_pct": 11.8,
+      "households_m": 0.8
+    }
+  ],
+  "neg_policy": {
+    "name": "NEF National Energy Guarantee",
+    "description": "Subsidise first 2,900 kWh of electricity per household (\u00a3793 at current rates). Progressive because low users get most or all of their electricity covered.",
+    "threshold_kwh": 2900,
+    "threshold_spend": 793,
+    "baseline_cost_bn": 0.5,
+    "avg_benefit_baseline": 591,
+    "deciles_baseline": [
+      {
+        "decile": 1,
+        "benefit": 671,
+        "elec_spend": 1261,
+        "coverage_pct": 53.2
+      },
+      {
+        "decile": 2,
+        "benefit": 594,
+        "elec_spend": 989,
+        "coverage_pct": 60.1
+      },
+      {
+        "decile": 3,
+        "benefit": 599,
+        "elec_spend": 925,
+        "coverage_pct": 64.7
+      },
+      {
+        "decile": 4,
+        "benefit": 651,
+        "elec_spend": 1126,
+        "coverage_pct": 57.8
+      },
+      {
+        "decile": 5,
+        "benefit": 365,
+        "elec_spend": 592,
+        "coverage_pct": 61.7
+      },
+      {
+        "decile": 6,
+        "benefit": 675,
+        "elec_spend": 1207,
+        "coverage_pct": 55.9
+      },
+      {
+        "decile": 7,
+        "benefit": 625,
+        "elec_spend": 1358,
+        "coverage_pct": 46.0
+      },
+      {
+        "decile": 8,
+        "benefit": 613,
+        "elec_spend": 1154,
+        "coverage_pct": 53.1
+      },
+      {
+        "decile": 9,
+        "benefit": 652,
+        "elec_spend": 1169,
+        "coverage_pct": 55.8
+      },
+      {
+        "decile": 10,
+        "benefit": 398,
+        "elec_spend": 600,
+        "coverage_pct": 66.4
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "+10%",
+        "new_cap": 1805,
+        "exchequer_cost_bn": 0.5,
+        "avg_benefit": 651,
+        "avg_net_extra_cost": 132,
+        "deciles": [
+          {
+            "decile": 1,
+            "benefit": 738,
+            "shock_extra": 230,
+            "benefit_extra_vs_baseline": 67,
+            "offset_pct": 29.2
+          },
+          {
+            "decile": 2,
+            "benefit": 653,
+            "shock_extra": 176,
+            "benefit_extra_vs_baseline": 59,
+            "offset_pct": 33.7
+          },
+          {
+            "decile": 3,
+            "benefit": 659,
+            "shock_extra": 170,
+            "benefit_extra_vs_baseline": 60,
+            "offset_pct": 35.1
+          },
+          {
+            "decile": 4,
+            "benefit": 716,
+            "shock_extra": 207,
+            "benefit_extra_vs_baseline": 65,
+            "offset_pct": 31.4
+          },
+          {
+            "decile": 5,
+            "benefit": 401,
+            "shock_extra": 108,
+            "benefit_extra_vs_baseline": 36,
+            "offset_pct": 33.9
+          },
+          {
+            "decile": 6,
+            "benefit": 743,
+            "shock_extra": 221,
+            "benefit_extra_vs_baseline": 67,
+            "offset_pct": 30.6
+          },
+          {
+            "decile": 7,
+            "benefit": 688,
+            "shock_extra": 249,
+            "benefit_extra_vs_baseline": 63,
+            "offset_pct": 25.1
+          },
+          {
+            "decile": 8,
+            "benefit": 674,
+            "shock_extra": 204,
+            "benefit_extra_vs_baseline": 61,
+            "offset_pct": 30.0
+          },
+          {
+            "decile": 9,
+            "benefit": 718,
+            "shock_extra": 225,
+            "benefit_extra_vs_baseline": 65,
+            "offset_pct": 29.0
+          },
+          {
+            "decile": 10,
+            "benefit": 438,
+            "shock_extra": 112,
+            "benefit_extra_vs_baseline": 40,
+            "offset_pct": 35.4
+          }
+        ]
+      },
+      {
+        "name": "+20%",
+        "new_cap": 1969,
+        "exchequer_cost_bn": 0.5,
+        "avg_benefit": 710,
+        "avg_net_extra_cost": 265,
+        "deciles": [
+          {
+            "decile": 1,
+            "benefit": 805,
+            "shock_extra": 460,
+            "benefit_extra_vs_baseline": 134,
+            "offset_pct": 29.2
+          },
+          {
+            "decile": 2,
+            "benefit": 713,
+            "shock_extra": 352,
+            "benefit_extra_vs_baseline": 119,
+            "offset_pct": 33.7
+          },
+          {
+            "decile": 3,
+            "benefit": 719,
+            "shock_extra": 341,
+            "benefit_extra_vs_baseline": 120,
+            "offset_pct": 35.1
+          },
+          {
+            "decile": 4,
+            "benefit": 781,
+            "shock_extra": 415,
+            "benefit_extra_vs_baseline": 130,
+            "offset_pct": 31.4
+          },
+          {
+            "decile": 5,
+            "benefit": 438,
+            "shock_extra": 215,
+            "benefit_extra_vs_baseline": 73,
+            "offset_pct": 33.9
+          },
+          {
+            "decile": 6,
+            "benefit": 810,
+            "shock_extra": 442,
+            "benefit_extra_vs_baseline": 135,
+            "offset_pct": 30.6
+          },
+          {
+            "decile": 7,
+            "benefit": 750,
+            "shock_extra": 499,
+            "benefit_extra_vs_baseline": 125,
+            "offset_pct": 25.1
+          },
+          {
+            "decile": 8,
+            "benefit": 735,
+            "shock_extra": 408,
+            "benefit_extra_vs_baseline": 122,
+            "offset_pct": 30.0
+          },
+          {
+            "decile": 9,
+            "benefit": 783,
+            "shock_extra": 450,
+            "benefit_extra_vs_baseline": 130,
+            "offset_pct": 29.0
+          },
+          {
+            "decile": 10,
+            "benefit": 478,
+            "shock_extra": 225,
+            "benefit_extra_vs_baseline": 80,
+            "offset_pct": 35.4
+          }
+        ]
+      },
+      {
+        "name": "+30%",
+        "new_cap": 2133,
+        "exchequer_cost_bn": 0.6,
+        "avg_benefit": 769,
+        "avg_net_extra_cost": 397,
+        "deciles": [
+          {
+            "decile": 1,
+            "benefit": 872,
+            "shock_extra": 690,
+            "benefit_extra_vs_baseline": 201,
+            "offset_pct": 29.2
+          },
+          {
+            "decile": 2,
+            "benefit": 772,
+            "shock_extra": 528,
+            "benefit_extra_vs_baseline": 178,
+            "offset_pct": 33.7
+          },
+          {
+            "decile": 3,
+            "benefit": 778,
+            "shock_extra": 511,
+            "benefit_extra_vs_baseline": 180,
+            "offset_pct": 35.1
+          },
+          {
+            "decile": 4,
+            "benefit": 846,
+            "shock_extra": 622,
+            "benefit_extra_vs_baseline": 195,
+            "offset_pct": 31.4
+          },
+          {
+            "decile": 5,
+            "benefit": 474,
+            "shock_extra": 323,
+            "benefit_extra_vs_baseline": 109,
+            "offset_pct": 33.9
+          },
+          {
+            "decile": 6,
+            "benefit": 878,
+            "shock_extra": 663,
+            "benefit_extra_vs_baseline": 202,
+            "offset_pct": 30.6
+          },
+          {
+            "decile": 7,
+            "benefit": 813,
+            "shock_extra": 748,
+            "benefit_extra_vs_baseline": 188,
+            "offset_pct": 25.1
+          },
+          {
+            "decile": 8,
+            "benefit": 797,
+            "shock_extra": 611,
+            "benefit_extra_vs_baseline": 184,
+            "offset_pct": 30.0
+          },
+          {
+            "decile": 9,
+            "benefit": 848,
+            "shock_extra": 675,
+            "benefit_extra_vs_baseline": 196,
+            "offset_pct": 29.0
+          },
+          {
+            "decile": 10,
+            "benefit": 518,
+            "shock_extra": 337,
+            "benefit_extra_vs_baseline": 119,
+            "offset_pct": 35.4
+          }
+        ]
+      },
+      {
+        "name": "+60%",
+        "new_cap": 2625,
+        "exchequer_cost_bn": 0.7,
+        "avg_benefit": 946,
+        "avg_net_extra_cost": 794,
+        "deciles": [
+          {
+            "decile": 1,
+            "benefit": 1074,
+            "shock_extra": 1379,
+            "benefit_extra_vs_baseline": 402,
+            "offset_pct": 29.2
+          },
+          {
+            "decile": 2,
+            "benefit": 950,
+            "shock_extra": 1056,
+            "benefit_extra_vs_baseline": 356,
+            "offset_pct": 33.7
+          },
+          {
+            "decile": 3,
+            "benefit": 958,
+            "shock_extra": 1023,
+            "benefit_extra_vs_baseline": 359,
+            "offset_pct": 35.1
+          },
+          {
+            "decile": 4,
+            "benefit": 1041,
+            "shock_extra": 1244,
+            "benefit_extra_vs_baseline": 390,
+            "offset_pct": 31.4
+          },
+          {
+            "decile": 5,
+            "benefit": 584,
+            "shock_extra": 646,
+            "benefit_extra_vs_baseline": 219,
+            "offset_pct": 33.9
+          },
+          {
+            "decile": 6,
+            "benefit": 1080,
+            "shock_extra": 1325,
+            "benefit_extra_vs_baseline": 405,
+            "offset_pct": 30.6
+          },
+          {
+            "decile": 7,
+            "benefit": 1001,
+            "shock_extra": 1497,
+            "benefit_extra_vs_baseline": 375,
+            "offset_pct": 25.1
+          },
+          {
+            "decile": 8,
+            "benefit": 980,
+            "shock_extra": 1223,
+            "benefit_extra_vs_baseline": 367,
+            "offset_pct": 30.0
+          },
+          {
+            "decile": 9,
+            "benefit": 1044,
+            "shock_extra": 1350,
+            "benefit_extra_vs_baseline": 391,
+            "offset_pct": 29.0
+          },
+          {
+            "decile": 10,
+            "benefit": 637,
+            "shock_extra": 674,
+            "benefit_extra_vs_baseline": 239,
+            "offset_pct": 35.4
+          }
+        ]
+      },
+      {
+        "name": "2022-level",
+        "new_cap": 3764,
+        "exchequer_cost_bn": 1.0,
+        "avg_benefit": 1357,
+        "avg_net_extra_cost": 1712,
+        "deciles": [
+          {
+            "decile": 1,
+            "benefit": 1540,
+            "shock_extra": 2976,
+            "benefit_extra_vs_baseline": 868,
+            "offset_pct": 29.2
+          },
+          {
+            "decile": 2,
+            "benefit": 1362,
+            "shock_extra": 2279,
+            "benefit_extra_vs_baseline": 768,
+            "offset_pct": 33.7
+          },
+          {
+            "decile": 3,
+            "benefit": 1374,
+            "shock_extra": 2207,
+            "benefit_extra_vs_baseline": 775,
+            "offset_pct": 35.1
+          },
+          {
+            "decile": 4,
+            "benefit": 1493,
+            "shock_extra": 2683,
+            "benefit_extra_vs_baseline": 842,
+            "offset_pct": 31.4
+          },
+          {
+            "decile": 5,
+            "benefit": 837,
+            "shock_extra": 1393,
+            "benefit_extra_vs_baseline": 472,
+            "offset_pct": 33.9
+          },
+          {
+            "decile": 6,
+            "benefit": 1549,
+            "shock_extra": 2860,
+            "benefit_extra_vs_baseline": 874,
+            "offset_pct": 30.6
+          },
+          {
+            "decile": 7,
+            "benefit": 1435,
+            "shock_extra": 3230,
+            "benefit_extra_vs_baseline": 809,
+            "offset_pct": 25.1
+          },
+          {
+            "decile": 8,
+            "benefit": 1406,
+            "shock_extra": 2639,
+            "benefit_extra_vs_baseline": 793,
+            "offset_pct": 30.0
+          },
+          {
+            "decile": 9,
+            "benefit": 1497,
+            "shock_extra": 2912,
+            "benefit_extra_vs_baseline": 844,
+            "offset_pct": 29.0
+          },
+          {
+            "decile": 10,
+            "benefit": 914,
+            "shock_extra": 1454,
+            "benefit_extra_vs_baseline": 515,
+            "offset_pct": 35.4
+          }
+        ]
+      }
+    ]
+  },
+  "rising_block_tariff": {
+    "name": "Rising block tariff (cost-neutral)",
+    "description": "50% discount on first 2,900 kWh of electricity, funded by a 64.6% surcharge on consumption above that level. Zero exchequer cost \u2014 high users cross-subsidise low users.",
+    "threshold_kwh": 2900,
+    "threshold_spend": 793,
+    "discount_rate_pct": 50,
+    "surcharge_rate_pct": 64.6,
+    "exchequer_cost_bn": 0,
+    "total_subsidy_bn": 0.2,
+    "deciles": [
+      {
+        "decile": 1,
+        "elec_spend": 1261,
+        "block1_spend": 671,
+        "block2_spend": 590,
+        "block1_saving": 336,
+        "block2_surcharge": 381,
+        "net_effect": 45,
+        "net_pct_income": 0.2
+      },
+      {
+        "decile": 2,
+        "elec_spend": 989,
+        "block1_spend": 594,
+        "block2_spend": 395,
+        "block1_saving": 297,
+        "block2_surcharge": 255,
+        "net_effect": -42,
+        "net_pct_income": -0.11
+      },
+      {
+        "decile": 3,
+        "elec_spend": 925,
+        "block1_spend": 599,
+        "block2_spend": 327,
+        "block1_saving": 299,
+        "block2_surcharge": 211,
+        "net_effect": -88,
+        "net_pct_income": -0.2
+      },
+      {
+        "decile": 4,
+        "elec_spend": 1126,
+        "block1_spend": 651,
+        "block2_spend": 475,
+        "block1_saving": 325,
+        "block2_surcharge": 307,
+        "net_effect": -19,
+        "net_pct_income": -0.04
+      },
+      {
+        "decile": 5,
+        "elec_spend": 592,
+        "block1_spend": 365,
+        "block2_spend": 227,
+        "block1_saving": 183,
+        "block2_surcharge": 146,
+        "net_effect": -36,
+        "net_pct_income": -0.07
+      },
+      {
+        "decile": 6,
+        "elec_spend": 1207,
+        "block1_spend": 675,
+        "block2_spend": 532,
+        "block1_saving": 338,
+        "block2_surcharge": 343,
+        "net_effect": 6,
+        "net_pct_income": 0.01
+      },
+      {
+        "decile": 7,
+        "elec_spend": 1358,
+        "block1_spend": 625,
+        "block2_spend": 733,
+        "block1_saving": 313,
+        "block2_surcharge": 473,
+        "net_effect": 161,
+        "net_pct_income": 0.28
+      },
+      {
+        "decile": 8,
+        "elec_spend": 1154,
+        "block1_spend": 613,
+        "block2_spend": 541,
+        "block1_saving": 306,
+        "block2_surcharge": 350,
+        "net_effect": 43,
+        "net_pct_income": 0.07
+      },
+      {
+        "decile": 9,
+        "elec_spend": 1169,
+        "block1_spend": 652,
+        "block2_spend": 517,
+        "block1_saving": 326,
+        "block2_surcharge": 334,
+        "net_effect": 7,
+        "net_pct_income": 0.01
+      },
+      {
+        "decile": 10,
+        "elec_spend": 600,
+        "block1_spend": 398,
+        "block2_spend": 201,
+        "block1_saving": 199,
+        "block2_surcharge": 130,
+        "net_effect": -69,
+        "net_pct_income": -0.04
+      }
+    ]
+  }
+}

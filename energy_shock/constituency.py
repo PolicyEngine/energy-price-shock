@@ -15,6 +15,7 @@ from policyengine_uk import Microsimulation
 from .config import (
     CURRENT_CAP, PRICE_SCENARIOS, SHORT_RUN_ELASTICITY,
     YEAR, SHOCK_CAP, EPG_TARGET, FLAT_TRANSFER, CT_REBATE,
+    REGION_TO_COUNTRY,
 )
 from .baseline import weighted_mean
 
@@ -40,10 +41,21 @@ def _load_constituency_data():
     return weights, constituencies
 
 
-def constituency_analysis(data):
+def constituency_analysis(data, country="UK"):
     """Compute per-constituency energy shock metrics using shared baseline."""
     print("Loading constituency weights...")
     const_weights, constituencies = _load_constituency_data()
+
+    # Filter constituencies by country if not UK-wide
+    country = country.upper()
+    if country != "UK":
+        filtered_idx = [
+            i for i, c in enumerate(constituencies)
+            if c.get("country", "").upper().replace(" ", "_") == country
+        ]
+        constituencies = [constituencies[i] for i in filtered_idx]
+        const_weights = const_weights[filtered_idx] if filtered_idx else const_weights
+        print(f"  Filtered to {len(constituencies)} {country} constituencies")
 
     energy = data["energy"]
     elec = data["elec"]
@@ -172,6 +184,8 @@ def constituency_analysis(data):
     rows.sort(key=lambda x: x["energy_burden_pct"], reverse=True)
 
     burdens = [r["energy_burden_pct"] for r in rows]
+    if not burdens:
+        return {"n_constituencies": 0, "max_burden_pct": 0, "min_burden_pct": 0, "median_burden_pct": 0, "constituencies": []}
     return {
         "n_constituencies": len(rows),
         "max_burden_pct": max(burdens),

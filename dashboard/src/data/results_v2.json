@@ -231,6 +231,48 @@
       "households_m": 2.2
     }
   ],
+  "country": [
+    {
+      "country": "NORTHERN_IRELAND",
+      "electricity": 1049,
+      "gas": 865,
+      "total_energy": 1915,
+      "net_income": 54871,
+      "energy_burden_pct": 3.5,
+      "fuel_poverty_pct": 11.8,
+      "households_m": 0.8
+    },
+    {
+      "country": "SCOTLAND",
+      "electricity": 896,
+      "gas": 673,
+      "total_energy": 1569,
+      "net_income": 50808,
+      "energy_burden_pct": 3.1,
+      "fuel_poverty_pct": 7.3,
+      "households_m": 2.7
+    },
+    {
+      "country": "ENGLAND",
+      "electricity": 859,
+      "gas": 705,
+      "total_energy": 1564,
+      "net_income": 54505,
+      "energy_burden_pct": 2.9,
+      "fuel_poverty_pct": 9.6,
+      "households_m": 26.8
+    },
+    {
+      "country": "WALES",
+      "electricity": 735,
+      "gas": 576,
+      "total_energy": 1311,
+      "net_income": 49379,
+      "energy_burden_pct": 2.7,
+      "fuel_poverty_pct": 6.3,
+      "households_m": 1.5
+    }
+  ],
   "neg_policy": {
     "name": "NEF National Energy Guarantee",
     "description": "Subsidise first 2,900 kWh of electricity per household (\u00a3793 at current rates). Progressive because low users get most or all of their electricity covered.",

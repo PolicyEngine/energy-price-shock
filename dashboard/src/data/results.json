@@ -10,61 +10,71 @@
         "decile": 1,
         "energy_spend": 1388,
         "net_income": 20044,
-        "energy_share_pct": 6.9
+        "energy_share_pct": 6.9,
+        "fuel_poverty_pct": 26.9
       },
       {
         "decile": 2,
         "energy_spend": 1460,
         "net_income": 30931,
-        "energy_share_pct": 4.7
+        "energy_share_pct": 4.7,
+        "fuel_poverty_pct": 13.7
       },
       {
         "decile": 3,
         "energy_spend": 1370,
         "net_income": 37529,
-        "energy_share_pct": 3.6
+        "energy_share_pct": 3.6,
+        "fuel_poverty_pct": 6.3
       },
       {
         "decile": 4,
         "energy_spend": 1513,
         "net_income": 42174,
-        "energy_share_pct": 3.6
+        "energy_share_pct": 3.6,
+        "fuel_poverty_pct": 8.7
       },
       {
         "decile": 5,
         "energy_spend": 1515,
         "net_income": 44158,
-        "energy_share_pct": 3.4
+        "energy_share_pct": 3.4,
+        "fuel_poverty_pct": 9.4
       },
       {
         "decile": 6,
         "energy_spend": 1613,
         "net_income": 51600,
-        "energy_share_pct": 3.1
+        "energy_share_pct": 3.1,
+        "fuel_poverty_pct": 6.3
       },
       {
         "decile": 7,
         "energy_spend": 1518,
         "net_income": 56013,
-        "energy_share_pct": 2.7
+        "energy_share_pct": 2.7,
+        "fuel_poverty_pct": 3.3
       },
       {
         "decile": 8,
         "energy_spend": 1670,
         "net_income": 67097,
-        "energy_share_pct": 2.5
+        "energy_share_pct": 2.5,
+        "fuel_poverty_pct": 4.0
       },
       {
         "decile": 9,
         "energy_spend": 1744,
         "net_income": 73807,
-        "energy_share_pct": 2.4
+        "energy_share_pct": 2.4,
+        "fuel_poverty_pct": 7.0
       },
       {
         "decile": 10,
         "energy_spend": 1702,
         "net_income": 125107,
-        "energy_share_pct": 1.4
+        "energy_share_pct": 1.4,
+        "fuel_poverty_pct": 0.8
       }
     ]
   },
@@ -235,6 +245,36 @@
           "fp_rate": 18.1,
           "fp_households_m": 1.03
         }
+      ],
+      "by_country": [
+        {
+          "country": "ENGLAND",
+          "extra_cost": 156,
+          "pct_of_income": 0.3,
+          "fp_rate": 10.4,
+          "fp_households_m": 2.79
+        },
+        {
+          "country": "NORTHERN_IRELAND",
+          "extra_cost": 191,
+          "pct_of_income": 0.3,
+          "fp_rate": 12.6,
+          "fp_households_m": 0.1
+        },
+        {
+          "country": "SCOTLAND",
+          "extra_cost": 157,
+          "pct_of_income": 0.3,
+          "fp_rate": 10.2,
+          "fp_households_m": 0.28
+        },
+        {
+          "country": "WALES",
+          "extra_cost": 131,
+          "pct_of_income": 0.3,
+          "fp_rate": 8.1,
+          "fp_households_m": 0.13
+        }
       ]
     },
     {
@@ -402,6 +442,36 @@
           "pct_of_income": 0.9,
           "fp_rate": 19.9,
           "fp_households_m": 1.13
+        }
+      ],
+      "by_country": [
+        {
+          "country": "ENGLAND",
+          "extra_cost": 313,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.8,
+          "fp_households_m": 3.17
+        },
+        {
+          "country": "NORTHERN_IRELAND",
+          "extra_cost": 383,
+          "pct_of_income": 0.7,
+          "fp_rate": 13.9,
+          "fp_households_m": 0.11
+        },
+        {
+          "country": "SCOTLAND",
+          "extra_cost": 314,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.0,
+          "fp_households_m": 0.3
+        },
+        {
+          "country": "WALES",
+          "extra_cost": 262,
+          "pct_of_income": 0.5,
+          "fp_rate": 9.1,
+          "fp_households_m": 0.14
         }
       ]
     },
@@ -571,6 +641,36 @@
           "fp_rate": 21.5,
           "fp_households_m": 1.22
         }
+      ],
+      "by_country": [
+        {
+          "country": "ENGLAND",
+          "extra_cost": 469,
+          "pct_of_income": 0.9,
+          "fp_rate": 12.9,
+          "fp_households_m": 3.45
+        },
+        {
+          "country": "NORTHERN_IRELAND",
+          "extra_cost": 574,
+          "pct_of_income": 1.0,
+          "fp_rate": 16.8,
+          "fp_households_m": 0.13
+        },
+        {
+          "country": "SCOTLAND",
+          "extra_cost": 470,
+          "pct_of_income": 0.9,
+          "fp_rate": 12.1,
+          "fp_households_m": 0.33
+        },
+        {
+          "country": "WALES",
+          "extra_cost": 393,
+          "pct_of_income": 0.8,
+          "fp_rate": 9.9,
+          "fp_households_m": 0.15
+        }
       ]
     },
     {
@@ -739,6 +839,36 @@
           "fp_rate": 26.6,
           "fp_households_m": 1.51
         }
+      ],
+      "by_country": [
+        {
+          "country": "ENGLAND",
+          "extra_cost": 938,
+          "pct_of_income": 1.7,
+          "fp_rate": 16.5,
+          "fp_households_m": 4.43
+        },
+        {
+          "country": "NORTHERN_IRELAND",
+          "extra_cost": 1148,
+          "pct_of_income": 2.1,
+          "fp_rate": 25.2,
+          "fp_households_m": 0.19
+        },
+        {
+          "country": "SCOTLAND",
+          "extra_cost": 941,
+          "pct_of_income": 1.9,
+          "fp_rate": 17.5,
+          "fp_households_m": 0.48
+        },
+        {
+          "country": "WALES",
+          "extra_cost": 786,
+          "pct_of_income": 1.6,
+          "fp_rate": 13.1,
+          "fp_households_m": 0.2
+        }
       ]
     },
     {
@@ -906,6 +1036,36 @@
           "pct_of_income": 5.7,
           "fp_rate": 42.7,
           "fp_households_m": 2.42
+        }
+      ],
+      "by_country": [
+        {
+          "country": "ENGLAND",
+          "extra_cost": 2023,
+          "pct_of_income": 3.7,
+          "fp_rate": 27.6,
+          "fp_households_m": 7.4
+        },
+        {
+          "country": "NORTHERN_IRELAND",
+          "extra_cost": 2477,
+          "pct_of_income": 4.5,
+          "fp_rate": 35.8,
+          "fp_households_m": 0.27
+        },
+        {
+          "country": "SCOTLAND",
+          "extra_cost": 2030,
+          "pct_of_income": 4.0,
+          "fp_rate": 28.1,
+          "fp_households_m": 0.76
+        },
+        {
+          "country": "WALES",
+          "extra_cost": 1696,
+          "pct_of_income": 3.4,
+          "fp_rate": 21.8,
+          "fp_households_m": 0.34
         }
       ]
     }
@@ -1230,6 +1390,52 @@
           "behavioral_fp_rate": 17.8,
           "behavioral_fp_households_m": 1.01
         }
+      ],
+      "by_country": [
+        {
+          "country": "ENGLAND",
+          "extra_cost": 156,
+          "pct_of_income": 0.3,
+          "fp_rate": 10.4,
+          "fp_households_m": 2.79,
+          "behavioral_extra_cost": 131,
+          "behavioral_pct_of_income": 0.2,
+          "behavioral_fp_rate": 10.3,
+          "behavioral_fp_households_m": 2.76
+        },
+        {
+          "country": "NORTHERN_IRELAND",
+          "extra_cost": 191,
+          "pct_of_income": 0.3,
+          "fp_rate": 12.6,
+          "fp_households_m": 0.1,
+          "behavioral_extra_cost": 160,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 12.5,
+          "behavioral_fp_households_m": 0.1
+        },
+        {
+          "country": "SCOTLAND",
+          "extra_cost": 157,
+          "pct_of_income": 0.3,
+          "fp_rate": 10.2,
+          "fp_households_m": 0.28,
+          "behavioral_extra_cost": 131,
+          "behavioral_pct_of_income": 0.3,
+          "behavioral_fp_rate": 9.9,
+          "behavioral_fp_households_m": 0.27
+        },
+        {
+          "country": "WALES",
+          "extra_cost": 131,
+          "pct_of_income": 0.3,
+          "fp_rate": 8.1,
+          "fp_households_m": 0.13,
+          "behavioral_extra_cost": 109,
+          "behavioral_pct_of_income": 0.2,
+          "behavioral_fp_rate": 8.0,
+          "behavioral_fp_households_m": 0.12
+        }
       ]
     },
     {
@@ -1512,6 +1718,52 @@
           "behavioral_pct_of_income": 0.7,
           "behavioral_fp_rate": 19.4,
           "behavioral_fp_households_m": 1.1
+        }
+      ],
+      "by_country": [
+        {
+          "country": "ENGLAND",
+          "extra_cost": 313,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.8,
+          "fp_households_m": 3.17,
+          "behavioral_extra_cost": 256,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 11.6,
+          "behavioral_fp_households_m": 3.11
+        },
+        {
+          "country": "NORTHERN_IRELAND",
+          "extra_cost": 383,
+          "pct_of_income": 0.7,
+          "fp_rate": 13.9,
+          "fp_households_m": 0.11,
+          "behavioral_extra_cost": 314,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 13.3,
+          "behavioral_fp_households_m": 0.1
+        },
+        {
+          "country": "SCOTLAND",
+          "extra_cost": 314,
+          "pct_of_income": 0.6,
+          "fp_rate": 11.0,
+          "fp_households_m": 0.3,
+          "behavioral_extra_cost": 257,
+          "behavioral_pct_of_income": 0.5,
+          "behavioral_fp_rate": 10.7,
+          "behavioral_fp_households_m": 0.29
+        },
+        {
+          "country": "WALES",
+          "extra_cost": 262,
+          "pct_of_income": 0.5,
+          "fp_rate": 9.1,
+          "fp_households_m": 0.14,
+          "behavioral_extra_cost": 215,
+          "behavioral_pct_of_income": 0.4,
+          "behavioral_fp_rate": 8.9,
+          "behavioral_fp_households_m": 0.14
         }
       ]
     },
@@ -1796,6 +2048,52 @@
           "behavioral_fp_rate": 20.2,
           "behavioral_fp_households_m": 1.15
         }
+      ],
+      "by_country": [
+        {
+          "country": "ENGLAND",
+          "extra_cost": 469,
+          "pct_of_income": 0.9,
+          "fp_rate": 12.9,
+          "fp_households_m": 3.45,
+          "behavioral_extra_cost": 377,
+          "behavioral_pct_of_income": 0.7,
+          "behavioral_fp_rate": 12.1,
+          "behavioral_fp_households_m": 3.25
+        },
+        {
+          "country": "NORTHERN_IRELAND",
+          "extra_cost": 574,
+          "pct_of_income": 1.0,
+          "fp_rate": 16.8,
+          "fp_households_m": 0.13,
+          "behavioral_extra_cost": 462,
+          "behavioral_pct_of_income": 0.8,
+          "behavioral_fp_rate": 13.9,
+          "behavioral_fp_households_m": 0.11
+        },
+        {
+          "country": "SCOTLAND",
+          "extra_cost": 470,
+          "pct_of_income": 0.9,
+          "fp_rate": 12.1,
+          "fp_households_m": 0.33,
+          "behavioral_extra_cost": 379,
+          "behavioral_pct_of_income": 0.7,
+          "behavioral_fp_rate": 11.4,
+          "behavioral_fp_households_m": 0.31
+        },
+        {
+          "country": "WALES",
+          "extra_cost": 393,
+          "pct_of_income": 0.8,
+          "fp_rate": 9.9,
+          "fp_households_m": 0.15,
+          "behavioral_extra_cost": 316,
+          "behavioral_pct_of_income": 0.6,
+          "behavioral_fp_rate": 9.6,
+          "behavioral_fp_households_m": 0.15
+        }
       ]
     },
     {
@@ -2079,6 +2377,52 @@
           "behavioral_fp_rate": 23.9,
           "behavioral_fp_households_m": 1.36
         }
+      ],
+      "by_country": [
+        {
+          "country": "ENGLAND",
+          "extra_cost": 938,
+          "pct_of_income": 1.7,
+          "fp_rate": 16.5,
+          "fp_households_m": 4.43,
+          "behavioral_extra_cost": 713,
+          "behavioral_pct_of_income": 1.3,
+          "behavioral_fp_rate": 14.6,
+          "behavioral_fp_households_m": 3.92
+        },
+        {
+          "country": "NORTHERN_IRELAND",
+          "extra_cost": 1148,
+          "pct_of_income": 2.1,
+          "fp_rate": 25.2,
+          "fp_households_m": 0.19,
+          "behavioral_extra_cost": 873,
+          "behavioral_pct_of_income": 1.6,
+          "behavioral_fp_rate": 20.7,
+          "behavioral_fp_households_m": 0.16
+        },
+        {
+          "country": "SCOTLAND",
+          "extra_cost": 941,
+          "pct_of_income": 1.9,
+          "fp_rate": 17.5,
+          "fp_households_m": 0.48,
+          "behavioral_extra_cost": 715,
+          "behavioral_pct_of_income": 1.4,
+          "behavioral_fp_rate": 16.3,
+          "behavioral_fp_households_m": 0.44
+        },
+        {
+          "country": "WALES",
+          "extra_cost": 786,
+          "pct_of_income": 1.6,
+          "fp_rate": 13.1,
+          "fp_households_m": 0.2,
+          "behavioral_extra_cost": 597,
+          "behavioral_pct_of_income": 1.2,
+          "behavioral_fp_rate": 10.6,
+          "behavioral_fp_households_m": 0.16
+        }
       ]
     },
     {
@@ -2361,6 +2705,52 @@
           "behavioral_pct_of_income": 3.8,
           "behavioral_fp_rate": 34.8,
           "behavioral_fp_households_m": 1.97
+        }
+      ],
+      "by_country": [
+        {
+          "country": "ENGLAND",
+          "extra_cost": 2023,
+          "pct_of_income": 3.7,
+          "fp_rate": 27.6,
+          "fp_households_m": 7.4,
+          "behavioral_extra_cost": 1327,
+          "behavioral_pct_of_income": 2.4,
+          "behavioral_fp_rate": 21.0,
+          "behavioral_fp_households_m": 5.63
+        },
+        {
+          "country": "NORTHERN_IRELAND",
+          "extra_cost": 2477,
+          "pct_of_income": 4.5,
+          "fp_rate": 35.8,
+          "fp_households_m": 0.27,
+          "behavioral_extra_cost": 1625,
+          "behavioral_pct_of_income": 3.0,
+          "behavioral_fp_rate": 28.6,
+          "behavioral_fp_households_m": 0.22
+        },
+        {
+          "country": "SCOTLAND",
+          "extra_cost": 2030,
+          "pct_of_income": 4.0,
+          "fp_rate": 28.1,
+          "fp_households_m": 0.76,
+          "behavioral_extra_cost": 1331,
+          "behavioral_pct_of_income": 2.6,
+          "behavioral_fp_rate": 20.3,
+          "behavioral_fp_households_m": 0.55
+        },
+        {
+          "country": "WALES",
+          "extra_cost": 1696,
+          "pct_of_income": 3.4,
+          "fp_rate": 21.8,
+          "fp_households_m": 0.34,
+          "behavioral_extra_cost": 1112,
+          "behavioral_pct_of_income": 2.3,
+          "behavioral_fp_rate": 17.6,
+          "behavioral_fp_households_m": 0.27
         }
       ]
     }
@@ -3225,6 +3615,52 @@
             "behavioral_fp_households_m": 1.01,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 156,
+            "pct_of_income": 0.3,
+            "fp_rate": 10.4,
+            "fp_households_m": 2.79,
+            "behavioral_extra_cost": 131,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 10.3,
+            "behavioral_fp_households_m": 2.76,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 191,
+            "pct_of_income": 0.3,
+            "fp_rate": 12.6,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 160,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 12.5,
+            "behavioral_fp_households_m": 0.1,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 157,
+            "pct_of_income": 0.3,
+            "fp_rate": 10.2,
+            "fp_households_m": 0.28,
+            "behavioral_extra_cost": 131,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 9.9,
+            "behavioral_fp_households_m": 0.27,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 131,
+            "pct_of_income": 0.3,
+            "fp_rate": 8.1,
+            "fp_households_m": 0.13,
+            "behavioral_extra_cost": 109,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.12,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -3479,6 +3915,52 @@
             "behavioral_fp_rate": 19.4,
             "behavioral_fp_households_m": 1.1,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 313,
+            "pct_of_income": 0.6,
+            "fp_rate": 11.8,
+            "fp_households_m": 3.17,
+            "behavioral_extra_cost": 256,
+            "behavioral_pct_of_income": 0.5,
+            "behavioral_fp_rate": 11.6,
+            "behavioral_fp_households_m": 3.11,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 383,
+            "pct_of_income": 0.7,
+            "fp_rate": 13.9,
+            "fp_households_m": 0.11,
+            "behavioral_extra_cost": 314,
+            "behavioral_pct_of_income": 0.6,
+            "behavioral_fp_rate": 13.3,
+            "behavioral_fp_households_m": 0.1,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 314,
+            "pct_of_income": 0.6,
+            "fp_rate": 11.0,
+            "fp_households_m": 0.3,
+            "behavioral_extra_cost": 257,
+            "behavioral_pct_of_income": 0.5,
+            "behavioral_fp_rate": 10.7,
+            "behavioral_fp_households_m": 0.29,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 262,
+            "pct_of_income": 0.5,
+            "fp_rate": 9.1,
+            "fp_households_m": 0.14,
+            "behavioral_extra_cost": 215,
+            "behavioral_pct_of_income": 0.4,
+            "behavioral_fp_rate": 8.9,
+            "behavioral_fp_households_m": 0.14,
+            "country": "WALES"
           }
         ]
       },
@@ -3735,6 +4217,52 @@
             "behavioral_fp_households_m": 1.15,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 469,
+            "pct_of_income": 0.9,
+            "fp_rate": 12.9,
+            "fp_households_m": 3.45,
+            "behavioral_extra_cost": 377,
+            "behavioral_pct_of_income": 0.7,
+            "behavioral_fp_rate": 12.1,
+            "behavioral_fp_households_m": 3.25,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 574,
+            "pct_of_income": 1.0,
+            "fp_rate": 16.8,
+            "fp_households_m": 0.13,
+            "behavioral_extra_cost": 462,
+            "behavioral_pct_of_income": 0.8,
+            "behavioral_fp_rate": 13.9,
+            "behavioral_fp_households_m": 0.11,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 470,
+            "pct_of_income": 0.9,
+            "fp_rate": 12.1,
+            "fp_households_m": 0.33,
+            "behavioral_extra_cost": 379,
+            "behavioral_pct_of_income": 0.7,
+            "behavioral_fp_rate": 11.4,
+            "behavioral_fp_households_m": 0.31,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 393,
+            "pct_of_income": 0.8,
+            "fp_rate": 9.9,
+            "fp_households_m": 0.15,
+            "behavioral_extra_cost": 316,
+            "behavioral_pct_of_income": 0.6,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 0.15,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -3990,6 +4518,52 @@
             "behavioral_fp_households_m": 1.35,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 929,
+            "pct_of_income": 1.7,
+            "fp_rate": 16.3,
+            "fp_households_m": 4.38,
+            "behavioral_extra_cost": 704,
+            "behavioral_pct_of_income": 1.3,
+            "behavioral_fp_rate": 14.6,
+            "behavioral_fp_households_m": 3.91,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 1137,
+            "pct_of_income": 2.1,
+            "fp_rate": 25.1,
+            "fp_households_m": 0.19,
+            "behavioral_extra_cost": 862,
+            "behavioral_pct_of_income": 1.6,
+            "behavioral_fp_rate": 20.6,
+            "behavioral_fp_households_m": 0.16,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 933,
+            "pct_of_income": 1.8,
+            "fp_rate": 17.5,
+            "fp_households_m": 0.48,
+            "behavioral_extra_cost": 707,
+            "behavioral_pct_of_income": 1.4,
+            "behavioral_fp_rate": 16.3,
+            "behavioral_fp_households_m": 0.44,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 778,
+            "pct_of_income": 1.6,
+            "fp_rate": 13.1,
+            "fp_households_m": 0.2,
+            "behavioral_extra_cost": 589,
+            "behavioral_pct_of_income": 1.2,
+            "behavioral_fp_rate": 10.6,
+            "behavioral_fp_households_m": 0.16,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -4244,6 +4818,52 @@
             "behavioral_fp_rate": 33.0,
             "behavioral_fp_households_m": 1.87,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 1933,
+            "pct_of_income": 3.5,
+            "fp_rate": 26.6,
+            "fp_households_m": 7.14,
+            "behavioral_extra_cost": 1237,
+            "behavioral_pct_of_income": 2.3,
+            "behavioral_fp_rate": 19.9,
+            "behavioral_fp_households_m": 5.35,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 2368,
+            "pct_of_income": 4.3,
+            "fp_rate": 35.6,
+            "fp_households_m": 0.27,
+            "behavioral_extra_cost": 1515,
+            "behavioral_pct_of_income": 2.8,
+            "behavioral_fp_rate": 27.8,
+            "behavioral_fp_households_m": 0.21,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 1947,
+            "pct_of_income": 3.8,
+            "fp_rate": 27.0,
+            "fp_households_m": 0.73,
+            "behavioral_extra_cost": 1249,
+            "behavioral_pct_of_income": 2.5,
+            "behavioral_fp_rate": 19.8,
+            "behavioral_fp_households_m": 0.54,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 1611,
+            "pct_of_income": 3.3,
+            "fp_rate": 21.3,
+            "fp_households_m": 0.33,
+            "behavioral_extra_cost": 1028,
+            "behavioral_pct_of_income": 2.1,
+            "behavioral_fp_rate": 15.2,
+            "behavioral_fp_households_m": 0.24,
+            "country": "WALES"
           }
         ]
       }
@@ -4502,6 +5122,52 @@
             "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 14,
+            "pct_of_income": 0.0,
+            "fp_rate": 9.7,
+            "fp_households_m": 2.61,
+            "behavioral_extra_cost": 8,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 2.58,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 15,
+            "pct_of_income": 0.0,
+            "fp_rate": 12.0,
+            "fp_households_m": 0.09,
+            "behavioral_extra_cost": 8,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 11.9,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 15,
+            "pct_of_income": 0.0,
+            "fp_rate": 7.3,
+            "fp_households_m": 0.2,
+            "behavioral_extra_cost": 9,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_households_m": 0.2,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 6,
+            "pct_of_income": 0.0,
+            "fp_rate": 6.4,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 3,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.1,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -4756,6 +5422,52 @@
             "behavioral_fp_rate": 16.2,
             "behavioral_fp_households_m": 0.92,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 74,
+            "pct_of_income": 0.1,
+            "fp_rate": 10.1,
+            "fp_households_m": 2.72,
+            "behavioral_extra_cost": 48,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 9.9,
+            "behavioral_fp_households_m": 2.65,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 115,
+            "pct_of_income": 0.2,
+            "fp_rate": 12.2,
+            "fp_households_m": 0.09,
+            "behavioral_extra_cost": 68,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 12.1,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 75,
+            "pct_of_income": 0.1,
+            "fp_rate": 7.7,
+            "fp_households_m": 0.21,
+            "behavioral_extra_cost": 48,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 7.4,
+            "behavioral_fp_households_m": 0.2,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 47,
+            "pct_of_income": 0.1,
+            "fp_rate": 6.6,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 29,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_households_m": 0.1,
+            "country": "WALES"
           }
         ]
       },
@@ -5012,6 +5724,52 @@
             "behavioral_fp_households_m": 0.93,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 172,
+            "pct_of_income": 0.3,
+            "fp_rate": 10.8,
+            "fp_households_m": 2.89,
+            "behavioral_extra_cost": 111,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 10.4,
+            "behavioral_fp_households_m": 2.78,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 271,
+            "pct_of_income": 0.5,
+            "fp_rate": 13.4,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 177,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 12.4,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 178,
+            "pct_of_income": 0.4,
+            "fp_rate": 9.8,
+            "fp_households_m": 0.27,
+            "behavioral_extra_cost": 114,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 7.9,
+            "behavioral_fp_households_m": 0.22,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 121,
+            "pct_of_income": 0.2,
+            "fp_rate": 7.0,
+            "fp_households_m": 0.11,
+            "behavioral_extra_cost": 74,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 6.9,
+            "behavioral_fp_households_m": 0.11,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -5267,6 +6025,52 @@
             "behavioral_fp_households_m": 1.1,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 583,
+            "pct_of_income": 1.1,
+            "fp_rate": 13.9,
+            "fp_households_m": 3.72,
+            "behavioral_extra_cost": 376,
+            "behavioral_pct_of_income": 0.7,
+            "behavioral_fp_rate": 12.3,
+            "behavioral_fp_households_m": 3.31,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 804,
+            "pct_of_income": 1.5,
+            "fp_rate": 20.5,
+            "fp_households_m": 0.16,
+            "behavioral_extra_cost": 542,
+            "behavioral_pct_of_income": 1.0,
+            "behavioral_fp_rate": 16.4,
+            "behavioral_fp_households_m": 0.13,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 587,
+            "pct_of_income": 1.2,
+            "fp_rate": 14.3,
+            "fp_households_m": 0.39,
+            "behavioral_extra_cost": 383,
+            "behavioral_pct_of_income": 0.8,
+            "behavioral_fp_rate": 11.6,
+            "behavioral_fp_households_m": 0.32,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 440,
+            "pct_of_income": 0.9,
+            "fp_rate": 10.3,
+            "fp_households_m": 0.16,
+            "behavioral_extra_cost": 278,
+            "behavioral_pct_of_income": 0.6,
+            "behavioral_fp_rate": 9.7,
+            "behavioral_fp_households_m": 0.15,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -5521,6 +6325,52 @@
             "behavioral_fp_rate": 25.4,
             "behavioral_fp_households_m": 1.44,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 1641,
+            "pct_of_income": 3.0,
+            "fp_rate": 23.6,
+            "fp_households_m": 6.33,
+            "behavioral_extra_cost": 957,
+            "behavioral_pct_of_income": 1.8,
+            "behavioral_fp_rate": 16.7,
+            "behavioral_fp_households_m": 4.48,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 2102,
+            "pct_of_income": 3.8,
+            "fp_rate": 34.8,
+            "fp_households_m": 0.27,
+            "behavioral_extra_cost": 1265,
+            "behavioral_pct_of_income": 2.3,
+            "behavioral_fp_rate": 26.1,
+            "behavioral_fp_households_m": 0.2,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 1643,
+            "pct_of_income": 3.2,
+            "fp_rate": 22.3,
+            "fp_households_m": 0.61,
+            "behavioral_extra_cost": 957,
+            "behavioral_pct_of_income": 1.9,
+            "behavioral_fp_rate": 17.9,
+            "behavioral_fp_households_m": 0.49,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 1321,
+            "pct_of_income": 2.7,
+            "fp_rate": 18.7,
+            "fp_households_m": 0.29,
+            "behavioral_extra_cost": 750,
+            "behavioral_pct_of_income": 1.5,
+            "behavioral_fp_rate": 12.9,
+            "behavioral_fp_households_m": 0.2,
+            "country": "WALES"
           }
         ]
       }
@@ -5779,6 +6629,52 @@
             "behavioral_fp_households_m": 0.93,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 53,
+            "pct_of_income": 0.1,
+            "fp_rate": 9.9,
+            "fp_households_m": 2.65,
+            "behavioral_extra_cost": 41,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 9.8,
+            "behavioral_fp_households_m": 2.64,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 27,
+            "pct_of_income": 0.0,
+            "fp_rate": 12.0,
+            "fp_households_m": 0.09,
+            "behavioral_extra_cost": 15,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 12.0,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 69,
+            "pct_of_income": 0.1,
+            "fp_rate": 8.7,
+            "fp_households_m": 0.24,
+            "behavioral_extra_cost": 56,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 8.4,
+            "behavioral_fp_households_m": 0.23,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 51,
+            "pct_of_income": 0.1,
+            "fp_rate": 6.9,
+            "fp_households_m": 0.11,
+            "behavioral_extra_cost": 41,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 6.8,
+            "behavioral_fp_households_m": 0.11,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -6033,6 +6929,52 @@
             "behavioral_fp_rate": 16.7,
             "behavioral_fp_households_m": 0.95,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 146,
+            "pct_of_income": 0.3,
+            "fp_rate": 10.5,
+            "fp_households_m": 2.82,
+            "behavioral_extra_cost": 108,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 10.4,
+            "behavioral_fp_households_m": 2.78,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 162,
+            "pct_of_income": 0.3,
+            "fp_rate": 12.5,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 107,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 12.2,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 174,
+            "pct_of_income": 0.3,
+            "fp_rate": 9.5,
+            "fp_households_m": 0.26,
+            "behavioral_extra_cost": 132,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 9.2,
+            "behavioral_fp_households_m": 0.25,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 130,
+            "pct_of_income": 0.3,
+            "fp_rate": 7.7,
+            "fp_households_m": 0.12,
+            "behavioral_extra_cost": 99,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 7.7,
+            "behavioral_fp_households_m": 0.12,
+            "country": "WALES"
           }
         ]
       },
@@ -6289,6 +7231,52 @@
             "behavioral_fp_households_m": 1.02,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 273,
+            "pct_of_income": 0.5,
+            "fp_rate": 11.4,
+            "fp_households_m": 3.06,
+            "behavioral_extra_cost": 196,
+            "behavioral_pct_of_income": 0.4,
+            "behavioral_fp_rate": 10.8,
+            "behavioral_fp_households_m": 2.9,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 332,
+            "pct_of_income": 0.6,
+            "fp_rate": 13.8,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 230,
+            "behavioral_pct_of_income": 0.4,
+            "behavioral_fp_rate": 12.9,
+            "behavioral_fp_households_m": 0.1,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 305,
+            "pct_of_income": 0.6,
+            "fp_rate": 11.3,
+            "fp_households_m": 0.31,
+            "behavioral_extra_cost": 226,
+            "behavioral_pct_of_income": 0.4,
+            "behavioral_fp_rate": 10.9,
+            "behavioral_fp_households_m": 0.3,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 231,
+            "pct_of_income": 0.5,
+            "fp_rate": 8.5,
+            "fp_households_m": 0.13,
+            "behavioral_extra_cost": 169,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 8.2,
+            "behavioral_fp_households_m": 0.13,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -6544,6 +7532,52 @@
             "behavioral_fp_households_m": 1.17,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 716,
+            "pct_of_income": 1.3,
+            "fp_rate": 14.6,
+            "fp_households_m": 3.92,
+            "behavioral_extra_cost": 499,
+            "behavioral_pct_of_income": 0.9,
+            "behavioral_fp_rate": 13.6,
+            "behavioral_fp_households_m": 3.64,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 880,
+            "pct_of_income": 1.6,
+            "fp_rate": 20.6,
+            "fp_households_m": 0.16,
+            "behavioral_extra_cost": 614,
+            "behavioral_pct_of_income": 1.1,
+            "behavioral_fp_rate": 16.8,
+            "behavioral_fp_households_m": 0.13,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 743,
+            "pct_of_income": 1.5,
+            "fp_rate": 16.8,
+            "fp_households_m": 0.46,
+            "behavioral_extra_cost": 528,
+            "behavioral_pct_of_income": 1.0,
+            "behavioral_fp_rate": 14.5,
+            "behavioral_fp_households_m": 0.4,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 592,
+            "pct_of_income": 1.2,
+            "fp_rate": 11.1,
+            "fp_households_m": 0.17,
+            "behavioral_extra_cost": 411,
+            "behavioral_pct_of_income": 0.8,
+            "behavioral_fp_rate": 10.2,
+            "behavioral_fp_households_m": 0.16,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -6798,6 +7832,52 @@
             "behavioral_fp_rate": 26.7,
             "behavioral_fp_households_m": 1.51,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 1790,
+            "pct_of_income": 3.3,
+            "fp_rate": 24.8,
+            "fp_households_m": 6.65,
+            "behavioral_extra_cost": 1099,
+            "behavioral_pct_of_income": 2.0,
+            "behavioral_fp_rate": 17.7,
+            "behavioral_fp_households_m": 4.75,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 2190,
+            "pct_of_income": 4.0,
+            "fp_rate": 34.9,
+            "fp_households_m": 0.27,
+            "behavioral_extra_cost": 1347,
+            "behavioral_pct_of_income": 2.5,
+            "behavioral_fp_rate": 26.7,
+            "behavioral_fp_households_m": 0.2,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 1820,
+            "pct_of_income": 3.6,
+            "fp_rate": 25.4,
+            "fp_households_m": 0.69,
+            "behavioral_extra_cost": 1126,
+            "behavioral_pct_of_income": 2.2,
+            "behavioral_fp_rate": 18.5,
+            "behavioral_fp_households_m": 0.5,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 1490,
+            "pct_of_income": 3.0,
+            "fp_rate": 20.3,
+            "fp_households_m": 0.31,
+            "behavioral_extra_cost": 912,
+            "behavioral_pct_of_income": 1.8,
+            "behavioral_fp_rate": 13.8,
+            "behavioral_fp_households_m": 0.21,
+            "country": "WALES"
           }
         ]
       }
@@ -7056,6 +8136,52 @@
             "behavioral_fp_households_m": 0.92,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 49,
+            "pct_of_income": 0.1,
+            "fp_rate": 9.9,
+            "fp_households_m": 2.66,
+            "behavioral_extra_cost": 33,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 9.8,
+            "behavioral_fp_households_m": 2.64,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 78,
+            "pct_of_income": 0.1,
+            "fp_rate": 12.2,
+            "fp_households_m": 0.09,
+            "behavioral_extra_cost": 53,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 12.1,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 51,
+            "pct_of_income": 0.1,
+            "fp_rate": 7.4,
+            "fp_households_m": 0.2,
+            "behavioral_extra_cost": 34,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 7.4,
+            "behavioral_fp_households_m": 0.2,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 33,
+            "pct_of_income": 0.1,
+            "fp_rate": 6.6,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 22,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_households_m": 0.1,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -7310,6 +8436,52 @@
             "behavioral_fp_rate": 16.3,
             "behavioral_fp_households_m": 0.92,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 98,
+            "pct_of_income": 0.2,
+            "fp_rate": 10.3,
+            "fp_households_m": 2.75,
+            "behavioral_extra_cost": 64,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 10.0,
+            "behavioral_fp_households_m": 2.69,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 156,
+            "pct_of_income": 0.3,
+            "fp_rate": 12.4,
+            "fp_households_m": 0.09,
+            "behavioral_extra_cost": 101,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 12.2,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 101,
+            "pct_of_income": 0.2,
+            "fp_rate": 7.9,
+            "fp_households_m": 0.21,
+            "behavioral_extra_cost": 66,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 7.6,
+            "behavioral_fp_households_m": 0.21,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 67,
+            "pct_of_income": 0.1,
+            "fp_rate": 6.7,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 42,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_households_m": 0.1,
+            "country": "WALES"
           }
         ]
       },
@@ -7566,6 +8738,52 @@
             "behavioral_fp_households_m": 0.93,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 146,
+            "pct_of_income": 0.3,
+            "fp_rate": 10.5,
+            "fp_households_m": 2.81,
+            "behavioral_extra_cost": 93,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 10.3,
+            "behavioral_fp_households_m": 2.76,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 234,
+            "pct_of_income": 0.4,
+            "fp_rate": 13.0,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 145,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 12.3,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 152,
+            "pct_of_income": 0.3,
+            "fp_rate": 9.2,
+            "fp_households_m": 0.25,
+            "behavioral_extra_cost": 94,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 7.9,
+            "behavioral_fp_households_m": 0.21,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 100,
+            "pct_of_income": 0.2,
+            "fp_rate": 7.0,
+            "fp_households_m": 0.11,
+            "behavioral_extra_cost": 60,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_households_m": 0.1,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -7821,6 +9039,52 @@
             "behavioral_fp_households_m": 0.94,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 293,
+            "pct_of_income": 0.5,
+            "fp_rate": 11.2,
+            "fp_households_m": 3.0,
+            "behavioral_extra_cost": 163,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 10.6,
+            "behavioral_fp_households_m": 2.84,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 469,
+            "pct_of_income": 0.9,
+            "fp_rate": 16.1,
+            "fp_households_m": 0.12,
+            "behavioral_extra_cost": 252,
+            "behavioral_pct_of_income": 0.5,
+            "behavioral_fp_rate": 13.6,
+            "behavioral_fp_households_m": 0.1,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 304,
+            "pct_of_income": 0.6,
+            "fp_rate": 10.3,
+            "fp_households_m": 0.28,
+            "behavioral_extra_cost": 166,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 8.5,
+            "behavioral_fp_households_m": 0.23,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 200,
+            "pct_of_income": 0.4,
+            "fp_rate": 7.4,
+            "fp_households_m": 0.12,
+            "behavioral_extra_cost": 104,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 7.0,
+            "behavioral_fp_households_m": 0.11,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -8075,6 +9339,52 @@
             "behavioral_fp_rate": 16.7,
             "behavioral_fp_households_m": 0.94,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 632,
+            "pct_of_income": 1.2,
+            "fp_rate": 13.2,
+            "fp_households_m": 3.54,
+            "behavioral_extra_cost": 256,
+            "behavioral_pct_of_income": 0.5,
+            "behavioral_fp_rate": 10.9,
+            "behavioral_fp_households_m": 2.92,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 1011,
+            "pct_of_income": 1.8,
+            "fp_rate": 22.5,
+            "fp_households_m": 0.17,
+            "behavioral_extra_cost": 370,
+            "behavioral_pct_of_income": 0.7,
+            "behavioral_fp_rate": 14.0,
+            "behavioral_fp_households_m": 0.11,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 656,
+            "pct_of_income": 1.3,
+            "fp_rate": 13.5,
+            "fp_households_m": 0.37,
+            "behavioral_extra_cost": 256,
+            "behavioral_pct_of_income": 0.5,
+            "behavioral_fp_rate": 8.8,
+            "behavioral_fp_households_m": 0.24,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 432,
+            "pct_of_income": 0.9,
+            "fp_rate": 9.8,
+            "fp_households_m": 0.15,
+            "behavioral_extra_cost": 155,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 7.2,
+            "behavioral_fp_households_m": 0.11,
+            "country": "WALES"
           }
         ]
       }
@@ -8333,6 +9643,52 @@
             "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 9.6,
+            "fp_households_m": 2.58,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 2.58,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 11.8,
+            "fp_households_m": 0.09,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 11.8,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 7.3,
+            "fp_households_m": 0.2,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_households_m": 0.2,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.1,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -8587,6 +9943,52 @@
             "behavioral_fp_rate": 16.1,
             "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 9.6,
+            "fp_households_m": 2.58,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 2.58,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 11.8,
+            "fp_households_m": 0.09,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 11.8,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 7.3,
+            "fp_households_m": 0.2,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_households_m": 0.2,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.1,
+            "country": "WALES"
           }
         ]
       },
@@ -8843,6 +10245,52 @@
             "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 9.6,
+            "fp_households_m": 2.58,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 2.58,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 11.8,
+            "fp_households_m": 0.09,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 11.8,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 7.3,
+            "fp_households_m": 0.2,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_households_m": 0.2,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.1,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -9098,6 +10546,52 @@
             "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 9.6,
+            "fp_households_m": 2.58,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 2.58,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 11.8,
+            "fp_households_m": 0.09,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 11.8,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 7.3,
+            "fp_households_m": 0.2,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_households_m": 0.2,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.1,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -9352,6 +10846,52 @@
             "behavioral_fp_rate": 16.1,
             "behavioral_fp_households_m": 0.91,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 9.6,
+            "fp_households_m": 2.58,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 9.6,
+            "behavioral_fp_households_m": 2.58,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 11.8,
+            "fp_households_m": 0.09,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 11.8,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 7.3,
+            "fp_households_m": 0.2,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 7.3,
+            "behavioral_fp_households_m": 0.2,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 0,
+            "pct_of_income": 0.0,
+            "fp_rate": 6.3,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 0,
+            "behavioral_pct_of_income": 0.0,
+            "behavioral_fp_rate": 6.3,
+            "behavioral_fp_households_m": 0.1,
+            "country": "WALES"
           }
         ]
       }
@@ -9610,6 +11150,52 @@
             "behavioral_fp_households_m": 0.94,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 100,
+            "pct_of_income": 0.2,
+            "fp_rate": 10.2,
+            "fp_households_m": 2.74,
+            "behavioral_extra_cost": 74,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 10.0,
+            "behavioral_fp_households_m": 2.69,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 132,
+            "pct_of_income": 0.2,
+            "fp_rate": 12.5,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 101,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 12.3,
+            "behavioral_fp_households_m": 0.09,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 101,
+            "pct_of_income": 0.2,
+            "fp_rate": 8.9,
+            "fp_households_m": 0.24,
+            "behavioral_extra_cost": 75,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 7.7,
+            "behavioral_fp_households_m": 0.21,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 79,
+            "pct_of_income": 0.2,
+            "fp_rate": 6.8,
+            "fp_households_m": 0.11,
+            "behavioral_extra_cost": 57,
+            "behavioral_pct_of_income": 0.1,
+            "behavioral_fp_rate": 6.6,
+            "behavioral_fp_households_m": 0.1,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -9864,6 +11450,52 @@
             "behavioral_fp_rate": 17.6,
             "behavioral_fp_households_m": 1.0,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 200,
+            "pct_of_income": 0.4,
+            "fp_rate": 10.7,
+            "fp_households_m": 2.86,
+            "behavioral_extra_cost": 144,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 10.4,
+            "behavioral_fp_households_m": 2.8,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 265,
+            "pct_of_income": 0.5,
+            "fp_rate": 13.0,
+            "fp_households_m": 0.1,
+            "behavioral_extra_cost": 196,
+            "behavioral_pct_of_income": 0.4,
+            "behavioral_fp_rate": 12.6,
+            "behavioral_fp_households_m": 0.1,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 201,
+            "pct_of_income": 0.4,
+            "fp_rate": 9.8,
+            "fp_households_m": 0.27,
+            "behavioral_extra_cost": 145,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 9.4,
+            "behavioral_fp_households_m": 0.26,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 158,
+            "pct_of_income": 0.3,
+            "fp_rate": 8.4,
+            "fp_households_m": 0.13,
+            "behavioral_extra_cost": 111,
+            "behavioral_pct_of_income": 0.2,
+            "behavioral_fp_rate": 7.1,
+            "behavioral_fp_households_m": 0.11,
+            "country": "WALES"
           }
         ]
       },
@@ -10120,6 +11752,52 @@
             "behavioral_fp_households_m": 1.04,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 300,
+            "pct_of_income": 0.6,
+            "fp_rate": 11.7,
+            "fp_households_m": 3.13,
+            "behavioral_extra_cost": 209,
+            "behavioral_pct_of_income": 0.4,
+            "behavioral_fp_rate": 10.8,
+            "behavioral_fp_households_m": 2.9,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 397,
+            "pct_of_income": 0.7,
+            "fp_rate": 14.4,
+            "fp_households_m": 0.11,
+            "behavioral_extra_cost": 285,
+            "behavioral_pct_of_income": 0.5,
+            "behavioral_fp_rate": 13.3,
+            "behavioral_fp_households_m": 0.1,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 302,
+            "pct_of_income": 0.6,
+            "fp_rate": 11.1,
+            "fp_households_m": 0.3,
+            "behavioral_extra_cost": 210,
+            "behavioral_pct_of_income": 0.4,
+            "behavioral_fp_rate": 9.9,
+            "behavioral_fp_households_m": 0.27,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 237,
+            "pct_of_income": 0.5,
+            "fp_rate": 8.9,
+            "fp_households_m": 0.14,
+            "behavioral_extra_cost": 160,
+            "behavioral_pct_of_income": 0.3,
+            "behavioral_fp_rate": 8.0,
+            "behavioral_fp_households_m": 0.12,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -10375,6 +12053,52 @@
             "behavioral_fp_households_m": 1.1,
             "hh_type": "SINGLE_WORKING_AGE"
           }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 600,
+            "pct_of_income": 1.1,
+            "fp_rate": 13.7,
+            "fp_households_m": 3.68,
+            "behavioral_extra_cost": 375,
+            "behavioral_pct_of_income": 0.7,
+            "behavioral_fp_rate": 12.0,
+            "behavioral_fp_households_m": 3.22,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 794,
+            "pct_of_income": 1.4,
+            "fp_rate": 20.5,
+            "fp_households_m": 0.16,
+            "behavioral_extra_cost": 518,
+            "behavioral_pct_of_income": 0.9,
+            "behavioral_fp_rate": 16.4,
+            "behavioral_fp_households_m": 0.13,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 604,
+            "pct_of_income": 1.2,
+            "fp_rate": 12.9,
+            "fp_households_m": 0.35,
+            "behavioral_extra_cost": 378,
+            "behavioral_pct_of_income": 0.7,
+            "behavioral_fp_rate": 10.8,
+            "behavioral_fp_households_m": 0.29,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 473,
+            "pct_of_income": 1.0,
+            "fp_rate": 10.3,
+            "fp_households_m": 0.16,
+            "behavioral_extra_cost": 285,
+            "behavioral_pct_of_income": 0.6,
+            "behavioral_fp_rate": 9.7,
+            "behavioral_fp_households_m": 0.15,
+            "country": "WALES"
+          }
         ]
       },
       {
@@ -10629,6 +12353,52 @@
             "behavioral_fp_rate": 20.2,
             "behavioral_fp_households_m": 1.15,
             "hh_type": "SINGLE_WORKING_AGE"
+          }
+        ],
+        "by_country": [
+          {
+            "extra_cost": 1294,
+            "pct_of_income": 2.4,
+            "fp_rate": 18.5,
+            "fp_households_m": 4.96,
+            "behavioral_extra_cost": 599,
+            "behavioral_pct_of_income": 1.1,
+            "behavioral_fp_rate": 13.6,
+            "behavioral_fp_households_m": 3.66,
+            "country": "ENGLAND"
+          },
+          {
+            "extra_cost": 1712,
+            "pct_of_income": 3.1,
+            "fp_rate": 29.1,
+            "fp_households_m": 0.22,
+            "behavioral_extra_cost": 860,
+            "behavioral_pct_of_income": 1.6,
+            "behavioral_fp_rate": 20.2,
+            "behavioral_fp_households_m": 0.15,
+            "country": "NORTHERN_IRELAND"
+          },
+          {
+            "extra_cost": 1302,
+            "pct_of_income": 2.6,
+            "fp_rate": 19.0,
+            "fp_households_m": 0.52,
+            "behavioral_extra_cost": 604,
+            "behavioral_pct_of_income": 1.2,
+            "behavioral_fp_rate": 12.5,
+            "behavioral_fp_households_m": 0.34,
+            "country": "SCOTLAND"
+          },
+          {
+            "extra_cost": 1021,
+            "pct_of_income": 2.1,
+            "fp_rate": 14.9,
+            "fp_households_m": 0.23,
+            "behavioral_extra_cost": 438,
+            "behavioral_pct_of_income": 0.9,
+            "behavioral_fp_rate": 9.9,
+            "behavioral_fp_households_m": 0.15,
+            "country": "WALES"
           }
         ]
       }
@@ -11033,6 +12803,7 @@
   },
   "config": {
     "year": 2026,
+    "country": "UK",
     "current_cap": 1641,
     "shock_cap": 2625,
     "epg_target": 2500,

@@ -1,4 +1,4 @@
 """Allow running with: python -m energy_shock"""
-from .generate import run_all
+from .generate import _cli
 
-run_all()
+_cli()

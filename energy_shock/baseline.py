@@ -7,7 +7,7 @@ Energy is defined as electricity_consumption + gas_consumption throughout.
 import numpy as np
 from policyengine_uk import Microsimulation
 
-from .config import YEAR
+from .config import YEAR, REGION_TO_COUNTRY
 
 
 def _vals(sim, var, **kw):
@@ -34,6 +34,9 @@ def run_baseline():
     # Household type: family_type (benunit) + pensioner status (person)
     hh_type = _build_household_type(sim)
 
+    # Country/nation derived from region
+    country_arr = np.array([REGION_TO_COUNTRY.get(str(r), "UNKNOWN") for r in region])
+
     return {
         "sim": sim,
         "elec": elec,
@@ -46,6 +49,7 @@ def run_baseline():
         "tenure": tenure,
         "accomm": accomm,
         "hh_type": hh_type,
+        "country": country_arr,
     }
 
 
@@ -91,6 +95,33 @@ def _build_household_type(sim):
             categories.append("OTHER")
 
     return np.array(categories)
+
+
+def filter_by_country(data, country):
+    """Filter all household arrays to a single country/nation.
+
+    country: "UK" (no filter), "ENGLAND", "SCOTLAND", "WALES", "NORTHERN_IRELAND"
+    Returns a new data dict with filtered arrays and a 'country_mask' key
+    containing the boolean mask against the original arrays.
+    """
+    country = country.upper()
+    if country == "UK":
+        mask = np.ones(len(data["weights"]), dtype=bool)
+        return {**data, "country_mask": mask, "country": country}
+
+    # Map each household's region to its country
+    hh_country = np.array([REGION_TO_COUNTRY.get(str(r), "") for r in data["region"]])
+    mask = hh_country == country
+
+    filtered = {
+        "sim": data["sim"],  # keep original sim for policy reform lookups
+        "country_mask": mask,
+        "country": country,
+    }
+    for key in ("elec", "gas", "energy", "income", "weights",
+                "decile", "region", "tenure", "accomm", "hh_type"):
+        filtered[key] = data[key][mask]
+    return filtered
 
 
 def weighted_mean(values, weights, mask=None):
