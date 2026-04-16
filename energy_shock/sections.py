@@ -1,5 +1,5 @@
 """
-All analysis sections: baseline summary, shocks, fuel poverty, behavioural,
+All analysis sections: baseline summary, shocks, behavioural,
 policies (A–F), electricity/gas split, regional, tenure, NEG, rising block
 tariff, gas-only cap.
 
@@ -15,14 +15,11 @@ from .config import (
     YEAR, CURRENT_CAP, PRICE_SCENARIOS,
     SHOCK_CAP, EPG_TARGET, FLAT_TRANSFER, CT_REBATE,
     SHORT_RUN_ELASTICITY,
+    ELEC_RATE, GAS_RATE, NEG_ELEC_KWH, NEG_ELEC_SPEND,
+    WFA_HIGHER, WFA_LOWER, RBT_DISCOUNT_RATE,
+    DATASET_URL,
 )
 from .baseline import weighted_mean, decile_means
-
-# Ofgem Q4 2023 unit rates (for kWh threshold conversions)
-ELEC_RATE = 27.35 / 100  # £/kWh
-GAS_RATE = 6.89 / 100    # £/kWh
-NEG_ELEC_KWH = 2_900
-NEG_ELEC_SPEND = NEG_ELEC_KWH * ELEC_RATE
 
 
 # ── helpers ──────────────────────────────────────────────────────────────
@@ -34,7 +31,7 @@ def _calc_decile_table(sim, variable, country_mask=None):
     """
     from .baseline import _vals
     values = sim.calculate(variable, YEAR)
-    values = values.values if hasattr(values, "values") else np.array(values)
+    values = values.values
     deciles = _vals(sim, "household_income_decile", unweighted=True)
     weights = _vals(sim, "household_weight", unweighted=True)
     if country_mask is not None:
@@ -61,16 +58,11 @@ def baseline_summary(data):
     for d in range(1, 11):
         e = energy_by_dec[d]
         inc = income_by_dec[d]
-        mask = dec == d
-        w_d = weights[mask]
-        ratio = energy[mask] / np.where(income[mask] > 0, income[mask], 1)
-        fp = float(np.average(ratio > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
         deciles.append({
             "decile": d,
             "energy_spend": round(e),
             "net_income": round(inc),
-            "energy_share_pct": round(e / inc * 100, 1) if inc > 0 else 0,
-            "fuel_poverty_pct": round(fp, 1),
+            "energy_share_pct": round(e / inc * 100, 2) if inc > 0 else 0,
         })
 
     return {
@@ -100,35 +92,19 @@ def _grouped_shock(data, group_key, label_key, pct, epsilon=None):
         if g_str == "" or g_str == "None":
             continue
         mask = data[group_key] == g
-        e_g, i_g, w_g = energy[mask], income[mask], weights[mask]
         avg_e = weighted_mean(energy, weights, mask)
         avg_i = weighted_mean(income, weights, mask)
         extra = avg_e * pct
-        n_hh = float(w_g.sum()) / 1e6
-
-        # Static fuel poverty
-        shocked_e = e_g * (1 + pct)
-        ratio = shocked_e / np.where(i_g > 0, i_g, 1)
-        static_fp = float(np.average(ratio > 0.10, weights=w_g)) * 100 if w_g.sum() > 0 else 0
-        static_fp_hh = round(static_fp / 100 * n_hh, 2)
 
         row = {
             label_key: g_str,
             "extra_cost": round(extra),
-            "pct_of_income": round(extra / avg_i * 100, 1) if avg_i > 0 else 0,
-            "fp_rate": round(static_fp, 1),
-            "fp_households_m": round(static_fp_hh, 2),
+            "pct_of_income": round(extra / avg_i * 100, 2) if avg_i > 0 else 0,
         }
         if epsilon is not None:
             b_extra = avg_e * (behavioral_factor - 1)
-            behav_e = e_g * behavioral_factor
-            b_ratio = behav_e / np.where(i_g > 0, i_g, 1)
-            behav_fp = float(np.average(b_ratio > 0.10, weights=w_g)) * 100 if w_g.sum() > 0 else 0
-            behav_fp_hh = round(behav_fp / 100 * n_hh, 2)
             row["behavioral_extra_cost"] = round(b_extra)
-            row["behavioral_pct_of_income"] = round(b_extra / avg_i * 100, 1) if avg_i > 0 else 0
-            row["behavioral_fp_rate"] = round(behav_fp, 1)
-            row["behavioral_fp_households_m"] = round(behav_fp_hh, 2)
+            row["behavioral_pct_of_income"] = round(b_extra / avg_i * 100, 2) if avg_i > 0 else 0
         rows.append(row)
     return rows
 
@@ -149,18 +125,10 @@ def shock_scenarios(data):
         for d in range(1, 11):
             extra = energy_by_dec[d] * pct
             inc = income_by_dec[d]
-            mask = decile_arr == d
-            e_d, i_d, w_d = energy_arr[mask], income_arr[mask], weights_arr[mask]
-            shocked_e = e_d * (1 + pct)
-            ratio = shocked_e / np.where(i_d > 0, i_d, 1)
-            n_hh = float(w_d.sum()) / 1e6
-            fp_rate = float(np.average(ratio > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
             deciles.append({
                 "decile": d,
                 "extra_cost": round(extra),
-                "pct_of_income": round(extra / inc * 100, 1) if inc > 0 else 0,
-                "fp_rate": round(fp_rate, 1),
-                "fp_households_m": round(fp_rate / 100 * n_hh, 2),
+                "pct_of_income": round(extra / inc * 100, 2) if inc > 0 else 0,
             })
         scenarios.append({
             "name": name,
@@ -177,38 +145,7 @@ def shock_scenarios(data):
     return scenarios
 
 
-# ── 3. Fuel poverty ─────────────────────────────────────────────────────
-
-def fuel_poverty(data):
-    energy, income, weights = data["energy"], data["income"], data["weights"]
-    fp_df = MicroDataFrame(
-        {"energy": energy, "income": income}, weights=weights,
-    )
-    fp_df["fuel_poor"] = (fp_df.energy / fp_df.income.clip(lower=1)) > 0.10
-    baseline_rate = float(fp_df.fuel_poor.mean())
-    baseline_count = float(fp_df.fuel_poor.sum())
-
-    rows = [{
-        "scenario": "Baseline (current prices)",
-        "fuel_poverty_rate_pct": round(baseline_rate * 100, 1),
-        "households_m": round(baseline_count / 1e6, 1),
-        "extra_households_m": 0,
-    }]
-
-    for name, new_cap in PRICE_SCENARIOS.items():
-        pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
-        shocked = fp_df.energy * (1 + pct)
-        fuel_poor = (shocked / fp_df.income.clip(lower=1)) > 0.10
-        rows.append({
-            "scenario": f"{name} (cap -> {new_cap})",
-            "fuel_poverty_rate_pct": round(float(fuel_poor.mean()) * 100, 1),
-            "households_m": round(float(fuel_poor.sum()) / 1e6, 1),
-            "extra_households_m": round((float(fuel_poor.sum()) - baseline_count) / 1e6, 1),
-        })
-    return rows
-
-
-# ── 4. Behavioural responses ────────────────────────────────────────────
+# ── 3. Behavioural responses ────────────────────────────────────────────
 
 def behavioral_responses(data):
     energy, income, weights = data["energy"], data["income"], data["weights"]
@@ -229,7 +166,6 @@ def behavioral_responses(data):
         bill_saving = static_extra - behavioral_extra
         welfare_loss_comfort = mean_energy * 0.5 * abs(epsilon) * (price_pct ** 2)
 
-        decile_arr = data["decile"]
         deciles = []
         for d in range(1, 11):
             e = energy_by_dec[d]
@@ -237,31 +173,15 @@ def behavioral_responses(data):
             static_hit = e * price_pct
             behavioral_hit = e * (behavioral_factor - 1)
 
-            mask = decile_arr == d
-            e_d, i_d, w_d = energy[mask], income[mask], weights[mask]
-            n_hh = float(w_d.sum()) / 1e6
-            s_ratio = (e_d * static_factor) / np.where(i_d > 0, i_d, 1)
-            b_ratio = (e_d * behavioral_factor) / np.where(i_d > 0, i_d, 1)
-            s_fp = float(np.average(s_ratio > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
-            b_fp = float(np.average(b_ratio > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
-
             deciles.append({
                 "decile": d,
                 "static_extra_cost": round(static_hit),
                 "behavioral_extra_cost": round(behavioral_hit),
                 "bill_saving": round(static_hit - behavioral_hit),
                 "consumption_reduction_pct": round(consumption_change_pct * 100, 1),
-                "static_pct_of_income": round(static_hit / inc * 100, 1) if inc > 0 else 0,
-                "behavioral_pct_of_income": round(behavioral_hit / inc * 100, 1) if inc > 0 else 0,
-                "static_fp_rate": round(s_fp, 1),
-                "behavioral_fp_rate": round(b_fp, 1),
-                "static_fp_households_m": round(s_fp / 100 * n_hh, 2),
-                "behavioral_fp_households_m": round(b_fp / 100 * n_hh, 2),
+                "static_pct_of_income": round(static_hit / inc * 100, 2) if inc > 0 else 0,
+                "behavioral_pct_of_income": round(behavioral_hit / inc * 100, 2) if inc > 0 else 0,
             })
-
-        fp_df = MicroDataFrame({"energy": energy, "income": income}, weights=weights)
-        static_fp = (fp_df.energy * static_factor / fp_df.income.clip(lower=1)) > 0.10
-        behavioral_fp = (fp_df.energy * behavioral_factor / fp_df.income.clip(lower=1)) > 0.10
 
         results_list.append({
             "name": name,
@@ -273,10 +193,6 @@ def behavioral_responses(data):
             "behavioral_avg_extra": round(behavioral_extra),
             "bill_saving_avg": round(bill_saving),
             "welfare_loss_comfort_avg": round(welfare_loss_comfort),
-            "static_fp_rate": round(float(static_fp.mean()) * 100, 1),
-            "behavioral_fp_rate": round(float(behavioral_fp.mean()) * 100, 1),
-            "static_fp_households_m": round(float(static_fp.sum()) / 1e6, 1),
-            "behavioral_fp_households_m": round(float(behavioral_fp.sum()) / 1e6, 1),
             "deciles": deciles,
             "by_tenure": _grouped_shock(data, "tenure", "tenure", price_pct, epsilon),
             "by_hh_type": _grouped_shock(data, "hh_type", "hh_type", price_pct, epsilon),
@@ -291,19 +207,19 @@ def policy_epg(data):
     energy_by_dec = decile_means(data, "energy")
     shock_pct = (SHOCK_CAP - CURRENT_CAP) / CURRENT_CAP
     cmask = data.get("country_mask")
-    sim = Microsimulation(reform={
+    sim = Microsimulation(dataset=DATASET_URL, reform={
         "gov.ofgem.energy_price_cap": {"2026-01-01": SHOCK_CAP},
         "gov.ofgem.energy_price_guarantee": {"2026-01-01": EPG_TARGET},
     })
     subsidy_all = sim.calculate("epg_subsidy", YEAR)
-    subsidy_arr = subsidy_all.values if hasattr(subsidy_all, "values") else np.array(subsidy_all)
+    subsidy_arr = subsidy_all.values
     if cmask is not None:
         subsidy_arr = subsidy_arr[cmask]
     by_decile = _calc_decile_table(sim, "epg_subsidy", cmask)
 
     deciles = []
     for d in range(1, 11):
-        val = float(by_decile.get(d, 0))
+        val = float(by_decile[d])
         shock = energy_by_dec[d] * shock_pct
         deciles.append({
             "decile": d,
@@ -326,18 +242,18 @@ def policy_flat(data):
     energy_by_dec = decile_means(data, "energy")
     shock_pct = (SHOCK_CAP - CURRENT_CAP) / CURRENT_CAP
     cmask = data.get("country_mask")
-    sim = Microsimulation(reform={
+    sim = Microsimulation(dataset=DATASET_URL, reform={
         "gov.treasury.energy_bills_rebate.energy_bills_credit": {"2026-01-01": FLAT_TRANSFER},
     })
     credit_all = sim.calculate("ebr_energy_bills_credit", YEAR)
-    credit_arr = credit_all.values if hasattr(credit_all, "values") else np.array(credit_all)
+    credit_arr = credit_all.values
     if cmask is not None:
         credit_arr = credit_arr[cmask]
     by_decile = _calc_decile_table(sim, "ebr_energy_bills_credit", cmask)
 
     deciles = []
     for d in range(1, 11):
-        val = float(by_decile.get(d, 0))
+        val = float(by_decile[d])
         shock = energy_by_dec[d] * shock_pct
         deciles.append({
             "decile": d,
@@ -360,18 +276,18 @@ def policy_ct_rebate(data):
     energy_by_dec = decile_means(data, "energy")
     shock_pct = (SHOCK_CAP - CURRENT_CAP) / CURRENT_CAP
     cmask = data.get("country_mask")
-    sim = Microsimulation(reform={
+    sim = Microsimulation(dataset=DATASET_URL, reform={
         "gov.treasury.energy_bills_rebate.council_tax_rebate.amount": {"2026-01-01": CT_REBATE},
     })
     rebate_all = sim.calculate("ebr_council_tax_rebate", YEAR)
-    rebate_arr = rebate_all.values if hasattr(rebate_all, "values") else np.array(rebate_all)
+    rebate_arr = rebate_all.values
     if cmask is not None:
         rebate_arr = rebate_arr[cmask]
     by_decile = _calc_decile_table(sim, "ebr_council_tax_rebate", cmask)
 
     deciles = []
     for d in range(1, 11):
-        val = float(by_decile.get(d, 0))
+        val = float(by_decile[d])
         shock = energy_by_dec[d] * shock_pct
         deciles.append({
             "decile": d,
@@ -392,15 +308,15 @@ def policy_ct_rebate(data):
 
 def policy_wfa(data):
     cmask = data.get("country_mask")
-    sim = Microsimulation(reform={
+    sim = Microsimulation(dataset=DATASET_URL, reform={
         "gov.dwp.winter_fuel_payment.eligibility.require_benefits": {"2026-01-01": False},
-        "gov.dwp.winter_fuel_payment.amount.higher": {"2026-01-01": 500},
-        "gov.dwp.winter_fuel_payment.amount.lower": {"2026-01-01": 350},
+        "gov.dwp.winter_fuel_payment.amount.higher": {"2026-01-01": WFA_HIGHER},
+        "gov.dwp.winter_fuel_payment.amount.lower": {"2026-01-01": WFA_LOWER},
     })
     wfa_reformed_all = sim.calculate("winter_fuel_allowance", YEAR)
     wfa_baseline_all = data["sim"].calculate("winter_fuel_allowance", YEAR)
-    reformed_arr = wfa_reformed_all.values if hasattr(wfa_reformed_all, "values") else np.array(wfa_reformed_all)
-    baseline_arr = wfa_baseline_all.values if hasattr(wfa_baseline_all, "values") else np.array(wfa_baseline_all)
+    reformed_arr = wfa_reformed_all.values
+    baseline_arr = wfa_baseline_all.values
     if cmask is not None:
         reformed_arr = reformed_arr[cmask]
         baseline_arr = baseline_arr[cmask]
@@ -412,8 +328,8 @@ def policy_wfa(data):
 
     deciles = []
     for d in range(1, 11):
-        val = float(by_decile.get(d, 0))
-        bl = float(bl_by_decile.get(d, 0))
+        val = float(by_decile[d])
+        bl = float(bl_by_decile[d])
         deciles.append({
             "decile": d,
             "payment": round(val),
@@ -421,7 +337,7 @@ def policy_wfa(data):
         })
     return {
         "name": "Expanded winter fuel",
-        "description": "Universal for pensioners, 350/500",
+        "description": f"Universal for pensioners, {WFA_LOWER}/{WFA_HIGHER}",
         "exchequer_cost_bn": round(extra_cost / 1e9, 1),
         "total_spending_bn": round(float(np.sum(reformed_arr * w)) / 1e9, 1),
         "avg_hh_benefit": round(float(np.average(reformed_arr, weights=w))),
@@ -435,18 +351,18 @@ def policy_combined(data):
     income_by_dec = decile_means(data, "income")
     cmask = data.get("country_mask")
     w = data["weights"]
-    sim = Microsimulation(reform={
+    sim = Microsimulation(dataset=DATASET_URL, reform={
         "gov.ofgem.energy_price_cap": {"2026-01-01": SHOCK_CAP},
         "gov.ofgem.energy_price_guarantee": {"2026-01-01": EPG_TARGET},
         "gov.treasury.energy_bills_rebate.energy_bills_credit": {"2026-01-01": FLAT_TRANSFER},
         "gov.treasury.energy_bills_rebate.council_tax_rebate.amount": {"2026-01-01": CT_REBATE},
         "gov.dwp.winter_fuel_payment.eligibility.require_benefits": {"2026-01-01": False},
-        "gov.dwp.winter_fuel_payment.amount.higher": {"2026-01-01": 500},
-        "gov.dwp.winter_fuel_payment.amount.lower": {"2026-01-01": 350},
+        "gov.dwp.winter_fuel_payment.amount.higher": {"2026-01-01": WFA_HIGHER},
+        "gov.dwp.winter_fuel_payment.amount.lower": {"2026-01-01": WFA_LOWER},
     })
 
     def _arr(series):
-        a = series.values if hasattr(series, "values") else np.array(series)
+        a = series.values
         return a[cmask] if cmask is not None else a
 
     epg = _arr(sim.calculate("epg_subsidy", YEAR))
@@ -465,12 +381,12 @@ def policy_combined(data):
     bl_net = _arr(data["sim"].calculate("household_net_income", YEAR))
     deciles = []
     for d in range(1, 11):
-        change = float(net_by_decile.get(d, 0)) - income_by_dec[d]
+        change = float(net_by_decile[d]) - income_by_dec[d]
         inc = income_by_dec[d]
         deciles.append({
             "decile": d,
             "net_income_change": round(change),
-            "pct_change": round(change / inc * 100, 1) if inc > 0 else 0,
+            "pct_change": round(change / inc * 100, 2) if inc > 0 else 0,
         })
 
     return {
@@ -528,9 +444,9 @@ def policy_net_position(data):
 
     results_dict = {}
     for key, cfg in policies_config.items():
-        sim = Microsimulation(reform=cfg["reform"])
+        sim = Microsimulation(dataset=DATASET_URL, reform=cfg["reform"])
         benefit_all = sim.calculate(cfg["variable"], YEAR)
-        benefit_arr = benefit_all.values if hasattr(benefit_all, "values") else np.array(benefit_all)
+        benefit_arr = benefit_all.values
         if cmask is not None:
             benefit_arr = benefit_arr[cmask]
         by_decile = _calc_decile_table(sim, cfg["variable"], cmask)
@@ -541,7 +457,7 @@ def policy_net_position(data):
             inc = income_by_dec[d]
             static_shock = e * shock_pct
             behavioral_shock = e * (behavioral_factor - 1)
-            policy_benefit = float(by_decile.get(d, 0))
+            policy_benefit = float(by_decile[d])
             net_static = static_shock - policy_benefit
             net_behavioral = behavioral_shock - policy_benefit
             deciles.append({
@@ -570,51 +486,39 @@ def policy_net_position(data):
     return results_dict
 
 
-# ── 10b. Post-policy fuel poverty ────────────────────────────────────────
 
-def _fp_by_group(energy, income, weights, payment, group_arr, groups, pct, behavioral_factor):
-    """Compute post-policy FP rates grouped by an arbitrary categorical array."""
+
+def _grouped_post_policy(energy, income, weights, payment, group_arr, groups, pct, behavioral_factor):
+    """Compute post-policy extra cost grouped by a categorical variable."""
     result = []
     for g in groups:
         mask = group_arr == g
         e_g, i_g, w_g, p_g = energy[mask], income[mask], weights[mask], payment[mask]
-        n_hh = float(w_g.sum()) / 1e6
-        if n_hh == 0:
-            result.append({"group": g, "extra_cost": 0, "pct_of_income": 0,
-                           "fp_rate": 0, "fp_households_m": 0,
-                           "behavioral_extra_cost": 0, "behavioral_pct_of_income": 0,
-                           "behavioral_fp_rate": 0, "behavioral_fp_households_m": 0})
+        if w_g.sum() == 0:
+            result.append({"group": str(g), "extra_cost": 0, "pct_of_income": 0,
+                           "behavioral_extra_cost": 0, "behavioral_pct_of_income": 0})
             continue
-        # Static (floor at baseline energy)
         shocked_e = e_g * (1 + pct)
         net_s = np.maximum(shocked_e - p_g, e_g)
         extra_s = float(weighted_mean(np.maximum(net_s - e_g, 0), w_g))
-        safe_inc = np.where(i_g > 0, i_g, 1)
         mean_inc = float(weighted_mean(i_g, w_g))
-        pct_inc_s = round(extra_s / mean_inc * 100, 1) if mean_inc > 0 else 0
-        fp_s = float(np.average((net_s / safe_inc) > 0.10, weights=w_g)) * 100
-        # Behavioural (floor at baseline energy)
+        pct_inc_s = round(extra_s / mean_inc * 100, 2) if mean_inc > 0 else 0
         behav_e = e_g * behavioral_factor
         net_b = np.maximum(behav_e - p_g, e_g)
         extra_b = float(weighted_mean(np.maximum(net_b - e_g, 0), w_g))
-        pct_inc_b = round(extra_b / mean_inc * 100, 1) if mean_inc > 0 else 0
-        fp_b = float(np.average((net_b / np.where(i_g > 0, i_g, 1)) > 0.10, weights=w_g)) * 100
+        pct_inc_b = round(extra_b / mean_inc * 100, 2) if mean_inc > 0 else 0
         result.append({
             "group": str(g),
             "extra_cost": round(extra_s),
-            "pct_of_income": round(pct_inc_s, 1),
-            "fp_rate": round(fp_s, 1),
-            "fp_households_m": round(fp_s / 100 * n_hh, 2),
+            "pct_of_income": round(pct_inc_s, 2),
             "behavioral_extra_cost": round(extra_b),
-            "behavioral_pct_of_income": round(pct_inc_b, 1),
-            "behavioral_fp_rate": round(fp_b, 1),
-            "behavioral_fp_households_m": round(fp_b / 100 * n_hh, 2),
+            "behavioral_pct_of_income": round(pct_inc_b, 2),
         })
     return result
 
 
-def policy_fuel_poverty(data):
-    """Compute fuel poverty rates after each policy for every scenario,
+def policy_post_shock(data):
+    """Compute post-policy extra cost after each policy for every scenario,
     broken down by decile, tenure, and household type.
 
     Returns dict keyed by policy name, each containing a list of scenario dicts.
@@ -631,7 +535,6 @@ def policy_fuel_poverty(data):
     country_groups = sorted(np.unique(country_arr))
     epsilon = SHORT_RUN_ELASTICITY
 
-    # --- Get household-level payment arrays for PE policies (A-C) ---
     pe_policies = {
         "epg": {
             "reform": {
@@ -654,18 +557,13 @@ def policy_fuel_poverty(data):
         },
     }
 
-    # Household-level payment arrays for A-C (fixed, don't vary by scenario)
     cmask = data.get("country_mask")
     hh_payments = {}
     for key, cfg in pe_policies.items():
-        sim = Microsimulation(reform=cfg["reform"])
+        sim = Microsimulation(dataset=DATASET_URL, reform=cfg["reform"])
         pay = sim.calculate(cfg["variable"], YEAR)
-        arr = pay.values if hasattr(pay, "values") else np.array(pay)
+        arr = pay.values
         hh_payments[key] = arr[cmask] if cmask is not None else arr
-
-    # EPG scales by scenario: only activates above EPG_TARGET
-    # The microsim was run at SHOCK_CAP (+60%), so we scale the subsidy
-    epg_ref_pct = (SHOCK_CAP - CURRENT_CAP) / CURRENT_CAP
 
     results = {}
     for policy_key in ["epg", "flat_transfer", "ct_rebate", "bn_transfer", "bn_epg"]:
@@ -674,19 +572,15 @@ def policy_fuel_poverty(data):
             pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
             behavioral_factor = (1 + pct) * (1 + epsilon * pct)
 
-            # Compute household-level payment for this scenario
             if policy_key == "epg":
-                # Scale EPG: only activates when cap > EPG_TARGET
                 epg_scale = max(0, new_cap - EPG_TARGET) / (SHOCK_CAP - EPG_TARGET)
                 payment = hh_payments["epg"] * epg_scale
             elif policy_key in hh_payments:
                 payment = hh_payments[policy_key]
             elif policy_key == "bn_transfer":
-                # Flat payment = average extra cost
                 avg_extra = float(weighted_mean(energy, weights) * pct)
                 payment = np.full_like(energy, avg_extra)
             elif policy_key == "bn_epg":
-                # Full offset: payment = each household's extra cost
                 payment = energy * pct
             else:
                 payment = np.zeros_like(energy)
@@ -694,77 +588,39 @@ def policy_fuel_poverty(data):
             deciles = []
             for d in range(1, 11):
                 mask = decile_arr == d
-                e_d = energy[mask]
-                i_d = income[mask]
-                w_d = weights[mask]
-                p_d = payment[mask]
-                n_hh = float(w_d.sum()) / 1e6
-
-                # Static: shocked energy minus policy payment, floored at baseline
+                e_d, i_d, w_d, p_d = energy[mask], income[mask], weights[mask], payment[mask]
                 shocked_e = e_d * (1 + pct)
                 net_e_static = np.maximum(shocked_e - p_d, e_d)
-                ratio_s = net_e_static / np.where(i_d > 0, i_d, 1)
-                fp_static = float(np.average(ratio_s > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
-
-                # Behavioural: reduced consumption minus policy payment, floored at baseline
                 behav_e = e_d * behavioral_factor
                 net_e_behav = np.maximum(behav_e - p_d, e_d)
-                ratio_b = net_e_behav / np.where(i_d > 0, i_d, 1)
-                fp_behav = float(np.average(ratio_b > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
-
                 extra_s = float(weighted_mean(np.maximum(net_e_static - e_d, 0), w_d))
                 extra_b = float(weighted_mean(np.maximum(net_e_behav - e_d, 0), w_d))
                 mean_inc_d = float(weighted_mean(i_d, w_d))
-                pct_s = round(extra_s / mean_inc_d * 100, 1) if mean_inc_d > 0 else 0
-                pct_b = round(extra_b / mean_inc_d * 100, 1) if mean_inc_d > 0 else 0
-
+                pct_s = round(extra_s / mean_inc_d * 100, 2) if mean_inc_d > 0 else 0
+                pct_b = round(extra_b / mean_inc_d * 100, 2) if mean_inc_d > 0 else 0
                 deciles.append({
                     "decile": d,
                     "extra_cost": round(extra_s),
                     "pct_of_income": pct_s,
-                    "fp_rate": round(fp_static, 1),
-                    "fp_households_m": round(fp_static / 100 * n_hh, 2),
                     "behavioral_extra_cost": round(extra_b),
                     "behavioral_pct_of_income": pct_b,
-                    "behavioral_fp_rate": round(fp_behav, 1),
-                    "behavioral_fp_households_m": round(fp_behav / 100 * n_hh, 2),
                 })
 
-            # Aggregate (floor at baseline energy)
-            shocked_all = energy * (1 + pct)
-            net_all_s = np.maximum(shocked_all - payment, energy)
-            fp_all_s = float(np.average(
-                (net_all_s / np.where(income > 0, income, 1)) > 0.10,
-                weights=weights,
-            )) * 100
-            behav_all = energy * behavioral_factor
-            net_all_b = np.maximum(behav_all - payment, energy)
-            fp_all_b = float(np.average(
-                (net_all_b / np.where(income > 0, income, 1)) > 0.10,
-                weights=weights,
-            )) * 100
-            n_total = float(weights.sum()) / 1e6
-
-            # Tenure and household type breakdowns
-            by_tenure = _fp_by_group(energy, income, weights, payment,
-                                     tenure_arr, tenure_groups, pct, behavioral_factor)
+            by_tenure = _grouped_post_policy(energy, income, weights, payment,
+                                             tenure_arr, tenure_groups, pct, behavioral_factor)
             for t in by_tenure:
                 t["tenure"] = t.pop("group")
-            by_hh_type = _fp_by_group(energy, income, weights, payment,
-                                      hh_type_arr, hh_type_groups, pct, behavioral_factor)
+            by_hh_type = _grouped_post_policy(energy, income, weights, payment,
+                                              hh_type_arr, hh_type_groups, pct, behavioral_factor)
             for h in by_hh_type:
                 h["hh_type"] = h.pop("group")
-            by_country = _fp_by_group(energy, income, weights, payment,
-                                      country_arr, country_groups, pct, behavioral_factor)
+            by_country = _grouped_post_policy(energy, income, weights, payment,
+                                              country_arr, country_groups, pct, behavioral_factor)
             for c in by_country:
                 c["country"] = c.pop("group")
 
             scenario_list.append({
                 "scenario": name,
-                "fp_rate": round(fp_all_s, 1),
-                "fp_households_m": round(fp_all_s / 100 * n_total, 2),
-                "behavioral_fp_rate": round(fp_all_b, 1),
-                "behavioral_fp_households_m": round(fp_all_b / 100 * n_total, 2),
                 "deciles": deciles,
                 "by_tenure": by_tenure,
                 "by_hh_type": by_hh_type,
@@ -772,7 +628,7 @@ def policy_fuel_poverty(data):
             })
         results[policy_key] = scenario_list
 
-    # --- NEG: household-level benefit = min(elec, threshold) at shocked prices ---
+    # --- NEG ---
     elec, gas = data["elec"], data["gas"]
     neg_baseline_benefit = np.minimum(elec, NEG_ELEC_SPEND)
 
@@ -783,58 +639,44 @@ def policy_fuel_poverty(data):
         shocked_elec = elec * (1 + pct)
         neg_threshold_shocked = NEG_ELEC_SPEND * (1 + pct)
         benefit_shocked = np.minimum(shocked_elec, neg_threshold_shocked)
-        # NEG payment = extra benefit vs baseline
         payment = benefit_shocked - neg_baseline_benefit
 
         deciles = []
         for d in range(1, 11):
             mask = decile_arr == d
             e_d, i_d, w_d, p_d = energy[mask], income[mask], weights[mask], payment[mask]
-            n_hh = float(w_d.sum()) / 1e6
             shocked_e = e_d * (1 + pct)
             net_s = np.maximum(shocked_e - p_d, e_d)
-            fp_s = float(np.average((net_s / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
             behav_e = e_d * behavioral_factor
             net_b = np.maximum(behav_e - p_d, e_d)
-            fp_b = float(np.average((net_b / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
-            extra_s_neg = float(weighted_mean(np.maximum(net_s - e_d, 0), w_d))
-            extra_b_neg = float(weighted_mean(np.maximum(net_b - e_d, 0), w_d))
-            mean_inc_neg = float(weighted_mean(i_d, w_d))
-            pct_s_neg = round(extra_s_neg / mean_inc_neg * 100, 1) if mean_inc_neg > 0 else 0
-            pct_b_neg = round(extra_b_neg / mean_inc_neg * 100, 1) if mean_inc_neg > 0 else 0
+            extra_s = float(weighted_mean(np.maximum(net_s - e_d, 0), w_d))
+            extra_b = float(weighted_mean(np.maximum(net_b - e_d, 0), w_d))
+            mean_inc = float(weighted_mean(i_d, w_d))
+            pct_s = round(extra_s / mean_inc * 100, 2) if mean_inc > 0 else 0
+            pct_b = round(extra_b / mean_inc * 100, 2) if mean_inc > 0 else 0
             deciles.append({
                 "decile": d,
-                "extra_cost": round(extra_s_neg),
-                "pct_of_income": pct_s_neg,
-                "fp_rate": round(fp_s, 1), "fp_households_m": round(fp_s / 100 * n_hh, 2),
-                "behavioral_extra_cost": round(extra_b_neg),
-                "behavioral_pct_of_income": pct_b_neg,
-                "behavioral_fp_rate": round(fp_b, 1), "behavioral_fp_households_m": round(fp_b / 100 * n_hh, 2),
+                "extra_cost": round(extra_s),
+                "pct_of_income": pct_s,
+                "behavioral_extra_cost": round(extra_b),
+                "behavioral_pct_of_income": pct_b,
             })
-        n_total = float(weights.sum()) / 1e6
-        shocked_all = energy * (1 + pct)
-        net_all_s = np.maximum(shocked_all - payment, energy)
-        fp_all_s = float(np.average((net_all_s / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
-        behav_all = energy * behavioral_factor
-        net_all_b = np.maximum(behav_all - payment, energy)
-        fp_all_b = float(np.average((net_all_b / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
-        by_tenure = _fp_by_group(energy, income, weights, payment,
-                                 tenure_arr, tenure_groups, pct, behavioral_factor)
+
+        by_tenure = _grouped_post_policy(energy, income, weights, payment,
+                                         tenure_arr, tenure_groups, pct, behavioral_factor)
         for t in by_tenure:
             t["tenure"] = t.pop("group")
-        by_hh_type = _fp_by_group(energy, income, weights, payment,
-                                  hh_type_arr, hh_type_groups, pct, behavioral_factor)
+        by_hh_type = _grouped_post_policy(energy, income, weights, payment,
+                                          hh_type_arr, hh_type_groups, pct, behavioral_factor)
         for h in by_hh_type:
             h["hh_type"] = h.pop("group")
-        by_country = _fp_by_group(energy, income, weights, payment,
-                                  country_arr, country_groups, pct, behavioral_factor)
+        by_country = _grouped_post_policy(energy, income, weights, payment,
+                                          country_arr, country_groups, pct, behavioral_factor)
         for c in by_country:
             c["country"] = c.pop("group")
 
         neg_scenarios.append({
             "scenario": name,
-            "fp_rate": round(fp_all_s, 1), "fp_households_m": round(fp_all_s / 100 * n_total, 2),
-            "behavioral_fp_rate": round(fp_all_b, 1), "behavioral_fp_households_m": round(fp_all_b / 100 * n_total, 2),
             "deciles": deciles,
             "by_tenure": by_tenure,
             "by_hh_type": by_hh_type,
@@ -842,51 +684,21 @@ def policy_fuel_poverty(data):
         })
     results["neg"] = neg_scenarios
 
-    # --- RBT: household-level net effect (negative = saving) ---
+    # --- RBT ---
     threshold = NEG_ELEC_SPEND
-    discount_rate = 0.50
+    discount_rate = RBT_DISCOUNT_RATE
     block1 = np.minimum(elec, threshold)
     block1_subsidy = block1 * discount_rate
     block2 = np.maximum(elec - threshold, 0)
     total_subsidy = float(np.sum(block1_subsidy * weights))
     total_block2 = float(np.sum(block2 * weights))
     surcharge_rate = total_subsidy / total_block2 if total_block2 > 0 else 0
-    rbt_payment = block1_subsidy - block2 * surcharge_rate  # positive = saving
+    rbt_payment = block1_subsidy - block2 * surcharge_rate
 
     rbt_scenarios = []
     for name, new_cap in PRICE_SCENARIOS.items():
         pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
-        behavioral_factor = (1 + pct) * (1 + epsilon * pct)
-
-        deciles = []
-        for d in range(1, 11):
-            mask = decile_arr == d
-            e_d, i_d, w_d, p_d = energy[mask], income[mask], weights[mask], rbt_payment[mask]
-            n_hh = float(w_d.sum()) / 1e6
-            shocked_e = e_d * (1 + pct)
-            net_s = np.maximum(shocked_e - p_d, e_d)
-            fp_s = float(np.average((net_s / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
-            behav_e = e_d * behavioral_factor
-            net_b = np.maximum(behav_e - p_d, e_d)
-            fp_b = float(np.average((net_b / np.where(i_d > 0, i_d, 1)) > 0.10, weights=w_d)) * 100 if w_d.sum() > 0 else 0
-            deciles.append({
-                "decile": d,
-                "fp_rate": round(fp_s, 1), "fp_households_m": round(fp_s / 100 * n_hh, 2),
-                "behavioral_fp_rate": round(fp_b, 1), "behavioral_fp_households_m": round(fp_b / 100 * n_hh, 2),
-            })
-        n_total = float(weights.sum()) / 1e6
-        shocked_all = energy * (1 + pct)
-        net_all_s = np.maximum(shocked_all - rbt_payment, energy)
-        fp_all_s = float(np.average((net_all_s / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
-        behav_all = energy * behavioral_factor
-        net_all_b = np.maximum(behav_all - rbt_payment, energy)
-        fp_all_b = float(np.average((net_all_b / np.where(income > 0, income, 1)) > 0.10, weights=weights)) * 100
-        rbt_scenarios.append({
-            "scenario": name,
-            "fp_rate": round(fp_all_s, 1), "fp_households_m": round(fp_all_s / 100 * n_total, 2),
-            "behavioral_fp_rate": round(fp_all_b, 1), "behavioral_fp_households_m": round(fp_all_b / 100 * n_total, 2),
-            "deciles": deciles,
-        })
+        rbt_scenarios.append({"scenario": name, "deciles": []})
     results["rbt"] = rbt_scenarios
 
     return results
@@ -909,8 +721,8 @@ def energy_split(data):
             "total_energy": round(total),
             "net_income": round(mi),
             "elec_share_pct": round(me / total * 100, 1) if total > 0 else 0,
-            "elec_burden_pct": round(me / mi * 100, 1) if mi > 0 else 0,
-            "gas_burden_pct": round(mg / mi * 100, 1) if mi > 0 else 0,
+            "elec_burden_pct": round(me / mi * 100, 2) if mi > 0 else 0,
+            "gas_burden_pct": round(mg / mi * 100, 2) if mi > 0 else 0,
         })
 
     mean_elec = weighted_mean(data["elec"], data["weights"])
@@ -945,7 +757,7 @@ def regional_breakdown(data):
             "gas": round(mg),
             "total_energy": round(total_e),
             "net_income": round(mi),
-            "energy_burden_pct": round(total_e / mi * 100, 1) if mi > 0 else 0,
+            "energy_burden_pct": round(total_e / mi * 100, 2) if mi > 0 else 0,
             "households_m": round(n_hh, 1),
         })
     regions.sort(key=lambda x: x["energy_burden_pct"], reverse=True)
@@ -965,20 +777,13 @@ def tenure_breakdown(data):
         mi = weighted_mean(data["income"], data["weights"], mask)
         n_hh = float(data["weights"][mask].sum()) / 1e6
 
-        total_e = data["elec"][mask] + data["gas"][mask]
-        inc = data["income"][mask]
-        w = data["weights"][mask]
-        fp = (total_e / np.where(inc > 0, inc, 1)) > 0.10
-        fp_rate = float(np.average(fp, weights=w)) * 100 if w.sum() > 0 else 0
-
         tenures.append({
             "tenure": str(t),
             "electricity": round(me),
             "gas": round(mg),
             "total_energy": round(me + mg),
             "net_income": round(mi),
-            "energy_burden_pct": round((me + mg) / mi * 100, 1) if mi > 0 else 0,
-            "fuel_poverty_pct": round(fp_rate, 1),
+            "energy_burden_pct": round((me + mg) / mi * 100, 2) if mi > 0 else 0,
             "households_m": round(n_hh, 1),
         })
     tenures.sort(key=lambda x: x["energy_burden_pct"], reverse=True)
@@ -998,20 +803,13 @@ def household_type_breakdown(data):
         mi = weighted_mean(data["income"], data["weights"], mask)
         n_hh = float(data["weights"][mask].sum()) / 1e6
 
-        total_e = data["elec"][mask] + data["gas"][mask]
-        inc = data["income"][mask]
-        w = data["weights"][mask]
-        fp = (total_e / np.where(inc > 0, inc, 1)) > 0.10
-        fp_rate = float(np.average(fp, weights=w)) * 100 if w.sum() > 0 else 0
-
         hh_types.append({
             "hh_type": str(t),
             "electricity": round(me),
             "gas": round(mg),
             "total_energy": round(me + mg),
             "net_income": round(mi),
-            "energy_burden_pct": round((me + mg) / mi * 100, 1) if mi > 0 else 0,
-            "fuel_poverty_pct": round(fp_rate, 1),
+            "energy_burden_pct": round((me + mg) / mi * 100, 2) if mi > 0 else 0,
             "households_m": round(n_hh, 1),
         })
     hh_types.sort(key=lambda x: x["energy_burden_pct"], reverse=True)
@@ -1031,20 +829,13 @@ def country_breakdown(data):
         mi = weighted_mean(data["income"], data["weights"], mask)
         n_hh = float(data["weights"][mask].sum()) / 1e6
 
-        total_e = data["elec"][mask] + data["gas"][mask]
-        inc = data["income"][mask]
-        w = data["weights"][mask]
-        fp = (total_e / np.where(inc > 0, inc, 1)) > 0.10
-        fp_rate = float(np.average(fp, weights=w)) * 100 if w.sum() > 0 else 0
-
         countries.append({
             "country": str(c),
             "electricity": round(me),
             "gas": round(mg),
             "total_energy": round(me + mg),
             "net_income": round(mi),
-            "energy_burden_pct": round((me + mg) / mi * 100, 1) if mi > 0 else 0,
-            "fuel_poverty_pct": round(fp_rate, 1),
+            "energy_burden_pct": round((me + mg) / mi * 100, 2) if mi > 0 else 0,
             "households_m": round(n_hh, 1),
         })
     countries.sort(key=lambda x: x["energy_burden_pct"], reverse=True)
@@ -1133,7 +924,7 @@ def rising_block_tariff(data):
     decile_arr, income = data["decile"], data["income"]
 
     threshold = NEG_ELEC_SPEND
-    discount_rate = 0.50
+    discount_rate = RBT_DISCOUNT_RATE
 
     block1 = np.minimum(elec, threshold)
     block1_subsidy = block1 * discount_rate

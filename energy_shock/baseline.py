@@ -7,7 +7,7 @@ Energy is defined as electricity_consumption + gas_consumption throughout.
 import numpy as np
 from policyengine_uk import Microsimulation
 
-from .config import YEAR, REGION_TO_COUNTRY
+from .config import YEAR, REGION_TO_COUNTRY, DATASET_URL
 
 
 def _vals(sim, var, **kw):
@@ -18,7 +18,7 @@ def _vals(sim, var, **kw):
 
 def run_baseline():
     """Run baseline simulation and return dict of household-level arrays."""
-    sim = Microsimulation()
+    sim = Microsimulation(dataset=DATASET_URL)
 
     elec = _vals(sim, "electricity_consumption")
     gas = _vals(sim, "gas_consumption")

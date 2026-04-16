@@ -36,3 +36,22 @@ SHOCK_CAP = PRICE_SCENARIOS["+60%"]
 EPG_TARGET = 2_500
 FLAT_TRANSFER = 400
 CT_REBATE = 300
+
+# Ofgem Q2 2026 unit rates (for kWh ↔ £ threshold conversions)
+ELEC_RATE = 24.70 / 100   # £/kWh
+GAS_RATE = 5.70 / 100     # £/kWh
+
+# NEG: median electricity consumption threshold
+NEG_ELEC_KWH = 2_900
+NEG_ELEC_SPEND = NEG_ELEC_KWH * ELEC_RATE
+
+# Winter Fuel Payment amounts
+WFA_HIGHER = 500
+WFA_LOWER = 350
+
+# Rising block tariff discount rate
+RBT_DISCOUNT_RATE = 0.50
+
+# HuggingFace dataset URL for PE UK data
+DATASET_URL = "hf://policyengine/policyengine-uk-data/enhanced_frs_2023_24.h5"
+

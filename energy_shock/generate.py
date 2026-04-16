@@ -14,11 +14,10 @@ from pathlib import Path
 
 from .baseline import run_baseline, filter_by_country
 from .config import (
-    YEAR, CURRENT_CAP, SHOCK_CAP, EPG_TARGET,
+    YEAR, CURRENT_CAP,
     FLAT_TRANSFER, CT_REBATE, SHORT_RUN_ELASTICITY,
 )
 from . import sections
-from .constituency import constituency_analysis
 
 OUTPUT_DIR = Path(__file__).parent.parent / "dashboard" / "src" / "data"
 
@@ -41,49 +40,31 @@ def _run_one(data, country, suffix, raw_data):
     print("  Shock scenarios...")
     scenarios = sections.shock_scenarios(data)
 
-    print("  Fuel poverty...")
-    fp = sections.fuel_poverty(data)
-
     print("  Behavioural responses...")
     behav = sections.behavioral_responses(data)
 
-    print("  Policy A: EPG...")
-    pol_epg = sections.policy_epg(data)
-
-    print("  Policy B: Flat transfer...")
+    print("  Policy: Flat transfer...")
     pol_flat = sections.policy_flat(data)
 
-    print("  Policy C: CT rebate...")
+    print("  Policy: CT rebate...")
     pol_ct = sections.policy_ct_rebate(data)
 
-    print("  Policy E: Combined...")
-    pol_combined = sections.policy_combined(data)
-
-    print("  Policy net positions...")
-    pol_net = sections.policy_net_position(data)
-
-    print("  Post-policy fuel poverty...")
-    pol_fp = sections.policy_fuel_poverty(data)
+    print("  Post-policy shock...")
+    pol_ps = sections.policy_post_shock(data)
 
     results = {
         "baseline": baseline,
         "shock_scenarios": scenarios,
-        "fuel_poverty": fp,
         "behavioral": behav,
         "policies": {
-            "epg": pol_epg,
             "flat_transfer": pol_flat,
             "ct_rebate": pol_ct,
-            "combined": pol_combined,
         },
-        "policy_net_position": pol_net,
-        "policy_fuel_poverty": pol_fp,
+        "policy_post_shock": pol_ps,
         "config": {
             "year": YEAR,
             "country": country,
             "current_cap": CURRENT_CAP,
-            "shock_cap": SHOCK_CAP,
-            "epg_target": EPG_TARGET,
             "flat_transfer": FLAT_TRANSFER,
             "ct_rebate": CT_REBATE,
             "elasticity": SHORT_RUN_ELASTICITY,
@@ -128,15 +109,6 @@ def _run_one(data, country, suffix, raw_data):
         json.dump(results_v2, f, indent=2)
     print(f"  -> {path_v2}")
 
-    # ── constituency_results.json ────────────────────────────────────
-    # Constituency weights matrix is aligned to full dataset, so pass raw_data
-    print("  Constituency analysis...")
-    const = constituency_analysis(raw_data, country=country)
-
-    path_const = OUTPUT_DIR / f"constituency_results{suffix}.json"
-    with open(path_const, "w") as f:
-        json.dump(const, f, indent=2)
-    print(f"  -> {path_const}")
 
 
 def run_all(country="UK"):
