@@ -1,6 +1,6 @@
 # Energy Price Shock: Distributional Impact & Policy Options
 
-How an energy price increase hits UK households, who suffers most, and what policy responses would cost the Exchequer. Built on [PolicyEngine UK](https://policyengine.org/) microsimulation of 31.9m households.
+How an energy price increase hits UK households, which groups are most affected, and what policy responses would cost the Exchequer. Built on [PolicyEngine UK](https://policyengine.org/) microsimulation of 31.9m households.
 
 ## Overview
 
@@ -9,12 +9,12 @@ This project models the distributional impact of energy price shocks on UK house
 1. **Flat transfer** — £400 per household
 2. **Council tax band rebate** — £300 for bands A–D
 3. **Shock-matching transfer** — Flat payment equal to the average shock
-4. **Full-offset EPG** — Energy Price Guarantee that fully offsets the shock
+4. **Cap-freeze subsidy** — Bills held at the pre-shock cap of £1,641, government subsidises the full increase
 5. **National Energy Guarantee (NEG)** — Subsidises the first 2,900 kWh of electricity
 
 Additional analysis covers the rising block tariff (cost-neutral) and gas-only cap scenarios.
 
-The model applies a single uniform short-run price elasticity of −0.15 (the overall energy average from Labandeira et al., 2017) to estimate behavioural responses. This is a simplification; Priesmann and Praktiknjo (2025) show elasticities vary by income from −0.64 (low-income) to −0.11 (high-income).
+The model applies a single uniform short-run price elasticity of −0.15 (the overall energy average from Labandeira et al., 2017) to estimate behavioural responses. Priesmann and Praktiknjo (2025) report income-differentiated elasticities ranging from −0.64 (low-income) to −0.11 (high-income).
 
 ## Project structure
 
@@ -77,7 +77,7 @@ Current Ofgem price cap (Q2 2026): £1,641/yr.
 | +20% | £1,969 | +20% |
 | +30% | £2,133 | +30% |
 | +60% | £2,625 | +60% |
-| 2022-level | £3,764 | +129% |
+| Q1 2023 peak | £4,279 | +161% |
 
 ## Key parameters
 
