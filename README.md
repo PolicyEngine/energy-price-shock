@@ -1,6 +1,6 @@
 # Energy Price Shock: Distributional Impact & Policy Options
 
-How an energy price spike hits UK households, who suffers most, and what policy responses would cost the Exchequer. Built on [PolicyEngine UK](https://policyengine.org/) microsimulation of 31.9m households.
+How an energy price increase hits UK households, who suffers most, and what policy responses would cost the Exchequer. Built on [PolicyEngine UK](https://policyengine.org/) microsimulation of 31.9m households.
 
 ## Overview
 

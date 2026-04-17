@@ -239,7 +239,7 @@
   letter-spacing: -0.02em;
 }
 
-.metric-value.teal { color: var(--pe-color-primary-500); }
+.metric-value.teal { color: var(--pe-color-gray-800); }
 .metric-value.amber { color: #d97706; }
 .metric-value.red { color: #dc2626; }
 
@@ -614,7 +614,7 @@
 }
 
 .scenario-chip-value {
-  color: var(--pe-color-primary-600, #0d9488);
+  color: var(--pe-color-gray-900);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }

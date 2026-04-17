@@ -23,7 +23,9 @@ PRICE_SCENARIOS = {
     "+20%": int(CURRENT_CAP * 1.20),
     "+30%": int(CURRENT_CAP * 1.30),
     "+60%": int(CURRENT_CAP * 1.60),
-    "2022-level": 3_764,
+    # Q1 2023 Ofgem cap peak (default tariff, dual-fuel direct-debit, typical consumption).
+    # Source: Ofgem default tariff levels — https://www.ofgem.gov.uk/energy-regulation/domestic-and-non-domestic/energy-pricing-rules/energy-price-cap/energy-price-cap-default-tariff-levels
+    "Q1 2023 peak": 4_279,
 }
 
 # Short-run price elasticity of household energy demand

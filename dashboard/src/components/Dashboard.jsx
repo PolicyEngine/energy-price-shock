@@ -78,43 +78,43 @@ const POLICY_META = {
     fullName: "Flat transfer (£400 per household)",
     description: <>
       Every household receives a £400 credit on its energy bill, regardless of income, tenure, or consumption. This replicates the Energy Bills
-      Support Scheme (EBSS) paid in autumn/winter 2022.<a href="#fn-11"><sup>11</sup></a> We model it as a lump-sum deduction from each household's
-      post-shock energy cost. Because the payment is flat, it represents a larger share of income for lower-income households but all households receive the same amount regardless of need.
+      Support Scheme (EBSS) paid in autumn/winter 2022.<a href="#fn-9"><sup>9</sup></a> We model it as a lump-sum deduction from each household's
+      post-shock energy cost.
     </>,
   },
   ct_rebate: {
-    fullName: "Council tax band rebate (£300 for bands A–D)",
+    fullName: "Council tax band rebate (£300 for bands A–D, England only)",
     description: <>
-      A £300 payment to households in council tax bands A through D, modelled on the £150 Council Tax Rebate paid in April
-      2022.<a href="#fn-12"><sup>12</sup></a> PolicyEngine takes council tax bands directly from the Family Resources Survey and calibrates household weights so the band distribution matches VOA administrative counts by region. Bands A–D cover roughly 63% of English
-      dwellings.<a href="#fn-13"><sup>13</sup></a>
+      An England-only £300 payment to households in council tax bands A through D. The 2022 Council Tax Rebate was £150; this dashboard models £300.<a href="#fn-10"><sup>10</sup></a>
+      PolicyEngine takes council tax bands directly from the Family Resources Survey and calibrates household weights so the band distribution matches VOA administrative counts by region. Bands A–D cover roughly 63% of English
+      dwellings.<a href="#fn-11"><sup>11</sup></a>
     </>,
   },
   bn_transfer: {
     fullName: "Shock-matching flat transfer",
     description: <>
-      Every household receives a flat payment equal to the average extra energy cost under the selected shock scenario.
-      The total payout exactly matches the aggregate shock cost. We compute the average
-      static extra cost across all households and credit that amount to each.
+      Every household receives a flat payment equal to the average static extra cost across all households under the selected
+      scenario. Aggregate payout therefore matches aggregate shock cost, but higher-consuming households
+      receive the same amount as lower-consuming households.
     </>,
   },
   bn_epg: {
-    fullName: "Full-offset EPG (cap at £1,641)",
+    fullName: "Cap-freeze subsidy (bills held at £1,641)",
     description: <>
-      The government caps every household's bill at the current Ofgem level (£1,641/yr)<a href="#fn-5"><sup>5</sup></a> and
-      subsidises the full price increase. Each household's subsidy equals its actual bill increase, so every decile's net extra cost
+      The government holds every household's bill at the pre-shock level of £1,641/yr and
+      subsidises the full price increase.<a href="#fn-6"><sup>6</sup></a> Each household's subsidy equals its actual bill increase, so every decile's net extra cost
       is zero. The exchequer bears the full shock cost but achieves 100% offset for all households.
-      We model it by setting each household's bill to the pre-shock level and computing the subsidy as the difference.
+      This differs from the 2022 Energy Price Guarantee, which capped bills at £2,500 rather than freezing them at the pre-shock level:
+      we model it by setting each household's bill to the pre-shock level and computing the subsidy as the difference.
     </>,
   },
   neg: {
-    fullName: "National Energy Guarantee",
+    fullName: "National Energy Guarantee (NEG)",
     description: <>
-      Based on the proposal discussed in <a href="#ref-bangham">Bangham (2026)</a>: the government subsidises all energy consumption below a
-      kWh threshold at the pre-shock unit price. The threshold is set at the median household consumption level. Households consuming below the
-      threshold are fully shielded; those above pay the shocked price on consumption above the threshold. Each household's subsidy covers
-      the price increase on whichever is smaller: their actual consumption or the threshold. Low-income households tend to consume less energy, so
-      a larger share of their bill falls below the threshold.
+      Based on the proposal in <a href="#ref-bangham">Bangham (2026)</a>: each household's first 2,900 kWh/yr of electricity
+      (the median) is held at the pre-shock unit price, with the government paying the difference; consumption above that
+      threshold is charged the shocked price. Low-income households tend to consume less electricity, so a larger share of
+      their bill falls below the threshold.
     </>,
   },
 };
@@ -311,10 +311,9 @@ function BaselineSection() {
         <a href="https://www.ofgem.gov.uk/information-consumers/energy-advice-households/energy-price-cap-explained" target="_blank" rel="noopener noreferrer">wholesale markets</a>,
         so a geopolitical shock feeds through primarily via gas. Electricity
         prices also rise because gas-fired power stations set the marginal
-        price. ONS estimates that the lowest-income decile spends roughly 7% of
-        income on energy, compared with around 2% for the highest.<a href="#fn-7"><sup>7</sup></a>{" "}
-        The figure below shows the baseline energy burden by decile,
-        tenure and household type.
+        price. ONS estimates that the lowest-income decile spends roughly 7% of income on energy,
+        compared with around 2% for the highest.<a href="#fn-7"><sup>7</sup></a>{" "}
+        The figure below shows the baseline energy burden by decile, tenure and household type.
       </p>
 
       <div className="metric-row">
@@ -495,8 +494,11 @@ function ShockSection() {
     <div id="shocks">
       <h2 className="section-heading">Price shock scenarios</h2>
       <p className="section-description">
-        We model five scenarios in which the Ofgem price cap rises by a
-        given percentage from the current level of £1,641.
+        We model five scenarios in which the Ofgem price cap rises from the current level of £1,641
+        (dual-fuel, direct-debit, typical consumption). Ofgem resets the cap quarterly using observed
+        wholesale gas and electricity costs, so a wholesale-price shock passes through to household
+        unit rates at the next cap update, raising the £/kWh paid for every unit of energy consumed. The largest scenario, "Q1 2023 peak" (£4,279), is the
+        cap level Ofgem announced for January–March 2023, the peak of the 2022–23 energy crisis.<a href="#fn-8"><sup>8</sup></a>
       </p>
 
       <details className="expandable-table">
@@ -513,11 +515,11 @@ function ShockSection() {
         consumption) and a <strong>behavioural</strong> estimate that applies a
         single uniform short-run price elasticity of −0.15, the overall energy
         median from a meta-analysis of 966 estimates (<a href="#ref-labandeira">Labandeira,
-        Labeaga and López-Otero, 2017</a>, Table 3). This is a simplification:
-        elasticities vary by income. <a href="#ref-priesmann">Priesmann and Praktiknjo (2025)</a> report
+        Labeaga and López-Otero, 2017</a>, Table 3). Elasticities vary by income:{" "}
+        <a href="#ref-priesmann">Priesmann and Praktiknjo (2025)</a> report
         short-run gas price elasticities from −0.64 (low-income) to −0.11
-        (high-income), meaning low-income households cut consumption more
-        and the behavioural estimates here may understate their response.
+        (high-income). Under a single-elasticity behavioural estimate, low-income consumption
+        reductions are therefore closer to the average than under an income-differentiated estimate.
         The figure below shows the 2026–27 extra cost and income
         share of each scenario by decile, tenure and household type.
       </p>
@@ -611,13 +613,13 @@ function ShockSection() {
                           {showBoth ? (
                             <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
                               <div className="col-chart-fill" style={{ height: `${(d.staticVal / effectiveMax) * 100}%`, width: "48%", background: "#94a3b8", borderRadius: "3px 3px 0 0" }} />
-                              <div className="col-chart-fill" style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#319795", borderRadius: "3px 3px 0 0" }} />
+                              <div className="col-chart-fill" style={{ height: `${(d.behavVal / effectiveMax) * 100}%`, width: "48%", background: "#64748b", borderRadius: "3px 3px 0 0" }} />
                             </div>
                           ) : (
                             <div className="col-chart-track">
                               <div className="col-chart-fill" style={{
                                 height: `${((showStatic ? d.staticVal : d.behavVal) / effectiveMax) * 100}%`,
-                                background: showStatic ? "#94a3b8" : "#319795",
+                                background: showStatic ? "#94a3b8" : "#64748b",
                                 borderRadius: "3px 3px 0 0",
                               }} />
                             </div>
@@ -630,7 +632,7 @@ function ShockSection() {
                 </div>
                 <div className="col-chart-legend">
                   {showStatic && <span><span className="col-chart-legend-dot" style={{ background: "#94a3b8" }} />Static</span>}
-                  {showBehav && <span><span className="col-chart-legend-dot" style={{ background: "#319795" }} />Behavioural</span>}
+                  {showBehav && <span><span className="col-chart-legend-dot" style={{ background: "#64748b" }} />Behavioural</span>}
                 </div>
               </div>
             );
@@ -649,10 +651,10 @@ function PolicyNetSection() {
   const { policies } = results;
   const nHH = results.baseline.n_households_m;
   const neg = resultsV2.neg_policy;
-  const policyKeys = ["flat_transfer", "ct_rebate", "bn_transfer", "bn_epg", "neg"];
+  const policyKeys = ["flat_transfer", "bn_transfer", "bn_epg", "neg", "ct_rebate"];
   const policyLabels = {
     flat_transfer: "Flat transfer", ct_rebate: "CT rebate",
-    bn_transfer: "Shock-match", bn_epg: "Full-offset EPG",
+    bn_transfer: "Shock-match", bn_epg: "Cap-freeze subsidy",
     neg: "Energy Guarantee",
   };
   const TENURE_LABELS = {
@@ -677,6 +679,14 @@ function PolicyNetSection() {
   const scenarioName = scenario.name;
   const isAlt = selectedNet === "neg";
   const bk = policyBreakdown;
+  const geographyLabel = country === "UK" ? "the UK" : COUNTRY_OPTIONS.find((option) => option.key === country)?.label || country;
+  const breakdownLabel = bk === "decile" ? "group" : bk === "tenure" ? "tenure group" : bk === "hh_type" ? "household type" : "country";
+
+  useEffect(() => {
+    if (selectedNet === "ct_rebate" && country !== "ENGLAND") {
+      setCountry("ENGLAND");
+    }
+  }, [selectedNet, country]);
 
   // === KPI computation (independent of breakdown) ===
   let avgBenefit = 0, exchequerCost = 0;
@@ -723,7 +733,7 @@ function PolicyNetSection() {
       }
     }
   } else if (selectedNet === "bn_epg") {
-    // Full-offset EPG fully offsets every household — show zero bars
+    // Cap-freeze subsidy fully offsets every household — show zero bars
     const items = bk === "tenure" ? scenario.by_tenure.map((d) => ({ label: TENURE_LABELS[d.tenure] || d.tenure }))
       : bk === "hh_type" ? scenario.by_hh_type.filter((d) => d.hh_type !== "OTHER").map((d) => ({ label: HH_TYPE_LABELS[d.hh_type] || d.hh_type }))
       : scenario.by_country.map((d) => ({ label: COUNTRY_LABELS[d.country] || d.country }));
@@ -760,12 +770,8 @@ function PolicyNetSection() {
       <p className="section-description">
         This section models five policy responses to the price shock and compares
         their exchequer cost, average household benefit and distributional
-        effects across income deciles, tenure and household type. The UK's 2022 relief
-        package — a 39% price subsidy combined with a universal £400 transfer — cost
-        1.3% of GDP in six months, but 12% of total spending was lost to
-        inefficiency (<a href="#ref-levell">Levell et al., 2025</a>). The policies
-        below explore alternatives ranging from flat transfers to targeted designs.
-        The following are the five policies modelled:
+        effects across income deciles, tenure and household type. The five policies below explore
+        alternatives ranging from flat transfers to targeted designs:
       </p>
 
       <details className="expandable-table">
@@ -780,7 +786,7 @@ function PolicyNetSection() {
         </ul>
       </details>
       <p className="section-description">
-        The chart below shows the extra energy cost each group still faces after the selected policy is applied, broken down by decile, tenure or household type. Taller bars mean the policy leaves that group with a larger remaining burden.
+        The chart below shows the extra energy cost each group still faces after the selected policy is applied, broken down by decile, tenure, household type or country. A larger bar means a larger remaining burden for that group under the selected policy.
       </p>
 
       <div className="section-card">
@@ -836,7 +842,7 @@ function PolicyNetSection() {
         <div className="metric-row">
           <KpiCard label="Avg shock (pre-policy)" value={fmt(policyResponse === "static" ? avgStaticShock : avgBehavShock)} unit="/yr" info="Average annual extra energy cost per household under the selected shock scenario, before any policy intervention." />
           <KpiCard label="Policy benefit" value={fmt(avgBenefit)} unit="/yr" color="teal" info="Average annual payment or subsidy each household receives from the selected policy. For shock-matching policies this equals the average shock." />
-          <KpiCard label="Exchequer cost" value={fmtBn(exchequerCost)} info="Total annual cost to the government of funding this policy across all UK households." />
+          <KpiCard label="Exchequer cost" value={fmtBn(exchequerCost)} info={`Total annual cost to the government of funding this policy across households in ${geographyLabel}.`} />
         </div>
       )}
 
@@ -873,7 +879,7 @@ function PolicyNetSection() {
                                 : `, Shock: ${fmt(shock)}`}
                             </div>
                             <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
-                              <div className="col-chart-fill" style={{ height: `${(d.benefit / effectiveMax) * 100}%`, width: showBoth ? "32%" : "48%", background: "#10b981", borderRadius: "3px 3px 0 0" }} />
+                              <div className="col-chart-fill" style={{ height: `${(d.benefit / effectiveMax) * 100}%`, width: showBoth ? "32%" : "48%", background: "#94a3b8", borderRadius: "3px 3px 0 0" }} />
                               {showStatic && <div className="col-chart-fill" style={{ height: `${(d.shockStatic / effectiveMax) * 100}%`, width: showBoth ? "32%" : "48%", background: "#ef4444", borderRadius: "3px 3px 0 0" }} />}
                               {showBehav && !showStatic && <div className="col-chart-fill" style={{ height: `${(d.shockBehav / effectiveMax) * 100}%`, width: "48%", background: "#f97316", borderRadius: "3px 3px 0 0" }} />}
                               {showBoth && <div className="col-chart-fill" style={{ height: `${(d.shockBehav / effectiveMax) * 100}%`, width: "32%", background: "#f97316", borderRadius: "3px 3px 0 0" }} />}
@@ -887,15 +893,15 @@ function PolicyNetSection() {
                 </div>
                 <div className="col-chart-x-label">Decile</div>
                 <div className="col-chart-legend">
-                  <span><span className="col-chart-legend-dot" style={{ background: "#10b981" }} />Extra NEG benefit</span>
+                  <span><span className="col-chart-legend-dot" style={{ background: "#94a3b8" }} />Extra NEG benefit</span>
                   {showStatic && <span><span className="col-chart-legend-dot" style={{ background: "#ef4444" }} />{showBoth ? "Shock (static)" : "Shock cost"}</span>}
                   {showBehav && <span><span className="col-chart-legend-dot" style={{ background: "#f97316" }} />{showBoth ? "Shock (behav)" : "Shock cost"}</span>}
                 </div>
                 <p className="chart-note">
                   The NEG subsidises the first {neg.threshold_kwh.toLocaleString()} kWh of electricity for all households, costing £{neg.baseline_cost_bn}bn/yr even with no price shock.
                   When prices rise, the same kWh costs more, so the subsidy automatically increases.
-                  The green bars show this additional benefit per decile — the gap between what the NEG pays at shocked prices vs. what it pays at current prices.
-                  The red{showBehav ? "/orange" : ""} bars show the total shock cost, so where the shock bar exceeds the green bar, households still face a net extra cost despite the NEG.
+                  The gray bars show this additional benefit per decile (the gap between what the NEG pays at shocked prices vs. what it pays at current prices).
+                  The red{showBehav ? "/orange" : ""} bars show the total shock cost, so where the shock bar exceeds the gray bar, households still face a net extra cost despite the NEG.
                 </p>
               </div>
             </div>
@@ -912,12 +918,12 @@ function PolicyNetSection() {
 
         const fmtChart = (v) => fmt(v);
         const barColorStatic = "#94a3b8";
-        const barColorBehav = "#319795";
+        const barColorBehav = "#64748b";
 
         if (allZero && chartMessage) {
           return (
             <div className="chart-wrapper">
-              <p style={{ color: "#319795", fontWeight: 500, fontSize: "0.88rem", marginBottom: 12, textAlign: "center" }}>{chartMessage}</p>
+              <p style={{ color: "#64748b", fontWeight: 500, fontSize: "0.88rem", marginBottom: 12, textAlign: "center" }}>{chartMessage}</p>
             </div>
           );
         }
@@ -966,7 +972,7 @@ function PolicyNetSection() {
               {xLabel && <div className="col-chart-x-label">{xLabel}</div>}
               <div className="col-chart-legend">
                 {showStatic && <span><span className="col-chart-legend-dot" style={{ background: "#94a3b8" }} />Static</span>}
-                {showBehav && <span><span className="col-chart-legend-dot" style={{ background: "#319795" }} />Behavioural</span>}
+                {showBehav && <span><span className="col-chart-legend-dot" style={{ background: "#64748b" }} />Behavioural</span>}
               </div>
             </div>
           </div>
@@ -977,12 +983,11 @@ function PolicyNetSection() {
 
       <p className="section-description">
         Under the {scenarioName} scenario, the selected policy determines how
-        much of the shock each decile absorbs. The shock-matching flat transfer
-        gives every household the same amount, so higher-consuming deciles remain
-        under-compensated. The full-offset EPG offsets each household's actual
-        bill increase, eliminating the extra cost across all deciles. Fixed-cost
-        policies (flat transfer, council tax rebate) cover a larger share of the
-        shock at lower cap levels.
+        much of the shock each {breakdownLabel} absorbs in {geographyLabel}. The shock-matching flat transfer
+        gives every household the same amount, so higher-consuming groups receive less than
+        they actually lose. The cap-freeze subsidy offsets each household's actual bill increase,
+        eliminating the extra cost across all groups. Flat payments (flat transfer, council tax rebate)
+        cover a larger share of the shock at lower cap levels.
       </p>
 
       <hr className="section-divider" />
@@ -999,15 +1004,15 @@ function PolicyComparisonSection() {
   const nHH = results.baseline.n_households_m;
   const neg = resultsV2.neg_policy;
 
-  const policyKeys = ["flat_transfer", "ct_rebate", "bn_transfer", "bn_epg", "neg"];
+  const policyKeys = ["flat_transfer", "bn_transfer", "bn_epg", "neg", "ct_rebate"];
   const policyLabels = {
     flat_transfer: "Flat transfer", ct_rebate: "CT rebate",
-    bn_transfer: "Shock-match", bn_epg: "Full-offset EPG",
+    bn_transfer: "Shock-match", bn_epg: "Cap-freeze subsidy",
     neg: "Energy Guarantee",
   };
   const policyBarLabels = {
     flat_transfer: "Flat transfer", ct_rebate: "CT rebate",
-    bn_transfer: "Shock-match", bn_epg: "Full-offset EPG", neg: "Energy Guarantee",
+    bn_transfer: "Shock-match", bn_epg: "Cap-freeze subsidy", neg: "Energy Guarantee",
   };
 
   const [compScenario, setCompScenario] = useState(0);
@@ -1056,7 +1061,7 @@ function PolicyComparisonSection() {
   const activeTicks = niceTicks(maxActive);
   const activeFmt = (v) => `£${v}bn`;
   const activeColor = "#94a3b8";
-  const activeColorB = "#319795";
+  const activeColorB = "#64748b";
 
 
   const topTick = activeTicks[activeTicks.length - 1] || 1;
@@ -1070,8 +1075,7 @@ function PolicyComparisonSection() {
     <div id="policy-comparison">
       <h2 className="section-heading">Policy at a glance</h2>
       <p className="section-description">
-        The figure below compares all five 2026–27 policies side by side on exchequer
-        cost.
+        The figure below compares the five modelled policies side by side on 2026–27 exchequer cost.
       </p>
 
       <div className="section-card">
@@ -1145,11 +1149,11 @@ function PolicyComparisonSection() {
         const d10 = results.baseline.deciles[9];
         return (
           <p className="section-description" style={{ marginTop: 24 }}>
-            A {s10.name} shock adds £{s10.avg_hh_hit_yr.toLocaleString()}/yr to the average bill; at {sMax.name} prices the average hit reaches
+            A {s10.name} scenario adds £{s10.avg_hh_hit_yr.toLocaleString()}/yr to the average bill; under the {sMax.name} scenario the average hit reaches
             £{sMax.avg_hh_hit_yr.toLocaleString()}/yr. The lowest-income decile spends {d1.energy_share_pct}% of net income on energy versus {d10.energy_share_pct}%
             for the highest. The
             flat £{results.config.flat_transfer} transfer costs £{policies.flat_transfer.exchequer_cost_bn}bn, and the council tax rebate £{policies.ct_rebate.exchequer_cost_bn}bn.
-            The full-offset EPG and shock-matching transfer fully offset the average shock but at significant exchequer cost.
+            The cap-freeze subsidy and shock-matching transfer fully offset the average shock at higher exchequer cost.
           </p>
         );
       })()}
@@ -1192,10 +1196,10 @@ function MethodologySection() {
       <div className="section-card" style={{ marginBottom: 24 }}>
         <h2 className="section-heading">Key findings</h2>
         <ul className="policy-bullet-list">
-          <li>Under <strong>no policy intervention</strong>, a price cap rise adds between <strong>£{s10.avg_hh_hit_yr.toLocaleString()}/year</strong> ({s10.name} shock) and <strong>£{sMax.avg_hh_hit_yr.toLocaleString()}/year</strong> ({sMax.name} shock) to the average household energy bill.</li>
-          <li>A <strong>flat £{flatAmt} transfer</strong> costs <strong>£{policies.flat_transfer.exchequer_cost_bn}bn</strong> but covers less than half the <strong>£{s60hit.toLocaleString()}/year</strong> average hit under a {s60.name} shock.</li>
-          <li>A <strong>council tax band rebate</strong> (£{ctAmt} for bands A–D) costs <strong>£{policies.ct_rebate.exchequer_cost_bn}bn</strong> and delivers <strong>£{ctAvg.toLocaleString()}/year</strong> on average, leaving around <strong>£{(s60hit - ctAvg).toLocaleString()}/year</strong> residual under a {s60.name} shock.</li>
-          <li>A <strong>shock-matching flat transfer</strong> fully offsets the average household hit but costs the exchequer <strong>£{s10cost}bn</strong> for a {s10.name} shock.</li>
+          <li>Under <strong>no policy intervention</strong>, a price cap rise adds between <strong>£{s10.avg_hh_hit_yr.toLocaleString()}/year</strong> ({s10.name} scenario) and <strong>£{sMax.avg_hh_hit_yr.toLocaleString()}/year</strong> ({sMax.name} scenario) to the average household energy bill.</li>
+          <li>A <strong>flat £{flatAmt} transfer</strong> costs <strong>£{policies.flat_transfer.exchequer_cost_bn}bn</strong> but covers less than half the <strong>£{s60hit.toLocaleString()}/year</strong> average hit under a {s60.name} scenario.</li>
+          <li>A <strong>council tax band rebate</strong> (£{ctAmt} for bands A–D) costs <strong>£{policies.ct_rebate.exchequer_cost_bn}bn</strong> and delivers <strong>£{ctAvg.toLocaleString()}/year</strong> on average, leaving around <strong>£{(s60hit - ctAvg).toLocaleString()}/year</strong> residual under a {s60.name} scenario.</li>
+          <li>A <strong>shock-matching flat transfer</strong> fully offsets the average household hit but costs the exchequer <strong>£{s10cost}bn</strong> for a {s10.name} scenario.</li>
         </ul>
       </div>
 
@@ -1203,19 +1207,20 @@ function MethodologySection() {
         <div className="section-card methodology-col">
           <h2 className="section-heading">Methodology</h2>
           <p className="section-description">
-            All modelling uses the{" "}
-            <a href="https://policyengine.org" target="_blank" rel="noopener noreferrer">PolicyEngine UK</a>{" "}
-            microsimulation model<a href="#fn-6"><sup>6</sup></a> with separate electricity and gas
-            imputations calibrated to NEED 2023 admin data. The baseline establishes 2026–27
-            energy costs across UK households under current Ofgem rules,<a href="#fn-5"><sup>5</sup></a> with
-            the price cap set at £1,641. All estimates are annualised.
+            All modelling uses{" "}
+            <a href="https://policyengine.org" target="_blank" rel="noopener noreferrer">PolicyEngine UK</a>.<a href="#fn-5"><sup>5</sup></a>
+            Household electricity and gas bills are imputed from the National Energy Efficiency Data-Framework (NEED) 2023
+            administrative dataset. The baseline establishes 2026–27 energy costs across UK
+            households under current Ofgem rules, with the price cap set at £1,641
+            (dual-fuel, direct-debit, typical consumption).<a href="#fn-6"><sup>6</sup></a> All estimates are annualised.
           </p>
           <p className="section-description">
-            Shock scenarios raise the Ofgem cap by a given percentage and compute the extra cost
-            and income share for each household. Behavioural estimates apply a short-run price
+            Shock scenarios raise the Ofgem cap (four by a given percentage: +10%, +20%, +30%, +60%;
+            and one to the Q1 2023 peak level of £4,279) and compute the extra cost and income share
+            for each household. Behavioural estimates apply a short-run price
             elasticity of −0.15 (<a href="#ref-labandeira">Labandeira et al., 2017</a>). Five policy
             responses are modelled: a flat transfer, a council tax band rebate, a shock-matching
-            flat transfer, a full-offset EPG, and a National Energy Guarantee.
+            flat transfer, a cap-freeze subsidy, and a National Energy Guarantee (NEG).
           </p>
         </div>
 
@@ -1227,11 +1232,8 @@ function MethodologySection() {
             consumption, with lower-income households bearing a larger
             share (<a href="#ref-ari">Ari et al., 2022</a>). In the UK, average household losses
             reached 6% of income before government intervention. Households at
-            the 10th income percentile lost 5 percentage points more than those
-            at the 90th (<a href="#ref-levell">Levell et al., 2025</a>). The UK's 2022 relief package, a
-            39% price subsidy combined with a universal £400 transfer, cost
-            1.3% of GDP in six months and reduced losses, but 12% of total
-            spending was lost to inefficiency (<a href="#ref-levell">Levell et al., 2025</a>).
+            the 10th income percentile lost 5 percentage points of income more than those
+            at the 90th (<a href="#ref-levell">Levell et al., 2025</a>).
           </p>
           <p className="section-description">
             More broadly, oil price shocks have triggered recessions since the
@@ -1286,7 +1288,7 @@ function MethodologySection() {
         <div className="chart-title" style={{ marginTop: 24, marginBottom: 12 }}>Sources and data</div>
         <ol className="ref-list">
           <li id="fn-1">
-            <em>City AM</em>, "UK gas prices spike over 90 per cent amid US-Iran war," 3 March 2026.{" "}
+            <em>City AM</em>, "UK gas prices increase over 90 per cent amid US-Iran war," 3 March 2026.{" "}
             <a href="https://www.cityam.com/uk-gas-prices-spike-over-90-per-cent-amid-us-iran-war/" target="_blank" rel="noopener noreferrer">cityam.com</a>
           </li>
           <li id="fn-2">
@@ -1302,36 +1304,40 @@ function MethodologySection() {
             <a href="https://www.resolutionfoundation.org/press-releases/war-in-middle-east-threatens-bumper-year-of-living-standards-growth-for-lower-income-families/" target="_blank" rel="noopener noreferrer">resolutionfoundation.org</a>
           </li>
           <li id="fn-5">
-            Ofgem, "Energy price cap explained," accessed April 2026.{" "}
-            <a href="https://www.ofgem.gov.uk/information-consumers/energy-advice-households/energy-price-cap-explained" target="_blank" rel="noopener noreferrer">ofgem.gov.uk</a>
-          </li>
-          <li id="fn-6">
             PolicyEngine, "Energy price shock: distributional impact and policy options," GitHub repository.{" "}
             <a href="https://github.com/PolicyEngine/energy-price-shock" target="_blank" rel="noopener noreferrer">github.com</a>
+          </li>
+          <li id="fn-6">
+            Ofgem, "Energy price cap explained," accessed April 2026.{" "}
+            <a href="https://www.ofgem.gov.uk/information-consumers/energy-advice-households/energy-price-cap-explained" target="_blank" rel="noopener noreferrer">ofgem.gov.uk</a>
           </li>
           <li id="fn-7">
             ONS, "Energy prices and their effect on households," February 2022.{" "}
             <a href="https://www.ons.gov.uk/economy/inflationandpriceindices/articles/energypricesandtheireffectonhouseholds/2022-02-01" target="_blank" rel="noopener noreferrer">ons.gov.uk</a>
           </li>
+          <li id="fn-8">
+            Ofgem, "Energy price cap (default tariff) levels," accessed April 2026. The Q1 2023 cap (1 January – 31 March 2023) was set at £4,279/yr for a typical dual-fuel direct-debit household, the peak announced cap during the 2022–23 energy crisis.{" "}
+            <a href="https://www.ofgem.gov.uk/energy-regulation/domestic-and-non-domestic/energy-pricing-rules/energy-price-cap/energy-price-cap-default-tariff-levels" target="_blank" rel="noopener noreferrer">ofgem.gov.uk</a>
+          </li>
           <li id="fn-9">
-            DESNZ, "Energy Price Guarantee," GOV.UK, 2023. The EPG capped the unit rate for electricity and gas so a typical household paid no more than £2,500/yr. Suppliers were compensated for the shortfall.{" "}
-            <a href="https://www.gov.uk/government/publications/energy-price-guarantee/energy-price-guarantee" target="_blank" rel="noopener noreferrer">gov.uk</a>
-          </li>
-          <li id="fn-10">
-            HM Treasury, "Energy bills support factsheet," GOV.UK, updated 2023. Details the Energy Price Guarantee, Energy Bills Support Scheme (£400 flat transfer), and Council Tax Rebate.{" "}
-            <a href="https://www.gov.uk/government/publications/energy-bills-support/energy-bills-support-factsheet-8-september-2022" target="_blank" rel="noopener noreferrer">gov.uk</a>
-          </li>
-          <li id="fn-11">
             DESNZ, "Energy Bills Support Scheme," GOV.UK, 2022. A £400 non-repayable discount applied to electricity bills in six monthly instalments (October 2022 – March 2023) for all domestic electricity customers.{" "}
             <a href="https://www.gov.uk/get-help-energy-bills/energy-bills-support-scheme" target="_blank" rel="noopener noreferrer">gov.uk</a>
           </li>
-          <li id="fn-12">
+          <li id="fn-10">
             DLUHC, "Council Tax Rebate: guidance for billing authorities," GOV.UK, 2022. A one-off £150 payment to households in council tax bands A–D in England.{" "}
             <a href="https://www.gov.uk/government/publications/the-council-tax-rebate-2022-23-billing-authority-guidance" target="_blank" rel="noopener noreferrer">gov.uk</a>
           </li>
-          <li id="fn-13">
+          <li id="fn-11">
             VOA, "Council tax: stock of properties," GOV.UK, 2024. Valuation Office Agency data on the distribution of dwellings by council tax band in England.{" "}
             <a href="https://www.gov.uk/government/statistics/council-tax-stock-of-properties-2024" target="_blank" rel="noopener noreferrer">gov.uk</a>
+          </li>
+          <li id="fn-12">
+            DESNZ, "Energy Price Guarantee," GOV.UK, 2023. The EPG capped the unit rate for electricity and gas so a typical household paid no more than £2,500/yr. Suppliers were compensated for the shortfall.{" "}
+            <a href="https://www.gov.uk/government/publications/energy-price-guarantee/energy-price-guarantee" target="_blank" rel="noopener noreferrer">gov.uk</a>
+          </li>
+          <li id="fn-13">
+            HM Treasury, "Energy bills support factsheet," GOV.UK, updated 2023. Details the Energy Price Guarantee, Energy Bills Support Scheme (£400 flat transfer), and Council Tax Rebate.{" "}
+            <a href="https://www.gov.uk/government/publications/energy-bills-support/energy-bills-support-factsheet-8-september-2022" target="_blank" rel="noopener noreferrer">gov.uk</a>
           </li>
         </ol>
       </details>
@@ -1372,16 +1378,19 @@ export default function Dashboard() {
 
       <main className="main-content">
         <p className="intro-text">
-          Since 28 February 2026, military strikes on Iran have disrupted Strait of Hormuz shipping
-          (~20% of global oil and gas), spiking UK wholesale gas prices over
-          90%.<a href="#fn-1"><sup>1</sup></a> Cornwall Insight forecasts the July 2026 Ofgem
-          cap at £1,801 (+10%),<a href="#fn-2"><sup>2</sup></a> while Stifel analysts warn a prolonged closure could push it to
-          £2,500.<a href="#fn-3"><sup>3</sup></a> This dashboard uses{" "}
-          <a href="https://policyengine.org" target="_blank" rel="noopener noreferrer">PolicyEngine UK</a>'s
-          microsimulation model<a href="#fn-6"><sup>6</sup></a> to estimate the distributional impact of five price-shock
-          scenarios on UK households, with separate electricity and gas imputations calibrated to
-          NEED 2023 data. Under current Ofgem rules,<a href="#fn-5"><sup>5</sup></a> the cap is
-          £1,641; all estimates are annualised. The{" "}
+          Since February 2026, military strikes on Iran have disrupted Strait of Hormuz shipping
+          (~20% of global oil and gas), increasing UK wholesale gas prices over 90%.<a href="#fn-1"><sup>1</sup></a>
+          Cornwall Insight forecasts the July 2026 Ofgem cap at £1,801, around +10% on the current cap.<a href="#fn-2"><sup>2</sup></a>
+          Stifel analysts estimate a sustained closure could push it to £2,500.<a href="#fn-3"><sup>3</sup></a>
+          Resolution Foundation estimates the combined energy-bill and motor-fuel rises could leave a
+          typical household £480 worse off in 2026.<a href="#fn-4"><sup>4</sup></a>
+        </p>
+        <p className="intro-text">
+          This dashboard uses PolicyEngine UK to estimate the distributional impact of five
+          price-shock scenarios.<a href="#fn-5"><sup>5</sup></a> Electricity and gas bills are imputed
+          from the National Energy Efficiency Data-Framework (NEED) 2023. Under current Ofgem rules,
+          the cap is £1,641 (dual-fuel, direct-debit, typical consumption); all figures are annual
+          values for the 2026–27 fiscal year.<a href="#fn-6"><sup>6</sup></a> The{" "}
           <strong>Impact scenarios</strong> tab models baseline burden and shock effects. The{" "}
           <strong>Policy responses</strong> tab evaluates five interventions. The{" "}
           <strong>Methodology</strong> tab explains the approach and data sources.

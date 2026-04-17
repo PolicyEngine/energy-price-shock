@@ -617,80 +617,80 @@
         ]
       },
       {
-        "name": "2022-level",
-        "new_cap": 3764,
-        "exchequer_cost_bn": 0.9,
-        "avg_benefit": 1162,
-        "avg_net_extra_cost": 1301,
+        "name": "Q1 2023 peak",
+        "new_cap": 4279,
+        "exchequer_cost_bn": 1.0,
+        "avg_benefit": 1322,
+        "avg_net_extra_cost": 1617,
         "deciles": [
           {
             "decile": 1,
-            "benefit": 1489,
-            "shock_extra": 2963,
-            "benefit_extra_vs_baseline": 840,
+            "benefit": 1693,
+            "shock_extra": 3682,
+            "benefit_extra_vs_baseline": 1044,
             "offset_pct": 28.3
           },
           {
             "decile": 2,
-            "benefit": 1120,
-            "shock_extra": 1773,
-            "benefit_extra_vs_baseline": 632,
+            "benefit": 1274,
+            "shock_extra": 2203,
+            "benefit_extra_vs_baseline": 785,
             "offset_pct": 35.6
           },
           {
             "decile": 3,
-            "benefit": 1219,
-            "shock_extra": 1716,
-            "benefit_extra_vs_baseline": 688,
+            "benefit": 1386,
+            "shock_extra": 2132,
+            "benefit_extra_vs_baseline": 854,
             "offset_pct": 40.1
           },
           {
             "decile": 4,
-            "benefit": 1092,
-            "shock_extra": 1712,
-            "benefit_extra_vs_baseline": 616,
+            "benefit": 1242,
+            "shock_extra": 2127,
+            "benefit_extra_vs_baseline": 766,
             "offset_pct": 36.0
           },
           {
             "decile": 5,
-            "benefit": 765,
-            "shock_extra": 1178,
-            "benefit_extra_vs_baseline": 432,
+            "benefit": 870,
+            "shock_extra": 1463,
+            "benefit_extra_vs_baseline": 536,
             "offset_pct": 36.7
           },
           {
             "decile": 6,
-            "benefit": 1264,
-            "shock_extra": 1924,
-            "benefit_extra_vs_baseline": 713,
+            "benefit": 1436,
+            "shock_extra": 2391,
+            "benefit_extra_vs_baseline": 886,
             "offset_pct": 37.0
           },
           {
             "decile": 7,
-            "benefit": 1247,
-            "shock_extra": 2762,
-            "benefit_extra_vs_baseline": 703,
+            "benefit": 1417,
+            "shock_extra": 3431,
+            "benefit_extra_vs_baseline": 874,
             "offset_pct": 25.5
           },
           {
             "decile": 8,
-            "benefit": 1204,
-            "shock_extra": 2026,
-            "benefit_extra_vs_baseline": 679,
+            "benefit": 1368,
+            "shock_extra": 2518,
+            "benefit_extra_vs_baseline": 843,
             "offset_pct": 33.5
           },
           {
             "decile": 9,
-            "benefit": 1224,
-            "shock_extra": 2703,
-            "benefit_extra_vs_baseline": 691,
+            "benefit": 1392,
+            "shock_extra": 3359,
+            "benefit_extra_vs_baseline": 858,
             "offset_pct": 25.5
           },
           {
             "decile": 10,
-            "benefit": 899,
-            "shock_extra": 1222,
-            "benefit_extra_vs_baseline": 507,
+            "benefit": 1022,
+            "shock_extra": 1518,
+            "benefit_extra_vs_baseline": 630,
             "offset_pct": 41.5
           }
         ]
