@@ -28,10 +28,35 @@ PRICE_SCENARIOS = {
     "Q1 2023 peak": 4_279,
 }
 
-# Short-run price elasticity of household energy demand
-# NEED 2022-23 data: consumption fell ~10-15% when prices roughly doubled
-# Consistent with Levell et al. (2025) and Kilian (2008) estimates
+# Short-run price elasticity of household energy demand.
+# Default −0.15 is the overall energy meta-analytic estimate from
+# Labandeira et al. (2017). NEED 2022-23 UK data shows consumption fell
+# ~10-15% when prices roughly doubled, consistent with this value at the
+# population mean.
+#
+# CAVEAT: this is a mean elasticity applied uniformly. Priesmann and
+# Praktiknjo (2025) find income-differentiated values ranging from −0.64
+# (low-income) to −0.11 (high-income) — poorer households cut
+# consumption far more sharply under a shock. Using a uniform value
+# therefore understates the behavioural-side progressivity of a shock
+# (and overstates the bill-saving that richer households achieve).
+# ``ELASTICITY_BY_DECILE`` below linearly interpolates the Priesmann
+# endpoints across deciles for sensitivity runs; ``SHORT_RUN_ELASTICITY``
+# is used for the headline numbers to stay comparable with prior PE work.
+#
+# CAVEAT 2: a constant-elasticity linearisation is applied out to +161%
+# (Q1 2023 peak scenario), well outside the ±10-20% band over which the
+# meta-analyses are validated. Treat the extreme-shock scenarios as
+# illustrative rather than predictive.
 SHORT_RUN_ELASTICITY = -0.15
+
+# Priesmann & Praktiknjo (2025) income-differentiated elasticities.
+# Linearly interpolate from D1 = −0.64 to D10 = −0.11 across the ten
+# income deciles. Used by ``behavioral_responses`` when
+# ``decile_elasticity=True`` is passed through.
+ELASTICITY_BY_DECILE = {
+    d: -0.64 + (d - 1) * (-0.11 - -0.64) / 9 for d in range(1, 11)
+}
 
 # Policy response parameters (applied to severe shock)
 SHOCK_CAP = PRICE_SCENARIOS["+60%"]
