@@ -188,6 +188,28 @@ def behavioral_responses(data):
                 "behavioral_pct_of_income": round(behavioral_hit / inc * 100, 2) if inc > 0 else 0,
             })
 
+        # Sensitivity: Priesmann & Praktiknjo (2025) income-differentiated
+        # elasticities. Poorer households cut consumption more sharply, so
+        # reporting the decile-specific behavioural hit alongside the
+        # uniform-elasticity one lets readers see the progressivity the
+        # headline value suppresses.
+        deciles_priesmann = []
+        for d in range(1, 11):
+            eps_d = ELASTICITY_BY_DECILE[d]
+            behav_factor_d = (1 + price_pct) * (1 + eps_d * price_pct)
+            e = energy_by_dec[d]
+            inc = income_by_dec[d]
+            hit_d = e * (behav_factor_d - 1)
+            deciles_priesmann.append({
+                "decile": d,
+                "elasticity": round(eps_d, 3),
+                "consumption_reduction_pct": round(eps_d * price_pct * 100, 1),
+                "behavioral_extra_cost": round(hit_d),
+                "behavioral_pct_of_income": (
+                    round(hit_d / inc * 100, 2) if inc > 0 else 0
+                ),
+            })
+
         results_list.append({
             "name": name,
             "new_cap": new_cap,
@@ -199,6 +221,7 @@ def behavioral_responses(data):
             "bill_saving_avg": round(bill_saving),
             "welfare_loss_comfort_avg": round(welfare_loss_comfort),
             "deciles": deciles,
+            "deciles_priesmann": deciles_priesmann,
             "by_tenure": _grouped_shock(data, "tenure", "tenure", price_pct, epsilon),
             "by_hh_type": _grouped_shock(data, "hh_type", "hh_type", price_pct, epsilon),
             "by_country": _grouped_shock(data, "country", "country", price_pct, epsilon),

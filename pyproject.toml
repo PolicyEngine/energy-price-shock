@@ -4,9 +4,10 @@ version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
     # Unified PolicyEngine Python API (wraps UK + US country models).
-    # Also pulls policyengine-uk as the bundled country model.
-    "policyengine>=4.0.0",
-    "policyengine-uk>=2.86.12",
+    # Pinned to the exact minor ``policyengine`` ships with so dataset
+    # manifest compatibility holds; tracker warns on mismatch.
+    "policyengine>=4.1.0",
+    "policyengine-uk==2.88.0",
     "microdf-python>=1.2.0",
     "pandas>=2.0",
     "numpy>=1.26",
