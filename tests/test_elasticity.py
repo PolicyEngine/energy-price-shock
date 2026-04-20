@@ -73,7 +73,24 @@ def test_behavioural_factor_low_decile_cuts_harder():
     # Lower factor = bigger bill saving relative to static.
     assert low_factor < high_factor
 
-    # Quantify: low-decile consumption drops more, so its bill ratio
-    # is closer to 1.0 than the high-decile one under a 60% shock.
-    assert low_factor < 1 + pct  # static 1.6
+    # Both strictly below the static (no-response) factor 1 + pct.
+    assert low_factor < 1 + pct
     assert high_factor < 1 + pct
+
+
+def test_behavioural_factor_physically_admissible_at_extreme_shock():
+    """Q1 2023 peak (+161 %) must not produce negative spending factors
+    for D1 (ε = −0.64). The linear approximation ``(1+p)(1+εp)`` gives
+    −0.08 here; the log-linear form stays positive for all ε ∈ (−1, 0].
+    """
+    pct = 1.61
+    for eps in ELASTICITY_BY_DECILE.values():
+        factor = _behavioural_factor_hh(np.array([eps]), pct)[0]
+        assert factor > 0, (
+            f"ε={eps}: factor {factor} is non-positive, implying "
+            "physically impossible consumption change"
+        )
+    # Spot-check the canonical constant-elasticity identity:
+    # (1+p)**(1+ε) at ε=−0.64, p=1.61  →  2.61**0.36 ≈ 1.4115
+    d1_factor = _behavioural_factor_hh(np.array([-0.64]), 1.61)[0]
+    assert np.isclose(d1_factor, 2.61**0.36, rtol=1e-4)

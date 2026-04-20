@@ -18,7 +18,7 @@ import pandas as pd
 # Defer it into the actual simulation functions so that importing
 # ``energy_shock.baseline`` for its pure helpers (``weighted_mean``,
 # ``decile_means``, ``filter_by_country``) is cheap and offline-safe.
-from .config import YEAR, REGION_TO_COUNTRY, DATASET_URL
+from .config import DATASET_URL, REGION_TO_COUNTRY, YEAR
 
 # Extra household/person variables the energy-shock analysis needs on top
 # of the model's default entity_variables. Anything not in this list (or
@@ -102,7 +102,13 @@ def run_baseline():
 
     hh_type = _build_household_type(sim)
 
-    country_arr = pd.Series(region).astype(str).map(REGION_TO_COUNTRY).fillna("UNKNOWN").to_numpy()
+    country_arr = (
+        pd.Series(region)
+        .astype(str)
+        .map(REGION_TO_COUNTRY)
+        .fillna("UNKNOWN")
+        .to_numpy()
+    )
 
     return {
         "sim": sim,
@@ -187,7 +193,13 @@ def filter_by_country(data, country):
         mask = np.ones(len(data["weights"]), dtype=bool)
         return {**data, "country_mask": mask, "country": country}
 
-    hh_country = pd.Series(data["region"]).astype(str).map(REGION_TO_COUNTRY).fillna("").to_numpy()
+    hh_country = (
+        pd.Series(data["region"])
+        .astype(str)
+        .map(REGION_TO_COUNTRY)
+        .fillna("")
+        .to_numpy()
+    )
     mask = hh_country == country
 
     filtered = {
@@ -195,8 +207,18 @@ def filter_by_country(data, country):
         "country_mask": mask,
         "country": country,
     }
-    for key in ("elec", "gas", "energy", "income", "weights",
-                "decile", "region", "tenure", "accomm", "hh_type"):
+    for key in (
+        "elec",
+        "gas",
+        "energy",
+        "income",
+        "weights",
+        "decile",
+        "region",
+        "tenure",
+        "accomm",
+        "hh_type",
+    ):
         filtered[key] = data[key][mask]
     return filtered
 

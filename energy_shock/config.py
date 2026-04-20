@@ -5,8 +5,15 @@ YEAR = 2026
 COUNTRY = "UK"
 
 ENGLISH_REGIONS = {
-    "EAST_MIDLANDS", "EAST_OF_ENGLAND", "LONDON", "NORTH_EAST",
-    "NORTH_WEST", "SOUTH_EAST", "SOUTH_WEST", "WEST_MIDLANDS", "YORKSHIRE",
+    "EAST_MIDLANDS",
+    "EAST_OF_ENGLAND",
+    "LONDON",
+    "NORTH_EAST",
+    "NORTH_WEST",
+    "SOUTH_EAST",
+    "SOUTH_WEST",
+    "WEST_MIDLANDS",
+    "YORKSHIRE",
 }
 
 REGION_TO_COUNTRY = {r: "ENGLAND" for r in ENGLISH_REGIONS}
@@ -49,9 +56,7 @@ PRICE_SCENARIOS = {
 # (Q1 2023 peak scenario), well outside the ±10-20% band over which the
 # underlying elasticity studies are validated. Treat the extreme-shock
 # scenarios as illustrative rather than predictive.
-ELASTICITY_BY_DECILE = {
-    d: -0.64 + (d - 1) * (-0.11 - -0.64) / 9 for d in range(1, 11)
-}
+ELASTICITY_BY_DECILE = {d: -0.64 + (d - 1) * (-0.11 - -0.64) / 9 for d in range(1, 11)}
 
 # Policy response parameters (applied to severe shock)
 SHOCK_CAP = PRICE_SCENARIOS["+60%"]
@@ -60,8 +65,8 @@ FLAT_TRANSFER = 400
 CT_REBATE = 300
 
 # Ofgem Q2 2026 unit rates (for kWh ↔ £ threshold conversions)
-ELEC_RATE = 24.70 / 100   # £/kWh
-GAS_RATE = 5.70 / 100     # £/kWh
+ELEC_RATE = 24.70 / 100  # £/kWh
+GAS_RATE = 5.70 / 100  # £/kWh
 
 # NEG: median electricity consumption threshold
 NEG_ELEC_KWH = 2_900
@@ -76,4 +81,3 @@ RBT_DISCOUNT_RATE = 0.50
 
 # HuggingFace dataset URL for PE UK data
 DATASET_URL = "hf://policyengine/policyengine-uk-data/enhanced_frs_2023_24.h5"
-

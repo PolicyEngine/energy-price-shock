@@ -512,16 +512,22 @@ function ShockSection() {
 
       <p className="section-description">
         All charts include a <strong>static</strong> estimate (no change in
-        consumption) and a <strong>behavioural</strong> estimate that applies a
-        single uniform short-run price elasticity of −0.15, the overall energy
-        median from a meta-analysis of 966 estimates (<a href="#ref-labandeira">Labandeira,
-        Labeaga and López-Otero, 2017</a>, Table 3). Elasticities vary by income:{" "}
-        <a href="#ref-priesmann">Priesmann and Praktiknjo (2025)</a> report
-        short-run gas price elasticities from −0.64 (low-income) to −0.11
-        (high-income). Under a single-elasticity behavioural estimate, low-income consumption
-        reductions are therefore closer to the average than under an income-differentiated estimate.
-        The figure below shows the 2026–27 extra cost and income
-        share of each scenario by decile, tenure and household type.
+        consumption) and a <strong>behavioural</strong> estimate in which each
+        household responds at its own income decile's short-run price
+        elasticity per <a href="#ref-priesmann">Priesmann and Praktiknjo
+        (2025)</a>: −0.64 for the lowest decile, rising monotonically to −0.11
+        for the highest. A population-mean elasticity (e.g. Labandeira et al.
+        2017's −0.15) would average away the progressivity that matters —
+        lower-income households are forced to cut sharply while higher-income
+        households barely respond. The spend response uses the canonical
+        constant-elasticity form{" "}
+        <code>(p<sub>new</sub> / p<sub>old</sub>)<sup>1 + ε</sup></code>,
+        which remains physically admissible at all ε ∈ (−1, 0] and shock
+        sizes (unlike the linear first-order approximation, which produces
+        negative consumption at the +161% scenario). Constant-elasticity
+        extrapolation to +161% (Q1 2023 peak) is outside the validated band
+        for these estimates; the extreme-shock results are illustrative, not
+        predictive.
       </p>
 
       <div className="section-card">
@@ -567,8 +573,8 @@ function ShockSection() {
       <div className="metric-row">
         <KpiCard label="New price cap" value={fmt(scenario.new_cap)} unit="/yr" color="teal" info="The Ofgem price cap after the shock is applied. This is the cap level that determines household bills." />
         <KpiCard label="Static avg hit" value={fmt(scenario.avg_hh_hit_yr)} unit="/yr" info="Average extra annual cost per household assuming no change in energy consumption (static estimate)." />
-        <KpiCard label="Behavioural avg hit" value={fmt(behav.behavioural_avg_extra)} unit="/yr" color="teal" info="Average extra annual cost after households reduce consumption in response to higher prices (elasticity = -0.15)." />
-        <KpiCard label="Consumption change" value={`${behav.consumption_change_pct}%`} info="Percentage reduction in energy consumption due to the price increase, based on a short-run price elasticity of -0.15." />
+        <KpiCard label="Behavioural avg hit" value={fmt(behav.behavioural_avg_extra)} unit="/yr" color="teal" info="Average extra annual cost after each decile's households reduce consumption at its Priesmann & Praktiknjo (2025) short-run elasticity (−0.64 for D1 to −0.11 for D10)." />
+        <KpiCard label="Mean elasticity" value={behav.mean_elasticity ?? "—"} info="Weighted mean of the decile-specific short-run elasticities, weighted by household_weight. Reported as a reference — each household's behavioural response uses its own decile's value, not this mean." />
       </div>
 
         <div className="chart-wrapper">
@@ -1217,10 +1223,12 @@ function MethodologySection() {
           <p className="section-description">
             Shock scenarios raise the Ofgem cap (four by a given percentage: +10%, +20%, +30%, +60%;
             and one to the Q1 2023 peak level of £4,279) and compute the extra cost and income share
-            for each household. Behavioural estimates apply a short-run price
-            elasticity of −0.15 (<a href="#ref-labandeira">Labandeira et al., 2017</a>). Five policy
-            responses are modelled: a flat transfer, a council tax band rebate, a shock-matching
-            flat transfer, a cap-freeze subsidy, and a National Energy Guarantee (NEG).
+            for each household. Behavioural estimates apply income-decile-specific
+            short-run elasticities per <a href="#ref-priesmann">Priesmann and Praktiknjo (2025)</a>
+            (−0.64 for D1, rising to −0.11 for D10) under a canonical
+            constant-elasticity demand curve. Five policy responses are modelled:
+            a flat transfer, a council tax band rebate, a shock-matching flat transfer,
+            a cap-freeze subsidy, and a National Energy Guarantee (NEG).
           </p>
         </div>
 
@@ -1345,6 +1353,14 @@ function MethodologySection() {
   );
 }
 
+// Data generation guard: every bundled JSON carries ``_stale: true`` until
+// ``python -m energy_shock --all-countries`` has been run. Rendering the
+// dashboard against stale stubs would either crash on missing keys or show
+// numbers from an obsolete analysis pass — both worse than a clear banner.
+const DATA_STALE = Object.values(ALL_DATA).some(
+  (d) => d.results?._stale || d.v2?._stale,
+);
+
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("impact");
 
@@ -1367,6 +1383,37 @@ export default function Dashboard() {
     document.addEventListener("click", handler);
     return () => document.removeEventListener("click", handler);
   }, []);
+
+  if (DATA_STALE) {
+    return (
+      <div className="app-shell">
+        <header className="title-row">
+          <div className="title-row-inner">
+            <h1>Energy price shock: Distributional impact & policy options</h1>
+          </div>
+        </header>
+        <main className="main-content">
+          <div className="section-card" style={{ marginTop: 32 }}>
+            <h2 className="section-heading">Data generation pending</h2>
+            <p className="section-description">
+              The bundled dashboard data files under <code>dashboard/src/data/</code> are
+              placeholder stubs. To render the analysis, run the microsimulation:
+            </p>
+            <pre className="section-description" style={{ padding: 16, background: "#f4f4f6" }}>
+              pip install -e .{"\n"}
+              python -m energy_shock --all-countries
+            </pre>
+            <p className="section-description">
+              This will regenerate <code>results.json</code> and <code>results_v2.json</code>{" "}
+              for UK + each constituent nation from the current PolicyEngine UK microdata and
+              the decile-specific elasticity model. Dataset download requires a{" "}
+              <code>HUGGING_FACE_TOKEN</code> in your environment.
+            </p>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="app-shell">

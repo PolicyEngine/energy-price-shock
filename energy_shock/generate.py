@@ -12,12 +12,15 @@ import argparse
 import json
 from pathlib import Path
 
-from .baseline import run_baseline, filter_by_country
-from .config import (
-    YEAR, CURRENT_CAP,
-    FLAT_TRANSFER, CT_REBATE, ELASTICITY_BY_DECILE,
-)
 from . import sections
+from .baseline import filter_by_country, run_baseline
+from .config import (
+    CT_REBATE,
+    CURRENT_CAP,
+    ELASTICITY_BY_DECILE,
+    FLAT_TRANSFER,
+    YEAR,
+)
 
 OUTPUT_DIR = Path(__file__).parent.parent / "dashboard" / "src" / "data"
 
@@ -28,10 +31,10 @@ def _run_one(data, country, suffix, raw_data):
     """Run full analysis for one country/nation and write JSON files."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    print(f"\n{'='*50}")
-    print(f"  {country}: {data['weights'].sum()/1e6:.1f}m households")
+    print(f"\n{'=' * 50}")
+    print(f"  {country}: {data['weights'].sum() / 1e6:.1f}m households")
     print(f"  Mean energy: £{data['energy'].mean():.0f}")
-    print(f"{'='*50}")
+    print(f"{'=' * 50}")
 
     # ── results.json ─────────────────────────────────────────────────
     print("  Baseline summary...")
@@ -112,7 +115,6 @@ def _run_one(data, country, suffix, raw_data):
     print(f"  -> {path_v2}")
 
 
-
 def run_all(country="UK"):
     """Run analysis for a single country."""
     print("Running baseline microsimulation...")
@@ -147,12 +149,14 @@ def run_all_countries():
 def _cli():
     parser = argparse.ArgumentParser(description="Generate energy-shock analysis")
     parser.add_argument(
-        "--country", default="UK",
+        "--country",
+        default="UK",
         choices=VALID_COUNTRIES,
         help="Country/nation to analyse (default: UK)",
     )
     parser.add_argument(
-        "--all-countries", action="store_true",
+        "--all-countries",
+        action="store_true",
         help="Generate data for UK + all four nations",
     )
     args = parser.parse_args()

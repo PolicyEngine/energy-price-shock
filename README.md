@@ -8,13 +8,20 @@ This project models the distributional impact of energy price shocks on UK house
 
 1. **Flat transfer** — £400 per household
 2. **Council tax band rebate** — £300 for bands A–D
-3. **Shock-matching transfer** — Flat payment equal to the average shock
-4. **Cap-freeze subsidy** — Bills held at the pre-shock cap of £1,641, government subsidises the full increase
-5. **National Energy Guarantee (NEG)** — Subsidises the first 2,900 kWh of electricity
+3. **Shock-matching transfer** — flat payment equal to the average shock
+4. **Cap-freeze subsidy** — bills held at the pre-shock cap, government subsidises the full increase
+5. **National Energy Guarantee (NEG)** — subsidises the first 2,900 kWh of electricity
+6. **Rising block tariff** (cost-neutral) and gas-only cap scenarios
 
-Additional analysis covers the rising block tariff (cost-neutral) and gas-only cap scenarios.
+### Behavioural response
 
-The model applies a single uniform short-run price elasticity of −0.15 (the overall energy average from Labandeira et al., 2017) to estimate behavioural responses. Priesmann and Praktiknjo (2025) report income-differentiated elasticities ranging from −0.64 (low-income) to −0.11 (high-income).
+Each household responds to a price shock at its own income decile's short-run elasticity per Priesmann & Praktiknjo (2025): −0.64 for the lowest decile, rising monotonically to −0.11 for the highest (linear interpolation). A population-mean elasticity (e.g. Labandeira et al. 2017's −0.15) averages away the progressivity that matters: lower-income households are forced to cut sharply while higher-income households barely respond.
+
+The spend response uses the canonical constant-elasticity form
+`(p_new / p_old) ** (1 + ε)`
+rather than the linear first-order approximation `(1 + p)(1 + εp)`, which produces negative consumption — physically impossible — for combinations like ε = −0.64 and +161% shock. The log-linear form stays admissible at all ε ∈ (−1, 0] and p ≥ 0.
+
+Constant-elasticity extrapolation to +161% (Q1 2023 peak) is well outside the validated band for these elasticity estimates; the extreme-shock results are illustrative, not predictive.
 
 ## Project structure
 
@@ -48,13 +55,21 @@ energy-price-shock/
 ```bash
 conda activate python313
 pip install -e .
+export HUGGING_FACE_TOKEN=<your_token>    # required for dataset download
 python -m energy_shock                    # UK only
 python -m energy_shock --all-countries    # UK + England, Scotland, Wales, N. Ireland
 ```
 
 This runs the PolicyEngine UK microsimulation via the unified [`policyengine`](https://github.com/PolicyEngine/policyengine.py) Python API and outputs JSON files to `dashboard/src/data/`. Datasets are fetched lazily from HuggingFace on first run.
 
-Requirements: `policyengine>=4.0.0`, `policyengine-uk>=2.86.12`, `microdf-python`, `numpy` (Python 3.13+).
+Requirements: `policyengine>=4.1.0`, `policyengine-uk==2.88.0`, `microdf-python`, `numpy` (Python 3.13+).
+
+### Tests
+
+```bash
+pip install -e .[dev]
+pytest tests/
+```
 
 ### Dashboard
 
@@ -85,12 +100,13 @@ Current Ofgem price cap (Q2 2026): £1,641/yr.
 | Current cap | £1,641 | Ofgem Q2 2026 |
 | Electricity rate | 24.70 p/kWh | Ofgem Q2 2026 |
 | Gas rate | 5.70 p/kWh | Ofgem Q2 2026 |
-| Short-run elasticity | −0.15 | Labandeira et al. (2017) |
+| Short-run elasticity | −0.64 (D1) → −0.11 (D10) | Priesmann & Praktiknjo (2025) |
+| Behavioural form | `(p_new/p_old) ** (1+ε)` | Constant-elasticity |
 | NEG threshold | 2,900 kWh | Median household electricity |
 | Dataset | enhanced_frs_2023_24.h5 | PolicyEngine UK data (HuggingFace) |
 
 ## Tech stack
 
-- **Analysis**: Python 3.13, `policyengine` >= 4.0 (wraps PolicyEngine UK 2.86.12), microdf
+- **Analysis**: Python 3.13, `policyengine` >= 4.1 (wraps PolicyEngine UK 2.88.0), microdf
 - **Dashboard**: React 18, Vite 5
 - **Charts**: CSS-based vertical column charts (no charting library)
