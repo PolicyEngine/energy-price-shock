@@ -28,6 +28,7 @@ from .config import (
     SHOCK_CAP,
     WFA_HIGHER,
     WFA_LOWER,
+    YEAR,
 )
 
 
@@ -80,8 +81,11 @@ def _behavioural_factor_hh(epsilon_hh, price_pct):
 
 
 def _hh_array(sim, var):
-    """Pull a household-level variable from a policyengine.py Simulation."""
-    return np.asarray(sim.output_dataset.data.household[var].values)
+    """Pull a household-level variable from a ``policyengine_uk``
+    Microsimulation. Mirrors ``baseline._hh_array``.
+    """
+    series = sim.calculate(var, YEAR)
+    return series.values if hasattr(series, "values") else np.asarray(series)
 
 
 def _calc_decile_table(sim, variable, country_mask=None):

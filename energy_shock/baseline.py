@@ -2,10 +2,13 @@
 
 Energy is defined as electricity_consumption + gas_consumption throughout.
 
-Uses the ``policyengine.py`` API for dataset ensuring + simulation. The
-policy/dynamic reform dicts compile against the bundled UK model
-version, so reform dicts use the same parameter paths as the raw
-``policyengine-uk`` Microsimulation.
+Uses ``policyengine_uk.Microsimulation`` directly. A migration to the
+unified ``policyengine.py`` API was trialled but blocked by a
+bootstrap mismatch in ``policyengine.py`` 4.1.x's bundled UK release
+manifest (pinned to a data-package version without a published
+``release_manifest.json`` on Hugging Face). Reform dicts use the same
+parameter paths either way, so the migration can be revisited once
+upstream stabilises.
 """
 
 from __future__ import annotations
@@ -13,75 +16,46 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-# ``policyengine`` import is expensive (HF manifest fetch, multi-GB
-# dataset registry) and fails without ``HUGGING_FACE_TOKEN`` set.
-# Defer it into the actual simulation functions so that importing
+# The ``policyengine_uk`` import pulls the whole UK tax-benefit system
+# at module load (variable registry, parameter tree, etc.), so defer it
+# into the actual simulation functions. That keeps importing
 # ``energy_shock.baseline`` for its pure helpers (``weighted_mean``,
-# ``decile_means``, ``filter_by_country``) is cheap and offline-safe.
+# ``decile_means``, ``filter_by_country``) cheap and makes the unit
+# tests under ``tests/`` runnable without a microsim bootstrap.
 from .config import DATASET_URL, REGION_TO_COUNTRY, YEAR
 
-# Extra household/person variables the energy-shock analysis needs on top
-# of the model's default entity_variables. Anything not in this list (or
-# in the model default) won't be present on ``output_dataset.data``.
-EXTRA_VARIABLES = {
-    "person": [
-        "is_SP_age",
-    ],
-    "benunit": [
-        "family_type",
-    ],
-    "household": [
-        # Demographics / housing
-        "electricity_consumption",
-        "gas_consumption",
-        "region",
-        "accommodation_type",
-        # Reform-specific variables pulled by sections.policy_*
-        "epg_subsidy",
-        "ebr_energy_bills_credit",
-        "ebr_council_tax_rebate",
-        "winter_fuel_allowance",
-    ],
-}
 
+def _build_simulation(reform: dict | None = None):
+    """Construct a ``policyengine_uk`` Microsimulation.
 
-def _load_dataset():
-    """Ensure the enhanced FRS dataset is materialised for ``YEAR``."""
-    from policyengine.tax_benefit_models.uk import ensure_datasets
+    Reform dicts use the same parameter paths and date-keyed values as
+    reforms passed to the library directly.
+    """
+    from policyengine_uk import Microsimulation
 
-    datasets = ensure_datasets(datasets=[DATASET_URL], years=[YEAR])
-    # ``ensure_datasets`` keys by ``f"{basename}_{year}"`` where basename
-    # drops the ``.h5`` suffix.
-    (key,) = datasets.keys()
-    return datasets[key]
-
-
-def _build_simulation(policy: dict | None = None):
-    """Construct a policyengine.py Simulation with the extra vars wired in."""
-    from policyengine.core import Simulation
-    from policyengine.tax_benefit_models.uk import uk_latest
-
-    sim = Simulation(
-        dataset=_load_dataset(),
-        tax_benefit_model_version=uk_latest,
-        extra_variables=EXTRA_VARIABLES,
-        policy=policy,
-    )
-    sim.ensure()
-    return sim
+    return Microsimulation(dataset=DATASET_URL, reform=reform)
 
 
 def _hh_array(sim, var: str) -> np.ndarray:
     """Pull a household-level variable as a numpy array."""
-    return np.asarray(sim.output_dataset.data.household[var].values)
+    series = sim.calculate(var, YEAR)
+    return series.values if hasattr(series, "values") else np.asarray(series)
 
 
 def _person_array(sim, var: str) -> np.ndarray:
-    return np.asarray(sim.output_dataset.data.person[var].values)
+    series = sim.calculate(var, YEAR, map_to="person")
+    return series.values if hasattr(series, "values") else np.asarray(series)
 
 
 def _benunit_array(sim, var: str) -> np.ndarray:
-    return np.asarray(sim.output_dataset.data.benunit[var].values)
+    series = sim.calculate(var, YEAR, map_to="benunit")
+    return series.values if hasattr(series, "values") else np.asarray(series)
+
+
+def _weights(sim) -> np.ndarray:
+    """Household weights as a raw numpy array (skip the MicroSeries)."""
+    series = sim.calculate("household_weight", YEAR, unweighted=True)
+    return series.values if hasattr(series, "values") else np.asarray(series)
 
 
 def run_baseline():
@@ -93,8 +67,7 @@ def run_baseline():
     energy = elec + gas
 
     income = _hh_array(sim, "household_net_income")
-    # Household weights live on the MicroDataFrame; extract as raw array.
-    weights = np.asarray(sim.output_dataset.data.household["household_weight"].values)
+    weights = _weights(sim)
     decile = _hh_array(sim, "household_income_decile")
     region = _hh_array(sim, "region")
     tenure = _hh_array(sim, "tenure_type")
@@ -133,7 +106,7 @@ def _build_household_type(sim) -> np.ndarray:
     level. Aggregate both up to the household via pandas groupby, keeping
     the household frame's row order.
     """
-    hh_ids = np.asarray(sim.output_dataset.data.household["household_id"].values)
+    hh_ids = _hh_array(sim, "household_id")
 
     # First benunit's family_type per household.
     bu_frame = pd.DataFrame(
@@ -178,7 +151,7 @@ def build_reform_simulation(reform: dict):
             "gov.ofgem.energy_price_cap": {"2026-01-01": 2625},
         })
     """
-    return _build_simulation(policy=reform)
+    return _build_simulation(reform=reform)
 
 
 def filter_by_country(data, country):
