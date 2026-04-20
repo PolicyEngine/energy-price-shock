@@ -15,7 +15,7 @@ from pathlib import Path
 from .baseline import run_baseline, filter_by_country
 from .config import (
     YEAR, CURRENT_CAP,
-    FLAT_TRANSFER, CT_REBATE, SHORT_RUN_ELASTICITY,
+    FLAT_TRANSFER, CT_REBATE, ELASTICITY_BY_DECILE,
 )
 from . import sections
 
@@ -41,7 +41,7 @@ def _run_one(data, country, suffix, raw_data):
     scenarios = sections.shock_scenarios(data)
 
     print("  Behavioural responses...")
-    behav = sections.behavioral_responses(data)
+    behav = sections.behavioural_responses(data)
 
     print("  Policy: Flat transfer...")
     pol_flat = sections.policy_flat(data)
@@ -55,7 +55,7 @@ def _run_one(data, country, suffix, raw_data):
     results = {
         "baseline": baseline,
         "shock_scenarios": scenarios,
-        "behavioral": behav,
+        "behavioural": behav,
         "policies": {
             "flat_transfer": pol_flat,
             "ct_rebate": pol_ct,
@@ -67,7 +67,9 @@ def _run_one(data, country, suffix, raw_data):
             "current_cap": CURRENT_CAP,
             "flat_transfer": FLAT_TRANSFER,
             "ct_rebate": CT_REBATE,
-            "elasticity": SHORT_RUN_ELASTICITY,
+            "elasticity_by_decile": {
+                str(d): round(ELASTICITY_BY_DECILE[d], 3) for d in range(1, 11)
+            },
         },
     }
 

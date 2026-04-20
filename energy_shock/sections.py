@@ -13,7 +13,7 @@ from microdf import MicroDataFrame
 from .config import (
     YEAR, CURRENT_CAP, PRICE_SCENARIOS,
     SHOCK_CAP, EPG_TARGET, FLAT_TRANSFER, CT_REBATE,
-    SHORT_RUN_ELASTICITY, ELASTICITY_BY_DECILE,
+    ELASTICITY_BY_DECILE,
     ELEC_RATE, GAS_RATE, NEG_ELEC_KWH, NEG_ELEC_SPEND,
     WFA_HIGHER, WFA_LOWER, RBT_DISCOUNT_RATE,
 )
@@ -22,6 +22,37 @@ from .baseline import (
     decile_means,
     weighted_mean,
 )
+
+
+def _epsilon_per_household(data):
+    """Return a per-household elasticity array based on each household's
+    income decile and the ``ELASTICITY_BY_DECILE`` table.
+
+    Households with ``decile <= 0`` (top-coded or missing) get the
+    decile-weighted mean of the observed deciles so they don't break
+    weighted aggregates.
+    """
+    decile_arr = data["decile"]
+    eps = np.zeros(len(decile_arr), dtype=float)
+    for d in range(1, 11):
+        eps[decile_arr == d] = ELASTICITY_BY_DECILE[d]
+    fallback_mask = eps == 0
+    if fallback_mask.any():
+        # Weighted mean elasticity of the observed deciles.
+        good = ~fallback_mask
+        if good.any():
+            mean_eps = float(
+                np.average(eps[good], weights=data["weights"][good])
+            )
+        else:
+            mean_eps = sum(ELASTICITY_BY_DECILE.values()) / 10
+        eps[fallback_mask] = mean_eps
+    return eps
+
+
+def _behavioural_factor_hh(epsilon_hh, price_pct):
+    """Per-household behavioural factor: (1+p)(1+εp)."""
+    return (1.0 + price_pct) * (1.0 + epsilon_hh * price_pct)
 
 
 # ── helpers ──────────────────────────────────────────────────────────────
@@ -82,16 +113,25 @@ def baseline_summary(data):
 
 # ── 2. Shock scenarios ──────────────────────────────────────────────────
 
-def _grouped_shock(data, group_key, label_key, pct, epsilon=None):
+def _grouped_shock(data, group_key, label_key, pct, include_behavioural=False):
     """Compute shock impacts grouped by a categorical variable.
 
-    If epsilon is None, returns static impacts only.
-    If epsilon is given, returns both static and behavioural.
+    When ``include_behavioural`` is True, the behavioural response is
+    computed at the household level using each household's decile-
+    specific elasticity (Priesmann & Praktiknjo 2025), then aggregated
+    within the group — so the per-group behavioural impact reflects the
+    decile composition of that group rather than a single population
+    mean.
     """
     energy, income, weights = data["energy"], data["income"], data["weights"]
     groups = sorted(np.unique(data[group_key]))
     rows = []
-    behavioral_factor = (1 + pct) * (1 + epsilon * pct) if epsilon else None
+
+    eps_hh = _epsilon_per_household(data) if include_behavioural else None
+    behavioural_hit_hh = (
+        energy * (_behavioural_factor_hh(eps_hh, pct) - 1) if include_behavioural else None
+    )
+
     for g in groups:
         g_str = str(g)
         if g_str == "" or g_str == "None":
@@ -106,10 +146,12 @@ def _grouped_shock(data, group_key, label_key, pct, epsilon=None):
             "extra_cost": round(extra),
             "pct_of_income": round(extra / avg_i * 100, 2) if avg_i > 0 else 0,
         }
-        if epsilon is not None:
-            b_extra = avg_e * (behavioral_factor - 1)
-            row["behavioral_extra_cost"] = round(b_extra)
-            row["behavioral_pct_of_income"] = round(b_extra / avg_i * 100, 2) if avg_i > 0 else 0
+        if include_behavioural:
+            b_extra = float(weighted_mean(behavioural_hit_hh, weights, mask))
+            row["behavioural_extra_cost"] = round(b_extra)
+            row["behavioural_pct_of_income"] = (
+                round(b_extra / avg_i * 100, 2) if avg_i > 0 else 0
+            )
         rows.append(row)
     return rows
 
@@ -152,61 +194,65 @@ def shock_scenarios(data):
 
 # ── 3. Behavioural responses ────────────────────────────────────────────
 
-def behavioral_responses(data):
+def behavioural_responses(data):
+    """Behavioural-response analysis using Priesmann & Praktiknjo (2025)
+    decile-specific elasticities.
+
+    Each household responds to a price shock at its own decile's
+    elasticity rather than at a population mean. This lets the
+    behavioural progressivity of the shock show up in the output:
+    low-income households cut consumption sharply (ε ≈ −0.64) while
+    high-income households barely do (ε ≈ −0.11).
+
+    The headline ``average elasticity`` reported per scenario is the
+    weighted mean of the decile-specific values (computed from the
+    dataset, not hardcoded).
+    """
     energy, income, weights = data["energy"], data["income"], data["weights"]
     energy_by_dec = decile_means(data, "energy")
     income_by_dec = decile_means(data, "income")
     mean_energy = weighted_mean(energy, weights)
-    epsilon = SHORT_RUN_ELASTICITY
+
+    eps_hh = _epsilon_per_household(data)
+    mean_epsilon = float(np.average(eps_hh, weights=weights))
 
     results_list = []
     for name, new_cap in PRICE_SCENARIOS.items():
         price_pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
-        consumption_change_pct = epsilon * price_pct
-        behavioral_factor = (1 + price_pct) * (1 + consumption_change_pct)
-        static_factor = (1 + price_pct)
+
+        behav_factor_hh = _behavioural_factor_hh(eps_hh, price_pct)
+        behavioural_hit_hh = energy * (behav_factor_hh - 1)
+        static_hit_hh = energy * price_pct
 
         static_extra = mean_energy * price_pct
-        behavioral_extra = mean_energy * (behavioral_factor - 1)
-        bill_saving = static_extra - behavioral_extra
-        welfare_loss_comfort = mean_energy * 0.5 * abs(epsilon) * (price_pct ** 2)
+        behavioural_extra = float(weighted_mean(behavioural_hit_hh, weights))
+        bill_saving = static_extra - behavioural_extra
+        # Harberger-triangle welfare loss, evaluated per household on
+        # its own elasticity then weighted-averaged.
+        welfare_loss_hh = energy * 0.5 * np.abs(eps_hh) * (price_pct ** 2)
+        welfare_loss_comfort = float(weighted_mean(welfare_loss_hh, weights))
 
         deciles = []
         for d in range(1, 11):
+            mask = data["decile"] == d
+            eps_d = ELASTICITY_BY_DECILE[d]
             e = energy_by_dec[d]
             inc = income_by_dec[d]
             static_hit = e * price_pct
-            behavioral_hit = e * (behavioral_factor - 1)
+            behavioural_hit = float(weighted_mean(behavioural_hit_hh, weights, mask))
 
             deciles.append({
                 "decile": d,
-                "static_extra_cost": round(static_hit),
-                "behavioral_extra_cost": round(behavioral_hit),
-                "bill_saving": round(static_hit - behavioral_hit),
-                "consumption_reduction_pct": round(consumption_change_pct * 100, 1),
-                "static_pct_of_income": round(static_hit / inc * 100, 2) if inc > 0 else 0,
-                "behavioral_pct_of_income": round(behavioral_hit / inc * 100, 2) if inc > 0 else 0,
-            })
-
-        # Sensitivity: Priesmann & Praktiknjo (2025) income-differentiated
-        # elasticities. Poorer households cut consumption more sharply, so
-        # reporting the decile-specific behavioural hit alongside the
-        # uniform-elasticity one lets readers see the progressivity the
-        # headline value suppresses.
-        deciles_priesmann = []
-        for d in range(1, 11):
-            eps_d = ELASTICITY_BY_DECILE[d]
-            behav_factor_d = (1 + price_pct) * (1 + eps_d * price_pct)
-            e = energy_by_dec[d]
-            inc = income_by_dec[d]
-            hit_d = e * (behav_factor_d - 1)
-            deciles_priesmann.append({
-                "decile": d,
                 "elasticity": round(eps_d, 3),
                 "consumption_reduction_pct": round(eps_d * price_pct * 100, 1),
-                "behavioral_extra_cost": round(hit_d),
-                "behavioral_pct_of_income": (
-                    round(hit_d / inc * 100, 2) if inc > 0 else 0
+                "static_extra_cost": round(static_hit),
+                "behavioural_extra_cost": round(behavioural_hit),
+                "bill_saving": round(static_hit - behavioural_hit),
+                "static_pct_of_income": (
+                    round(static_hit / inc * 100, 2) if inc > 0 else 0
+                ),
+                "behavioural_pct_of_income": (
+                    round(behavioural_hit / inc * 100, 2) if inc > 0 else 0
                 ),
             })
 
@@ -214,17 +260,24 @@ def behavioral_responses(data):
             "name": name,
             "new_cap": new_cap,
             "price_increase_pct": round(price_pct * 100),
-            "elasticity": epsilon,
-            "consumption_change_pct": round(consumption_change_pct * 100, 1),
+            "mean_elasticity": round(mean_epsilon, 3),
+            "elasticity_by_decile": {
+                str(d): round(ELASTICITY_BY_DECILE[d], 3) for d in range(1, 11)
+            },
             "static_avg_extra": round(static_extra),
-            "behavioral_avg_extra": round(behavioral_extra),
+            "behavioural_avg_extra": round(behavioural_extra),
             "bill_saving_avg": round(bill_saving),
             "welfare_loss_comfort_avg": round(welfare_loss_comfort),
             "deciles": deciles,
-            "deciles_priesmann": deciles_priesmann,
-            "by_tenure": _grouped_shock(data, "tenure", "tenure", price_pct, epsilon),
-            "by_hh_type": _grouped_shock(data, "hh_type", "hh_type", price_pct, epsilon),
-            "by_country": _grouped_shock(data, "country", "country", price_pct, epsilon),
+            "by_tenure": _grouped_shock(
+                data, "tenure", "tenure", price_pct, include_behavioural=True
+            ),
+            "by_hh_type": _grouped_shock(
+                data, "hh_type", "hh_type", price_pct, include_behavioural=True
+            ),
+            "by_country": _grouped_shock(
+                data, "country", "country", price_pct, include_behavioural=True
+            ),
         })
     return results_list
 
@@ -433,9 +486,10 @@ def policy_net_position(data):
     income_by_dec = decile_means(data, "income")
     mean_energy = weighted_mean(data["energy"], data["weights"])
     shock_pct = (SHOCK_CAP - CURRENT_CAP) / CURRENT_CAP
-    epsilon = SHORT_RUN_ELASTICITY
-    consumption_change = epsilon * shock_pct
-    behavioral_factor = (1 + shock_pct) * (1 + consumption_change)
+    eps_hh = _epsilon_per_household(data)
+    behavioural_factor_hh = _behavioural_factor_hh(eps_hh, shock_pct)
+    behavioural_hit_hh = data["energy"] * (behavioural_factor_hh - 1)
+    mean_behavioural_hit = float(weighted_mean(behavioural_hit_hh, data["weights"]))
     cmask = data.get("country_mask")
     w = data["weights"]
 
@@ -474,23 +528,24 @@ def policy_net_position(data):
 
         deciles = []
         for d in range(1, 11):
+            mask = data["decile"] == d
             e = energy_by_dec[d]
             inc = income_by_dec[d]
             static_shock = e * shock_pct
-            behavioral_shock = e * (behavioral_factor - 1)
+            behavioural_shock = float(weighted_mean(behavioural_hit_hh, w, mask))
             policy_benefit = float(by_decile[d])
             net_static = static_shock - policy_benefit
-            net_behavioral = behavioral_shock - policy_benefit
+            net_behavioural = behavioural_shock - policy_benefit
             deciles.append({
                 "decile": d,
                 "baseline_energy": round(e),
                 "shock_extra_static": round(static_shock),
-                "shock_extra_behavioral": round(behavioral_shock),
+                "shock_extra_behavioural": round(behavioural_shock),
                 "policy_benefit": round(policy_benefit),
                 "net_cost_static": round(max(net_static, 0)),
-                "net_cost_behavioral": round(max(net_behavioral, 0)),
+                "net_cost_behavioural": round(max(net_behavioural, 0)),
                 "offset_pct_static": round(policy_benefit / static_shock * 100) if static_shock > 0 else 0,
-                "offset_pct_behavioral": round(policy_benefit / behavioral_shock * 100) if behavioral_shock > 0 else 0,
+                "offset_pct_behavioural": round(policy_benefit / behavioural_shock * 100) if behavioural_shock > 0 else 0,
             })
 
         avg_benefit = float(np.average(benefit_arr, weights=w))
@@ -499,9 +554,9 @@ def policy_net_position(data):
             "exchequer_cost_bn": round(float(np.sum(benefit_arr * w)) / 1e9, 1),
             "avg_benefit": round(avg_benefit),
             "avg_shock_static": round(mean_energy * shock_pct),
-            "avg_shock_behavioral": round(mean_energy * (behavioral_factor - 1)),
+            "avg_shock_behavioural": round(mean_behavioural_hit),
             "avg_net_cost_static": round(mean_energy * shock_pct - avg_benefit),
-            "avg_net_cost_behavioral": round(mean_energy * (behavioral_factor - 1) - avg_benefit),
+            "avg_net_cost_behavioural": round(mean_behavioural_hit - avg_benefit),
             "deciles": deciles,
         }
     return results_dict
@@ -509,32 +564,53 @@ def policy_net_position(data):
 
 
 
-def _grouped_post_policy(energy, income, weights, payment, group_arr, groups, pct, behavioral_factor):
-    """Compute post-policy extra cost grouped by a categorical variable."""
+def _grouped_post_policy(
+    energy, income, weights, payment, group_arr, groups, pct, behav_factor_hh
+):
+    """Compute post-policy extra cost grouped by a categorical variable.
+
+    ``behav_factor_hh`` is a per-household array computed from each
+    household's decile-specific elasticity — group aggregates therefore
+    reflect the decile composition of each group rather than a single
+    mean elasticity.
+    """
     result = []
     for g in groups:
         mask = group_arr == g
-        e_g, i_g, w_g, p_g = energy[mask], income[mask], weights[mask], payment[mask]
+        e_g = energy[mask]
+        i_g = income[mask]
+        w_g = weights[mask]
+        p_g = payment[mask]
+        bf_g = behav_factor_hh[mask]
         if w_g.sum() == 0:
-            result.append({"group": str(g), "extra_cost": 0, "pct_of_income": 0,
-                           "behavioral_extra_cost": 0, "behavioral_pct_of_income": 0})
+            result.append(
+                {
+                    "group": str(g),
+                    "extra_cost": 0,
+                    "pct_of_income": 0,
+                    "behavioural_extra_cost": 0,
+                    "behavioural_pct_of_income": 0,
+                }
+            )
             continue
         shocked_e = e_g * (1 + pct)
         net_s = np.maximum(shocked_e - p_g, e_g)
         extra_s = float(weighted_mean(np.maximum(net_s - e_g, 0), w_g))
         mean_inc = float(weighted_mean(i_g, w_g))
         pct_inc_s = round(extra_s / mean_inc * 100, 2) if mean_inc > 0 else 0
-        behav_e = e_g * behavioral_factor
+        behav_e = e_g * bf_g
         net_b = np.maximum(behav_e - p_g, e_g)
         extra_b = float(weighted_mean(np.maximum(net_b - e_g, 0), w_g))
         pct_inc_b = round(extra_b / mean_inc * 100, 2) if mean_inc > 0 else 0
-        result.append({
-            "group": str(g),
-            "extra_cost": round(extra_s),
-            "pct_of_income": round(pct_inc_s, 2),
-            "behavioral_extra_cost": round(extra_b),
-            "behavioral_pct_of_income": round(pct_inc_b, 2),
-        })
+        result.append(
+            {
+                "group": str(g),
+                "extra_cost": round(extra_s),
+                "pct_of_income": round(pct_inc_s, 2),
+                "behavioural_extra_cost": round(extra_b),
+                "behavioural_pct_of_income": round(pct_inc_b, 2),
+            }
+        )
     return result
 
 
@@ -554,7 +630,7 @@ def policy_post_shock(data):
     tenure_groups = sorted(np.unique(tenure_arr))
     hh_type_groups = sorted(np.unique(hh_type_arr))
     country_groups = sorted(np.unique(country_arr))
-    epsilon = SHORT_RUN_ELASTICITY
+    eps_hh = _epsilon_per_household(data)
 
     pe_policies = {
         "epg": {
@@ -590,7 +666,7 @@ def policy_post_shock(data):
         scenario_list = []
         for name, new_cap in PRICE_SCENARIOS.items():
             pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
-            behavioral_factor = (1 + pct) * (1 + epsilon * pct)
+            behav_factor_hh = _behavioural_factor_hh(eps_hh, pct)
 
             if policy_key == "epg":
                 epg_scale = max(0, new_cap - EPG_TARGET) / (SHOCK_CAP - EPG_TARGET)
@@ -608,10 +684,14 @@ def policy_post_shock(data):
             deciles = []
             for d in range(1, 11):
                 mask = decile_arr == d
-                e_d, i_d, w_d, p_d = energy[mask], income[mask], weights[mask], payment[mask]
+                e_d = energy[mask]
+                i_d = income[mask]
+                w_d = weights[mask]
+                p_d = payment[mask]
+                bf_d = behav_factor_hh[mask]
                 shocked_e = e_d * (1 + pct)
                 net_e_static = np.maximum(shocked_e - p_d, e_d)
-                behav_e = e_d * behavioral_factor
+                behav_e = e_d * bf_d
                 net_e_behav = np.maximum(behav_e - p_d, e_d)
                 extra_s = float(weighted_mean(np.maximum(net_e_static - e_d, 0), w_d))
                 extra_b = float(weighted_mean(np.maximum(net_e_behav - e_d, 0), w_d))
@@ -622,20 +702,26 @@ def policy_post_shock(data):
                     "decile": d,
                     "extra_cost": round(extra_s),
                     "pct_of_income": pct_s,
-                    "behavioral_extra_cost": round(extra_b),
-                    "behavioral_pct_of_income": pct_b,
+                    "behavioural_extra_cost": round(extra_b),
+                    "behavioural_pct_of_income": pct_b,
                 })
 
-            by_tenure = _grouped_post_policy(energy, income, weights, payment,
-                                             tenure_arr, tenure_groups, pct, behavioral_factor)
+            by_tenure = _grouped_post_policy(
+                energy, income, weights, payment,
+                tenure_arr, tenure_groups, pct, behav_factor_hh,
+            )
             for t in by_tenure:
                 t["tenure"] = t.pop("group")
-            by_hh_type = _grouped_post_policy(energy, income, weights, payment,
-                                              hh_type_arr, hh_type_groups, pct, behavioral_factor)
+            by_hh_type = _grouped_post_policy(
+                energy, income, weights, payment,
+                hh_type_arr, hh_type_groups, pct, behav_factor_hh,
+            )
             for h in by_hh_type:
                 h["hh_type"] = h.pop("group")
-            by_country = _grouped_post_policy(energy, income, weights, payment,
-                                              country_arr, country_groups, pct, behavioral_factor)
+            by_country = _grouped_post_policy(
+                energy, income, weights, payment,
+                country_arr, country_groups, pct, behav_factor_hh,
+            )
             for c in by_country:
                 c["country"] = c.pop("group")
 
@@ -655,7 +741,7 @@ def policy_post_shock(data):
     neg_scenarios = []
     for name, new_cap in PRICE_SCENARIOS.items():
         pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
-        behavioral_factor = (1 + pct) * (1 + epsilon * pct)
+        behav_factor_hh = _behavioural_factor_hh(eps_hh, pct)
         shocked_elec = elec * (1 + pct)
         neg_threshold_shocked = NEG_ELEC_SPEND * (1 + pct)
         benefit_shocked = np.minimum(shocked_elec, neg_threshold_shocked)
@@ -664,10 +750,14 @@ def policy_post_shock(data):
         deciles = []
         for d in range(1, 11):
             mask = decile_arr == d
-            e_d, i_d, w_d, p_d = energy[mask], income[mask], weights[mask], payment[mask]
+            e_d = energy[mask]
+            i_d = income[mask]
+            w_d = weights[mask]
+            p_d = payment[mask]
+            bf_d = behav_factor_hh[mask]
             shocked_e = e_d * (1 + pct)
             net_s = np.maximum(shocked_e - p_d, e_d)
-            behav_e = e_d * behavioral_factor
+            behav_e = e_d * bf_d
             net_b = np.maximum(behav_e - p_d, e_d)
             extra_s = float(weighted_mean(np.maximum(net_s - e_d, 0), w_d))
             extra_b = float(weighted_mean(np.maximum(net_b - e_d, 0), w_d))
@@ -678,20 +768,26 @@ def policy_post_shock(data):
                 "decile": d,
                 "extra_cost": round(extra_s),
                 "pct_of_income": pct_s,
-                "behavioral_extra_cost": round(extra_b),
-                "behavioral_pct_of_income": pct_b,
+                "behavioural_extra_cost": round(extra_b),
+                "behavioural_pct_of_income": pct_b,
             })
 
-        by_tenure = _grouped_post_policy(energy, income, weights, payment,
-                                         tenure_arr, tenure_groups, pct, behavioral_factor)
+        by_tenure = _grouped_post_policy(
+            energy, income, weights, payment,
+            tenure_arr, tenure_groups, pct, behav_factor_hh,
+        )
         for t in by_tenure:
             t["tenure"] = t.pop("group")
-        by_hh_type = _grouped_post_policy(energy, income, weights, payment,
-                                          hh_type_arr, hh_type_groups, pct, behavioral_factor)
+        by_hh_type = _grouped_post_policy(
+            energy, income, weights, payment,
+            hh_type_arr, hh_type_groups, pct, behav_factor_hh,
+        )
         for h in by_hh_type:
             h["hh_type"] = h.pop("group")
-        by_country = _grouped_post_policy(energy, income, weights, payment,
-                                          country_arr, country_groups, pct, behavioral_factor)
+        by_country = _grouped_post_policy(
+            energy, income, weights, payment,
+            country_arr, country_groups, pct, behav_factor_hh,
+        )
         for c in by_country:
             c["country"] = c.pop("group")
 
@@ -718,7 +814,7 @@ def policy_post_shock(data):
     rbt_scenarios = []
     for name, new_cap in PRICE_SCENARIOS.items():
         pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
-        behavioral_factor = (1 + pct) * (1 + epsilon * pct)
+        behav_factor_hh = _behavioural_factor_hh(eps_hh, pct)
 
         shocked_elec = elec * (1 + pct)
         shocked_threshold = threshold * (1 + pct)
@@ -737,9 +833,10 @@ def policy_post_shock(data):
             i_d = income[mask]
             w_d = weights[mask]
             p_d = payment[mask]
+            bf_d = behav_factor_hh[mask]
             shocked_e = e_d * (1 + pct)
             net_s = np.maximum(shocked_e - p_d, e_d)
-            behav_e = e_d * behavioral_factor
+            behav_e = e_d * bf_d
             net_b = np.maximum(behav_e - p_d, e_d)
             extra_s = float(weighted_mean(np.maximum(net_s - e_d, 0), w_d))
             extra_b = float(weighted_mean(np.maximum(net_b - e_d, 0), w_d))
@@ -750,25 +847,25 @@ def policy_post_shock(data):
                 "decile": d,
                 "extra_cost": round(extra_s),
                 "pct_of_income": pct_s,
-                "behavioral_extra_cost": round(extra_b),
-                "behavioral_pct_of_income": pct_b,
+                "behavioural_extra_cost": round(extra_b),
+                "behavioural_pct_of_income": pct_b,
             })
 
         by_tenure = _grouped_post_policy(
             energy, income, weights, payment,
-            tenure_arr, tenure_groups, pct, behavioral_factor,
+            tenure_arr, tenure_groups, pct, behav_factor_hh,
         )
         for t in by_tenure:
             t["tenure"] = t.pop("group")
         by_hh_type = _grouped_post_policy(
             energy, income, weights, payment,
-            hh_type_arr, hh_type_groups, pct, behavioral_factor,
+            hh_type_arr, hh_type_groups, pct, behav_factor_hh,
         )
         for h in by_hh_type:
             h["hh_type"] = h.pop("group")
         by_country = _grouped_post_policy(
             energy, income, weights, payment,
-            country_arr, country_groups, pct, behavioral_factor,
+            country_arr, country_groups, pct, behav_factor_hh,
         )
         for c in by_country:
             c["country"] = c.pop("group")

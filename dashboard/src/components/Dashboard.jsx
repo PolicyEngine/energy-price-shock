@@ -412,7 +412,7 @@ function ShockSection() {
   const [shockResponse, setShockResponse] = useState("behavioural");
   const [shockBreakdown, setShockBreakdown] = useState("decile");
   const scenario = results.shock_scenarios[selected];
-  const behav = results.behavioral[selected];
+  const behav = results.behavioural[selected];
 
   const TENURE_LABELS = {
     OWNED_OUTRIGHT: "Owned outright", OWNED_WITH_MORTGAGE: "Mortgage",
@@ -429,7 +429,7 @@ function ShockSection() {
   // Build bar data based on breakdown
   const isPct = shockMetric === "pct_of_income";
 
-  // Helper to pick the right static/behavioral field from a row
+  // Helper to pick the right static/behavioural field from a row
   const getStaticVal = (d) => {
     if (shockMetric === "pct_of_income") return d.pct_of_income;
     if (shockMetric === "extra_cost") return d.extra_cost;
@@ -437,8 +437,8 @@ function ShockSection() {
   };
   const getBehavVal = (bd) => {
     if (!bd) return 0;
-    if (shockMetric === "pct_of_income") return bd.behavioral_pct_of_income;
-    if (shockMetric === "extra_cost") return bd.behavioral_extra_cost;
+    if (shockMetric === "pct_of_income") return bd.behavioural_pct_of_income;
+    if (shockMetric === "extra_cost") return bd.behavioural_extra_cost;
     return 0;
   };
 
@@ -567,7 +567,7 @@ function ShockSection() {
       <div className="metric-row">
         <KpiCard label="New price cap" value={fmt(scenario.new_cap)} unit="/yr" color="teal" info="The Ofgem price cap after the shock is applied. This is the cap level that determines household bills." />
         <KpiCard label="Static avg hit" value={fmt(scenario.avg_hh_hit_yr)} unit="/yr" info="Average extra annual cost per household assuming no change in energy consumption (static estimate)." />
-        <KpiCard label="Behavioural avg hit" value={fmt(behav.behavioral_avg_extra)} unit="/yr" color="teal" info="Average extra annual cost after households reduce consumption in response to higher prices (elasticity = -0.15)." />
+        <KpiCard label="Behavioural avg hit" value={fmt(behav.behavioural_avg_extra)} unit="/yr" color="teal" info="Average extra annual cost after households reduce consumption in response to higher prices (elasticity = -0.15)." />
         <KpiCard label="Consumption change" value={`${behav.consumption_change_pct}%`} info="Percentage reduction in energy consumption due to the price increase, based on a short-run price elasticity of -0.15." />
       </div>
 
@@ -675,7 +675,7 @@ function PolicyNetSection() {
   const [policyBreakdown, setPolicyBreakdown] = useState("decile");
 
   const scenario = results.shock_scenarios[selectedScenario];
-  const behav = results.behavioral[selectedScenario];
+  const behav = results.behavioural[selectedScenario];
   const scenarioName = scenario.name;
   const isAlt = selectedNet === "neg";
   const bk = policyBreakdown;
@@ -699,7 +699,7 @@ function PolicyNetSection() {
     exchequerCost = p.exchequer_cost_bn;
   }
   const avgStaticShock = scenario.avg_hh_hit_yr;
-  const avgBehavShock = behav.behavioral_avg_extra;
+  const avgBehavShock = behav.behavioural_avg_extra;
 
   // === Chart data computation ===
   let barData, xLabel;
@@ -716,7 +716,7 @@ function PolicyNetSection() {
         label: `${d.decile}`,
         benefit: d.benefit_extra_vs_baseline,
         shockStatic: d.shock_extra,
-        shockBehav: behav.deciles[i].behavioral_extra_cost,
+        shockBehav: behav.deciles[i].behavioural_extra_cost,
       }));
     } else if (selectedNet === "bn_epg") {
       barData = scenario.deciles.map((d) => ({ label: `${d.decile}`, staticVal: 0, behavVal: 0 }));
@@ -726,7 +726,7 @@ function PolicyNetSection() {
       const pfp = results.policy_post_shock?.[selectedNet]?.[selectedScenario];
       if (pfp) {
         barData = pfp.deciles.map((d) => ({
-          label: `${d.decile}`, staticVal: d.extra_cost, behavVal: d.behavioral_extra_cost,
+          label: `${d.decile}`, staticVal: d.extra_cost, behavVal: d.behavioural_extra_cost,
         }));
       } else {
         barData = scenario.deciles.map((d) => ({ label: `${d.decile}`, staticVal: 0, behavVal: 0 }));
@@ -750,7 +750,7 @@ function PolicyNetSection() {
       const LABELS = bk === "tenure" ? TENURE_LABELS : bk === "hh_type" ? HH_TYPE_LABELS : COUNTRY_LABELS;
       const groupKey = bk === "tenure" ? "tenure" : bk === "hh_type" ? "hh_type" : "country";
       barData = groupData.map((d) => ({
-        label: LABELS[d[groupKey]] || d[groupKey], staticVal: d.extra_cost, behavVal: d.behavioral_extra_cost,
+        label: LABELS[d[groupKey]] || d[groupKey], staticVal: d.extra_cost, behavVal: d.behavioural_extra_cost,
       }));
       barData.sort((a, b) => b.staticVal - a.staticVal);
     } else {
@@ -1026,14 +1026,14 @@ function PolicyComparisonSection() {
   const scenarioName = scenario.name;
 
   // Compute exchequer cost for each policy at the selected scenario (static + behavioural)
-  const behav = results.behavioral[compScenario];
-  const behavRatio = behav.behavioral_avg_extra / behav.static_avg_extra;
+  const behav = results.behavioural[compScenario];
+  const behavRatio = behav.behavioural_avg_extra / behav.static_avg_extra;
   const getExchequer = (pk) => {
     let staticCost, behavCost;
     if (pk === "bn_transfer") {
       // Shock-matching: pays the average hit, which differs under behavioural response
       staticCost = Math.round(scenario.avg_hh_hit_yr * nHH / 100) / 10;
-      behavCost = Math.round(behav.behavioral_avg_extra * nHH / 100) / 10;
+      behavCost = Math.round(behav.behavioural_avg_extra * nHH / 100) / 10;
     } else if (pk === "bn_epg") {
       staticCost = scenario.total_cost_bn;
       behavCost = Math.round(staticCost * behavRatio * 10) / 10;

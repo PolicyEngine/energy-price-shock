@@ -13,9 +13,11 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from policyengine.core import Simulation
-from policyengine.tax_benefit_models.uk import ensure_datasets, uk_latest
-
+# ``policyengine`` import is expensive (HF manifest fetch, multi-GB
+# dataset registry) and fails without ``HUGGING_FACE_TOKEN`` set.
+# Defer it into the actual simulation functions so that importing
+# ``energy_shock.baseline`` for its pure helpers (``weighted_mean``,
+# ``decile_means``, ``filter_by_country``) is cheap and offline-safe.
 from .config import YEAR, REGION_TO_COUNTRY, DATASET_URL
 
 # Extra household/person variables the energy-shock analysis needs on top
@@ -45,6 +47,8 @@ EXTRA_VARIABLES = {
 
 def _load_dataset():
     """Ensure the enhanced FRS dataset is materialised for ``YEAR``."""
+    from policyengine.tax_benefit_models.uk import ensure_datasets
+
     datasets = ensure_datasets(datasets=[DATASET_URL], years=[YEAR])
     # ``ensure_datasets`` keys by ``f"{basename}_{year}"`` where basename
     # drops the ``.h5`` suffix.
@@ -52,8 +56,11 @@ def _load_dataset():
     return datasets[key]
 
 
-def _build_simulation(policy: dict | None = None) -> Simulation:
+def _build_simulation(policy: dict | None = None):
     """Construct a policyengine.py Simulation with the extra vars wired in."""
+    from policyengine.core import Simulation
+    from policyengine.tax_benefit_models.uk import uk_latest
+
     sim = Simulation(
         dataset=_load_dataset(),
         tax_benefit_model_version=uk_latest,
@@ -64,16 +71,16 @@ def _build_simulation(policy: dict | None = None) -> Simulation:
     return sim
 
 
-def _hh_array(sim: Simulation, var: str) -> np.ndarray:
+def _hh_array(sim, var: str) -> np.ndarray:
     """Pull a household-level variable as a numpy array."""
     return np.asarray(sim.output_dataset.data.household[var].values)
 
 
-def _person_array(sim: Simulation, var: str) -> np.ndarray:
+def _person_array(sim, var: str) -> np.ndarray:
     return np.asarray(sim.output_dataset.data.person[var].values)
 
 
-def _benunit_array(sim: Simulation, var: str) -> np.ndarray:
+def _benunit_array(sim, var: str) -> np.ndarray:
     return np.asarray(sim.output_dataset.data.benunit[var].values)
 
 
@@ -113,7 +120,7 @@ def run_baseline():
     }
 
 
-def _build_household_type(sim: Simulation) -> np.ndarray:
+def _build_household_type(sim) -> np.ndarray:
     """Classify each household into type based on family_type + pensioner status.
 
     ``family_type`` is held at benunit level; ``is_SP_age`` at person
@@ -153,7 +160,7 @@ def _build_household_type(sim: Simulation) -> np.ndarray:
     return categories.astype(str)
 
 
-def build_reform_simulation(reform: dict) -> Simulation:
+def build_reform_simulation(reform: dict):
     """Construct a reformed Simulation. Reform dict uses the same parameter
     paths and date-keyed values as the raw ``policyengine-uk`` reforms.
 

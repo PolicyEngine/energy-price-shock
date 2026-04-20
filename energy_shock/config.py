@@ -28,32 +28,27 @@ PRICE_SCENARIOS = {
     "Q1 2023 peak": 4_279,
 }
 
-# Short-run price elasticity of household energy demand.
-# Default −0.15 is the overall energy meta-analytic estimate from
-# Labandeira et al. (2017). NEED 2022-23 UK data shows consumption fell
-# ~10-15% when prices roughly doubled, consistent with this value at the
-# population mean.
+# Income-differentiated short-run price elasticities of household energy
+# demand, from Priesmann & Praktiknjo (2025). Poorer households cut
+# consumption far more sharply under a shock than richer households.
+# Linearly interpolated from D1 = −0.64 to D10 = −0.11.
 #
-# CAVEAT: this is a mean elasticity applied uniformly. Priesmann and
-# Praktiknjo (2025) find income-differentiated values ranging from −0.64
-# (low-income) to −0.11 (high-income) — poorer households cut
-# consumption far more sharply under a shock. Using a uniform value
-# therefore understates the behavioural-side progressivity of a shock
-# (and overstates the bill-saving that richer households achieve).
-# ``ELASTICITY_BY_DECILE`` below linearly interpolates the Priesmann
-# endpoints across deciles for sensitivity runs; ``SHORT_RUN_ELASTICITY``
-# is used for the headline numbers to stay comparable with prior PE work.
+# This is the canonical elasticity used throughout the analysis — the
+# behavioural response for each decile is computed from its own ε, not
+# from a population-mean value, so the progressivity of the shock is
+# captured rather than averaged away. A uniform value (e.g. the
+# −0.15 Labandeira et al. 2017 meta-analytic mean) would understate
+# how sharply low-income households are forced to cut and overstate
+# the bill-saving high-income households achieve.
 #
-# CAVEAT 2: a constant-elasticity linearisation is applied out to +161%
+# For reporting headline aggregate statistics ("average household gives
+# up X% of consumption") the weighted mean of these decile-specific
+# values is used — computed at output time rather than hardcoded.
+#
+# CAVEAT: a constant-elasticity linearisation is applied out to +161%
 # (Q1 2023 peak scenario), well outside the ±10-20% band over which the
-# meta-analyses are validated. Treat the extreme-shock scenarios as
-# illustrative rather than predictive.
-SHORT_RUN_ELASTICITY = -0.15
-
-# Priesmann & Praktiknjo (2025) income-differentiated elasticities.
-# Linearly interpolate from D1 = −0.64 to D10 = −0.11 across the ten
-# income deciles. Used by ``behavioral_responses`` when
-# ``decile_elasticity=True`` is passed through.
+# underlying elasticity studies are validated. Treat the extreme-shock
+# scenarios as illustrative rather than predictive.
 ELASTICITY_BY_DECILE = {
     d: -0.64 + (d - 1) * (-0.11 - -0.64) / 9 for d in range(1, 11)
 }
