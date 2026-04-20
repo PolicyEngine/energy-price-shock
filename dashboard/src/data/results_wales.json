@@ -751,7 +751,7 @@
         {
           "decile": 1,
           "elasticity": -0.64,
-          "consumption_reduction_pct": -6.4,
+          "consumption_reduction_pct": -5.9,
           "static_extra_cost": 66,
           "behavioural_extra_cost": 23,
           "bill_saving": 43,
@@ -761,7 +761,7 @@
         {
           "decile": 2,
           "elasticity": -0.581,
-          "consumption_reduction_pct": -5.8,
+          "consumption_reduction_pct": -5.4,
           "static_extra_cost": 89,
           "behavioural_extra_cost": 36,
           "bill_saving": 53,
@@ -771,7 +771,7 @@
         {
           "decile": 3,
           "elasticity": -0.522,
-          "consumption_reduction_pct": -5.2,
+          "consumption_reduction_pct": -4.9,
           "static_extra_cost": 126,
           "behavioural_extra_cost": 59,
           "bill_saving": 67,
@@ -781,7 +781,7 @@
         {
           "decile": 4,
           "elasticity": -0.463,
-          "consumption_reduction_pct": -4.6,
+          "consumption_reduction_pct": -4.3,
           "static_extra_cost": 127,
           "behavioural_extra_cost": 66,
           "bill_saving": 60,
@@ -791,7 +791,7 @@
         {
           "decile": 5,
           "elasticity": -0.404,
-          "consumption_reduction_pct": -4.0,
+          "consumption_reduction_pct": -3.8,
           "static_extra_cost": 93,
           "behavioural_extra_cost": 55,
           "bill_saving": 39,
@@ -801,7 +801,7 @@
         {
           "decile": 6,
           "elasticity": -0.346,
-          "consumption_reduction_pct": -3.5,
+          "consumption_reduction_pct": -3.2,
           "static_extra_cost": 153,
           "behavioural_extra_cost": 98,
           "bill_saving": 54,
@@ -811,7 +811,7 @@
         {
           "decile": 7,
           "elasticity": -0.287,
-          "consumption_reduction_pct": -2.9,
+          "consumption_reduction_pct": -2.7,
           "static_extra_cost": 137,
           "behavioural_extra_cost": 96,
           "bill_saving": 41,
@@ -821,7 +821,7 @@
         {
           "decile": 8,
           "elasticity": -0.228,
-          "consumption_reduction_pct": -2.3,
+          "consumption_reduction_pct": -2.1,
           "static_extra_cost": 155,
           "behavioural_extra_cost": 118,
           "bill_saving": 37,
@@ -831,7 +831,7 @@
         {
           "decile": 9,
           "elasticity": -0.169,
-          "consumption_reduction_pct": -1.7,
+          "consumption_reduction_pct": -1.6,
           "static_extra_cost": 277,
           "behavioural_extra_cost": 228,
           "bill_saving": 49,
@@ -841,7 +841,7 @@
         {
           "decile": 10,
           "elasticity": -0.11,
-          "consumption_reduction_pct": -1.1,
+          "consumption_reduction_pct": -1.0,
           "static_extra_cost": 254,
           "behavioural_extra_cost": 225,
           "bill_saving": 29,
@@ -972,7 +972,7 @@
         {
           "decile": 1,
           "elasticity": -0.64,
-          "consumption_reduction_pct": -12.8,
+          "consumption_reduction_pct": -11.0,
           "static_extra_cost": 132,
           "behavioural_extra_cost": 45,
           "bill_saving": 87,
@@ -982,7 +982,7 @@
         {
           "decile": 2,
           "elasticity": -0.581,
-          "consumption_reduction_pct": -11.6,
+          "consumption_reduction_pct": -10.0,
           "static_extra_cost": 178,
           "behavioural_extra_cost": 71,
           "bill_saving": 108,
@@ -992,7 +992,7 @@
         {
           "decile": 3,
           "elasticity": -0.522,
-          "consumption_reduction_pct": -10.4,
+          "consumption_reduction_pct": -9.1,
           "static_extra_cost": 253,
           "behavioural_extra_cost": 115,
           "bill_saving": 138,
@@ -1002,7 +1002,7 @@
         {
           "decile": 4,
           "elasticity": -0.463,
-          "consumption_reduction_pct": -9.3,
+          "consumption_reduction_pct": -8.1,
           "static_extra_cost": 253,
           "behavioural_extra_cost": 130,
           "bill_saving": 123,
@@ -1012,7 +1012,7 @@
         {
           "decile": 5,
           "elasticity": -0.404,
-          "consumption_reduction_pct": -8.1,
+          "consumption_reduction_pct": -7.1,
           "static_extra_cost": 187,
           "behavioural_extra_cost": 107,
           "bill_saving": 80,
@@ -1022,7 +1022,7 @@
         {
           "decile": 6,
           "elasticity": -0.346,
-          "consumption_reduction_pct": -6.9,
+          "consumption_reduction_pct": -6.1,
           "static_extra_cost": 305,
           "behavioural_extra_cost": 194,
           "bill_saving": 112,
@@ -1032,7 +1032,7 @@
         {
           "decile": 7,
           "elasticity": -0.287,
-          "consumption_reduction_pct": -5.7,
+          "consumption_reduction_pct": -5.1,
           "static_extra_cost": 274,
           "behavioural_extra_cost": 190,
           "bill_saving": 84,
@@ -1042,7 +1042,7 @@
         {
           "decile": 8,
           "elasticity": -0.228,
-          "consumption_reduction_pct": -4.6,
+          "consumption_reduction_pct": -4.1,
           "static_extra_cost": 310,
           "behavioural_extra_cost": 234,
           "bill_saving": 76,
@@ -1052,7 +1052,7 @@
         {
           "decile": 9,
           "elasticity": -0.169,
-          "consumption_reduction_pct": -3.4,
+          "consumption_reduction_pct": -3.0,
           "static_extra_cost": 554,
           "behavioural_extra_cost": 453,
           "bill_saving": 101,
@@ -1062,7 +1062,7 @@
         {
           "decile": 10,
           "elasticity": -0.11,
-          "consumption_reduction_pct": -2.2,
+          "consumption_reduction_pct": -2.0,
           "static_extra_cost": 509,
           "behavioural_extra_cost": 448,
           "bill_saving": 61,
@@ -1193,7 +1193,7 @@
         {
           "decile": 1,
           "elasticity": -0.64,
-          "consumption_reduction_pct": -19.2,
+          "consumption_reduction_pct": -15.4,
           "static_extra_cost": 197,
           "behavioural_extra_cost": 65,
           "bill_saving": 132,
@@ -1203,7 +1203,7 @@
         {
           "decile": 2,
           "elasticity": -0.581,
-          "consumption_reduction_pct": -17.4,
+          "consumption_reduction_pct": -14.1,
           "static_extra_cost": 268,
           "behavioural_extra_cost": 104,
           "bill_saving": 164,
@@ -1213,7 +1213,7 @@
         {
           "decile": 3,
           "elasticity": -0.522,
-          "consumption_reduction_pct": -15.7,
+          "consumption_reduction_pct": -12.8,
           "static_extra_cost": 379,
           "behavioural_extra_cost": 169,
           "bill_saving": 210,
@@ -1223,7 +1223,7 @@
         {
           "decile": 4,
           "elasticity": -0.463,
-          "consumption_reduction_pct": -13.9,
+          "consumption_reduction_pct": -11.4,
           "static_extra_cost": 380,
           "behavioural_extra_cost": 191,
           "bill_saving": 188,
@@ -1233,7 +1233,7 @@
         {
           "decile": 5,
           "elasticity": -0.404,
-          "consumption_reduction_pct": -12.1,
+          "consumption_reduction_pct": -10.1,
           "static_extra_cost": 280,
           "behavioural_extra_cost": 158,
           "bill_saving": 122,
@@ -1243,7 +1243,7 @@
         {
           "decile": 6,
           "elasticity": -0.346,
-          "consumption_reduction_pct": -10.4,
+          "consumption_reduction_pct": -8.7,
           "static_extra_cost": 458,
           "behavioural_extra_cost": 286,
           "bill_saving": 172,
@@ -1253,7 +1253,7 @@
         {
           "decile": 7,
           "elasticity": -0.287,
-          "consumption_reduction_pct": -8.6,
+          "consumption_reduction_pct": -7.2,
           "static_extra_cost": 411,
           "behavioural_extra_cost": 282,
           "bill_saving": 129,
@@ -1263,7 +1263,7 @@
         {
           "decile": 8,
           "elasticity": -0.228,
-          "consumption_reduction_pct": -6.8,
+          "consumption_reduction_pct": -5.8,
           "static_extra_cost": 465,
           "behavioural_extra_cost": 348,
           "bill_saving": 117,
@@ -1273,7 +1273,7 @@
         {
           "decile": 9,
           "elasticity": -0.169,
-          "consumption_reduction_pct": -5.1,
+          "consumption_reduction_pct": -4.3,
           "static_extra_cost": 831,
           "behavioural_extra_cost": 675,
           "bill_saving": 156,
@@ -1283,7 +1283,7 @@
         {
           "decile": 10,
           "elasticity": -0.11,
-          "consumption_reduction_pct": -3.3,
+          "consumption_reduction_pct": -2.8,
           "static_extra_cost": 763,
           "behavioural_extra_cost": 669,
           "bill_saving": 94,
@@ -1414,7 +1414,7 @@
         {
           "decile": 1,
           "elasticity": -0.64,
-          "consumption_reduction_pct": -38.4,
+          "consumption_reduction_pct": -26.0,
           "static_extra_cost": 395,
           "behavioural_extra_cost": 121,
           "bill_saving": 273,
@@ -1424,7 +1424,7 @@
         {
           "decile": 2,
           "elasticity": -0.581,
-          "consumption_reduction_pct": -34.8,
+          "consumption_reduction_pct": -23.9,
           "static_extra_cost": 535,
           "behavioural_extra_cost": 194,
           "bill_saving": 341,
@@ -1434,7 +1434,7 @@
         {
           "decile": 3,
           "elasticity": -0.522,
-          "consumption_reduction_pct": -31.3,
+          "consumption_reduction_pct": -21.8,
           "static_extra_cost": 758,
           "behavioural_extra_cost": 318,
           "bill_saving": 440,
@@ -1444,7 +1444,7 @@
         {
           "decile": 4,
           "elasticity": -0.463,
-          "consumption_reduction_pct": -27.8,
+          "consumption_reduction_pct": -19.6,
           "static_extra_cost": 760,
           "behavioural_extra_cost": 363,
           "bill_saving": 396,
@@ -1454,7 +1454,7 @@
         {
           "decile": 5,
           "elasticity": -0.404,
-          "consumption_reduction_pct": -24.3,
+          "consumption_reduction_pct": -17.3,
           "static_extra_cost": 560,
           "behavioural_extra_cost": 302,
           "bill_saving": 259,
@@ -1464,7 +1464,7 @@
         {
           "decile": 6,
           "elasticity": -0.346,
-          "consumption_reduction_pct": -20.7,
+          "consumption_reduction_pct": -15.0,
           "static_extra_cost": 916,
           "behavioural_extra_cost": 550,
           "bill_saving": 366,
@@ -1474,7 +1474,7 @@
         {
           "decile": 7,
           "elasticity": -0.287,
-          "consumption_reduction_pct": -17.2,
+          "consumption_reduction_pct": -12.6,
           "static_extra_cost": 821,
           "behavioural_extra_cost": 545,
           "bill_saving": 276,
@@ -1484,7 +1484,7 @@
         {
           "decile": 8,
           "elasticity": -0.228,
-          "consumption_reduction_pct": -13.7,
+          "consumption_reduction_pct": -10.1,
           "static_extra_cost": 931,
           "behavioural_extra_cost": 679,
           "bill_saving": 252,
@@ -1494,7 +1494,7 @@
         {
           "decile": 9,
           "elasticity": -0.169,
-          "consumption_reduction_pct": -10.1,
+          "consumption_reduction_pct": -7.6,
           "static_extra_cost": 1662,
           "behavioural_extra_cost": 1323,
           "bill_saving": 338,
@@ -1504,7 +1504,7 @@
         {
           "decile": 10,
           "elasticity": -0.11,
-          "consumption_reduction_pct": -6.6,
+          "consumption_reduction_pct": -5.0,
           "static_extra_cost": 1526,
           "behavioural_extra_cost": 1321,
           "bill_saving": 205,
@@ -1635,7 +1635,7 @@
         {
           "decile": 1,
           "elasticity": -0.64,
-          "consumption_reduction_pct": -102.9,
+          "consumption_reduction_pct": -45.8,
           "static_extra_cost": 1058,
           "behavioural_extra_cost": 271,
           "bill_saving": 787,
@@ -1645,7 +1645,7 @@
         {
           "decile": 2,
           "elasticity": -0.581,
-          "consumption_reduction_pct": -93.4,
+          "consumption_reduction_pct": -42.7,
           "static_extra_cost": 1435,
           "behavioural_extra_cost": 441,
           "bill_saving": 994,
@@ -1655,7 +1655,7 @@
         {
           "decile": 3,
           "elasticity": -0.522,
-          "consumption_reduction_pct": -84.0,
+          "consumption_reduction_pct": -39.4,
           "static_extra_cost": 2031,
           "behavioural_extra_cost": 734,
           "bill_saving": 1297,
@@ -1665,7 +1665,7 @@
         {
           "decile": 4,
           "elasticity": -0.463,
-          "consumption_reduction_pct": -74.5,
+          "consumption_reduction_pct": -35.9,
           "static_extra_cost": 2037,
           "behavioural_extra_cost": 852,
           "bill_saving": 1185,
@@ -1675,7 +1675,7 @@
         {
           "decile": 5,
           "elasticity": -0.404,
-          "consumption_reduction_pct": -65.0,
+          "consumption_reduction_pct": -32.1,
           "static_extra_cost": 1502,
           "behavioural_extra_cost": 719,
           "bill_saving": 783,
@@ -1685,7 +1685,7 @@
         {
           "decile": 6,
           "elasticity": -0.346,
-          "consumption_reduction_pct": -55.6,
+          "consumption_reduction_pct": -28.2,
           "static_extra_cost": 2457,
           "behavioural_extra_cost": 1333,
           "bill_saving": 1123,
@@ -1695,7 +1695,7 @@
         {
           "decile": 7,
           "elasticity": -0.287,
-          "consumption_reduction_pct": -46.1,
+          "consumption_reduction_pct": -24.0,
           "static_extra_cost": 2202,
           "behavioural_extra_cost": 1344,
           "bill_saving": 858,
@@ -1705,7 +1705,7 @@
         {
           "decile": 8,
           "elasticity": -0.228,
-          "consumption_reduction_pct": -36.6,
+          "consumption_reduction_pct": -19.6,
           "static_extra_cost": 2495,
           "behavioural_extra_cost": 1701,
           "bill_saving": 794,
@@ -1715,7 +1715,7 @@
         {
           "decile": 9,
           "elasticity": -0.169,
-          "consumption_reduction_pct": -27.1,
+          "consumption_reduction_pct": -14.9,
           "static_extra_cost": 4455,
           "behavioural_extra_cost": 3375,
           "bill_saving": 1080,
@@ -1725,7 +1725,7 @@
         {
           "decile": 10,
           "elasticity": -0.11,
-          "consumption_reduction_pct": -17.7,
+          "consumption_reduction_pct": -10.0,
           "static_extra_cost": 4092,
           "behavioural_extra_cost": 3428,
           "bill_saving": 664,
@@ -1894,58 +1894,58 @@
     "ct_rebate": {
       "name": "CT band rebate",
       "description": "300 for bands A-D",
-      "exchequer_cost_bn": 0.3,
-      "avg_hh_benefit": 220,
+      "exchequer_cost_bn": 0.0,
+      "avg_hh_benefit": 0,
       "deciles": [
         {
           "decile": 1,
-          "payment": 198,
-          "shock_offset_pct": 50
+          "payment": 0,
+          "shock_offset_pct": 0
         },
         {
           "decile": 2,
-          "payment": 209,
-          "shock_offset_pct": 39
+          "payment": 0,
+          "shock_offset_pct": 0
         },
         {
           "decile": 3,
-          "payment": 255,
-          "shock_offset_pct": 34
+          "payment": 0,
+          "shock_offset_pct": 0
         },
         {
           "decile": 4,
-          "payment": 237,
-          "shock_offset_pct": 31
+          "payment": 0,
+          "shock_offset_pct": 0
         },
         {
           "decile": 5,
-          "payment": 238,
-          "shock_offset_pct": 42
+          "payment": 0,
+          "shock_offset_pct": 0
         },
         {
           "decile": 6,
-          "payment": 209,
-          "shock_offset_pct": 23
+          "payment": 0,
+          "shock_offset_pct": 0
         },
         {
           "decile": 7,
-          "payment": 242,
-          "shock_offset_pct": 29
+          "payment": 0,
+          "shock_offset_pct": 0
         },
         {
           "decile": 8,
-          "payment": 237,
-          "shock_offset_pct": 25
+          "payment": 0,
+          "shock_offset_pct": 0
         },
         {
           "decile": 9,
-          "payment": 172,
-          "shock_offset_pct": 10
+          "payment": 0,
+          "shock_offset_pct": 0
         },
         {
           "decile": 10,
-          "payment": 158,
-          "shock_offset_pct": 10
+          "payment": 0,
+          "shock_offset_pct": 0
         }
       ]
     }
@@ -3681,169 +3681,169 @@
         "deciles": [
           {
             "decile": 1,
-            "extra_cost": 17,
-            "pct_of_income": 0.08,
-            "behavioural_extra_cost": 5,
-            "behavioural_pct_of_income": 0.02
+            "extra_cost": 66,
+            "pct_of_income": 0.31,
+            "behavioural_extra_cost": 23,
+            "behavioural_pct_of_income": 0.11
           },
           {
             "decile": 2,
-            "extra_cost": 40,
-            "pct_of_income": 0.13,
-            "behavioural_extra_cost": 15,
-            "behavioural_pct_of_income": 0.05
+            "extra_cost": 89,
+            "pct_of_income": 0.28,
+            "behavioural_extra_cost": 36,
+            "behavioural_pct_of_income": 0.11
           },
           {
             "decile": 3,
-            "extra_cost": 44,
-            "pct_of_income": 0.13,
-            "behavioural_extra_cost": 11,
-            "behavioural_pct_of_income": 0.03
+            "extra_cost": 126,
+            "pct_of_income": 0.39,
+            "behavioural_extra_cost": 59,
+            "behavioural_pct_of_income": 0.18
           },
           {
             "decile": 4,
-            "extra_cost": 50,
-            "pct_of_income": 0.11,
-            "behavioural_extra_cost": 25,
-            "behavioural_pct_of_income": 0.06
+            "extra_cost": 127,
+            "pct_of_income": 0.29,
+            "behavioural_extra_cost": 66,
+            "behavioural_pct_of_income": 0.15
           },
           {
             "decile": 5,
-            "extra_cost": 31,
-            "pct_of_income": 0.07,
-            "behavioural_extra_cost": 17,
-            "behavioural_pct_of_income": 0.04
+            "extra_cost": 93,
+            "pct_of_income": 0.22,
+            "behavioural_extra_cost": 55,
+            "behavioural_pct_of_income": 0.13
           },
           {
             "decile": 6,
-            "extra_cost": 88,
-            "pct_of_income": 0.15,
-            "behavioural_extra_cost": 51,
-            "behavioural_pct_of_income": 0.09
-          },
-          {
-            "decile": 7,
-            "extra_cost": 41,
-            "pct_of_income": 0.07,
-            "behavioural_extra_cost": 26,
-            "behavioural_pct_of_income": 0.05
-          },
-          {
-            "decile": 8,
-            "extra_cost": 72,
-            "pct_of_income": 0.12,
-            "behavioural_extra_cost": 49,
-            "behavioural_pct_of_income": 0.08
-          },
-          {
-            "decile": 9,
-            "extra_cost": 181,
-            "pct_of_income": 0.22,
-            "behavioural_extra_cost": 142,
+            "extra_cost": 153,
+            "pct_of_income": 0.27,
+            "behavioural_extra_cost": 98,
             "behavioural_pct_of_income": 0.17
           },
           {
+            "decile": 7,
+            "extra_cost": 137,
+            "pct_of_income": 0.25,
+            "behavioural_extra_cost": 96,
+            "behavioural_pct_of_income": 0.17
+          },
+          {
+            "decile": 8,
+            "extra_cost": 155,
+            "pct_of_income": 0.25,
+            "behavioural_extra_cost": 118,
+            "behavioural_pct_of_income": 0.19
+          },
+          {
+            "decile": 9,
+            "extra_cost": 277,
+            "pct_of_income": 0.33,
+            "behavioural_extra_cost": 228,
+            "behavioural_pct_of_income": 0.27
+          },
+          {
             "decile": 10,
-            "extra_cost": 138,
-            "pct_of_income": 0.14,
-            "behavioural_extra_cost": 112,
-            "behavioural_pct_of_income": 0.11
+            "extra_cost": 254,
+            "pct_of_income": 0.25,
+            "behavioural_extra_cost": 225,
+            "behavioural_pct_of_income": 0.22
           }
         ],
         "by_tenure": [
           {
-            "extra_cost": 78,
-            "pct_of_income": 0.16,
-            "behavioural_extra_cost": 48,
-            "behavioural_pct_of_income": 0.1,
+            "extra_cost": 136,
+            "pct_of_income": 0.28,
+            "behavioural_extra_cost": 86,
+            "behavioural_pct_of_income": 0.18,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
-            "extra_cost": 96,
-            "pct_of_income": 0.17,
-            "behavioural_extra_cost": 57,
-            "behavioural_pct_of_income": 0.1,
+            "extra_cost": 220,
+            "pct_of_income": 0.38,
+            "behavioural_extra_cost": 158,
+            "behavioural_pct_of_income": 0.27,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
-            "extra_cost": 3,
-            "pct_of_income": 0.01,
-            "behavioural_extra_cost": 0,
-            "behavioural_pct_of_income": 0.0,
+            "extra_cost": 71,
+            "pct_of_income": 0.21,
+            "behavioural_extra_cost": 37,
+            "behavioural_pct_of_income": 0.11,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
-            "extra_cost": 3,
-            "pct_of_income": 0.01,
-            "behavioural_extra_cost": 1,
-            "behavioural_pct_of_income": 0.0,
+            "extra_cost": 70,
+            "pct_of_income": 0.18,
+            "behavioural_extra_cost": 42,
+            "behavioural_pct_of_income": 0.11,
             "tenure": "RENT_FROM_HA"
           },
           {
-            "extra_cost": 56,
-            "pct_of_income": 0.11,
-            "behavioural_extra_cost": 37,
-            "behavioural_pct_of_income": 0.07,
+            "extra_cost": 116,
+            "pct_of_income": 0.23,
+            "behavioural_extra_cost": 74,
+            "behavioural_pct_of_income": 0.14,
             "tenure": "RENT_PRIVATELY"
           }
         ],
         "by_hh_type": [
           {
-            "extra_cost": 57,
-            "pct_of_income": 0.1,
-            "behavioural_extra_cost": 39,
-            "behavioural_pct_of_income": 0.06,
+            "extra_cost": 168,
+            "pct_of_income": 0.28,
+            "behavioural_extra_cost": 127,
+            "behavioural_pct_of_income": 0.21,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
-            "extra_cost": 69,
-            "pct_of_income": 0.12,
-            "behavioural_extra_cost": 37,
-            "behavioural_pct_of_income": 0.06,
+            "extra_cost": 136,
+            "pct_of_income": 0.23,
+            "behavioural_extra_cost": 81,
+            "behavioural_pct_of_income": 0.14,
             "hh_type": "COUPLE_PENSIONER"
           },
           {
-            "extra_cost": 120,
-            "pct_of_income": 0.19,
-            "behavioural_extra_cost": 82,
-            "behavioural_pct_of_income": 0.13,
+            "extra_cost": 196,
+            "pct_of_income": 0.31,
+            "behavioural_extra_cost": 130,
+            "behavioural_pct_of_income": 0.21,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
-            "extra_cost": 5,
-            "pct_of_income": 0.01,
-            "behavioural_extra_cost": 2,
-            "behavioural_pct_of_income": 0.0,
+            "extra_cost": 67,
+            "pct_of_income": 0.19,
+            "behavioural_extra_cost": 30,
+            "behavioural_pct_of_income": 0.09,
             "hh_type": "LONE_PARENT"
           },
           {
-            "extra_cost": 159,
-            "pct_of_income": 0.19,
-            "behavioural_extra_cost": 102,
-            "behavioural_pct_of_income": 0.12,
+            "extra_cost": 229,
+            "pct_of_income": 0.27,
+            "behavioural_extra_cost": 163,
+            "behavioural_pct_of_income": 0.19,
             "hh_type": "OTHER"
           },
           {
-            "extra_cost": 29,
-            "pct_of_income": 0.09,
-            "behavioural_extra_cost": 13,
-            "behavioural_pct_of_income": 0.04,
+            "extra_cost": 100,
+            "pct_of_income": 0.32,
+            "behavioural_extra_cost": 58,
+            "behavioural_pct_of_income": 0.18,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
-            "extra_cost": 25,
-            "pct_of_income": 0.14,
-            "behavioural_extra_cost": 9,
-            "behavioural_pct_of_income": 0.05,
+            "extra_cost": 84,
+            "pct_of_income": 0.45,
+            "behavioural_extra_cost": 46,
+            "behavioural_pct_of_income": 0.25,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ],
         "by_country": [
           {
-            "extra_cost": 64,
-            "pct_of_income": 0.13,
-            "behavioural_extra_cost": 39,
-            "behavioural_pct_of_income": 0.08,
+            "extra_cost": 140,
+            "pct_of_income": 0.29,
+            "behavioural_extra_cost": 92,
+            "behavioural_pct_of_income": 0.19,
             "country": "WALES"
           }
         ]
@@ -3853,169 +3853,169 @@
         "deciles": [
           {
             "decile": 1,
-            "extra_cost": 47,
-            "pct_of_income": 0.22,
-            "behavioural_extra_cost": 10,
-            "behavioural_pct_of_income": 0.05
-          },
-          {
-            "decile": 2,
-            "extra_cost": 87,
-            "pct_of_income": 0.27,
-            "behavioural_extra_cost": 31,
-            "behavioural_pct_of_income": 0.1
-          },
-          {
-            "decile": 3,
-            "extra_cost": 119,
-            "pct_of_income": 0.37,
-            "behavioural_extra_cost": 37,
-            "behavioural_pct_of_income": 0.11
-          },
-          {
-            "decile": 4,
-            "extra_cost": 113,
-            "pct_of_income": 0.25,
-            "behavioural_extra_cost": 51,
-            "behavioural_pct_of_income": 0.12
-          },
-          {
-            "decile": 5,
-            "extra_cost": 73,
-            "pct_of_income": 0.17,
-            "behavioural_extra_cost": 37,
-            "behavioural_pct_of_income": 0.08
-          },
-          {
-            "decile": 6,
-            "extra_cost": 202,
-            "pct_of_income": 0.35,
-            "behavioural_extra_cost": 118,
+            "extra_cost": 132,
+            "pct_of_income": 0.63,
+            "behavioural_extra_cost": 45,
             "behavioural_pct_of_income": 0.21
           },
           {
+            "decile": 2,
+            "extra_cost": 178,
+            "pct_of_income": 0.56,
+            "behavioural_extra_cost": 71,
+            "behavioural_pct_of_income": 0.22
+          },
+          {
+            "decile": 3,
+            "extra_cost": 253,
+            "pct_of_income": 0.77,
+            "behavioural_extra_cost": 115,
+            "behavioural_pct_of_income": 0.35
+          },
+          {
+            "decile": 4,
+            "extra_cost": 253,
+            "pct_of_income": 0.57,
+            "behavioural_extra_cost": 130,
+            "behavioural_pct_of_income": 0.29
+          },
+          {
+            "decile": 5,
+            "extra_cost": 187,
+            "pct_of_income": 0.43,
+            "behavioural_extra_cost": 107,
+            "behavioural_pct_of_income": 0.25
+          },
+          {
+            "decile": 6,
+            "extra_cost": 305,
+            "pct_of_income": 0.53,
+            "behavioural_extra_cost": 194,
+            "behavioural_pct_of_income": 0.34
+          },
+          {
             "decile": 7,
-            "extra_cost": 132,
-            "pct_of_income": 0.24,
-            "behavioural_extra_cost": 72,
-            "behavioural_pct_of_income": 0.13
+            "extra_cost": 274,
+            "pct_of_income": 0.5,
+            "behavioural_extra_cost": 190,
+            "behavioural_pct_of_income": 0.34
           },
           {
             "decile": 8,
-            "extra_cost": 182,
-            "pct_of_income": 0.29,
-            "behavioural_extra_cost": 128,
-            "behavioural_pct_of_income": 0.2
+            "extra_cost": 310,
+            "pct_of_income": 0.49,
+            "behavioural_extra_cost": 234,
+            "behavioural_pct_of_income": 0.37
           },
           {
             "decile": 9,
-            "extra_cost": 417,
-            "pct_of_income": 0.5,
-            "behavioural_extra_cost": 326,
-            "behavioural_pct_of_income": 0.39
+            "extra_cost": 554,
+            "pct_of_income": 0.66,
+            "behavioural_extra_cost": 453,
+            "behavioural_pct_of_income": 0.54
           },
           {
             "decile": 10,
-            "extra_cost": 373,
-            "pct_of_income": 0.37,
-            "behavioural_extra_cost": 316,
-            "behavioural_pct_of_income": 0.31
+            "extra_cost": 509,
+            "pct_of_income": 0.5,
+            "behavioural_extra_cost": 448,
+            "behavioural_pct_of_income": 0.44
           }
         ],
         "by_tenure": [
           {
-            "extra_cost": 179,
-            "pct_of_income": 0.37,
-            "behavioural_extra_cost": 107,
-            "behavioural_pct_of_income": 0.22,
+            "extra_cost": 273,
+            "pct_of_income": 0.57,
+            "behavioural_extra_cost": 169,
+            "behavioural_pct_of_income": 0.35,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
-            "extra_cost": 264,
-            "pct_of_income": 0.46,
-            "behavioural_extra_cost": 170,
-            "behavioural_pct_of_income": 0.29,
+            "extra_cost": 440,
+            "pct_of_income": 0.76,
+            "behavioural_extra_cost": 313,
+            "behavioural_pct_of_income": 0.54,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
-            "extra_cost": 27,
-            "pct_of_income": 0.08,
-            "behavioural_extra_cost": 4,
-            "behavioural_pct_of_income": 0.01,
+            "extra_cost": 142,
+            "pct_of_income": 0.43,
+            "behavioural_extra_cost": 72,
+            "behavioural_pct_of_income": 0.21,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
-            "extra_cost": 11,
-            "pct_of_income": 0.03,
-            "behavioural_extra_cost": 3,
-            "behavioural_pct_of_income": 0.01,
+            "extra_cost": 139,
+            "pct_of_income": 0.37,
+            "behavioural_extra_cost": 83,
+            "behavioural_pct_of_income": 0.22,
             "tenure": "RENT_FROM_HA"
           },
           {
-            "extra_cost": 135,
-            "pct_of_income": 0.26,
-            "behavioural_extra_cost": 83,
-            "behavioural_pct_of_income": 0.16,
+            "extra_cost": 232,
+            "pct_of_income": 0.45,
+            "behavioural_extra_cost": 147,
+            "behavioural_pct_of_income": 0.28,
             "tenure": "RENT_PRIVATELY"
           }
         ],
         "by_hh_type": [
           {
-            "extra_cost": 173,
-            "pct_of_income": 0.29,
-            "behavioural_extra_cost": 118,
-            "behavioural_pct_of_income": 0.2,
+            "extra_cost": 337,
+            "pct_of_income": 0.57,
+            "behavioural_extra_cost": 252,
+            "behavioural_pct_of_income": 0.42,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
-            "extra_cost": 160,
-            "pct_of_income": 0.28,
-            "behavioural_extra_cost": 85,
-            "behavioural_pct_of_income": 0.15,
+            "extra_cost": 271,
+            "pct_of_income": 0.47,
+            "behavioural_extra_cost": 160,
+            "behavioural_pct_of_income": 0.28,
             "hh_type": "COUPLE_PENSIONER"
           },
           {
-            "extra_cost": 277,
-            "pct_of_income": 0.44,
-            "behavioural_extra_cost": 179,
-            "behavioural_pct_of_income": 0.29,
+            "extra_cost": 392,
+            "pct_of_income": 0.63,
+            "behavioural_extra_cost": 256,
+            "behavioural_pct_of_income": 0.41,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
-            "extra_cost": 12,
-            "pct_of_income": 0.03,
-            "behavioural_extra_cost": 4,
-            "behavioural_pct_of_income": 0.01,
+            "extra_cost": 133,
+            "pct_of_income": 0.38,
+            "behavioural_extra_cost": 59,
+            "behavioural_pct_of_income": 0.17,
             "hh_type": "LONE_PARENT"
           },
           {
-            "extra_cost": 374,
-            "pct_of_income": 0.44,
-            "behavioural_extra_cost": 252,
-            "behavioural_pct_of_income": 0.29,
+            "extra_cost": 457,
+            "pct_of_income": 0.53,
+            "behavioural_extra_cost": 322,
+            "behavioural_pct_of_income": 0.38,
             "hh_type": "OTHER"
           },
           {
-            "extra_cost": 70,
-            "pct_of_income": 0.22,
-            "behavioural_extra_cost": 27,
-            "behavioural_pct_of_income": 0.09,
+            "extra_cost": 201,
+            "pct_of_income": 0.64,
+            "behavioural_extra_cost": 114,
+            "behavioural_pct_of_income": 0.36,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
-            "extra_cost": 72,
-            "pct_of_income": 0.39,
-            "behavioural_extra_cost": 31,
-            "behavioural_pct_of_income": 0.17,
+            "extra_cost": 169,
+            "pct_of_income": 0.91,
+            "behavioural_extra_cost": 91,
+            "behavioural_pct_of_income": 0.49,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ],
         "by_country": [
           {
-            "extra_cost": 160,
-            "pct_of_income": 0.33,
-            "behavioural_extra_cost": 97,
-            "behavioural_pct_of_income": 0.2,
+            "extra_cost": 280,
+            "pct_of_income": 0.58,
+            "behavioural_extra_cost": 182,
+            "behavioural_pct_of_income": 0.38,
             "country": "WALES"
           }
         ]
@@ -4025,169 +4025,169 @@
         "deciles": [
           {
             "decile": 1,
-            "extra_cost": 88,
-            "pct_of_income": 0.42,
-            "behavioural_extra_cost": 17,
-            "behavioural_pct_of_income": 0.08
+            "extra_cost": 197,
+            "pct_of_income": 0.94,
+            "behavioural_extra_cost": 65,
+            "behavioural_pct_of_income": 0.31
           },
           {
             "decile": 2,
-            "extra_cost": 137,
-            "pct_of_income": 0.43,
-            "behavioural_extra_cost": 47,
-            "behavioural_pct_of_income": 0.15
-          },
-          {
-            "decile": 3,
-            "extra_cost": 203,
-            "pct_of_income": 0.62,
-            "behavioural_extra_cost": 69,
-            "behavioural_pct_of_income": 0.21
-          },
-          {
-            "decile": 4,
-            "extra_cost": 197,
-            "pct_of_income": 0.44,
-            "behavioural_extra_cost": 80,
-            "behavioural_pct_of_income": 0.18
-          },
-          {
-            "decile": 5,
-            "extra_cost": 136,
-            "pct_of_income": 0.31,
-            "behavioural_extra_cost": 58,
-            "behavioural_pct_of_income": 0.13
-          },
-          {
-            "decile": 6,
-            "extra_cost": 323,
-            "pct_of_income": 0.57,
-            "behavioural_extra_cost": 188,
+            "extra_cost": 268,
+            "pct_of_income": 0.84,
+            "behavioural_extra_cost": 104,
             "behavioural_pct_of_income": 0.33
           },
           {
+            "decile": 3,
+            "extra_cost": 379,
+            "pct_of_income": 1.16,
+            "behavioural_extra_cost": 169,
+            "behavioural_pct_of_income": 0.52
+          },
+          {
+            "decile": 4,
+            "extra_cost": 380,
+            "pct_of_income": 0.86,
+            "behavioural_extra_cost": 191,
+            "behavioural_pct_of_income": 0.43
+          },
+          {
+            "decile": 5,
+            "extra_cost": 280,
+            "pct_of_income": 0.65,
+            "behavioural_extra_cost": 158,
+            "behavioural_pct_of_income": 0.36
+          },
+          {
+            "decile": 6,
+            "extra_cost": 458,
+            "pct_of_income": 0.8,
+            "behavioural_extra_cost": 286,
+            "behavioural_pct_of_income": 0.5
+          },
+          {
             "decile": 7,
-            "extra_cost": 235,
-            "pct_of_income": 0.43,
-            "behavioural_extra_cost": 138,
-            "behavioural_pct_of_income": 0.25
+            "extra_cost": 411,
+            "pct_of_income": 0.74,
+            "behavioural_extra_cost": 282,
+            "behavioural_pct_of_income": 0.51
           },
           {
             "decile": 8,
-            "extra_cost": 296,
-            "pct_of_income": 0.47,
-            "behavioural_extra_cost": 210,
-            "behavioural_pct_of_income": 0.34
+            "extra_cost": 465,
+            "pct_of_income": 0.74,
+            "behavioural_extra_cost": 348,
+            "behavioural_pct_of_income": 0.56
           },
           {
             "decile": 9,
-            "extra_cost": 684,
-            "pct_of_income": 0.82,
-            "behavioural_extra_cost": 531,
-            "behavioural_pct_of_income": 0.64
+            "extra_cost": 831,
+            "pct_of_income": 1.0,
+            "behavioural_extra_cost": 675,
+            "behavioural_pct_of_income": 0.81
           },
           {
             "decile": 10,
-            "extra_cost": 618,
-            "pct_of_income": 0.61,
-            "behavioural_extra_cost": 526,
-            "behavioural_pct_of_income": 0.52
+            "extra_cost": 763,
+            "pct_of_income": 0.75,
+            "behavioural_extra_cost": 669,
+            "behavioural_pct_of_income": 0.66
           }
         ],
         "by_tenure": [
           {
-            "extra_cost": 287,
-            "pct_of_income": 0.6,
-            "behavioural_extra_cost": 169,
-            "behavioural_pct_of_income": 0.35,
+            "extra_cost": 409,
+            "pct_of_income": 0.85,
+            "behavioural_extra_cost": 250,
+            "behavioural_pct_of_income": 0.52,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
-            "extra_cost": 458,
-            "pct_of_income": 0.79,
-            "behavioural_extra_cost": 295,
-            "behavioural_pct_of_income": 0.51,
+            "extra_cost": 660,
+            "pct_of_income": 1.14,
+            "behavioural_extra_cost": 465,
+            "behavioural_pct_of_income": 0.8,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
-            "extra_cost": 60,
-            "pct_of_income": 0.18,
-            "behavioural_extra_cost": 15,
-            "behavioural_pct_of_income": 0.05,
+            "extra_cost": 214,
+            "pct_of_income": 0.64,
+            "behavioural_extra_cost": 106,
+            "behavioural_pct_of_income": 0.32,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
-            "extra_cost": 28,
-            "pct_of_income": 0.07,
-            "behavioural_extra_cost": 7,
-            "behavioural_pct_of_income": 0.02,
+            "extra_cost": 209,
+            "pct_of_income": 0.55,
+            "behavioural_extra_cost": 122,
+            "behavioural_pct_of_income": 0.32,
             "tenure": "RENT_FROM_HA"
           },
           {
-            "extra_cost": 219,
-            "pct_of_income": 0.43,
-            "behavioural_extra_cost": 137,
-            "behavioural_pct_of_income": 0.27,
+            "extra_cost": 348,
+            "pct_of_income": 0.68,
+            "behavioural_extra_cost": 218,
+            "behavioural_pct_of_income": 0.42,
             "tenure": "RENT_PRIVATELY"
           }
         ],
         "by_hh_type": [
           {
-            "extra_cost": 310,
-            "pct_of_income": 0.52,
-            "behavioural_extra_cost": 214,
-            "behavioural_pct_of_income": 0.36,
+            "extra_cost": 505,
+            "pct_of_income": 0.85,
+            "behavioural_extra_cost": 375,
+            "behavioural_pct_of_income": 0.63,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
-            "extra_cost": 265,
-            "pct_of_income": 0.46,
-            "behavioural_extra_cost": 138,
-            "behavioural_pct_of_income": 0.24,
+            "extra_cost": 407,
+            "pct_of_income": 0.7,
+            "behavioural_extra_cost": 237,
+            "behavioural_pct_of_income": 0.41,
             "hh_type": "COUPLE_PENSIONER"
           },
           {
-            "extra_cost": 452,
-            "pct_of_income": 0.72,
-            "behavioural_extra_cost": 283,
-            "behavioural_pct_of_income": 0.45,
+            "extra_cost": 588,
+            "pct_of_income": 0.94,
+            "behavioural_extra_cost": 379,
+            "behavioural_pct_of_income": 0.61,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
-            "extra_cost": 25,
-            "pct_of_income": 0.07,
-            "behavioural_extra_cost": 7,
-            "behavioural_pct_of_income": 0.02,
+            "extra_cost": 200,
+            "pct_of_income": 0.57,
+            "behavioural_extra_cost": 87,
+            "behavioural_pct_of_income": 0.25,
             "hh_type": "LONE_PARENT"
           },
           {
-            "extra_cost": 593,
-            "pct_of_income": 0.69,
-            "behavioural_extra_cost": 400,
-            "behavioural_pct_of_income": 0.47,
+            "extra_cost": 686,
+            "pct_of_income": 0.8,
+            "behavioural_extra_cost": 478,
+            "behavioural_pct_of_income": 0.56,
             "hh_type": "OTHER"
           },
           {
-            "extra_cost": 115,
-            "pct_of_income": 0.37,
-            "behavioural_extra_cost": 45,
-            "behavioural_pct_of_income": 0.14,
+            "extra_cost": 301,
+            "pct_of_income": 0.96,
+            "behavioural_extra_cost": 168,
+            "behavioural_pct_of_income": 0.53,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
-            "extra_cost": 127,
-            "pct_of_income": 0.68,
-            "behavioural_extra_cost": 57,
-            "behavioural_pct_of_income": 0.3,
+            "extra_cost": 253,
+            "pct_of_income": 1.36,
+            "behavioural_extra_cost": 134,
+            "behavioural_pct_of_income": 0.72,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ],
         "by_country": [
           {
-            "extra_cost": 268,
-            "pct_of_income": 0.55,
-            "behavioural_extra_cost": 162,
-            "behavioural_pct_of_income": 0.33,
+            "extra_cost": 420,
+            "pct_of_income": 0.87,
+            "behavioural_extra_cost": 269,
+            "behavioural_pct_of_income": 0.56,
             "country": "WALES"
           }
         ]
@@ -4197,169 +4197,169 @@
         "deciles": [
           {
             "decile": 1,
-            "extra_cost": 246,
-            "pct_of_income": 1.18,
-            "behavioural_extra_cost": 41,
-            "behavioural_pct_of_income": 0.2
+            "extra_cost": 395,
+            "pct_of_income": 1.89,
+            "behavioural_extra_cost": 121,
+            "behavioural_pct_of_income": 0.58
           },
           {
             "decile": 2,
-            "extra_cost": 365,
-            "pct_of_income": 1.15,
-            "behavioural_extra_cost": 95,
-            "behavioural_pct_of_income": 0.3
+            "extra_cost": 535,
+            "pct_of_income": 1.68,
+            "behavioural_extra_cost": 194,
+            "behavioural_pct_of_income": 0.61
           },
           {
             "decile": 3,
-            "extra_cost": 528,
-            "pct_of_income": 1.62,
-            "behavioural_extra_cost": 162,
-            "behavioural_pct_of_income": 0.5
+            "extra_cost": 758,
+            "pct_of_income": 2.32,
+            "behavioural_extra_cost": 318,
+            "behavioural_pct_of_income": 0.97
           },
           {
             "decile": 4,
-            "extra_cost": 543,
-            "pct_of_income": 1.22,
-            "behavioural_extra_cost": 185,
-            "behavioural_pct_of_income": 0.42
+            "extra_cost": 760,
+            "pct_of_income": 1.71,
+            "behavioural_extra_cost": 363,
+            "behavioural_pct_of_income": 0.82
           },
           {
             "decile": 5,
-            "extra_cost": 380,
-            "pct_of_income": 0.88,
-            "behavioural_extra_cost": 152,
-            "behavioural_pct_of_income": 0.35
-          },
-          {
-            "decile": 6,
-            "extra_cost": 736,
+            "extra_cost": 560,
             "pct_of_income": 1.29,
-            "behavioural_extra_cost": 401,
+            "behavioural_extra_cost": 302,
             "behavioural_pct_of_income": 0.7
           },
           {
+            "decile": 6,
+            "extra_cost": 916,
+            "pct_of_income": 1.6,
+            "behavioural_extra_cost": 550,
+            "behavioural_pct_of_income": 0.96
+          },
+          {
             "decile": 7,
-            "extra_cost": 614,
-            "pct_of_income": 1.11,
-            "behavioural_extra_cost": 353,
-            "behavioural_pct_of_income": 0.64
+            "extra_cost": 821,
+            "pct_of_income": 1.49,
+            "behavioural_extra_cost": 545,
+            "behavioural_pct_of_income": 0.99
           },
           {
             "decile": 8,
-            "extra_cost": 714,
-            "pct_of_income": 1.14,
-            "behavioural_extra_cost": 473,
-            "behavioural_pct_of_income": 0.75
+            "extra_cost": 931,
+            "pct_of_income": 1.48,
+            "behavioural_extra_cost": 679,
+            "behavioural_pct_of_income": 1.08
           },
           {
             "decile": 9,
-            "extra_cost": 1509,
-            "pct_of_income": 1.81,
-            "behavioural_extra_cost": 1173,
-            "behavioural_pct_of_income": 1.41
+            "extra_cost": 1662,
+            "pct_of_income": 1.99,
+            "behavioural_extra_cost": 1323,
+            "behavioural_pct_of_income": 1.59
           },
           {
             "decile": 10,
-            "extra_cost": 1372,
-            "pct_of_income": 1.36,
-            "behavioural_extra_cost": 1169,
-            "behavioural_pct_of_income": 1.15
+            "extra_cost": 1526,
+            "pct_of_income": 1.51,
+            "behavioural_extra_cost": 1321,
+            "behavioural_pct_of_income": 1.31
           }
         ],
         "by_tenure": [
           {
-            "extra_cost": 665,
-            "pct_of_income": 1.38,
-            "behavioural_extra_cost": 360,
-            "behavioural_pct_of_income": 0.75,
+            "extra_cost": 819,
+            "pct_of_income": 1.7,
+            "behavioural_extra_cost": 482,
+            "behavioural_pct_of_income": 1.0,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
-            "extra_cost": 1103,
-            "pct_of_income": 1.91,
-            "behavioural_extra_cost": 698,
-            "behavioural_pct_of_income": 1.21,
+            "extra_cost": 1320,
+            "pct_of_income": 2.28,
+            "behavioural_extra_cost": 903,
+            "behavioural_pct_of_income": 1.56,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
-            "extra_cost": 211,
-            "pct_of_income": 0.63,
-            "behavioural_extra_cost": 58,
-            "behavioural_pct_of_income": 0.17,
+            "extra_cost": 427,
+            "pct_of_income": 1.28,
+            "behavioural_extra_cost": 201,
+            "behavioural_pct_of_income": 0.6,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
-            "extra_cost": 167,
-            "pct_of_income": 0.44,
-            "behavioural_extra_cost": 29,
-            "behavioural_pct_of_income": 0.08,
+            "extra_cost": 417,
+            "pct_of_income": 1.11,
+            "behavioural_extra_cost": 236,
+            "behavioural_pct_of_income": 0.62,
             "tenure": "RENT_FROM_HA"
           },
           {
-            "extra_cost": 527,
-            "pct_of_income": 1.02,
-            "behavioural_extra_cost": 303,
-            "behavioural_pct_of_income": 0.59,
+            "extra_cost": 697,
+            "pct_of_income": 1.35,
+            "behavioural_extra_cost": 421,
+            "behavioural_pct_of_income": 0.82,
             "tenure": "RENT_PRIVATELY"
           }
         ],
         "by_hh_type": [
           {
-            "extra_cost": 796,
-            "pct_of_income": 1.34,
-            "behavioural_extra_cost": 532,
-            "behavioural_pct_of_income": 0.89,
+            "extra_cost": 1010,
+            "pct_of_income": 1.7,
+            "behavioural_extra_cost": 733,
+            "behavioural_pct_of_income": 1.23,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
-            "extra_cost": 632,
-            "pct_of_income": 1.09,
-            "behavioural_extra_cost": 305,
-            "behavioural_pct_of_income": 0.52,
+            "extra_cost": 814,
+            "pct_of_income": 1.4,
+            "behavioural_extra_cost": 455,
+            "behavioural_pct_of_income": 0.78,
             "hh_type": "COUPLE_PENSIONER"
           },
           {
-            "extra_cost": 1007,
-            "pct_of_income": 1.61,
-            "behavioural_extra_cost": 603,
-            "behavioural_pct_of_income": 0.97,
+            "extra_cost": 1175,
+            "pct_of_income": 1.88,
+            "behavioural_extra_cost": 733,
+            "behavioural_pct_of_income": 1.17,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
-            "extra_cost": 163,
-            "pct_of_income": 0.46,
-            "behavioural_extra_cost": 20,
-            "behavioural_pct_of_income": 0.06,
+            "extra_cost": 400,
+            "pct_of_income": 1.14,
+            "behavioural_extra_cost": 164,
+            "behavioural_pct_of_income": 0.47,
             "hh_type": "LONE_PARENT"
           },
           {
-            "extra_cost": 1261,
-            "pct_of_income": 1.47,
-            "behavioural_extra_cost": 839,
-            "behavioural_pct_of_income": 0.98,
+            "extra_cost": 1372,
+            "pct_of_income": 1.6,
+            "behavioural_extra_cost": 929,
+            "behavioural_pct_of_income": 1.08,
             "hh_type": "OTHER"
           },
           {
-            "extra_cost": 358,
-            "pct_of_income": 1.14,
-            "behavioural_extra_cost": 110,
-            "behavioural_pct_of_income": 0.35,
+            "extra_cost": 602,
+            "pct_of_income": 1.91,
+            "behavioural_extra_cost": 322,
+            "behavioural_pct_of_income": 1.02,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
-            "extra_cost": 338,
-            "pct_of_income": 1.82,
-            "behavioural_extra_cost": 138,
-            "behavioural_pct_of_income": 0.74,
+            "extra_cost": 506,
+            "pct_of_income": 2.72,
+            "behavioural_extra_cost": 257,
+            "behavioural_pct_of_income": 1.38,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ],
         "by_country": [
           {
-            "extra_cost": 651,
-            "pct_of_income": 1.35,
-            "behavioural_extra_cost": 367,
-            "behavioural_pct_of_income": 0.76,
+            "extra_cost": 840,
+            "pct_of_income": 1.74,
+            "behavioural_extra_cost": 521,
+            "behavioural_pct_of_income": 1.08,
             "country": "WALES"
           }
         ]
@@ -4369,169 +4369,169 @@
         "deciles": [
           {
             "decile": 1,
-            "extra_cost": 880,
-            "pct_of_income": 4.21,
-            "behavioural_extra_cost": 141,
-            "behavioural_pct_of_income": 0.68
+            "extra_cost": 1058,
+            "pct_of_income": 5.06,
+            "behavioural_extra_cost": 271,
+            "behavioural_pct_of_income": 1.3
           },
           {
             "decile": 2,
-            "extra_cost": 1251,
-            "pct_of_income": 3.93,
-            "behavioural_extra_cost": 276,
-            "behavioural_pct_of_income": 0.87
+            "extra_cost": 1435,
+            "pct_of_income": 4.51,
+            "behavioural_extra_cost": 441,
+            "behavioural_pct_of_income": 1.39
           },
           {
             "decile": 3,
-            "extra_cost": 1790,
-            "pct_of_income": 5.47,
-            "behavioural_extra_cost": 506,
-            "behavioural_pct_of_income": 1.55
+            "extra_cost": 2031,
+            "pct_of_income": 6.21,
+            "behavioural_extra_cost": 734,
+            "behavioural_pct_of_income": 2.24
           },
           {
             "decile": 4,
-            "extra_cost": 1810,
-            "pct_of_income": 4.08,
-            "behavioural_extra_cost": 634,
-            "behavioural_pct_of_income": 1.43
+            "extra_cost": 2037,
+            "pct_of_income": 4.59,
+            "behavioural_extra_cost": 852,
+            "behavioural_pct_of_income": 1.92
           },
           {
             "decile": 5,
-            "extra_cost": 1296,
-            "pct_of_income": 2.99,
-            "behavioural_extra_cost": 532,
-            "behavioural_pct_of_income": 1.23
+            "extra_cost": 1502,
+            "pct_of_income": 3.47,
+            "behavioural_extra_cost": 719,
+            "behavioural_pct_of_income": 1.66
           },
           {
             "decile": 6,
-            "extra_cost": 2256,
-            "pct_of_income": 3.95,
-            "behavioural_extra_cost": 1139,
-            "behavioural_pct_of_income": 1.99
+            "extra_cost": 2457,
+            "pct_of_income": 4.3,
+            "behavioural_extra_cost": 1333,
+            "behavioural_pct_of_income": 2.33
           },
           {
             "decile": 7,
-            "extra_cost": 1963,
-            "pct_of_income": 3.56,
-            "behavioural_extra_cost": 1116,
-            "behavioural_pct_of_income": 2.02
+            "extra_cost": 2202,
+            "pct_of_income": 3.99,
+            "behavioural_extra_cost": 1344,
+            "behavioural_pct_of_income": 2.44
           },
           {
             "decile": 8,
-            "extra_cost": 2267,
-            "pct_of_income": 3.62,
-            "behavioural_extra_cost": 1476,
-            "behavioural_pct_of_income": 2.35
+            "extra_cost": 2495,
+            "pct_of_income": 3.98,
+            "behavioural_extra_cost": 1701,
+            "behavioural_pct_of_income": 2.71
           },
           {
             "decile": 9,
-            "extra_cost": 4295,
-            "pct_of_income": 5.15,
-            "behavioural_extra_cost": 3217,
-            "behavioural_pct_of_income": 3.86
+            "extra_cost": 4455,
+            "pct_of_income": 5.34,
+            "behavioural_extra_cost": 3375,
+            "behavioural_pct_of_income": 4.04
           },
           {
             "decile": 10,
-            "extra_cost": 3935,
-            "pct_of_income": 3.89,
-            "behavioural_extra_cost": 3271,
-            "behavioural_pct_of_income": 3.23
+            "extra_cost": 4092,
+            "pct_of_income": 4.04,
+            "behavioural_extra_cost": 3428,
+            "behavioural_pct_of_income": 3.39
           }
         ],
         "by_tenure": [
           {
-            "extra_cost": 2028,
-            "pct_of_income": 4.22,
-            "behavioural_extra_cost": 1017,
-            "behavioural_pct_of_income": 2.12,
+            "extra_cost": 2195,
+            "pct_of_income": 4.56,
+            "behavioural_extra_cost": 1177,
+            "behavioural_pct_of_income": 2.45,
             "tenure": "OWNED_OUTRIGHT"
           },
           {
-            "extra_cost": 3312,
-            "pct_of_income": 5.72,
-            "behavioural_extra_cost": 2034,
-            "behavioural_pct_of_income": 3.51,
+            "extra_cost": 3540,
+            "pct_of_income": 6.12,
+            "behavioural_extra_cost": 2255,
+            "behavioural_pct_of_income": 3.9,
             "tenure": "OWNED_WITH_MORTGAGE"
           },
           {
-            "extra_cost": 884,
-            "pct_of_income": 2.65,
-            "behavioural_extra_cost": 264,
-            "behavioural_pct_of_income": 0.79,
+            "extra_cost": 1146,
+            "pct_of_income": 3.44,
+            "behavioural_extra_cost": 475,
+            "behavioural_pct_of_income": 1.42,
             "tenure": "RENT_FROM_COUNCIL"
           },
           {
-            "extra_cost": 846,
-            "pct_of_income": 2.24,
-            "behavioural_extra_cost": 321,
-            "behavioural_pct_of_income": 0.85,
+            "extra_cost": 1119,
+            "pct_of_income": 2.97,
+            "behavioural_extra_cost": 574,
+            "behavioural_pct_of_income": 1.52,
             "tenure": "RENT_FROM_HA"
           },
           {
-            "extra_cost": 1678,
-            "pct_of_income": 3.26,
-            "behavioural_extra_cost": 871,
-            "behavioural_pct_of_income": 1.69,
+            "extra_cost": 1868,
+            "pct_of_income": 3.62,
+            "behavioural_extra_cost": 1038,
+            "behavioural_pct_of_income": 2.01,
             "tenure": "RENT_PRIVATELY"
           }
         ],
         "by_hh_type": [
           {
-            "extra_cost": 2489,
-            "pct_of_income": 4.18,
-            "behavioural_extra_cost": 1630,
-            "behavioural_pct_of_income": 2.74,
+            "extra_cost": 2709,
+            "pct_of_income": 4.55,
+            "behavioural_extra_cost": 1847,
+            "behavioural_pct_of_income": 3.11,
             "hh_type": "COUPLE_NO_CHILDREN"
           },
           {
-            "extra_cost": 1971,
-            "pct_of_income": 3.39,
-            "behavioural_extra_cost": 900,
-            "behavioural_pct_of_income": 1.55,
+            "extra_cost": 2183,
+            "pct_of_income": 3.75,
+            "behavioural_extra_cost": 1103,
+            "behavioural_pct_of_income": 1.9,
             "hh_type": "COUPLE_PENSIONER"
           },
           {
-            "extra_cost": 2964,
-            "pct_of_income": 4.75,
-            "behavioural_extra_cost": 1636,
-            "behavioural_pct_of_income": 2.62,
+            "extra_cost": 3150,
+            "pct_of_income": 5.05,
+            "behavioural_extra_cost": 1804,
+            "behavioural_pct_of_income": 2.89,
             "hh_type": "COUPLE_WITH_CHILDREN"
           },
           {
-            "extra_cost": 807,
-            "pct_of_income": 2.3,
-            "behavioural_extra_cost": 146,
-            "behavioural_pct_of_income": 0.42,
+            "extra_cost": 1073,
+            "pct_of_income": 3.06,
+            "behavioural_extra_cost": 380,
+            "behavioural_pct_of_income": 1.09,
             "hh_type": "LONE_PARENT"
           },
           {
-            "extra_cost": 3543,
-            "pct_of_income": 4.12,
-            "behavioural_extra_cost": 2201,
-            "behavioural_pct_of_income": 2.56,
+            "extra_cost": 3677,
+            "pct_of_income": 4.28,
+            "behavioural_extra_cost": 2313,
+            "behavioural_pct_of_income": 2.69,
             "hh_type": "OTHER"
           },
           {
-            "extra_cost": 1365,
-            "pct_of_income": 4.34,
-            "behavioural_extra_cost": 536,
-            "behavioural_pct_of_income": 1.7,
+            "extra_cost": 1613,
+            "pct_of_income": 5.13,
+            "behavioural_extra_cost": 779,
+            "behavioural_pct_of_income": 2.47,
             "hh_type": "SINGLE_PENSIONER"
           },
           {
-            "extra_cost": 1165,
-            "pct_of_income": 6.27,
-            "behavioural_extra_cost": 447,
-            "behavioural_pct_of_income": 2.41,
+            "extra_cost": 1357,
+            "pct_of_income": 7.3,
+            "behavioural_extra_cost": 612,
+            "behavioural_pct_of_income": 3.29,
             "hh_type": "SINGLE_WORKING_AGE"
           }
         ],
         "by_country": [
           {
-            "extra_cost": 2046,
-            "pct_of_income": 4.23,
-            "behavioural_extra_cost": 1092,
-            "behavioural_pct_of_income": 2.26,
+            "extra_cost": 2252,
+            "pct_of_income": 4.66,
+            "behavioural_extra_cost": 1284,
+            "behavioural_pct_of_income": 2.66,
             "country": "WALES"
           }
         ]

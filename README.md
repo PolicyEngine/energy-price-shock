@@ -60,9 +60,9 @@ python -m energy_shock                    # UK only
 python -m energy_shock --all-countries    # UK + England, Scotland, Wales, N. Ireland
 ```
 
-This runs the PolicyEngine UK microsimulation via the unified [`policyengine`](https://github.com/PolicyEngine/policyengine.py) Python API and outputs JSON files to `dashboard/src/data/`. Datasets are fetched lazily from HuggingFace on first run.
+This runs the PolicyEngine UK microsimulation directly via [`policyengine-uk`](https://github.com/PolicyEngine/policyengine-uk) and outputs JSON files to `dashboard/src/data/`. Datasets are fetched lazily from HuggingFace on first run (the private FRS repo requires `HUGGING_FACE_TOKEN`).
 
-Requirements: `policyengine>=4.1.0`, `policyengine-uk==2.88.0`, `microdf-python`, `numpy` (Python 3.13+).
+Requirements: `policyengine-uk>=2.88.0`, `microdf-python>=1.2.0`, `pandas>=2.0`, `numpy>=1.26` (Python 3.13+).
 
 ### Tests
 
@@ -75,8 +75,8 @@ pytest tests/
 
 ```bash
 cd dashboard
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 Opens at `http://localhost:5173`.
@@ -107,6 +107,6 @@ Current Ofgem price cap (Q2 2026): £1,641/yr.
 
 ## Tech stack
 
-- **Analysis**: Python 3.13, `policyengine` >= 4.1 (wraps PolicyEngine UK 2.88.0), microdf
+- **Analysis**: Python 3.13, `policyengine-uk` >= 2.88.0, microdf
 - **Dashboard**: React 18, Vite 5
 - **Charts**: CSS-based vertical column charts (no charting library)

@@ -24,12 +24,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
-        with:
-          python-version: "3.13"
-      - name: Install
-        run: uv pip install --system -e .[dev]
+      - name: Create venv and install
+        run: |
+          uv venv --python 3.13 .venv
+          uv pip install --python .venv/bin/python -e .[dev]
       - name: Pytest
-        run: pytest tests/ -v
+        run: .venv/bin/pytest tests/ -v
 
   dashboard-build:
     name: Dashboard build

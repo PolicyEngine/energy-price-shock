@@ -8,6 +8,7 @@ Energy = electricity + gas everywhere.
 """
 
 import numpy as np
+import pandas as pd
 from microdf import MicroDataFrame
 
 from .baseline import (
@@ -19,6 +20,7 @@ from .config import (
     CT_REBATE,
     CURRENT_CAP,
     ELASTICITY_BY_DECILE,
+    ENGLISH_REGIONS,
     EPG_TARGET,
     FLAT_TRANSFER,
     NEG_ELEC_KWH,
@@ -30,6 +32,26 @@ from .config import (
     WFA_LOWER,
     YEAR,
 )
+
+
+def _england_mask_unfiltered(sim, country_mask=None):
+    """Boolean mask selecting English households in the microsim's
+    household-row order, optionally country-masked first.
+
+    The 2022 Council Tax Rebate was England-only (Scotland / Wales ran
+    separate schemes, Northern Ireland uses the Rates system and has no
+    council tax bands). ``ebr_council_tax_rebate`` in policyengine-uk
+    keys off ``council_tax_band`` alone and therefore pays any household
+    whose dataset record has an A–D band, including non-English ones.
+    Apply this mask at the analysis layer to restore the policy's real
+    geographic scope.
+    """
+    region = _hh_array(sim, "region")
+    region_str = pd.Series(region).astype(str)
+    mask = region_str.isin(ENGLISH_REGIONS).to_numpy()
+    if country_mask is not None:
+        mask = mask[country_mask]
+    return mask
 
 
 def _epsilon_per_household(data):
@@ -293,7 +315,13 @@ def behavioural_responses(data):
                 {
                     "decile": d,
                     "elasticity": round(eps_d, 3),
-                    "consumption_reduction_pct": round(eps_d * price_pct * 100, 1),
+                    # Log-linear q_new / q_old = (1 + p)^ε; reduction is
+                    # (1 - q_new/q_old) × 100. Formerly reported the
+                    # linear εp approximation which produced values
+                    # < −100 % at the +161 % scenario for low deciles.
+                    "consumption_reduction_pct": round(
+                        ((1 + price_pct) ** eps_d - 1) * 100, 1
+                    ),
                     "static_extra_cost": round(static_hit),
                     "behavioural_extra_cost": round(behavioural_hit),
                     "bill_saving": round(static_hit - behavioural_hit),
@@ -430,7 +458,29 @@ def policy_ct_rebate(data):
     rebate_arr = _hh_array(sim, "ebr_council_tax_rebate")
     if cmask is not None:
         rebate_arr = rebate_arr[cmask]
+    # England-only: zero out rebate for non-English households so the
+    # aggregate matches the actual 2022 policy's geographic scope.
+    eng_mask = _england_mask_unfiltered(sim, cmask)
+    rebate_arr = np.where(eng_mask, rebate_arr, 0.0)
     by_decile = _calc_decile_table(sim, "ebr_council_tax_rebate", cmask)
+    # Apply the England mask to the decile table too.
+    eng_deciles = _hh_array(sim, "household_income_decile")
+    if cmask is not None:
+        eng_deciles_masked = eng_deciles[cmask]
+    else:
+        eng_deciles_masked = eng_deciles
+    eng_rebate_arr = rebate_arr  # already zeroed outside England
+    w_arr = data["weights"]
+    # Rebuild by_decile off the England-masked array
+    by_decile = {}
+    for d in range(1, 11):
+        dmask = eng_deciles_masked == d
+        if dmask.any() and w_arr[dmask].sum() > 0:
+            by_decile[d] = float(
+                np.average(eng_rebate_arr[dmask], weights=w_arr[dmask])
+            )
+        else:
+            by_decile[d] = 0.0
 
     deciles = []
     for d in range(1, 11):
@@ -530,6 +580,8 @@ def policy_combined(data):
     epg = _arr(_hh_array(sim, "epg_subsidy"))
     flat = _arr(_hh_array(sim, "ebr_energy_bills_credit"))
     ct = _arr(_hh_array(sim, "ebr_council_tax_rebate"))
+    # CT rebate is England-only in reality; zero non-English rows.
+    ct = np.where(_england_mask_unfiltered(sim, cmask), ct, 0.0)
     wfa = _arr(_hh_array(sim, "winter_fuel_allowance"))
     wfa_baseline = _arr(_hh_array(data["sim"], "winter_fuel_allowance"))
     net = _arr(_hh_array(sim, "household_net_income"))
@@ -769,7 +821,14 @@ def policy_post_shock(data):
     for key, cfg in pe_policies.items():
         sim = build_reform_simulation(cfg["reform"])
         arr = _hh_array(sim, cfg["variable"])
-        hh_payments[key] = arr[cmask] if cmask is not None else arr
+        arr = arr[cmask] if cmask is not None else arr
+        # Council tax rebate is England-only in the real-world 2022
+        # policy; the PE-UK formula pays any A-D band household, so mask
+        # non-English rows to zero.
+        if key == "ct_rebate":
+            eng_mask = _england_mask_unfiltered(sim, cmask)
+            arr = np.where(eng_mask, arr, 0.0)
+        hh_payments[key] = arr
 
     results = {}
     for policy_key in ["epg", "flat_transfer", "ct_rebate", "bn_transfer", "bn_epg"]:
