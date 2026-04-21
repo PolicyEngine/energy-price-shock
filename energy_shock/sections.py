@@ -1,7 +1,6 @@
 """
 All analysis sections: baseline summary, shocks, behavioural,
-policies (A–F), electricity/gas split, regional, tenure, NEG, rising block
-tariff, gas-only cap.
+policies (A–F), electricity/gas split, regional, tenure, NEG, gas-only cap.
 
 Every function takes the shared `data` dict from baseline.run_baseline().
 Energy = electricity + gas everywhere.
@@ -26,7 +25,6 @@ from .config import (
     NEG_ELEC_KWH,
     NEG_ELEC_SPEND,
     PRICE_SCENARIOS,
-    RBT_DISCOUNT_RATE,
     SHOCK_CAP,
     WFA_HIGHER,
     WFA_LOWER,
@@ -292,15 +290,10 @@ def behavioural_responses(data):
 
         behav_factor_hh = _behavioural_factor_hh(eps_hh, price_pct)
         behavioural_hit_hh = energy * (behav_factor_hh - 1)
-        energy * price_pct
 
         static_extra = mean_energy * price_pct
         behavioural_extra = float(weighted_mean(behavioural_hit_hh, weights))
         bill_saving = static_extra - behavioural_extra
-        # Harberger-triangle welfare loss, evaluated per household on
-        # its own elasticity then weighted-averaged.
-        welfare_loss_hh = energy * 0.5 * np.abs(eps_hh) * (price_pct**2)
-        welfare_loss_comfort = float(weighted_mean(welfare_loss_hh, weights))
 
         deciles = []
         for d in range(1, 11):
@@ -346,7 +339,6 @@ def behavioural_responses(data):
                 "static_avg_extra": round(static_extra),
                 "behavioural_avg_extra": round(behavioural_extra),
                 "bill_saving_avg": round(bill_saving),
-                "welfare_loss_comfort_avg": round(welfare_loss_comfort),
                 "deciles": deciles,
                 "by_tenure": _grouped_shock(
                     data, "tenure", "tenure", price_pct, include_behavioural=True
@@ -795,13 +787,6 @@ def policy_post_shock(data):
     eps_hh = _epsilon_per_household(data)
 
     pe_policies = {
-        "epg": {
-            "reform": {
-                "gov.ofgem.energy_price_cap": {"2026-01-01": SHOCK_CAP},
-                "gov.ofgem.energy_price_guarantee": {"2026-01-01": EPG_TARGET},
-            },
-            "variable": "epg_subsidy",
-        },
         "flat_transfer": {
             "reform": {
                 "gov.treasury.energy_bills_rebate.energy_bills_credit": {
@@ -835,16 +820,13 @@ def policy_post_shock(data):
         hh_payments[key] = arr
 
     results = {}
-    for policy_key in ["epg", "flat_transfer", "ct_rebate", "bn_transfer", "bn_epg"]:
+    for policy_key in ["flat_transfer", "ct_rebate", "bn_transfer", "bn_epg"]:
         scenario_list = []
         for name, new_cap in PRICE_SCENARIOS.items():
             pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
             behav_factor_hh = _behavioural_factor_hh(eps_hh, pct)
 
-            if policy_key == "epg":
-                epg_scale = max(0, new_cap - EPG_TARGET) / (SHOCK_CAP - EPG_TARGET)
-                payment = hh_payments["epg"] * epg_scale
-            elif policy_key in hh_payments:
+            if policy_key in hh_payments:
                 payment = hh_payments[policy_key]
             elif policy_key == "bn_transfer":
                 avg_extra = float(weighted_mean(energy, weights) * pct)
@@ -1016,108 +998,6 @@ def policy_post_shock(data):
             }
         )
     results["neg"] = neg_scenarios
-
-    # --- RBT ---
-    # Rising block tariff under shock. The baseline surcharge rate is
-    # computed from block-1 subsidy / block-2 consumption at pre-shock
-    # prices; under shock we hold the per-household payment structure
-    # fixed (subsidy and surcharge both scale with the shocked elec
-    # consumption, preserving the decile distribution) and rebuild the
-    # surcharge rate so aggregate block-1 subsidy is still exactly
-    # covered by aggregate block-2 surcharge.
-    threshold = NEG_ELEC_SPEND
-    discount_rate = RBT_DISCOUNT_RATE
-
-    rbt_scenarios = []
-    for name, new_cap in PRICE_SCENARIOS.items():
-        pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
-        behav_factor_hh = _behavioural_factor_hh(eps_hh, pct)
-
-        shocked_elec = elec * (1 + pct)
-        shocked_threshold = threshold * (1 + pct)
-        block1_s = np.minimum(shocked_elec, shocked_threshold)
-        block2_s = np.maximum(shocked_elec - shocked_threshold, 0)
-        block1_subsidy_s = block1_s * discount_rate
-        total_sub = float(np.sum(block1_subsidy_s * weights))
-        total_b2 = float(np.sum(block2_s * weights))
-        surcharge_rate_s = total_sub / total_b2 if total_b2 > 0 else 0
-        payment = block1_subsidy_s - block2_s * surcharge_rate_s
-
-        deciles_rbt = []
-        for d in range(1, 11):
-            mask = decile_arr == d
-            e_d = energy[mask]
-            i_d = income[mask]
-            w_d = weights[mask]
-            p_d = payment[mask]
-            bf_d = behav_factor_hh[mask]
-            shocked_e = e_d * (1 + pct)
-            net_s = np.maximum(shocked_e - p_d, e_d)
-            behav_e = e_d * bf_d
-            net_b = np.maximum(behav_e - p_d, e_d)
-            extra_s = float(weighted_mean(np.maximum(net_s - e_d, 0), w_d))
-            extra_b = float(weighted_mean(np.maximum(net_b - e_d, 0), w_d))
-            mean_inc_d = float(weighted_mean(i_d, w_d))
-            pct_s = round(extra_s / mean_inc_d * 100, 2) if mean_inc_d > 0 else 0
-            pct_b = round(extra_b / mean_inc_d * 100, 2) if mean_inc_d > 0 else 0
-            deciles_rbt.append(
-                {
-                    "decile": d,
-                    "extra_cost": round(extra_s),
-                    "pct_of_income": pct_s,
-                    "behavioural_extra_cost": round(extra_b),
-                    "behavioural_pct_of_income": pct_b,
-                }
-            )
-
-        by_tenure = _grouped_post_policy(
-            energy,
-            income,
-            weights,
-            payment,
-            tenure_arr,
-            tenure_groups,
-            pct,
-            behav_factor_hh,
-        )
-        for t in by_tenure:
-            t["tenure"] = t.pop("group")
-        by_hh_type = _grouped_post_policy(
-            energy,
-            income,
-            weights,
-            payment,
-            hh_type_arr,
-            hh_type_groups,
-            pct,
-            behav_factor_hh,
-        )
-        for h in by_hh_type:
-            h["hh_type"] = h.pop("group")
-        by_country = _grouped_post_policy(
-            energy,
-            income,
-            weights,
-            payment,
-            country_arr,
-            country_groups,
-            pct,
-            behav_factor_hh,
-        )
-        for c in by_country:
-            c["country"] = c.pop("group")
-
-        rbt_scenarios.append(
-            {
-                "scenario": name,
-                "surcharge_rate_pct": round(surcharge_rate_s * 100, 1),
-                "deciles": deciles_rbt,
-                "by_tenure": by_tenure,
-                "by_hh_type": by_hh_type,
-                "by_country": by_country,
-            }
-        )
-    results["rbt"] = rbt_scenarios
 
     return results
 
@@ -1359,63 +1239,7 @@ def neg_policy(data):
     }
 
 
-# ── 15. Rising block tariff ─────────────────────────────────────────────
-
-
-def rising_block_tariff(data):
-    elec, weights = data["elec"], data["weights"]
-    decile_arr, income = data["decile"], data["income"]
-
-    threshold = NEG_ELEC_SPEND
-    discount_rate = RBT_DISCOUNT_RATE
-
-    block1 = np.minimum(elec, threshold)
-    block1_subsidy = block1 * discount_rate
-    block2 = np.maximum(elec - threshold, 0)
-
-    total_subsidy = float(np.sum(block1_subsidy * weights))
-    total_block2 = float(np.sum(block2 * weights))
-    surcharge_rate = total_subsidy / total_block2 if total_block2 > 0 else 0
-
-    net_effect = -block1_subsidy + block2 * surcharge_rate
-
-    deciles = []
-    for d in range(1, 11):
-        mask = decile_arr == d
-        me = weighted_mean(elec, weights, mask)
-        mb1 = weighted_mean(block1, weights, mask)
-        mb2 = weighted_mean(block2, weights, mask)
-        saving = weighted_mean(block1_subsidy, weights, mask)
-        surcharge = weighted_mean(block2 * surcharge_rate, weights, mask)
-        net = weighted_mean(net_effect, weights, mask)
-        mi = weighted_mean(income, weights, mask)
-        deciles.append(
-            {
-                "decile": d,
-                "elec_spend": round(me),
-                "block1_spend": round(mb1),
-                "block2_spend": round(mb2),
-                "block1_saving": round(saving),
-                "block2_surcharge": round(surcharge),
-                "net_effect": round(net),
-                "net_pct_income": round(net / mi * 100, 2) if mi > 0 else 0,
-            }
-        )
-
-    return {
-        "name": "Rising block tariff (cost-neutral)",
-        "description": f"50% discount on first {NEG_ELEC_KWH:,} kWh of electricity, funded by a {round(surcharge_rate * 100, 1)}% surcharge on consumption above that level. Zero exchequer cost — high users cross-subsidise low users.",
-        "threshold_kwh": NEG_ELEC_KWH,
-        "threshold_spend": round(threshold),
-        "discount_rate_pct": round(discount_rate * 100),
-        "surcharge_rate_pct": round(surcharge_rate * 100, 1),
-        "exchequer_cost_bn": 0,
-        "total_subsidy_bn": round(total_subsidy / 1e9, 1),
-        "deciles": deciles,
-    }
-
-
-# ── 16. Gas-only price cap ──────────────────────────────────────────────
+# ── 15. Gas-only price cap ──────────────────────────────────────────────
 
 
 def gas_price_cap(data):

@@ -11,7 +11,6 @@ This project models the distributional impact of energy price shocks on UK house
 3. **Shock-matching transfer** — flat payment equal to the average shock
 4. **Cap-freeze subsidy** — bills held at the pre-shock cap, government subsidises the full increase
 5. **National Energy Guarantee (NEG)** — subsidises the first 2,900 kWh of electricity
-6. **Rising block tariff** (cost-neutral) and gas-only cap scenarios
 
 ### Behavioural response
 
@@ -20,6 +19,8 @@ Each household responds to a price shock at its own income decile's short-run el
 The spend response uses the canonical constant-elasticity form
 `(p_new / p_old) ** (1 + ε)`
 rather than the linear first-order approximation `(1 + p)(1 + εp)`, which produces negative consumption — physically impossible — for combinations like ε = −0.64 and +161% shock. The log-linear form stays admissible at all ε ∈ (−1, 0] and p ≥ 0.
+
+**Transferability caveats.** Priesmann & Praktiknjo estimate their elasticities from German *gas* demand using a decile-specific log-linear model; the decile-specific pattern, not the headline magnitude, is what we rely on. Applying those point estimates to combined (electricity + gas) UK consumption assumes (i) the UK income gradient in responsiveness mirrors Germany's and (ii) electricity responds at the same elasticity as gas. Both assumptions are conservative — UK electricity demand is typically estimated less elastic than gas — so the behavioural bill savings reported here are best read as an upper bound. Linear interpolation between D1 and D10 is also a convenience; the underlying estimates give coarser decile bins.
 
 Constant-elasticity extrapolation to +161% (Q1 2023 peak) is well outside the validated band for these elasticity estimates; the extreme-shock results are illustrative, not predictive.
 
@@ -53,8 +54,9 @@ energy-price-shock/
 ### Python analysis
 
 ```bash
-conda activate python313
-pip install -e .
+uv venv --python 3.13 .venv
+source .venv/bin/activate
+uv pip install -e .
 export HUGGING_FACE_TOKEN=<your_token>    # required for dataset download
 python -m energy_shock                    # UK only
 python -m energy_shock --all-countries    # UK + England, Scotland, Wales, N. Ireland
@@ -67,7 +69,7 @@ Requirements: `policyengine-uk>=2.88.0`, `microdf-python>=1.2.0`, `pandas>=2.0`,
 ### Tests
 
 ```bash
-pip install -e .[dev]
+uv pip install -e .[dev]
 pytest tests/
 ```
 

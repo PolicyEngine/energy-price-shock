@@ -2,7 +2,8 @@
 Single entry point: run all analyses and write dashboard JSON files.
 
 Usage:
-    conda activate python313
+    uv venv --python 3.13 .venv && source .venv/bin/activate
+    uv pip install -e .
     python -m energy_shock                        # UK only (default)
     python -m energy_shock --country SCOTLAND     # single country
     python -m energy_shock --all-countries         # UK + all four nations
@@ -81,7 +82,7 @@ def _run_one(data, country, suffix, raw_data):
         json.dump(results, f, indent=2)
     print(f"  -> {path}")
 
-    # ── results_v2.json ──────────────────────────────────────────────
+    # ── results_breakdowns.json ──────────────────────────────────────
     print("  Electricity/gas split...")
     split = sections.energy_split(data)
 
@@ -94,25 +95,21 @@ def _run_one(data, country, suffix, raw_data):
     print("  NEF National Energy Guarantee...")
     neg = sections.neg_policy(data)
 
-    print("  Rising block tariff...")
-    rbt = sections.rising_block_tariff(data)
-
     print("  Country breakdown...")
     country_bd = sections.country_breakdown(data)
 
-    results_v2 = {
+    breakdowns = {
         "energy_split": split,
         "tenure": tenure,
         "household_type": hh_type,
         "country": country_bd,
         "neg_policy": neg,
-        "rising_block_tariff": rbt,
     }
 
-    path_v2 = OUTPUT_DIR / f"results_v2{suffix}.json"
-    with open(path_v2, "w") as f:
-        json.dump(results_v2, f, indent=2)
-    print(f"  -> {path_v2}")
+    path_breakdowns = OUTPUT_DIR / f"results_breakdowns{suffix}.json"
+    with open(path_breakdowns, "w") as f:
+        json.dump(breakdowns, f, indent=2)
+    print(f"  -> {path_breakdowns}")
 
 
 def run_all(country="UK"):

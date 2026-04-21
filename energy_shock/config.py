@@ -76,8 +76,5 @@ NEG_ELEC_SPEND = NEG_ELEC_KWH * ELEC_RATE
 WFA_HIGHER = 500
 WFA_LOWER = 350
 
-# Rising block tariff discount rate
-RBT_DISCOUNT_RATE = 0.50
-
 # HuggingFace dataset URL for PE UK data
 DATASET_URL = "hf://policyengine/policyengine-uk-data/enhanced_frs_2023_24.h5"

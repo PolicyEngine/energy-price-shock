@@ -1,22 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 import resultsUK from "../data/results.json";
-import resultsV2UK from "../data/results_v2.json";
+import breakdownsUK from "../data/results_breakdowns.json";
 import resultsEngland from "../data/results_england.json";
-import resultsV2England from "../data/results_v2_england.json";
+import breakdownsEngland from "../data/results_breakdowns_england.json";
 import resultsScotland from "../data/results_scotland.json";
-import resultsV2Scotland from "../data/results_v2_scotland.json";
+import breakdownsScotland from "../data/results_breakdowns_scotland.json";
 import resultsWales from "../data/results_wales.json";
-import resultsV2Wales from "../data/results_v2_wales.json";
+import breakdownsWales from "../data/results_breakdowns_wales.json";
 import resultsNI from "../data/results_northern_ireland.json";
-import resultsV2NI from "../data/results_v2_northern_ireland.json";
+import breakdownsNI from "../data/results_breakdowns_northern_ireland.json";
 import "./Dashboard.css";
 
 const ALL_DATA = {
-  UK: { results: resultsUK, v2: resultsV2UK },
-  ENGLAND: { results: resultsEngland, v2: resultsV2England },
-  SCOTLAND: { results: resultsScotland, v2: resultsV2Scotland },
-  WALES: { results: resultsWales, v2: resultsV2Wales },
-  NORTHERN_IRELAND: { results: resultsNI, v2: resultsV2NI },
+  UK: { results: resultsUK, breakdowns: breakdownsUK },
+  ENGLAND: { results: resultsEngland, breakdowns: breakdownsEngland },
+  SCOTLAND: { results: resultsScotland, breakdowns: breakdownsScotland },
+  WALES: { results: resultsWales, breakdowns: breakdownsWales },
+  NORTHERN_IRELAND: { results: resultsNI, breakdowns: breakdownsNI },
 };
 
 const COUNTRY_OPTIONS = [
@@ -29,7 +29,7 @@ const COUNTRY_OPTIONS = [
 
 function useData(country) {
   const d = ALL_DATA[country];
-  return { results: d.results, resultsV2: d.v2 };
+  return { results: d.results, breakdowns: d.breakdowns };
 }
 
 function ExpandablePillRow({ label, options, value, onChange }) {
@@ -209,11 +209,11 @@ function ColumnChart({ data, maxValue, color, formatValue, colorFn, yLabel, xLab
 
 function BaselineSection() {
   const [country, setCountry] = useState("UK");
-  const { results, resultsV2 } = useData(country);
+  const { results, breakdowns } = useData(country);
   const { baseline } = results;
-  const split = resultsV2.energy_split;
-  const tenureData = resultsV2.tenure;
-  const hhTypeData = resultsV2.household_type.filter((h) => h.hh_type !== "OTHER");
+  const split = breakdowns.energy_split;
+  const tenureData = breakdowns.tenure;
+  const hhTypeData = breakdowns.household_type.filter((h) => h.hh_type !== "OTHER");
   const [baselineView, setBaselineView] = useState("elec_gas");
   const [breakdownView, setBreakdownView] = useState("decile");
 
@@ -238,7 +238,7 @@ function BaselineSection() {
     WALES: "Wales",
     NORTHERN_IRELAND: "N. Ireland",
   };
-  const countryData = resultsV2.country;
+  const countryData = breakdowns.country;
   // Build chart data for current metric + breakdown combo
   let xLabel;
   const bk = breakdownView;
@@ -318,8 +318,8 @@ function BaselineSection() {
       </p>
 
       <div className="metric-row">
-        <KpiCard label="Avg electricity" value={fmt(split.mean_electricity)} unit="/yr" info="Mean annual household electricity bill before any price shock, based on imputed consumption from NEED 2023 data." />
-        <KpiCard label="Avg gas" value={fmt(split.mean_gas)} unit="/yr" info="Mean annual household gas bill before any price shock, based on imputed consumption from NEED 2023 data." />
+        <KpiCard label="Avg electricity" value={fmt(split.mean_electricity)} unit="/yr" info="Mean annual household electricity bill before any price shock, based on consumption imputed from the Living Costs and Food Survey and calibrated against NEED 2023 administrative totals." />
+        <KpiCard label="Avg gas" value={fmt(split.mean_gas)} unit="/yr" info="Mean annual household gas bill before any price shock, based on consumption imputed from the Living Costs and Food Survey and calibrated against NEED 2023 administrative totals." />
         <KpiCard label="Avg total energy" value={fmt(baseline.mean_energy_spend)} unit="/yr" info="Mean annual combined electricity and gas bill per household at current prices." />
       </div>
 
@@ -407,7 +407,7 @@ function BaselineSection() {
 
 function ShockSection() {
   const [country, setCountry] = useState("UK");
-  const { results, resultsV2 } = useData(country);
+  const { results, breakdowns } = useData(country);
   const [selected, setSelected] = useState(0);
   const [shockMetric, setShockMetric] = useState("pct_of_income");
   const [shockResponse, setShockResponse] = useState("behavioural");
@@ -528,7 +528,13 @@ function ShockSection() {
         negative consumption at the +161% scenario). Constant-elasticity
         extrapolation to +161% (Q1 2023 peak) is outside the validated band
         for these estimates; the extreme-shock results are illustrative, not
-        predictive.
+        predictive. Priesmann and Praktiknjo estimate the decile pattern from
+        German <em>gas</em> demand; applying it to combined UK electricity +
+        gas consumption assumes the UK income gradient mirrors Germany's and
+        that electricity responds at the same elasticity as gas — UK
+        electricity is typically estimated less elastic than gas, so the
+        behavioural bill savings reported here should be read as an upper
+        bound on consumer adjustment.
       </p>
 
       <div className="section-card">
@@ -654,10 +660,10 @@ function ShockSection() {
 
 function PolicyNetSection() {
   const [country, setCountry] = useState("UK");
-  const { results, resultsV2 } = useData(country);
+  const { results, breakdowns } = useData(country);
   const { policies } = results;
   const nHH = results.baseline.n_households_m;
-  const neg = resultsV2.neg_policy;
+  const neg = breakdowns.neg_policy;
   const policyKeys = ["flat_transfer", "bn_transfer", "bn_epg", "neg", "ct_rebate"];
   const policyLabels = {
     flat_transfer: "Flat transfer", ct_rebate: "CT rebate",
@@ -1006,10 +1012,10 @@ function PolicyNetSection() {
 
 function PolicyComparisonSection() {
   const [country, setCountry] = useState("UK");
-  const { results, resultsV2 } = useData(country);
+  const { results, breakdowns } = useData(country);
   const { policies } = results;
   const nHH = results.baseline.n_households_m;
-  const neg = resultsV2.neg_policy;
+  const neg = breakdowns.neg_policy;
 
   const policyKeys = ["flat_transfer", "bn_transfer", "bn_epg", "neg", "ct_rebate"];
   const policyLabels = {
@@ -1216,8 +1222,9 @@ function MethodologySection() {
           <p className="section-description">
             All modelling uses{" "}
             <a href="https://policyengine.org" target="_blank" rel="noopener noreferrer">PolicyEngine UK</a>.<a href="#fn-5"><sup>5</sup></a>
-            Household electricity and gas bills are imputed from the National Energy Efficiency Data-Framework (NEED) 2023
-            administrative dataset. The baseline establishes 2026–27 energy costs across UK
+            Household electricity and gas consumption are imputed from the Living Costs and Food Survey (LCFS), which
+            records detailed expenditure, and calibrated against the National Energy Efficiency Data-Framework (NEED) 2023
+            administrative dataset so aggregate consumption matches the DESNZ totals. The baseline establishes 2026–27 energy costs across UK
             households under current Ofgem rules, with the price cap set at £1,641
             (dual-fuel, direct-debit, typical consumption).<a href="#fn-6"><sup>6</sup></a> All estimates are annualised.
           </p>
@@ -1354,14 +1361,6 @@ function MethodologySection() {
   );
 }
 
-// Data generation guard: every bundled JSON carries ``_stale: true`` until
-// ``python -m energy_shock --all-countries`` has been run. Rendering the
-// dashboard against stale stubs would either crash on missing keys or show
-// numbers from an obsolete analysis pass — both worse than a clear banner.
-const DATA_STALE = Object.values(ALL_DATA).some(
-  (d) => d.results?._stale || d.v2?._stale,
-);
-
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("impact");
 
@@ -1385,37 +1384,6 @@ export default function Dashboard() {
     return () => document.removeEventListener("click", handler);
   }, []);
 
-  if (DATA_STALE) {
-    return (
-      <div className="app-shell">
-        <header className="title-row">
-          <div className="title-row-inner">
-            <h1>Energy price shock: Distributional impact & policy options</h1>
-          </div>
-        </header>
-        <main className="main-content">
-          <div className="section-card" style={{ marginTop: 32 }}>
-            <h2 className="section-heading">Data generation pending</h2>
-            <p className="section-description">
-              The bundled dashboard data files under <code>dashboard/src/data/</code> are
-              placeholder stubs. To render the analysis, run the microsimulation:
-            </p>
-            <pre className="section-description" style={{ padding: 16, background: "#f4f4f6" }}>
-              pip install -e .{"\n"}
-              python -m energy_shock --all-countries
-            </pre>
-            <p className="section-description">
-              This will regenerate <code>results.json</code> and <code>results_v2.json</code>{" "}
-              for UK + each constituent nation from the current PolicyEngine UK microdata and
-              the decile-specific elasticity model. Dataset download requires a{" "}
-              <code>HUGGING_FACE_TOKEN</code> in your environment.
-            </p>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
   return (
     <div className="app-shell">
       <header className="title-row">
@@ -1435,8 +1403,9 @@ export default function Dashboard() {
         </p>
         <p className="intro-text">
           This dashboard uses PolicyEngine UK to estimate the distributional impact of five
-          price-shock scenarios.<a href="#fn-5"><sup>5</sup></a> Electricity and gas bills are imputed
-          from the National Energy Efficiency Data-Framework (NEED) 2023. Under current Ofgem rules,
+          price-shock scenarios.<a href="#fn-5"><sup>5</sup></a> Electricity and gas consumption are
+          imputed from the Living Costs and Food Survey and calibrated against the National Energy Efficiency
+          Data-Framework (NEED) 2023 aggregates. Under current Ofgem rules,
           the cap is £1,641 (dual-fuel, direct-debit, typical consumption); all figures are annual
           values for the 2026–27 fiscal year.<a href="#fn-6"><sup>6</sup></a> The{" "}
           <strong>Impact scenarios</strong> tab models baseline burden and shock effects. The{" "}
