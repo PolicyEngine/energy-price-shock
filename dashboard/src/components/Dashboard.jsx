@@ -1002,13 +1002,14 @@ function PolicyNetSection() {
                       // Available on policy_post_shock outputs, absent on NEG /
                       // bn_epg fallback paths — only show when populated.
                       const hasNet = d.staticNet !== undefined && d.behavNet !== undefined;
-                      const netFmt = (v) => (v > 0 ? `+${fmt(v)}` : fmt(v));
+                      const netFmt = (v) =>
+                        v >= 0 ? `+${fmt(v)}` : `-£${(-v).toLocaleString("en-GB")}`;
                       const netStr = hasNet
                         ? showBoth
-                          ? `, net change: static ${netFmt(d.staticNet)}, behav ${netFmt(d.behavNet)}`
+                          ? `, net change vs baseline: static ${netFmt(d.staticNet)}, behav ${netFmt(d.behavNet)}`
                           : showStatic
-                          ? `, net change: ${netFmt(d.staticNet)}`
-                          : `, net change: ${netFmt(d.behavNet)}`
+                          ? `, net change vs baseline: ${netFmt(d.staticNet)}`
+                          : `, net change vs baseline: ${netFmt(d.behavNet)}`
                         : "";
                       return (
                       <div className="col-chart-col" key={i}>
@@ -1096,23 +1097,34 @@ function PolicyComparisonSection() {
   const scenario = scenarios[compScenario];
   const scenarioName = scenario.name;
 
-  // Compute exchequer cost for each policy at the selected scenario (static + behavioural)
+  // Compute exchequer cost for each policy at the selected scenario (static + behavioural).
+  // Behavioural toggle only moves cost for policies whose *payment* scales with
+  // consumer behaviour — in practice only the cap-freeze subsidy, which reimburses
+  // each household's actual bill increase. Every other policy in this dashboard
+  // is a fixed per-household amount (flat transfer, CT rebate), a flat payment
+  // pegged to the static average shock (shock-matching), or a subsidy indexed to
+  // static baseline consumption (NEG) — all invariant to behavioural response.
   const behav = results.behavioural[compScenario];
   const behavRatio = behav.behavioural_avg_extra / behav.static_avg_extra;
   const getExchequer = (pk) => {
     let staticCost, behavCost;
     if (pk === "bn_transfer") {
-      // Shock-matching: pays the average hit, which differs under behavioural response
+      // Shock-matching: flat payment equal to the static average shock; cost is
+      // a function of the payment, not of household response.
       staticCost = Math.round(scenario.avg_hh_hit_yr * nHH / 100) / 10;
-      behavCost = Math.round(behav.behavioural_avg_extra * nHH / 100) / 10;
+      behavCost = staticCost;
     } else if (pk === "bn_epg") {
+      // Cap-freeze: government reimburses each household's actual bill increase,
+      // so the aggregate cost scales with the behavioural / static ratio.
       staticCost = scenario.total_cost_bn;
       behavCost = Math.round(staticCost * behavRatio * 10) / 10;
     } else if (pk === "neg") {
+      // NEG subsidy indexed to static pre-shock consumption (see neg_policy
+      // docstring); cost does not depend on the response toggle.
       staticCost = neg.scenarios[compScenario].exchequer_cost_bn;
-      behavCost = Math.round(staticCost * behavRatio * 10) / 10;
+      behavCost = staticCost;
     } else {
-      // Fixed-amount policies (flat_transfer, ct_rebate): same cost regardless
+      // Fixed-amount policies (flat_transfer, ct_rebate): same cost regardless.
       staticCost = policies[pk].exchequer_cost_bn;
       behavCost = staticCost;
     }

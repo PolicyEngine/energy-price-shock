@@ -294,12 +294,13 @@ def behavioural_responses(data):
                 {
                     "decile": d,
                     "elasticity": round(eps_d, 3),
-                    # Log-linear q_new / q_old = (1 + p)^ε; reduction is
-                    # (1 - q_new/q_old) × 100. Formerly reported the
-                    # linear εp approximation which produced values
-                    # < −100 % at the +161 % scenario for low deciles.
+                    # Log-linear q_new / q_old = (1 + p)^ε. Reduction is
+                    # reported as a positive percentage: (1 − q_new/q_old)
+                    # × 100. The earlier linear εp approximation produced
+                    # values > 100 % (implying negative consumption) at
+                    # the +161 % scenario for low deciles.
                     "consumption_reduction_pct": round(
-                        ((1 + price_pct) ** eps_d - 1) * 100, 1
+                        (1 - (1 + price_pct) ** eps_d) * 100, 1
                     ),
                     "static_extra_cost": round(static_hit),
                     "behavioural_extra_cost": round(behavioural_hit),

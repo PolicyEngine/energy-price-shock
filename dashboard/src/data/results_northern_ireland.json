@@ -750,7 +750,7 @@
         {
           "decile": 1,
           "elasticity": -0.64,
-          "consumption_reduction_pct": -5.9,
+          "consumption_reduction_pct": 5.9,
           "static_extra_cost": 148,
           "behavioural_extra_cost": 52,
           "bill_saving": 96,
@@ -760,7 +760,7 @@
         {
           "decile": 2,
           "elasticity": -0.581,
-          "consumption_reduction_pct": -5.4,
+          "consumption_reduction_pct": 5.4,
           "static_extra_cost": 160,
           "behavioural_extra_cost": 65,
           "bill_saving": 95,
@@ -770,7 +770,7 @@
         {
           "decile": 3,
           "elasticity": -0.522,
-          "consumption_reduction_pct": -4.9,
+          "consumption_reduction_pct": 4.9,
           "static_extra_cost": 148,
           "behavioural_extra_cost": 69,
           "bill_saving": 79,
@@ -780,7 +780,7 @@
         {
           "decile": 4,
           "elasticity": -0.463,
-          "consumption_reduction_pct": -4.3,
+          "consumption_reduction_pct": 4.3,
           "static_extra_cost": 207,
           "behavioural_extra_cost": 109,
           "bill_saving": 98,
@@ -790,7 +790,7 @@
         {
           "decile": 5,
           "elasticity": -0.404,
-          "consumption_reduction_pct": -3.8,
+          "consumption_reduction_pct": 3.8,
           "static_extra_cost": 147,
           "behavioural_extra_cost": 86,
           "bill_saving": 61,
@@ -800,7 +800,7 @@
         {
           "decile": 6,
           "elasticity": -0.346,
-          "consumption_reduction_pct": -3.2,
+          "consumption_reduction_pct": 3.2,
           "static_extra_cost": 178,
           "behavioural_extra_cost": 115,
           "bill_saving": 63,
@@ -810,7 +810,7 @@
         {
           "decile": 7,
           "elasticity": -0.287,
-          "consumption_reduction_pct": -2.7,
+          "consumption_reduction_pct": 2.7,
           "static_extra_cost": 330,
           "behavioural_extra_cost": 232,
           "bill_saving": 98,
@@ -820,7 +820,7 @@
         {
           "decile": 8,
           "elasticity": -0.228,
-          "consumption_reduction_pct": -2.1,
+          "consumption_reduction_pct": 2.1,
           "static_extra_cost": 303,
           "behavioural_extra_cost": 232,
           "bill_saving": 72,
@@ -830,7 +830,7 @@
         {
           "decile": 9,
           "elasticity": -0.169,
-          "consumption_reduction_pct": -1.6,
+          "consumption_reduction_pct": 1.6,
           "static_extra_cost": 259,
           "behavioural_extra_cost": 214,
           "bill_saving": 46,
@@ -840,7 +840,7 @@
         {
           "decile": 10,
           "elasticity": -0.11,
-          "consumption_reduction_pct": -1.0,
+          "consumption_reduction_pct": 1.0,
           "static_extra_cost": 140,
           "behavioural_extra_cost": 124,
           "bill_saving": 16,
@@ -970,7 +970,7 @@
         {
           "decile": 1,
           "elasticity": -0.64,
-          "consumption_reduction_pct": -11.0,
+          "consumption_reduction_pct": 11.0,
           "static_extra_cost": 296,
           "behavioural_extra_cost": 101,
           "bill_saving": 196,
@@ -980,7 +980,7 @@
         {
           "decile": 2,
           "elasticity": -0.581,
-          "consumption_reduction_pct": -10.0,
+          "consumption_reduction_pct": 10.0,
           "static_extra_cost": 319,
           "behavioural_extra_cost": 127,
           "bill_saving": 193,
@@ -990,7 +990,7 @@
         {
           "decile": 3,
           "elasticity": -0.522,
-          "consumption_reduction_pct": -9.1,
+          "consumption_reduction_pct": 9.1,
           "static_extra_cost": 296,
           "behavioural_extra_cost": 135,
           "bill_saving": 161,
@@ -1000,7 +1000,7 @@
         {
           "decile": 4,
           "elasticity": -0.463,
-          "consumption_reduction_pct": -8.1,
+          "consumption_reduction_pct": 8.1,
           "static_extra_cost": 414,
           "behavioural_extra_cost": 213,
           "bill_saving": 201,
@@ -1010,7 +1010,7 @@
         {
           "decile": 5,
           "elasticity": -0.404,
-          "consumption_reduction_pct": -7.1,
+          "consumption_reduction_pct": 7.1,
           "static_extra_cost": 294,
           "behavioural_extra_cost": 169,
           "bill_saving": 126,
@@ -1020,7 +1020,7 @@
         {
           "decile": 6,
           "elasticity": -0.346,
-          "consumption_reduction_pct": -6.1,
+          "consumption_reduction_pct": 6.1,
           "static_extra_cost": 356,
           "behavioural_extra_cost": 226,
           "bill_saving": 131,
@@ -1030,7 +1030,7 @@
         {
           "decile": 7,
           "elasticity": -0.287,
-          "consumption_reduction_pct": -5.1,
+          "consumption_reduction_pct": 5.1,
           "static_extra_cost": 660,
           "behavioural_extra_cost": 458,
           "bill_saving": 202,
@@ -1040,7 +1040,7 @@
         {
           "decile": 8,
           "elasticity": -0.228,
-          "consumption_reduction_pct": -4.1,
+          "consumption_reduction_pct": 4.1,
           "static_extra_cost": 606,
           "behavioural_extra_cost": 458,
           "bill_saving": 148,
@@ -1050,7 +1050,7 @@
         {
           "decile": 9,
           "elasticity": -0.169,
-          "consumption_reduction_pct": -3.0,
+          "consumption_reduction_pct": 3.0,
           "static_extra_cost": 519,
           "behavioural_extra_cost": 424,
           "bill_saving": 94,
@@ -1060,7 +1060,7 @@
         {
           "decile": 10,
           "elasticity": -0.11,
-          "consumption_reduction_pct": -2.0,
+          "consumption_reduction_pct": 2.0,
           "static_extra_cost": 281,
           "behavioural_extra_cost": 247,
           "bill_saving": 33,
@@ -1190,7 +1190,7 @@
         {
           "decile": 1,
           "elasticity": -0.64,
-          "consumption_reduction_pct": -15.4,
+          "consumption_reduction_pct": 15.4,
           "static_extra_cost": 445,
           "behavioural_extra_cost": 147,
           "bill_saving": 298,
@@ -1200,7 +1200,7 @@
         {
           "decile": 2,
           "elasticity": -0.581,
-          "consumption_reduction_pct": -14.1,
+          "consumption_reduction_pct": 14.1,
           "static_extra_cost": 479,
           "behavioural_extra_cost": 185,
           "bill_saving": 293,
@@ -1210,7 +1210,7 @@
         {
           "decile": 3,
           "elasticity": -0.522,
-          "consumption_reduction_pct": -12.8,
+          "consumption_reduction_pct": 12.8,
           "static_extra_cost": 444,
           "behavioural_extra_cost": 198,
           "bill_saving": 246,
@@ -1220,7 +1220,7 @@
         {
           "decile": 4,
           "elasticity": -0.463,
-          "consumption_reduction_pct": -11.4,
+          "consumption_reduction_pct": 11.4,
           "static_extra_cost": 621,
           "behavioural_extra_cost": 313,
           "bill_saving": 308,
@@ -1230,7 +1230,7 @@
         {
           "decile": 5,
           "elasticity": -0.404,
-          "consumption_reduction_pct": -10.1,
+          "consumption_reduction_pct": 10.1,
           "static_extra_cost": 441,
           "behavioural_extra_cost": 249,
           "bill_saving": 193,
@@ -1240,7 +1240,7 @@
         {
           "decile": 6,
           "elasticity": -0.346,
-          "consumption_reduction_pct": -8.7,
+          "consumption_reduction_pct": 8.7,
           "static_extra_cost": 534,
           "behavioural_extra_cost": 334,
           "bill_saving": 201,
@@ -1250,7 +1250,7 @@
         {
           "decile": 7,
           "elasticity": -0.287,
-          "consumption_reduction_pct": -7.2,
+          "consumption_reduction_pct": 7.2,
           "static_extra_cost": 990,
           "behavioural_extra_cost": 679,
           "bill_saving": 311,
@@ -1260,7 +1260,7 @@
         {
           "decile": 8,
           "elasticity": -0.228,
-          "consumption_reduction_pct": -5.8,
+          "consumption_reduction_pct": 5.8,
           "static_extra_cost": 910,
           "behavioural_extra_cost": 681,
           "bill_saving": 229,
@@ -1270,7 +1270,7 @@
         {
           "decile": 9,
           "elasticity": -0.169,
-          "consumption_reduction_pct": -4.3,
+          "consumption_reduction_pct": 4.3,
           "static_extra_cost": 778,
           "behavioural_extra_cost": 632,
           "bill_saving": 146,
@@ -1280,7 +1280,7 @@
         {
           "decile": 10,
           "elasticity": -0.11,
-          "consumption_reduction_pct": -2.8,
+          "consumption_reduction_pct": 2.8,
           "static_extra_cost": 421,
           "behavioural_extra_cost": 369,
           "bill_saving": 52,
@@ -1410,7 +1410,7 @@
         {
           "decile": 1,
           "elasticity": -0.64,
-          "consumption_reduction_pct": -26.0,
+          "consumption_reduction_pct": 26.0,
           "static_extra_cost": 889,
           "behavioural_extra_cost": 273,
           "bill_saving": 616,
@@ -1420,7 +1420,7 @@
         {
           "decile": 2,
           "elasticity": -0.581,
-          "consumption_reduction_pct": -23.9,
+          "consumption_reduction_pct": 23.9,
           "static_extra_cost": 957,
           "behavioural_extra_cost": 347,
           "bill_saving": 610,
@@ -1430,7 +1430,7 @@
         {
           "decile": 3,
           "elasticity": -0.522,
-          "consumption_reduction_pct": -21.8,
+          "consumption_reduction_pct": 21.8,
           "static_extra_cost": 888,
           "behavioural_extra_cost": 373,
           "bill_saving": 515,
@@ -1440,7 +1440,7 @@
         {
           "decile": 4,
           "elasticity": -0.463,
-          "consumption_reduction_pct": -19.6,
+          "consumption_reduction_pct": 19.6,
           "static_extra_cost": 1242,
           "behavioural_extra_cost": 594,
           "bill_saving": 648,
@@ -1450,7 +1450,7 @@
         {
           "decile": 5,
           "elasticity": -0.404,
-          "consumption_reduction_pct": -17.3,
+          "consumption_reduction_pct": 17.3,
           "static_extra_cost": 883,
           "behavioural_extra_cost": 475,
           "bill_saving": 408,
@@ -1460,7 +1460,7 @@
         {
           "decile": 6,
           "elasticity": -0.346,
-          "consumption_reduction_pct": -15.0,
+          "consumption_reduction_pct": 15.0,
           "static_extra_cost": 1069,
           "behavioural_extra_cost": 642,
           "bill_saving": 427,
@@ -1470,7 +1470,7 @@
         {
           "decile": 7,
           "elasticity": -0.287,
-          "consumption_reduction_pct": -12.6,
+          "consumption_reduction_pct": 12.6,
           "static_extra_cost": 1980,
           "behavioural_extra_cost": 1314,
           "bill_saving": 665,
@@ -1480,7 +1480,7 @@
         {
           "decile": 8,
           "elasticity": -0.228,
-          "consumption_reduction_pct": -10.1,
+          "consumption_reduction_pct": 10.1,
           "static_extra_cost": 1819,
           "behavioural_extra_cost": 1327,
           "bill_saving": 493,
@@ -1490,7 +1490,7 @@
         {
           "decile": 9,
           "elasticity": -0.169,
-          "consumption_reduction_pct": -7.6,
+          "consumption_reduction_pct": 7.6,
           "static_extra_cost": 1556,
           "behavioural_extra_cost": 1239,
           "bill_saving": 317,
@@ -1500,7 +1500,7 @@
         {
           "decile": 10,
           "elasticity": -0.11,
-          "consumption_reduction_pct": -5.0,
+          "consumption_reduction_pct": 5.0,
           "static_extra_cost": 842,
           "behavioural_extra_cost": 729,
           "bill_saving": 113,
@@ -1630,7 +1630,7 @@
         {
           "decile": 1,
           "elasticity": -0.64,
-          "consumption_reduction_pct": -45.8,
+          "consumption_reduction_pct": 45.8,
           "static_extra_cost": 2384,
           "behavioural_extra_cost": 611,
           "bill_saving": 1773,
@@ -1640,7 +1640,7 @@
         {
           "decile": 2,
           "elasticity": -0.581,
-          "consumption_reduction_pct": -42.7,
+          "consumption_reduction_pct": 42.7,
           "static_extra_cost": 2567,
           "behavioural_extra_cost": 789,
           "bill_saving": 1778,
@@ -1650,7 +1650,7 @@
         {
           "decile": 3,
           "elasticity": -0.522,
-          "consumption_reduction_pct": -39.4,
+          "consumption_reduction_pct": 39.4,
           "static_extra_cost": 2380,
           "behavioural_extra_cost": 860,
           "bill_saving": 1520,
@@ -1660,7 +1660,7 @@
         {
           "decile": 4,
           "elasticity": -0.463,
-          "consumption_reduction_pct": -35.9,
+          "consumption_reduction_pct": 35.9,
           "static_extra_cost": 3330,
           "behavioural_extra_cost": 1393,
           "bill_saving": 1937,
@@ -1670,7 +1670,7 @@
         {
           "decile": 5,
           "elasticity": -0.404,
-          "consumption_reduction_pct": -32.1,
+          "consumption_reduction_pct": 32.1,
           "static_extra_cost": 2367,
           "behavioural_extra_cost": 1133,
           "bill_saving": 1234,
@@ -1680,7 +1680,7 @@
         {
           "decile": 6,
           "elasticity": -0.346,
-          "consumption_reduction_pct": -28.2,
+          "consumption_reduction_pct": 28.2,
           "static_extra_cost": 2865,
           "behavioural_extra_cost": 1555,
           "bill_saving": 1310,
@@ -1690,7 +1690,7 @@
         {
           "decile": 7,
           "elasticity": -0.287,
-          "consumption_reduction_pct": -24.0,
+          "consumption_reduction_pct": 24.0,
           "static_extra_cost": 5307,
           "behavioural_extra_cost": 3239,
           "bill_saving": 2068,
@@ -1700,7 +1700,7 @@
         {
           "decile": 8,
           "elasticity": -0.228,
-          "consumption_reduction_pct": -19.6,
+          "consumption_reduction_pct": 19.6,
           "static_extra_cost": 4878,
           "behavioural_extra_cost": 3326,
           "bill_saving": 1552,
@@ -1710,7 +1710,7 @@
         {
           "decile": 9,
           "elasticity": -0.169,
-          "consumption_reduction_pct": -14.9,
+          "consumption_reduction_pct": 14.9,
           "static_extra_cost": 4171,
           "behavioural_extra_cost": 3160,
           "bill_saving": 1011,
@@ -1720,7 +1720,7 @@
         {
           "decile": 10,
           "elasticity": -0.11,
-          "consumption_reduction_pct": -10.0,
+          "consumption_reduction_pct": 10.0,
           "static_extra_cost": 2258,
           "behavioural_extra_cost": 1891,
           "bill_saving": 366,
