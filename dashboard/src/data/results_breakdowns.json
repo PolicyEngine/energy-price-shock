@@ -722,6 +722,7 @@
           }
         ]
       }
-    ]
+    ],
+    "subsidy_indexed_to": "static_baseline_consumption"
   }
 }

@@ -105,7 +105,7 @@ const POLICY_META = {
       The government holds every household's bill at the pre-shock level of £1,641/yr and
       subsidises the full price increase.<a href="#fn-6"><sup>6</sup></a> Each household's subsidy equals its actual bill increase, so every decile's net extra cost
       is zero. The exchequer bears the full shock cost but achieves 100% offset for all households.
-      This differs from the 2022 Energy Price Guarantee, which capped bills at £2,500 rather than freezing them at the pre-shock level:
+      This differs from the 2022 Energy Price Guarantee,<a href="#fn-12"><sup>12</sup></a> which capped bills at £2,500 rather than freezing them at the pre-shock level:
       we model it by setting each household's bill to the pre-shock level and computing the subsidy as the difference.
     </>,
   },
@@ -113,9 +113,12 @@ const POLICY_META = {
     fullName: "National Energy Guarantee (NEG)",
     description: <>
       Based on the proposal in <a href="#ref-bangham">Bangham (2026)</a>: each household's first 2,900 kWh/yr of electricity
-      (the median) is held at the pre-shock unit price, with the government paying the difference; consumption above that
+      — the threshold Bangham suggests, mirroring Austria's and the Netherlands' 2022 relief schemes — is held at the pre-shock
+      unit price, with the government paying the difference; consumption above that
       threshold is charged the shocked price. Low-income households tend to consume less electricity, so a larger share of
-      their bill falls below the threshold.
+      their bill falls below the threshold. Our model indexes the subsidy to each household's pre-shock consumption up to
+      the threshold; an alternative design indexing it to actual (post-response) consumption would shrink the subsidy for
+      households that cut below the threshold and reduce headline progressivity.
     </>,
   },
 };
@@ -517,8 +520,8 @@ function ShockSection() {
         household responds at its own income decile's short-run price
         elasticity per <a href="#ref-priesmann">Priesmann and Praktiknjo
         (2025)</a>: −0.64 for the lowest decile, rising monotonically to −0.11
-        for the highest. A population-mean elasticity (e.g. Labandeira et al.
-        2017's −0.15) would average away the progressivity that matters —
+        for the highest. A population-mean elasticity (e.g. <a href="#ref-labandeira">Labandeira et al.
+        (2017)</a>'s −0.15) would average away the progressivity that matters —
         lower-income households are forced to cut sharply while higher-income
         households barely respond. The spend response uses the canonical
         constant-elasticity form{" "}
@@ -576,6 +579,22 @@ function ShockSection() {
           onChange={setShockBreakdown}
         />
       </div>
+
+      {scenario.price_increase_pct >= 100 && (
+        <div className="scenario-banner" style={{
+          padding: "10px 14px",
+          marginBottom: 12,
+          borderRadius: 6,
+          background: "#fef3c7",
+          borderLeft: "4px solid #d97706",
+          fontSize: 13,
+          color: "#78350f",
+        }}>
+          <strong>Illustrative scenario.</strong> A +{scenario.price_increase_pct}% shock is well outside the
+          ±10–20% band over which the Priesmann &amp; Praktiknjo (2025) elasticities are validated. Treat
+          the numbers as a stress-test of the model's geometry, not a forecast.
+        </div>
+      )}
 
       <div className="metric-row">
         <KpiCard label="New price cap" value={fmt(scenario.new_cap)} unit="/yr" color="teal" info="The Ofgem price cap after the shock is applied. This is the cap level that determines household bills." />
@@ -667,7 +686,7 @@ function PolicyNetSection() {
   const policyKeys = ["flat_transfer", "bn_transfer", "bn_epg", "neg", "ct_rebate"];
   const policyLabels = {
     flat_transfer: "Flat transfer", ct_rebate: "CT rebate",
-    bn_transfer: "Shock-match", bn_epg: "Cap-freeze subsidy",
+    bn_transfer: "Shock-matching", bn_epg: "Cap-freeze subsidy",
     neg: "Energy Guarantee",
   };
   const TENURE_LABELS = {
@@ -739,7 +758,11 @@ function PolicyNetSection() {
       const pfp = results.policy_post_shock?.[selectedNet]?.[selectedScenario];
       if (pfp) {
         barData = pfp.deciles.map((d) => ({
-          label: `${d.decile}`, staticVal: d.extra_cost, behavVal: d.behavioural_extra_cost,
+          label: `${d.decile}`,
+          staticVal: d.extra_cost,
+          behavVal: d.behavioural_extra_cost,
+          staticNet: d.net_change,
+          behavNet: d.behavioural_net_change,
         }));
       } else {
         barData = scenario.deciles.map((d) => ({ label: `${d.decile}`, staticVal: 0, behavVal: 0 }));
@@ -763,7 +786,11 @@ function PolicyNetSection() {
       const LABELS = bk === "tenure" ? TENURE_LABELS : bk === "hh_type" ? HH_TYPE_LABELS : COUNTRY_LABELS;
       const groupKey = bk === "tenure" ? "tenure" : bk === "hh_type" ? "hh_type" : "country";
       barData = groupData.map((d) => ({
-        label: LABELS[d[groupKey]] || d[groupKey], staticVal: d.extra_cost, behavVal: d.behavioural_extra_cost,
+        label: LABELS[d[groupKey]] || d[groupKey],
+        staticVal: d.extra_cost,
+        behavVal: d.behavioural_extra_cost,
+        staticNet: d.net_change,
+        behavNet: d.behavioural_net_change,
       }));
       barData.sort((a, b) => b.staticVal - a.staticVal);
     } else {
@@ -799,7 +826,7 @@ function PolicyNetSection() {
         </ul>
       </details>
       <p className="section-description">
-        The chart below shows the extra energy cost each group still faces after the selected policy is applied, broken down by decile, tenure, household type or country. A larger bar means a larger remaining burden for that group under the selected policy.
+        The chart below shows the extra energy cost each group still faces after the selected policy is applied, broken down by decile, tenure, household type or country. A larger bar means a larger remaining burden for that group under the selected policy. Households whose shock is smaller than the policy payment are fully offset and contribute zero to the bar — this is a residual-burden view, not a net-welfare one, so over-compensation (e.g. a £400 flat transfer paid to low-decile households whose static shock is only £98 at +10%) is not shown as a negative bar. The per-decile tooltips include a signed net-change value for that purpose.
       </p>
 
       <div className="section-card">
@@ -839,12 +866,28 @@ function PolicyNetSection() {
         />
       </div>
 
+      {scenario.price_increase_pct >= 100 && (
+        <div className="scenario-banner" style={{
+          padding: "10px 14px",
+          marginBottom: 12,
+          borderRadius: 6,
+          background: "#fef3c7",
+          borderLeft: "4px solid #d97706",
+          fontSize: 13,
+          color: "#78350f",
+        }}>
+          <strong>Illustrative scenario.</strong> A +{scenario.price_increase_pct}% shock is well outside the
+          ±10–20% band over which the Priesmann &amp; Praktiknjo (2025) elasticities are validated. Policy
+          offset percentages below are an upper bound on what the model can support.
+        </div>
+      )}
+
       {/* KPI cards */}
       {selectedNet === "neg" && (() => {
         const scen = neg.scenarios[selectedScenario];
         return (
           <div className="metric-row">
-            <KpiCard label="Threshold" value={`${neg.threshold_kwh.toLocaleString()} kWh`} info="Energy consumption threshold below which all usage is subsidised. Set at the median household level." />
+            <KpiCard label="Threshold" value={`${neg.threshold_kwh.toLocaleString()} kWh`} info="Electricity consumption threshold per Bangham (2026), mirroring Austria's and the Netherlands' 2022 relief schemes. Close to but not identical to the Ofgem TDCV for medium-consumption electricity (~2,700 kWh)." />
             <KpiCard label="Baseline cost" value={fmtBn(neg.baseline_cost_bn)} info={`The NEG subsidises the first ${neg.threshold_kwh.toLocaleString()} kWh of electricity for all households. This is the programme cost with no price shock.`} />
             <KpiCard label="Extra cost from shock" value={fmtBn(Math.round((scen.exchequer_cost_bn - neg.baseline_cost_bn) * 10) / 10)} info={`Additional exchequer cost caused by the price shock (total £${scen.exchequer_cost_bn}bn minus baseline £${neg.baseline_cost_bn}bn). The NEG automatically scales with prices, so costs rise when energy prices rise.`} />
             <KpiCard label="Avg extra benefit" value={fmt(scen.avg_benefit - neg.avg_benefit_baseline)} unit="/yr" color="teal" info="Additional annual subsidy per household due to the price shock, above the baseline NEG benefit." />
@@ -954,13 +997,27 @@ function PolicyNetSection() {
                 <div className="col-chart-area">
                   {ticks.map((t, i) => (<div className="col-chart-gridline" key={i} style={{ bottom: `${(t / effectiveMax) * 100}%` }} />))}
                   <div className="col-chart-bars">
-                    {barData.map((d, i) => (
+                    {barData.map((d, i) => {
+                      // Net change (signed; negative = over-compensated by policy).
+                      // Available on policy_post_shock outputs, absent on NEG /
+                      // bn_epg fallback paths — only show when populated.
+                      const hasNet = d.staticNet !== undefined && d.behavNet !== undefined;
+                      const netFmt = (v) => (v > 0 ? `+${fmt(v)}` : fmt(v));
+                      const netStr = hasNet
+                        ? showBoth
+                          ? `, net change: static ${netFmt(d.staticNet)}, behav ${netFmt(d.behavNet)}`
+                          : showStatic
+                          ? `, net change: ${netFmt(d.staticNet)}`
+                          : `, net change: ${netFmt(d.behavNet)}`
+                        : "";
+                      return (
                       <div className="col-chart-col" key={i}>
                         <div className="col-chart-tooltip">
                           {showBoth
                             ? `Static: ${fmtChart(d.staticVal)}, Behavioural: ${fmtChart(d.behavVal)}`
                             : showStatic ? `Static: ${fmtChart(d.staticVal)}`
                             : `Behavioural: ${fmtChart(d.behavVal)}`}
+                          {netStr}
                         </div>
                         {showBoth ? (
                           <div className="col-chart-track" style={{ flexDirection: "row", gap: "2px", alignItems: "flex-end" }}>
@@ -978,7 +1035,8 @@ function PolicyNetSection() {
                         )}
                         <div className="col-chart-label">{d.label}</div>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1020,12 +1078,12 @@ function PolicyComparisonSection() {
   const policyKeys = ["flat_transfer", "bn_transfer", "bn_epg", "neg", "ct_rebate"];
   const policyLabels = {
     flat_transfer: "Flat transfer", ct_rebate: "CT rebate",
-    bn_transfer: "Shock-match", bn_epg: "Cap-freeze subsidy",
+    bn_transfer: "Shock-matching", bn_epg: "Cap-freeze subsidy",
     neg: "Energy Guarantee",
   };
   const policyBarLabels = {
     flat_transfer: "Flat transfer", ct_rebate: "CT rebate",
-    bn_transfer: "Shock-match", bn_epg: "Cap-freeze subsidy", neg: "Energy Guarantee",
+    bn_transfer: "Shock-matching", bn_epg: "Cap-freeze subsidy", neg: "Energy Guarantee",
   };
 
   const [compScenario, setCompScenario] = useState(0);
@@ -1230,13 +1288,29 @@ function MethodologySection() {
           </p>
           <p className="section-description">
             Shock scenarios raise the Ofgem cap (four by a given percentage: +10%, +20%, +30%, +60%;
-            and one to the Q1 2023 peak level of £4,279) and compute the extra cost and income share
+            and one to the Q1 2023 peak level of £4,279 — the announced cap before the
+            Energy Price Guarantee held typical bills at £2,500).<a href="#fn-8"><sup>8</sup></a>{" "}
+            Each scenario computes the extra cost and income share
             for each household. Behavioural estimates apply income-decile-specific
             short-run elasticities per <a href="#ref-priesmann">Priesmann and Praktiknjo (2025)</a>
             (−0.64 for D1, rising to −0.11 for D10) under a canonical
-            constant-elasticity demand curve. Five policy responses are modelled:
-            a flat transfer, a council tax band rebate, a shock-matching flat transfer,
-            a cap-freeze subsidy, and a National Energy Guarantee (NEG).
+            constant-elasticity demand curve. The five modelled responses —
+            flat transfer, council tax band rebate, shock-matching flat transfer,
+            cap-freeze subsidy, and the National Energy Guarantee (NEG) —
+            mix ideas from the 2022 UK support package<a href="#fn-13"><sup>13</sup></a> with
+            newer proposals.
+          </p>
+          <p className="section-description">
+            Shocks are modelled as proportional to the combined dual-fuel cap: a
+            gas-only shock would hit households heating with gas (and those on
+            all-electric tariffs indirectly, since roughly 40% of UK electricity
+            is gas-fuelled at the margin) more sharply than these averages imply.
+            The Ofgem cap figure of £1,641/yr also bundles ~£290/yr of fixed
+            standing charges with unit-rate spend, so a uniform-percentage shock
+            implicitly rescales standing charges too — which is not how a real
+            wholesale-gas shock propagates. Low-consumption (often small,
+            well-insulated, low-income) households would be <em>less</em> exposed
+            to a true unit-rate shock than the model implies.
           </p>
         </div>
 
@@ -1308,16 +1382,16 @@ function MethodologySection() {
             <a href="https://www.cityam.com/uk-gas-prices-spike-over-90-per-cent-amid-us-iran-war/" target="_blank" rel="noopener noreferrer">cityam.com</a>
           </li>
           <li id="fn-2">
-            Cornwall Insight, "Final July price cap forecast," March 2026.{" "}
-            <a href="https://www.cornwall-insight.com/press-and-media/press-release/cornwall-insight-release-final-july-price-cap-forecast/" target="_blank" rel="noopener noreferrer">cornwall-insight.com</a>
+            Cornwall Insight, "July price cap forecast rises to £1,801 as conflict in the Middle East drives up gas prices," 4 March 2026.{" "}
+            <a href="https://www.cornwall-insight.com/press-and-media/press-release/july-price-cap-forecast-rises-to-1800-as-conflict-in-the-middle-east-drives-up-gas-prices/" target="_blank" rel="noopener noreferrer">cornwall-insight.com</a>
           </li>
           <li id="fn-3">
-            <em>GB News</em>, "Iran war: Household energy bills could rise by £160," March 2026 (citing Stifel analysts).{" "}
-            <a href="https://www.gbnews.com/news/iran-war-household-energy-bills-rise" target="_blank" rel="noopener noreferrer">gbnews.com</a>
+            <em>GB News</em>, "Energy bills: UK households face higher costs as Iran conflict drives up gas prices" (citing Chris Wheaton at Stifel, who estimates a sustained closure could push the cap toward £2,500), March 2026.{" "}
+            <a href="https://www.gbnews.com/money/energy-bills-uk-households-iran-gas-prices" target="_blank" rel="noopener noreferrer">gbnews.com</a>
           </li>
           <li id="fn-4">
-            Resolution Foundation, "War in Middle East threatens bumper year of living standards growth for lower-income families," 4 March 2026.{" "}
-            <a href="https://www.resolutionfoundation.org/press-releases/war-in-middle-east-threatens-bumper-year-of-living-standards-growth-for-lower-income-families/" target="_blank" rel="noopener noreferrer">resolutionfoundation.org</a>
+            Resolution Foundation, "Higher energy prices could leave typical British households £480 worse off this year," comment piece, March 2026.{" "}
+            <a href="https://www.resolutionfoundation.org/comment/higher-energy-prices-could-leave-typical-british-households-480-worse-off-this-year/" target="_blank" rel="noopener noreferrer">resolutionfoundation.org</a>
           </li>
           <li id="fn-5">
             PolicyEngine, "Energy price shock: distributional impact and policy options," GitHub repository.{" "}
@@ -1332,7 +1406,7 @@ function MethodologySection() {
             <a href="https://www.ons.gov.uk/economy/inflationandpriceindices/articles/energypricesandtheireffectonhouseholds/2022-02-01" target="_blank" rel="noopener noreferrer">ons.gov.uk</a>
           </li>
           <li id="fn-8">
-            Ofgem, "Energy price cap (default tariff) levels," accessed April 2026. The Q1 2023 cap (1 January – 31 March 2023) was set at £4,279/yr for a typical dual-fuel direct-debit household, the peak announced cap during the 2022–23 energy crisis.{" "}
+            Ofgem, "Energy price cap (default tariff) levels," accessed April 2026. The Q1 2023 cap (1 January – 31 March 2023) was announced at £4,279/yr for a typical dual-fuel direct-debit household — the peak announced cap during the 2022–23 crisis — but the concurrent Energy Price Guarantee held typical bills at £2,500/yr, so this figure is what households would have paid absent government intervention rather than what they actually paid.{" "}
             <a href="https://www.ofgem.gov.uk/energy-regulation/domestic-and-non-domestic/energy-pricing-rules/energy-price-cap/energy-price-cap-default-tariff-levels" target="_blank" rel="noopener noreferrer">ofgem.gov.uk</a>
           </li>
           <li id="fn-9">

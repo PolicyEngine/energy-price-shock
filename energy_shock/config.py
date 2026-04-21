@@ -36,26 +36,28 @@ PRICE_SCENARIOS = {
 }
 
 # Income-differentiated short-run price elasticities of household energy
-# demand, from Priesmann & Praktiknjo (2025). Poorer households cut
-# consumption far more sharply under a shock than richer households.
-# Linearly interpolated from D1 = −0.64 to D10 = −0.11.
+# demand. The D1 (−0.64) and D10 (−0.11) endpoints are reported by
+# Priesmann & Praktiknjo (2025) for German gas; the interior values
+# (D2-D9) are our own linear interpolation between those endpoints and
+# are not a result of that paper. A flat or smoothly monotone pattern
+# between endpoints is consistent with Priesmann's reported trend but
+# any specific interior shape is a modelling choice.
 #
-# This is the canonical elasticity used throughout the analysis — the
-# behavioural response for each decile is computed from its own ε, not
-# from a population-mean value, so the progressivity of the shock is
-# captured rather than averaged away. A uniform value (e.g. the
-# −0.15 Labandeira et al. 2017 meta-analytic mean) would understate
-# how sharply low-income households are forced to cut and overstate
-# the bill-saving high-income households achieve.
+# The behavioural response for each household is computed from its own
+# decile's ε rather than a population-mean value, so the progressivity
+# of the shock is captured rather than averaged away. A uniform value
+# (e.g. the −0.15 Labandeira et al. 2017 meta-analytic mean) would
+# understate how sharply low-income households are forced to cut and
+# overstate the bill-saving higher-income households achieve.
 #
 # For reporting headline aggregate statistics ("average household gives
 # up X% of consumption") the weighted mean of these decile-specific
 # values is used — computed at output time rather than hardcoded.
 #
-# CAVEAT: a constant-elasticity linearisation is applied out to +161%
-# (Q1 2023 peak scenario), well outside the ±10-20% band over which the
-# underlying elasticity studies are validated. Treat the extreme-shock
-# scenarios as illustrative rather than predictive.
+# CAVEAT: the constant-elasticity form is applied out to +161 %
+# (Q1 2023 peak scenario), well outside the ±10-20 % band over which
+# the underlying elasticity studies are validated. Treat the extreme-
+# shock scenarios as illustrative rather than predictive.
 ELASTICITY_BY_DECILE = {d: -0.64 + (d - 1) * (-0.11 - -0.64) / 9 for d in range(1, 11)}
 
 # Policy response parameters (applied to severe shock)
@@ -67,7 +69,10 @@ CT_REBATE = 300
 ELEC_RATE = 24.70 / 100  # £/kWh
 GAS_RATE = 5.70 / 100  # £/kWh
 
-# NEG: median electricity consumption threshold
+# NEG electricity threshold per Bangham (2026) Substack proposal: matches
+# Austria and the Netherlands' 2022 "first N kWh at the old price" relief
+# schemes. 2,900 kWh is close to but not identical to the Ofgem TDCV for
+# electricity (≈ 2,700 kWh for the medium-consumption band).
 NEG_ELEC_KWH = 2_900
 NEG_ELEC_SPEND = NEG_ELEC_KWH * ELEC_RATE
 

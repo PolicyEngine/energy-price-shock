@@ -19,14 +19,18 @@ jobs:
         run: uvx ruff check .
 
   test:
-    name: Test
+    name: Test (${{ matrix.python-version }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.13", "3.14"]
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
       - name: Create venv and install
         run: |
-          uv venv --python 3.13 .venv
+          uv venv --python ${{ matrix.python-version }} .venv
           uv pip install --python .venv/bin/python -e .[dev]
       - name: Pytest
         run: .venv/bin/pytest tests/ -v

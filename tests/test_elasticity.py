@@ -80,17 +80,51 @@ def test_behavioural_factor_low_decile_cuts_harder():
 
 def test_behavioural_factor_physically_admissible_at_extreme_shock():
     """Q1 2023 peak (+161 %) must not produce negative spending factors
-    for D1 (ε = −0.64). The linear approximation ``(1+p)(1+εp)`` gives
-    −0.08 here; the log-linear form stays positive for all ε ∈ (−1, 0].
+    for any decile. The linear approximation ``(1+p)(1+εp)`` produces a
+    physically impossible negative factor at (ε=−0.64, p=1.61); the
+    log-linear form ``(1+p)^(1+ε)`` stays positive for all ε ∈ (−1, 0].
+    Guards against any regression back to the linear first-order form.
     """
     pct = 1.61
+    d1_eps = ELASTICITY_BY_DECILE[1]  # -0.64
+
+    # Linear first-order form at (ε=-0.64, p=1.61):
+    #   (1 + 1.61) * (1 + (-0.64)*1.61) = 2.61 * (-0.0304) ≈ -0.0793
+    linear_factor = (1 + pct) * (1 + d1_eps * pct)
+    assert linear_factor < 0, (
+        f"sanity: the linear form (1+p)(1+εp) = {linear_factor:.4f} "
+        "should be negative at (ε=-0.64, p=1.61) — this test guards "
+        "against regressing to it"
+    )
+
     for eps in ELASTICITY_BY_DECILE.values():
         factor = _behavioural_factor_hh(np.array([eps]), pct)[0]
         assert factor > 0, (
             f"ε={eps}: factor {factor} is non-positive, implying "
             "physically impossible consumption change"
         )
+        # And explicitly not the broken linear form:
+        lin = (1 + pct) * (1 + eps * pct)
+        assert not np.isclose(factor, lin, atol=1e-3), (
+            f"ε={eps}: factor {factor} matches linear form {lin} — "
+            "log-linear implementation has regressed to first-order"
+        )
+
     # Spot-check the canonical constant-elasticity identity:
     # (1+p)**(1+ε) at ε=−0.64, p=1.61  →  2.61**0.36 ≈ 1.4115
-    d1_factor = _behavioural_factor_hh(np.array([-0.64]), 1.61)[0]
+    d1_factor = _behavioural_factor_hh(np.array([d1_eps]), pct)[0]
     assert np.isclose(d1_factor, 2.61**0.36, rtol=1e-4)
+
+
+def test_epsilon_fallback_honours_weights():
+    """The weighted-mean fallback for missing-decile rows should weight
+    by ``household_weight`` — a uniform fallback would bias toward the
+    unweighted arithmetic mean."""
+    data = _synthetic_data(
+        [0, 1, 10],
+        weights=[1.0, 1.0, 9.0],  # D10 dominates
+    )
+    eps = _epsilon_per_household(data)
+    # Weighted mean of D1 and D10, weighted 1:9 toward D10.
+    expected = (1 * ELASTICITY_BY_DECILE[1] + 9 * ELASTICITY_BY_DECILE[10]) / 10
+    assert np.isclose(eps[0], expected)

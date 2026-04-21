@@ -1,8 +1,8 @@
 """
-All analysis sections: baseline summary, shocks, behavioural,
-flat-transfer and council-tax-rebate policies, post-policy residual
-extra cost, electricity/gas split, tenure, household type, country,
-NEG, gas-only cap.
+All analysis sections: baseline summary, shocks, behavioural responses,
+policy scenarios (flat transfer + CT rebate + post-shock composite),
+electricity/gas split, tenure / household-type / country breakdowns, and
+the National Energy Guarantee (NEG).
 
 Every function takes the shared `data` dict from baseline.run_baseline().
 Energy = electricity + gas everywhere.
@@ -134,12 +134,6 @@ def baseline_summary(data):
     energy_by_dec = decile_means(data, "energy")
     income_by_dec = decile_means(data, "income")
     n_households = float(data["weights"].sum())
-    _energy, _income, _weights, _dec = (
-        data["energy"],
-        data["income"],
-        data["weights"],
-        data["decile"],
-    )
 
     deciles = []
     for d in range(1, 11):
@@ -219,13 +213,6 @@ def shock_scenarios(data):
     income_by_dec = decile_means(data, "income")
     mean_energy = weighted_mean(data["energy"], data["weights"])
     total_energy = float(np.sum(data["energy"] * data["weights"]))
-
-    _energy_arr, _income_arr, _weights_arr = (
-        data["energy"],
-        data["income"],
-        data["weights"],
-    )
-    data["decile"]
 
     scenarios = []
     for name, new_cap in PRICE_SCENARIOS.items():
@@ -353,7 +340,7 @@ def behavioural_responses(data):
     return results_list
 
 
-# ── 6. Policy B: Flat transfer ──────────────────────────────────────────
+# ── 5. Policy: Flat transfer ────────────────────────────────────────────
 
 
 def policy_flat(data):
@@ -393,7 +380,7 @@ def policy_flat(data):
     }
 
 
-# ── 7. Policy C: CT rebate ──────────────────────────────────────────────
+# ── 6. Policy: CT rebate ────────────────────────────────────────────────
 
 
 def policy_ct_rebate(data):
@@ -481,17 +468,24 @@ def _grouped_post_policy(
                     "pct_of_income": 0,
                     "behavioural_extra_cost": 0,
                     "behavioural_pct_of_income": 0,
+                    "net_change": 0,
+                    "behavioural_net_change": 0,
                 }
             )
             continue
         shocked_e = e_g * (1 + pct)
-        net_s = np.maximum(shocked_e - p_g, e_g)
-        extra_s = float(weighted_mean(np.maximum(net_s - e_g, 0), w_g))
+        # Signed net change: positive = still worse off vs baseline,
+        # negative = over-compensated by the policy payment.
+        net_change_s = float(weighted_mean(shocked_e - p_g - e_g, w_g))
+        # "extra_cost" is the underwater-only aggregate: households fully
+        # offset by the policy contribute zero, so this floor is a
+        # residual-burden view rather than a net-welfare view.
+        extra_s = float(weighted_mean(np.maximum(shocked_e - p_g - e_g, 0), w_g))
         mean_inc = float(weighted_mean(i_g, w_g))
         pct_inc_s = round(extra_s / mean_inc * 100, 2) if mean_inc > 0 else 0
         behav_e = e_g * bf_g
-        net_b = np.maximum(behav_e - p_g, e_g)
-        extra_b = float(weighted_mean(np.maximum(net_b - e_g, 0), w_g))
+        net_change_b = float(weighted_mean(behav_e - p_g - e_g, w_g))
+        extra_b = float(weighted_mean(np.maximum(behav_e - p_g - e_g, 0), w_g))
         pct_inc_b = round(extra_b / mean_inc * 100, 2) if mean_inc > 0 else 0
         result.append(
             {
@@ -500,6 +494,8 @@ def _grouped_post_policy(
                 "pct_of_income": round(pct_inc_s, 2),
                 "behavioural_extra_cost": round(extra_b),
                 "behavioural_pct_of_income": round(pct_inc_b, 2),
+                "net_change": round(net_change_s),
+                "behavioural_net_change": round(net_change_b),
             }
         )
     return result
@@ -582,11 +578,16 @@ def policy_post_shock(data):
                 p_d = payment[mask]
                 bf_d = behav_factor_hh[mask]
                 shocked_e = e_d * (1 + pct)
-                net_e_static = np.maximum(shocked_e - p_d, e_d)
                 behav_e = e_d * bf_d
-                net_e_behav = np.maximum(behav_e - p_d, e_d)
-                extra_s = float(weighted_mean(np.maximum(net_e_static - e_d, 0), w_d))
-                extra_b = float(weighted_mean(np.maximum(net_e_behav - e_d, 0), w_d))
+                # Signed net change (can be negative when the policy
+                # over-compensates vs the household's shock) and the
+                # underwater-only residual (used for the main chart).
+                net_change_s = float(weighted_mean(shocked_e - p_d - e_d, w_d))
+                net_change_b = float(weighted_mean(behav_e - p_d - e_d, w_d))
+                extra_s = float(
+                    weighted_mean(np.maximum(shocked_e - p_d - e_d, 0), w_d)
+                )
+                extra_b = float(weighted_mean(np.maximum(behav_e - p_d - e_d, 0), w_d))
                 mean_inc_d = float(weighted_mean(i_d, w_d))
                 pct_s = round(extra_s / mean_inc_d * 100, 2) if mean_inc_d > 0 else 0
                 pct_b = round(extra_b / mean_inc_d * 100, 2) if mean_inc_d > 0 else 0
@@ -597,6 +598,8 @@ def policy_post_shock(data):
                         "pct_of_income": pct_s,
                         "behavioural_extra_cost": round(extra_b),
                         "behavioural_pct_of_income": pct_b,
+                        "net_change": round(net_change_s),
+                        "behavioural_net_change": round(net_change_b),
                     }
                 )
 
@@ -656,6 +659,10 @@ def policy_post_shock(data):
     for name, new_cap in PRICE_SCENARIOS.items():
         pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
         behav_factor_hh = _behavioural_factor_hh(eps_hh, pct)
+        # NEG subsidy is indexed to each household's static pre-shock
+        # consumption (see neg_policy docstring for the caveat). Using
+        # static here keeps the subsidy consistent between the two
+        # response views the dashboard toggles between.
         shocked_elec = elec * (1 + pct)
         neg_threshold_shocked = NEG_ELEC_SPEND * (1 + pct)
         benefit_shocked = np.minimum(shocked_elec, neg_threshold_shocked)
@@ -670,11 +677,11 @@ def policy_post_shock(data):
             p_d = payment[mask]
             bf_d = behav_factor_hh[mask]
             shocked_e = e_d * (1 + pct)
-            net_s = np.maximum(shocked_e - p_d, e_d)
             behav_e = e_d * bf_d
-            net_b = np.maximum(behav_e - p_d, e_d)
-            extra_s = float(weighted_mean(np.maximum(net_s - e_d, 0), w_d))
-            extra_b = float(weighted_mean(np.maximum(net_b - e_d, 0), w_d))
+            net_change_s = float(weighted_mean(shocked_e - p_d - e_d, w_d))
+            net_change_b = float(weighted_mean(behav_e - p_d - e_d, w_d))
+            extra_s = float(weighted_mean(np.maximum(shocked_e - p_d - e_d, 0), w_d))
+            extra_b = float(weighted_mean(np.maximum(behav_e - p_d - e_d, 0), w_d))
             mean_inc = float(weighted_mean(i_d, w_d))
             pct_s = round(extra_s / mean_inc * 100, 2) if mean_inc > 0 else 0
             pct_b = round(extra_b / mean_inc * 100, 2) if mean_inc > 0 else 0
@@ -683,6 +690,8 @@ def policy_post_shock(data):
                     "decile": d,
                     "extra_cost": round(extra_s),
                     "pct_of_income": pct_s,
+                    "net_change": round(net_change_s),
+                    "behavioural_net_change": round(net_change_b),
                     "behavioural_extra_cost": round(extra_b),
                     "behavioural_pct_of_income": pct_b,
                 }
@@ -778,36 +787,7 @@ def energy_split(data):
     }
 
 
-# ── 12. Regional breakdown ──────────────────────────────────────────────
-
-
-def regional_breakdown(data):
-    regions = []
-    for r in sorted(np.unique(data["region"])):
-        if r == "" or r is None:
-            continue
-        mask = data["region"] == r
-        me = weighted_mean(data["elec"], data["weights"], mask)
-        mg = weighted_mean(data["gas"], data["weights"], mask)
-        mi = weighted_mean(data["income"], data["weights"], mask)
-        n_hh = float(data["weights"][mask].sum()) / 1e6
-        total_e = me + mg
-        regions.append(
-            {
-                "region": str(r),
-                "electricity": round(me),
-                "gas": round(mg),
-                "total_energy": round(total_e),
-                "net_income": round(mi),
-                "energy_burden_pct": round(total_e / mi * 100, 2) if mi > 0 else 0,
-                "households_m": round(n_hh, 1),
-            }
-        )
-    regions.sort(key=lambda x: x["energy_burden_pct"], reverse=True)
-    return regions
-
-
-# ── 13. Tenure breakdown ────────────────────────────────────────────────
+# ── 12. Tenure breakdown ────────────────────────────────────────────────
 
 
 def tenure_breakdown(data):
@@ -836,7 +816,7 @@ def tenure_breakdown(data):
     return tenures
 
 
-# ── 13b. Household type breakdown ────────────────────────────────────────
+# ── 12b. Household type breakdown ───────────────────────────────────────
 
 
 def household_type_breakdown(data):
@@ -865,7 +845,7 @@ def household_type_breakdown(data):
     return hh_types
 
 
-# ── 13c. Country breakdown ──────────────────────────────────────────────
+# ── 12c. Country breakdown ──────────────────────────────────────────────
 
 
 def country_breakdown(data):
@@ -894,10 +874,21 @@ def country_breakdown(data):
     return countries
 
 
-# ── 14. NEF National Energy Guarantee ────────────────────────────────────
+# ── 13. NEF National Energy Guarantee ───────────────────────────────────
 
 
 def neg_policy(data):
+    """National Energy Guarantee scenarios.
+
+    Subsidy is indexed to each household's pre-shock consumption up to
+    the 2,900 kWh threshold. This is the simpler reading of Bangham's
+    (2026) proposal — an "inframarginal" allocation each household
+    receives at the old price regardless of how it responds to the
+    shock. An alternative design indexing the subsidy to actual post-
+    shock consumption would shrink subsidy cost for the highest-
+    elasticity (low-income) deciles that cut below the threshold, and
+    correspondingly reduce headline progressivity.
+    """
     elec, gas, weights = data["elec"], data["gas"], data["weights"]
     _income, decile_arr = data["income"], data["decile"]
 
@@ -923,6 +914,14 @@ def neg_policy(data):
     scenarios = []
     for name, new_cap in PRICE_SCENARIOS.items():
         pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
+        # Subsidy base: static pre-shock electricity consumption up to
+        # the 2,900 kWh threshold. We treat the NEG allocation as a
+        # fixed entitlement indexed to each household's baseline usage
+        # rather than their post-shock behavioural response, so the
+        # subsidy doesn't shrink when a household cuts below threshold.
+        # If the real policy were indexed to actual post-shock usage,
+        # subsidy cost and headline progressivity would both fall for
+        # the highest-elasticity (low-income) deciles.
         shocked_elec = elec * (1 + pct)
         shocked_gas = gas * (1 + pct)
         shocked_total = shocked_elec + shocked_gas
@@ -973,60 +972,5 @@ def neg_policy(data):
         "avg_benefit_baseline": avg_benefit,
         "deciles_baseline": deciles_baseline,
         "scenarios": scenarios,
-    }
-
-
-# ── 15. Gas-only price cap ──────────────────────────────────────────────
-
-
-def gas_price_cap(data):
-    elec, gas, weights = data["elec"], data["gas"], data["weights"]
-    decile_arr, _income = data["decile"], data["income"]
-
-    scenarios = []
-    for name, new_cap in PRICE_SCENARIOS.items():
-        pct = (new_cap - CURRENT_CAP) / CURRENT_CAP
-        shocked_elec = elec * (1 + pct)
-        shocked_gas = gas * (1 + pct)
-        total_shock_extra = (shocked_elec + shocked_gas) - (elec + gas)
-
-        net_extra = shocked_elec - elec
-        gas_subsidy = shocked_gas - gas
-
-        cost_bn = round(float(np.sum(gas_subsidy * weights)) / 1e9, 1)
-        avg_benefit = round(weighted_mean(gas_subsidy, weights))
-        avg_net_extra = round(weighted_mean(net_extra, weights))
-
-        deciles = []
-        for d in range(1, 11):
-            mask = decile_arr == d
-            shock = weighted_mean(total_shock_extra, weights, mask)
-            ben = weighted_mean(gas_subsidy, weights, mask)
-            remaining = weighted_mean(net_extra, weights, mask)
-            offset_pct = ben / shock * 100 if shock > 0 else 0
-            deciles.append(
-                {
-                    "decile": d,
-                    "total_shock": round(shock),
-                    "gas_subsidy": round(ben),
-                    "remaining_cost": round(remaining),
-                    "offset_pct": round(offset_pct, 1),
-                }
-            )
-
-        scenarios.append(
-            {
-                "name": name,
-                "new_cap": new_cap,
-                "exchequer_cost_bn": cost_bn,
-                "avg_gas_subsidy": avg_benefit,
-                "avg_remaining_cost": avg_net_extra,
-                "deciles": deciles,
-            }
-        )
-
-    return {
-        "name": "Gas-only price cap",
-        "description": "Cap gas bills at current level and let electricity prices float. Gas is more volatile due to wholesale market exposure, so capping gas alone is cheaper and targets the main source of price shocks.",
-        "scenarios": scenarios,
+        "subsidy_indexed_to": "static_baseline_consumption",
     }

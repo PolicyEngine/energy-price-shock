@@ -95,6 +95,27 @@ Current Ofgem price cap (Q2 2026): £1,641/yr.
 | +60% | £2,625 | +60% |
 | Q1 2023 peak | £4,279 | +161% |
 
+The +10 %, +20 %, and +30 % figures sit inside the range Cornwall Insight has
+forecast for the July 2026 cap. +60 % is close to Stifel's upper-bound
+scenario under a sustained Strait-of-Hormuz closure. The Q1 2023 peak
+corresponds to the *announced* cap of £4,279 for January–March 2023;
+households actually paid around £2,500 under the concurrent Energy Price
+Guarantee, so the +161 % scenario is what bills would have reached absent
+government intervention — not a realised historical data point. It is
+included as a stress-test of the model's geometry at elasticity ranges
+outside the validated band (the elasticities are estimated on ±10–20 %
+variation), and should be read as illustrative rather than predictive.
+
+Shocks are modelled as a uniform percentage increase on the combined
+dual-fuel cap. A gas-only shock — the more plausible trigger given the
+wholesale-gas dynamics these scenarios anticipate — would hit gas-heated
+households more sharply and all-electric households less sharply than
+these averages imply. The cap figure of £1,641/yr also bundles roughly
+£290/yr of fixed standing charges with unit-rate spend, so a uniform
+percentage shock implicitly rescales standing charges too. Low-consumption
+households (often small, well-insulated, or low-income) would be *less*
+exposed to a true unit-rate shock than the combined-cap model implies.
+
 ## Key parameters
 
 | Parameter | Value | Source |
@@ -104,7 +125,7 @@ Current Ofgem price cap (Q2 2026): £1,641/yr.
 | Gas rate | 5.70 p/kWh | Ofgem Q2 2026 |
 | Short-run elasticity | −0.64 (D1) → −0.11 (D10) | Priesmann & Praktiknjo (2025) |
 | Behavioural form | `(p_new/p_old) ** (1+ε)` | Constant-elasticity |
-| NEG threshold | 2,900 kWh | Median household electricity |
+| NEG threshold | 2,900 kWh | Bangham (2026) proposal, mirroring Austria/Netherlands 2022 schemes |
 | Dataset | enhanced_frs_2023_24.h5 | PolicyEngine UK data (HuggingFace) |
 
 ## Tech stack
