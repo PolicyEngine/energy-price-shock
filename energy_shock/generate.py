@@ -2,7 +2,8 @@
 Single entry point: run all analyses and write dashboard JSON files.
 
 Usage:
-    conda activate python313
+    uv venv --python 3.13 .venv && source .venv/bin/activate
+    uv pip install -e .
     python -m energy_shock                        # UK only (default)
     python -m energy_shock --country SCOTLAND     # single country
     python -m energy_shock --all-countries         # UK + all four nations
@@ -12,12 +13,15 @@ import argparse
 import json
 from pathlib import Path
 
-from .baseline import run_baseline, filter_by_country
-from .config import (
-    YEAR, CURRENT_CAP,
-    FLAT_TRANSFER, CT_REBATE, SHORT_RUN_ELASTICITY,
-)
 from . import sections
+from .baseline import filter_by_country, run_baseline
+from .config import (
+    CT_REBATE,
+    CURRENT_CAP,
+    ELASTICITY_BY_DECILE,
+    FLAT_TRANSFER,
+    YEAR,
+)
 
 OUTPUT_DIR = Path(__file__).parent.parent / "dashboard" / "src" / "data"
 
@@ -28,10 +32,10 @@ def _run_one(data, country, suffix, raw_data):
     """Run full analysis for one country/nation and write JSON files."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    print(f"\n{'='*50}")
-    print(f"  {country}: {data['weights'].sum()/1e6:.1f}m households")
+    print(f"\n{'=' * 50}")
+    print(f"  {country}: {data['weights'].sum() / 1e6:.1f}m households")
     print(f"  Mean energy: £{data['energy'].mean():.0f}")
-    print(f"{'='*50}")
+    print(f"{'=' * 50}")
 
     # ── results.json ─────────────────────────────────────────────────
     print("  Baseline summary...")
@@ -41,7 +45,7 @@ def _run_one(data, country, suffix, raw_data):
     scenarios = sections.shock_scenarios(data)
 
     print("  Behavioural responses...")
-    behav = sections.behavioral_responses(data)
+    behav = sections.behavioural_responses(data)
 
     print("  Policy: Flat transfer...")
     pol_flat = sections.policy_flat(data)
@@ -55,7 +59,7 @@ def _run_one(data, country, suffix, raw_data):
     results = {
         "baseline": baseline,
         "shock_scenarios": scenarios,
-        "behavioral": behav,
+        "behavioural": behav,
         "policies": {
             "flat_transfer": pol_flat,
             "ct_rebate": pol_ct,
@@ -67,7 +71,9 @@ def _run_one(data, country, suffix, raw_data):
             "current_cap": CURRENT_CAP,
             "flat_transfer": FLAT_TRANSFER,
             "ct_rebate": CT_REBATE,
-            "elasticity": SHORT_RUN_ELASTICITY,
+            "elasticity_by_decile": {
+                str(d): round(ELASTICITY_BY_DECILE[d], 3) for d in range(1, 11)
+            },
         },
     }
 
@@ -76,7 +82,7 @@ def _run_one(data, country, suffix, raw_data):
         json.dump(results, f, indent=2)
     print(f"  -> {path}")
 
-    # ── results_v2.json ──────────────────────────────────────────────
+    # ── results_breakdowns.json ──────────────────────────────────────
     print("  Electricity/gas split...")
     split = sections.energy_split(data)
 
@@ -89,26 +95,21 @@ def _run_one(data, country, suffix, raw_data):
     print("  NEF National Energy Guarantee...")
     neg = sections.neg_policy(data)
 
-    print("  Rising block tariff...")
-    rbt = sections.rising_block_tariff(data)
-
     print("  Country breakdown...")
     country_bd = sections.country_breakdown(data)
 
-    results_v2 = {
+    breakdowns = {
         "energy_split": split,
         "tenure": tenure,
         "household_type": hh_type,
         "country": country_bd,
         "neg_policy": neg,
-        "rising_block_tariff": rbt,
     }
 
-    path_v2 = OUTPUT_DIR / f"results_v2{suffix}.json"
-    with open(path_v2, "w") as f:
-        json.dump(results_v2, f, indent=2)
-    print(f"  -> {path_v2}")
-
+    path_breakdowns = OUTPUT_DIR / f"results_breakdowns{suffix}.json"
+    with open(path_breakdowns, "w") as f:
+        json.dump(breakdowns, f, indent=2)
+    print(f"  -> {path_breakdowns}")
 
 
 def run_all(country="UK"):
@@ -145,12 +146,14 @@ def run_all_countries():
 def _cli():
     parser = argparse.ArgumentParser(description="Generate energy-shock analysis")
     parser.add_argument(
-        "--country", default="UK",
+        "--country",
+        default="UK",
         choices=VALID_COUNTRIES,
         help="Country/nation to analyse (default: UK)",
     )
     parser.add_argument(
-        "--all-countries", action="store_true",
+        "--all-countries",
+        action="store_true",
         help="Generate data for UK + all four nations",
     )
     args = parser.parse_args()

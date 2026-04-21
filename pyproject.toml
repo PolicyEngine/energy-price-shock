@@ -1,13 +1,80 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "energy-shock"
 version = "0.1.0"
+description = "Distributional analysis of UK energy price shocks using PolicyEngine UK."
+readme = "README.md"
 requires-python = ">=3.13"
+license = { text = "AGPL-3.0-or-later" }
+authors = [
+    { name = "PolicyEngine", email = "hello@policyengine.org" },
+]
+keywords = [
+    "energy",
+    "microsimulation",
+    "policyengine",
+    "uk",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
 dependencies = [
-    "policyengine-uk",
-    "microdf",
-    "pandas",
-    "numpy",
+    # PolicyEngine UK microsim. The ``policyengine`` 4.x unified API
+    # was trialled but blocked by a bundled-manifest bootstrap issue
+    # (see baseline.py module docstring); migrate once upstream fixes.
+    "policyengine-uk>=2.88.0",
+    "microdf-python>=1.2.0",
+    "pandas>=2.0",
+    "numpy>=1.26",
 ]
 
-[tool.setuptools.packages.find]
-include = ["energy_shock*"]
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+energy-shock = "energy_shock.generate:_cli"
+
+[project.urls]
+Homepage = "https://github.com/PolicyEngine/energy-price-shock"
+Repository = "https://github.com/PolicyEngine/energy-price-shock"
+Issues = "https://github.com/PolicyEngine/energy-price-shock/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["energy_shock"]
+
+# Keep the sdist lean: ship only the Python package, tests, README, LICENSE,
+# and pyproject.toml. The ``dashboard/`` subtree (bundled data, React app,
+# node artefacts) is a consumer of the package, not part of it, and would
+# otherwise inflate the source distribution by ~10 MB.
+[tool.hatch.build.targets.sdist]
+include = [
+    "energy_shock/**/*.py",
+    "tests/**/*.py",
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP"]
+ignore = ["E501"]  # long lines in scenario-heavy code
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

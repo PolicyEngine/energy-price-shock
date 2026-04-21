@@ -1,41 +1,87 @@
-"""
-Shared baseline: run the microsimulation once, extract all household arrays.
+"""Shared baseline: run the microsimulation once, extract all household arrays.
 
 Energy is defined as electricity_consumption + gas_consumption throughout.
+
+Uses ``policyengine_uk.Microsimulation`` directly. A migration to the
+unified ``policyengine.py`` API was trialled but blocked by a
+bootstrap mismatch in ``policyengine.py`` 4.1.x's bundled UK release
+manifest (pinned to a data-package version without a published
+``release_manifest.json`` on Hugging Face). Reform dicts use the same
+parameter paths either way, so the migration can be revisited once
+upstream stabilises.
 """
 
+from __future__ import annotations
+
 import numpy as np
-from policyengine_uk import Microsimulation
+import pandas as pd
 
-from .config import YEAR, REGION_TO_COUNTRY, DATASET_URL
+# The ``policyengine_uk`` import pulls the whole UK tax-benefit system
+# at module load (variable registry, parameter tree, etc.), so defer it
+# into the actual simulation functions. That keeps importing
+# ``energy_shock.baseline`` for its pure helpers (``weighted_mean``,
+# ``decile_means``, ``filter_by_country``) cheap and makes the unit
+# tests under ``tests/`` runnable without a microsim bootstrap.
+from .config import DATASET_URL, REGION_TO_COUNTRY, YEAR
 
 
-def _vals(sim, var, **kw):
-    """Extract numpy array from sim.calculate, handling MicroSeries."""
-    v = sim.calculate(var, YEAR, **kw)
-    return v if isinstance(v, np.ndarray) else v.values
+def _build_simulation(reform: dict | None = None):
+    """Construct a ``policyengine_uk`` Microsimulation.
+
+    Reform dicts use the same parameter paths and date-keyed values as
+    reforms passed to the library directly.
+    """
+    from policyengine_uk import Microsimulation
+
+    return Microsimulation(dataset=DATASET_URL, reform=reform)
+
+
+def _hh_array(sim, var: str) -> np.ndarray:
+    """Pull a household-level variable as a numpy array."""
+    series = sim.calculate(var, YEAR)
+    return series.values if hasattr(series, "values") else np.asarray(series)
+
+
+def _person_array(sim, var: str) -> np.ndarray:
+    series = sim.calculate(var, YEAR, map_to="person")
+    return series.values if hasattr(series, "values") else np.asarray(series)
+
+
+def _benunit_array(sim, var: str) -> np.ndarray:
+    series = sim.calculate(var, YEAR, map_to="benunit")
+    return series.values if hasattr(series, "values") else np.asarray(series)
+
+
+def _weights(sim) -> np.ndarray:
+    """Household weights as a raw numpy array (skip the MicroSeries)."""
+    series = sim.calculate("household_weight", YEAR, unweighted=True)
+    return series.values if hasattr(series, "values") else np.asarray(series)
 
 
 def run_baseline():
     """Run baseline simulation and return dict of household-level arrays."""
-    sim = Microsimulation(dataset=DATASET_URL)
+    sim = _build_simulation()
 
-    elec = _vals(sim, "electricity_consumption")
-    gas = _vals(sim, "gas_consumption")
-    energy = elec + gas  # consistent total
+    elec = _hh_array(sim, "electricity_consumption")
+    gas = _hh_array(sim, "gas_consumption")
+    energy = elec + gas
 
-    income = _vals(sim, "household_net_income")
-    weights = _vals(sim, "household_weight", unweighted=True)
-    decile = _vals(sim, "household_income_decile", unweighted=True)
-    region = _vals(sim, "region")
-    tenure = _vals(sim, "tenure_type")
-    accomm = _vals(sim, "accommodation_type")
+    income = _hh_array(sim, "household_net_income")
+    weights = _weights(sim)
+    decile = _hh_array(sim, "household_income_decile")
+    region = _hh_array(sim, "region")
+    tenure = _hh_array(sim, "tenure_type")
+    accomm = _hh_array(sim, "accommodation_type")
 
-    # Household type: family_type (benunit) + pensioner status (person)
     hh_type = _build_household_type(sim)
 
-    # Country/nation derived from region
-    country_arr = np.array([REGION_TO_COUNTRY.get(str(r), "UNKNOWN") for r in region])
+    country_arr = (
+        pd.Series(region)
+        .astype(str)
+        .map(REGION_TO_COUNTRY)
+        .fillna("UNKNOWN")
+        .to_numpy()
+    )
 
     return {
         "sim": sim,
@@ -53,73 +99,105 @@ def run_baseline():
     }
 
 
-def _build_household_type(sim):
-    """Classify each household into type based on family_type + pensioner status."""
-    from collections import defaultdict
+def _build_household_type(sim) -> np.ndarray:
+    """Classify each household into type based on family_type + pensioner status.
 
-    hh_id_hh = _vals(sim, "household_id")
-    hh_id_bu = _vals(sim, "household_id", map_to="benunit")
-    hh_id_person = _vals(sim, "household_id", map_to="person")
-    ft = _vals(sim, "family_type")
-    is_sp = _vals(sim, "is_SP_age")
+    ``family_type`` is held at benunit level; ``is_SP_age`` at person
+    level. Aggregate both up to the household via pandas groupby, keeping
+    the household frame's row order.
+    """
+    hh_ids = _hh_array(sim, "household_id")
 
-    # First benunit's family_type per household
-    hh_ft = {}
-    for i, hid in enumerate(hh_id_bu):
-        if hid not in hh_ft:
-            hh_ft[hid] = str(ft[i])
+    # First benunit's family_type per household.
+    bu_frame = pd.DataFrame(
+        {
+            "household_id": _benunit_array(sim, "household_id"),
+            "family_type": _benunit_array(sim, "family_type").astype(str),
+        }
+    )
+    first_ft = bu_frame.groupby("household_id")["family_type"].first()
 
-    # Any person at state pension age -> pensioner household
-    hh_pensioner = defaultdict(bool)
-    for i, hid in enumerate(hh_id_person):
-        if is_sp[i]:
-            hh_pensioner[hid] = True
+    # Any person at SP age → pensioner household.
+    person_frame = pd.DataFrame(
+        {
+            "household_id": _person_array(sim, "household_id"),
+            "is_sp": _person_array(sim, "is_SP_age").astype(bool),
+        }
+    )
+    any_sp = person_frame.groupby("household_id")["is_sp"].any()
 
-    categories = []
-    for hid in hh_id_hh:
-        ftype = hh_ft.get(hid, "UNKNOWN")
-        is_pen = hh_pensioner[hid]
-        if ftype == "SINGLE" and is_pen:
-            categories.append("SINGLE_PENSIONER")
-        elif ftype == "COUPLE_NO_CHILDREN" and is_pen:
-            categories.append("COUPLE_PENSIONER")
-        elif ftype == "SINGLE":
-            categories.append("SINGLE_WORKING_AGE")
-        elif ftype == "COUPLE_NO_CHILDREN":
-            categories.append("COUPLE_NO_CHILDREN")
-        elif ftype == "COUPLE_WITH_CHILDREN":
-            categories.append("COUPLE_WITH_CHILDREN")
-        elif ftype == "LONE_PARENT":
-            categories.append("LONE_PARENT")
-        else:
-            categories.append("OTHER")
+    ft = pd.Series(hh_ids).map(first_ft).fillna("UNKNOWN").astype(str).to_numpy()
+    is_pen = pd.Series(hh_ids).map(any_sp).fillna(False).astype(bool).to_numpy()
 
-    return np.array(categories)
+    categories = np.full(len(hh_ids), "OTHER", dtype=object)
+    categories[(ft == "SINGLE") & is_pen] = "SINGLE_PENSIONER"
+    categories[(ft == "COUPLE_NO_CHILDREN") & is_pen] = "COUPLE_PENSIONER"
+    categories[(ft == "SINGLE") & ~is_pen] = "SINGLE_WORKING_AGE"
+    categories[(ft == "COUPLE_NO_CHILDREN") & ~is_pen] = "COUPLE_NO_CHILDREN"
+    categories[ft == "COUPLE_WITH_CHILDREN"] = "COUPLE_WITH_CHILDREN"
+    categories[ft == "LONE_PARENT"] = "LONE_PARENT"
+    return categories.astype(str)
+
+
+def build_reform_simulation(reform: dict):
+    """Construct a reformed Simulation. Reform dict uses the same parameter
+    paths and date-keyed values as the raw ``policyengine-uk`` reforms.
+
+    Example:
+
+    .. code-block:: python
+
+        sim = build_reform_simulation({
+            "gov.ofgem.energy_price_cap": {"2026-01-01": 2625},
+        })
+    """
+    return _build_simulation(reform=reform)
 
 
 def filter_by_country(data, country):
     """Filter all household arrays to a single country/nation.
 
     country: "UK" (no filter), "ENGLAND", "SCOTLAND", "WALES", "NORTHERN_IRELAND"
-    Returns a new data dict with filtered arrays and a 'country_mask' key
-    containing the boolean mask against the original arrays.
+    Returns a new data dict with filtered arrays, a ``country_mask`` key
+    containing the boolean mask against the original arrays, and a
+    ``country_label`` string naming the filter.
+
+    ``data["country"]`` stays a per-household array so downstream
+    groupby / masking by country works the same shape in filtered and
+    unfiltered data dicts.
     """
     country = country.upper()
     if country == "UK":
         mask = np.ones(len(data["weights"]), dtype=bool)
-        return {**data, "country_mask": mask, "country": country}
+        return {**data, "country_mask": mask, "country_label": country}
 
-    # Map each household's region to its country
-    hh_country = np.array([REGION_TO_COUNTRY.get(str(r), "") for r in data["region"]])
+    hh_country = (
+        pd.Series(data["region"])
+        .astype(str)
+        .map(REGION_TO_COUNTRY)
+        .fillna("")
+        .to_numpy()
+    )
     mask = hh_country == country
 
     filtered = {
         "sim": data["sim"],  # keep original sim for policy reform lookups
         "country_mask": mask,
-        "country": country,
+        "country_label": country,
     }
-    for key in ("elec", "gas", "energy", "income", "weights",
-                "decile", "region", "tenure", "accomm", "hh_type"):
+    for key in (
+        "elec",
+        "gas",
+        "energy",
+        "income",
+        "weights",
+        "decile",
+        "region",
+        "tenure",
+        "accomm",
+        "hh_type",
+        "country",
+    ):
         filtered[key] = data[key][mask]
     return filtered
 

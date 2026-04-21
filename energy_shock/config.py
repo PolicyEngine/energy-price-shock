@@ -5,8 +5,15 @@ YEAR = 2026
 COUNTRY = "UK"
 
 ENGLISH_REGIONS = {
-    "EAST_MIDLANDS", "EAST_OF_ENGLAND", "LONDON", "NORTH_EAST",
-    "NORTH_WEST", "SOUTH_EAST", "SOUTH_WEST", "WEST_MIDLANDS", "YORKSHIRE",
+    "EAST_MIDLANDS",
+    "EAST_OF_ENGLAND",
+    "LONDON",
+    "NORTH_EAST",
+    "NORTH_WEST",
+    "SOUTH_EAST",
+    "SOUTH_WEST",
+    "WEST_MIDLANDS",
+    "YORKSHIRE",
 }
 
 REGION_TO_COUNTRY = {r: "ENGLAND" for r in ENGLISH_REGIONS}
@@ -28,32 +35,46 @@ PRICE_SCENARIOS = {
     "Q1 2023 peak": 4_279,
 }
 
-# Short-run price elasticity of household energy demand
-# NEED 2022-23 data: consumption fell ~10-15% when prices roughly doubled
-# Consistent with Levell et al. (2025) and Kilian (2008) estimates
-SHORT_RUN_ELASTICITY = -0.15
+# Income-differentiated short-run price elasticities of household energy
+# demand. The D1 (−0.64) and D10 (−0.11) endpoints are reported by
+# Priesmann & Praktiknjo (2025) for German gas; the interior values
+# (D2-D9) are our own linear interpolation between those endpoints and
+# are not a result of that paper. A flat or smoothly monotone pattern
+# between endpoints is consistent with Priesmann's reported trend but
+# any specific interior shape is a modelling choice.
+#
+# The behavioural response for each household is computed from its own
+# decile's ε rather than a population-mean value, so the progressivity
+# of the shock is captured rather than averaged away. A uniform value
+# (e.g. the −0.15 Labandeira et al. 2017 meta-analytic mean) would
+# understate how sharply low-income households are forced to cut and
+# overstate the bill-saving higher-income households achieve.
+#
+# For reporting headline aggregate statistics ("average household gives
+# up X% of consumption") the weighted mean of these decile-specific
+# values is used — computed at output time rather than hardcoded.
+#
+# CAVEAT: the constant-elasticity form is applied out to +161 %
+# (Q1 2023 peak scenario), well outside the ±10-20 % band over which
+# the underlying elasticity studies are validated. Treat the extreme-
+# shock scenarios as illustrative rather than predictive.
+ELASTICITY_BY_DECILE = {d: -0.64 + (d - 1) * (-0.11 - -0.64) / 9 for d in range(1, 11)}
 
 # Policy response parameters (applied to severe shock)
 SHOCK_CAP = PRICE_SCENARIOS["+60%"]
-EPG_TARGET = 2_500
 FLAT_TRANSFER = 400
 CT_REBATE = 300
 
 # Ofgem Q2 2026 unit rates (for kWh ↔ £ threshold conversions)
-ELEC_RATE = 24.70 / 100   # £/kWh
-GAS_RATE = 5.70 / 100     # £/kWh
+ELEC_RATE = 24.70 / 100  # £/kWh
+GAS_RATE = 5.70 / 100  # £/kWh
 
-# NEG: median electricity consumption threshold
+# NEG electricity threshold per Bangham (2026) Substack proposal: matches
+# Austria and the Netherlands' 2022 "first N kWh at the old price" relief
+# schemes. 2,900 kWh is close to but not identical to the Ofgem TDCV for
+# electricity (≈ 2,700 kWh for the medium-consumption band).
 NEG_ELEC_KWH = 2_900
 NEG_ELEC_SPEND = NEG_ELEC_KWH * ELEC_RATE
 
-# Winter Fuel Payment amounts
-WFA_HIGHER = 500
-WFA_LOWER = 350
-
-# Rising block tariff discount rate
-RBT_DISCOUNT_RATE = 0.50
-
 # HuggingFace dataset URL for PE UK data
 DATASET_URL = "hf://policyengine/policyengine-uk-data/enhanced_frs_2023_24.h5"
-
