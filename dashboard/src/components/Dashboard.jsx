@@ -85,9 +85,10 @@ const POLICY_META = {
   ct_rebate: {
     fullName: "Council tax band rebate (£300 for bands A–D, England only)",
     description: <>
-      An England-only £300 payment to households in council tax bands A through D. The 2022 Council Tax Rebate was £150; this dashboard models £300.<a href="#fn-10"><sup>10</sup></a>
-      PolicyEngine takes council tax bands directly from the Family Resources Survey and calibrates household weights so the band distribution matches VOA administrative counts by region. Bands A–D cover roughly 63% of English
-      dwellings.<a href="#fn-11"><sup>11</sup></a>
+      An England-only £300 payment to households in council tax bands A through D, mirroring the geographic scope of the 2022 Council Tax Rebate.<a href="#fn-10"><sup>10</sup></a>
+      The 2022 policy paid £150; this dashboard models £300. PolicyEngine takes council tax bands from the Family Resources Survey;
+      the modelled A–D share reaches households above the VOA administrative headline of roughly 63% of English dwellings,<a href="#fn-11"><sup>11</sup></a>
+      because PolicyEngine's FRS-based band imputation is coarser than the VOA postcode-level property record, so the modelled coverage should be read as an upper bound.
     </>,
   },
   bn_transfer: {
@@ -1204,7 +1205,7 @@ function MethodologySection() {
         <ul className="policy-bullet-list">
           <li>Under <strong>no policy intervention</strong>, a price cap rise adds between <strong>£{s10.avg_hh_hit_yr.toLocaleString()}/year</strong> ({s10.name} scenario) and <strong>£{sMax.avg_hh_hit_yr.toLocaleString()}/year</strong> ({sMax.name} scenario) to the average household energy bill.</li>
           <li>A <strong>flat £{flatAmt} transfer</strong> costs <strong>£{policies.flat_transfer.exchequer_cost_bn}bn</strong> but covers less than half the <strong>£{s60hit.toLocaleString()}/year</strong> average hit under a {s60.name} scenario.</li>
-          <li>A <strong>council tax band rebate</strong> (£{ctAmt} for bands A–D) costs <strong>£{policies.ct_rebate.exchequer_cost_bn}bn</strong> and delivers <strong>£{ctAvg.toLocaleString()}/year</strong> on average, leaving around <strong>£{(s60hit - ctAvg).toLocaleString()}/year</strong> residual under a {s60.name} scenario.</li>
+          <li>A <strong>council tax band rebate</strong> (£{ctAmt} for bands A–D, England only) costs <strong>£{policies.ct_rebate.exchequer_cost_bn}bn</strong> and delivers <strong>£{ctAvg.toLocaleString()}/year</strong> on average across the UK, leaving around <strong>£{(s60hit - ctAvg).toLocaleString()}/year</strong> residual under a {s60.name} scenario.</li>
           <li>A <strong>shock-matching flat transfer</strong> fully offsets the average household hit but costs the exchequer <strong>£{s10cost}bn</strong> for a {s10.name} scenario.</li>
         </ul>
       </div>

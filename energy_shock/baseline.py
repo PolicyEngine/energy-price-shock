@@ -158,13 +158,18 @@ def filter_by_country(data, country):
     """Filter all household arrays to a single country/nation.
 
     country: "UK" (no filter), "ENGLAND", "SCOTLAND", "WALES", "NORTHERN_IRELAND"
-    Returns a new data dict with filtered arrays and a 'country_mask' key
-    containing the boolean mask against the original arrays.
+    Returns a new data dict with filtered arrays, a ``country_mask`` key
+    containing the boolean mask against the original arrays, and a
+    ``country_label`` string naming the filter.
+
+    ``data["country"]`` stays a per-household array so downstream
+    groupby / masking by country works the same shape in filtered and
+    unfiltered data dicts.
     """
     country = country.upper()
     if country == "UK":
         mask = np.ones(len(data["weights"]), dtype=bool)
-        return {**data, "country_mask": mask, "country": country}
+        return {**data, "country_mask": mask, "country_label": country}
 
     hh_country = (
         pd.Series(data["region"])
@@ -178,7 +183,7 @@ def filter_by_country(data, country):
     filtered = {
         "sim": data["sim"],  # keep original sim for policy reform lookups
         "country_mask": mask,
-        "country": country,
+        "country_label": country,
     }
     for key in (
         "elec",
@@ -191,6 +196,7 @@ def filter_by_country(data, country):
         "tenure",
         "accomm",
         "hh_type",
+        "country",
     ):
         filtered[key] = data[key][mask]
     return filtered

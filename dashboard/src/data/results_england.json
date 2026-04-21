@@ -1892,8 +1892,8 @@
       ]
     },
     "ct_rebate": {
-      "name": "CT band rebate",
-      "description": "300 for bands A-D",
+      "name": "CT band rebate (England only)",
+      "description": "\u00a3300 for bands A-D, England only (mirrors the 2022 Council Tax Rebate)",
       "exchequer_cost_bn": 6.5,
       "avg_hh_benefit": 242,
       "deciles": [

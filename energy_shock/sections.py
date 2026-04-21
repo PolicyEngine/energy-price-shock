@@ -495,8 +495,8 @@ def policy_ct_rebate(data):
         )
     w = data["weights"]
     return {
-        "name": "CT band rebate",
-        "description": f"{CT_REBATE} for bands A-D",
+        "name": "CT band rebate (England only)",
+        "description": f"£{CT_REBATE} for bands A-D, England only (mirrors the 2022 Council Tax Rebate)",
         "exchequer_cost_bn": round(float(np.sum(rebate_arr * w)) / 1e9, 1),
         "avg_hh_benefit": round(float(np.average(rebate_arr, weights=w))),
         "deciles": deciles,

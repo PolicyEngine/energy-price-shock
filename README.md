@@ -7,7 +7,7 @@ How an energy price increase hits UK households, which groups are most affected,
 This project models the distributional impact of energy price shocks on UK households and evaluates policy responses:
 
 1. **Flat transfer** — £400 per household
-2. **Council tax band rebate** — £300 for bands A–D
+2. **Council tax band rebate** — £300 for bands A–D, England only (mirrors the 2022 Council Tax Rebate's geographic scope)
 3. **Shock-matching transfer** — flat payment equal to the average shock
 4. **Cap-freeze subsidy** — bills held at the pre-shock cap, government subsidises the full increase
 5. **National Energy Guarantee (NEG)** — subsidises the first 2,900 kWh of electricity
