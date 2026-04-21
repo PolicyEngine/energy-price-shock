@@ -721,17 +721,36 @@ function PolicyNetSection() {
   }, [selectedNet, country]);
 
   // === KPI computation (independent of breakdown) ===
+  // Shock-matching (bn_transfer), NEG, and the fixed-amount policies pay
+  // amounts that do not depend on the behavioural response toggle —
+  // shock-matching is a flat payment pegged to the static average shock,
+  // NEG is indexed to static baseline consumption, and flat transfer /
+  // CT rebate are fixed per-household. Only the cap-freeze subsidy
+  // (bn_epg) reimburses each household's *actual* bill increase, so its
+  // benefit and exchequer cost scale with the static vs behavioural hit.
+  const avgBehavShock = behav.behavioural_avg_extra;
+  const avgStaticShock = scenario.avg_hh_hit_yr;
+  const behavRatio = avgBehavShock / avgStaticShock;
+
   let avgBenefit = 0, exchequerCost = 0;
-  if (selectedNet === "bn_transfer") { avgBenefit = scenario.avg_hh_hit_yr; exchequerCost = Math.round(scenario.avg_hh_hit_yr * nHH / 100) / 10; }
-  else if (selectedNet === "bn_epg") { avgBenefit = scenario.avg_hh_hit_yr; exchequerCost = scenario.total_cost_bn; }
-  else if (selectedNet === "neg") { const s = neg.scenarios[selectedScenario]; avgBenefit = s.avg_benefit; exchequerCost = s.exchequer_cost_bn; }
-  else {
+  if (selectedNet === "bn_transfer") {
+    avgBenefit = avgStaticShock;
+    exchequerCost = Math.round(avgStaticShock * nHH / 100) / 10;
+  } else if (selectedNet === "bn_epg") {
+    const shockForMode = policyResponse === "behavioural" ? avgBehavShock : avgStaticShock;
+    avgBenefit = shockForMode;
+    exchequerCost = policyResponse === "behavioural"
+      ? Math.round(scenario.total_cost_bn * behavRatio * 10) / 10
+      : scenario.total_cost_bn;
+  } else if (selectedNet === "neg") {
+    const s = neg.scenarios[selectedScenario];
+    avgBenefit = s.avg_benefit;
+    exchequerCost = s.exchequer_cost_bn;
+  } else {
     const p = policies[selectedNet];
     avgBenefit = p.avg_hh_benefit;
     exchequerCost = p.exchequer_cost_bn;
   }
-  const avgStaticShock = scenario.avg_hh_hit_yr;
-  const avgBehavShock = behav.behavioural_avg_extra;
 
   // === Chart data computation ===
   let barData, xLabel;
