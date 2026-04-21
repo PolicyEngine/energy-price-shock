@@ -1,6 +1,8 @@
 """
 All analysis sections: baseline summary, shocks, behavioural,
-policies (A–F), electricity/gas split, regional, tenure, NEG, gas-only cap.
+flat-transfer and council-tax-rebate policies, post-policy residual
+extra cost, electricity/gas split, tenure, household type, country,
+NEG, gas-only cap.
 
 Every function takes the shared `data` dict from baseline.run_baseline().
 Energy = electricity + gas everywhere.
@@ -20,14 +22,11 @@ from .config import (
     CURRENT_CAP,
     ELASTICITY_BY_DECILE,
     ENGLISH_REGIONS,
-    EPG_TARGET,
     FLAT_TRANSFER,
     NEG_ELEC_KWH,
     NEG_ELEC_SPEND,
     PRICE_SCENARIOS,
     SHOCK_CAP,
-    WFA_HIGHER,
-    WFA_LOWER,
     YEAR,
 )
 
@@ -354,45 +353,6 @@ def behavioural_responses(data):
     return results_list
 
 
-# ── 5. Policy A: EPG ────────────────────────────────────────────────────
-
-
-def policy_epg(data):
-    energy_by_dec = decile_means(data, "energy")
-    shock_pct = (SHOCK_CAP - CURRENT_CAP) / CURRENT_CAP
-    cmask = data.get("country_mask")
-    sim = build_reform_simulation(
-        {
-            "gov.ofgem.energy_price_cap": {"2026-01-01": SHOCK_CAP},
-            "gov.ofgem.energy_price_guarantee": {"2026-01-01": EPG_TARGET},
-        }
-    )
-    subsidy_arr = _hh_array(sim, "epg_subsidy")
-    if cmask is not None:
-        subsidy_arr = subsidy_arr[cmask]
-    by_decile = _calc_decile_table(sim, "epg_subsidy", cmask)
-
-    deciles = []
-    for d in range(1, 11):
-        val = float(by_decile[d])
-        shock = energy_by_dec[d] * shock_pct
-        deciles.append(
-            {
-                "decile": d,
-                "payment": round(val),
-                "shock_offset_pct": round(val / shock * 100) if shock > 0 else 0,
-            }
-        )
-    w = data["weights"]
-    return {
-        "name": "EPG subsidy",
-        "description": f"Energy Price Guarantee at {EPG_TARGET}",
-        "exchequer_cost_bn": round(float(np.sum(subsidy_arr * w)) / 1e9, 1),
-        "avg_hh_benefit": round(float(np.average(subsidy_arr, weights=w))),
-        "deciles": deciles,
-    }
-
-
 # ── 6. Policy B: Flat transfer ──────────────────────────────────────────
 
 
@@ -493,229 +453,6 @@ def policy_ct_rebate(data):
         "avg_hh_benefit": round(float(np.average(rebate_arr, weights=w))),
         "deciles": deciles,
     }
-
-
-# ── 8. Policy D: Expanded WFA ───────────────────────────────────────────
-
-
-def policy_wfa(data):
-    cmask = data.get("country_mask")
-    sim = build_reform_simulation(
-        {
-            "gov.dwp.winter_fuel_payment.eligibility.require_benefits": {
-                "2026-01-01": False
-            },
-            "gov.dwp.winter_fuel_payment.amount.higher": {"2026-01-01": WFA_HIGHER},
-            "gov.dwp.winter_fuel_payment.amount.lower": {"2026-01-01": WFA_LOWER},
-        }
-    )
-    reformed_arr = _hh_array(sim, "winter_fuel_allowance")
-    baseline_arr = _hh_array(data["sim"], "winter_fuel_allowance")
-    if cmask is not None:
-        reformed_arr = reformed_arr[cmask]
-        baseline_arr = baseline_arr[cmask]
-    w = data["weights"]
-    extra_cost = float(np.sum(reformed_arr * w)) - float(np.sum(baseline_arr * w))
-
-    by_decile = _calc_decile_table(sim, "winter_fuel_allowance", cmask)
-    bl_by_decile = _calc_decile_table(data["sim"], "winter_fuel_allowance", cmask)
-
-    deciles = []
-    for d in range(1, 11):
-        val = float(by_decile[d])
-        bl = float(bl_by_decile[d])
-        deciles.append(
-            {
-                "decile": d,
-                "payment": round(val),
-                "extra_vs_baseline": round(val - bl),
-            }
-        )
-    return {
-        "name": "Expanded winter fuel",
-        "description": f"Universal for pensioners, {WFA_LOWER}/{WFA_HIGHER}",
-        "exchequer_cost_bn": round(extra_cost / 1e9, 1),
-        "total_spending_bn": round(float(np.sum(reformed_arr * w)) / 1e9, 1),
-        "avg_hh_benefit": round(float(np.average(reformed_arr, weights=w))),
-        "deciles": deciles,
-    }
-
-
-# ── 9. Policy E: Combined ───────────────────────────────────────────────
-
-
-def policy_combined(data):
-    income_by_dec = decile_means(data, "income")
-    cmask = data.get("country_mask")
-    w = data["weights"]
-    sim = build_reform_simulation(
-        {
-            "gov.ofgem.energy_price_cap": {"2026-01-01": SHOCK_CAP},
-            "gov.ofgem.energy_price_guarantee": {"2026-01-01": EPG_TARGET},
-            "gov.treasury.energy_bills_rebate.energy_bills_credit": {
-                "2026-01-01": FLAT_TRANSFER
-            },
-            "gov.treasury.energy_bills_rebate.council_tax_rebate.amount": {
-                "2026-01-01": CT_REBATE
-            },
-            "gov.dwp.winter_fuel_payment.eligibility.require_benefits": {
-                "2026-01-01": False
-            },
-            "gov.dwp.winter_fuel_payment.amount.higher": {"2026-01-01": WFA_HIGHER},
-            "gov.dwp.winter_fuel_payment.amount.lower": {"2026-01-01": WFA_LOWER},
-        }
-    )
-
-    def _arr(values):
-        return values[cmask] if cmask is not None else values
-
-    epg = _arr(_hh_array(sim, "epg_subsidy"))
-    flat = _arr(_hh_array(sim, "ebr_energy_bills_credit"))
-    ct = _arr(_hh_array(sim, "ebr_council_tax_rebate"))
-    # CT rebate is England-only in reality; zero non-English rows.
-    ct = np.where(_england_mask_unfiltered(sim, cmask), ct, 0.0)
-    wfa = _arr(_hh_array(sim, "winter_fuel_allowance"))
-    wfa_baseline = _arr(_hh_array(data["sim"], "winter_fuel_allowance"))
-    net = _arr(_hh_array(sim, "household_net_income"))
-
-    total_cost = (
-        float(np.sum(epg * w))
-        + float(np.sum(flat * w))
-        + float(np.sum(ct * w))
-        + (float(np.sum(wfa * w)) - float(np.sum(wfa_baseline * w)))
-    )
-
-    net_by_decile = _calc_decile_table(sim, "household_net_income", cmask)
-    bl_net = _arr(_hh_array(data["sim"], "household_net_income"))
-    deciles = []
-    for d in range(1, 11):
-        change = float(net_by_decile[d]) - income_by_dec[d]
-        inc = income_by_dec[d]
-        deciles.append(
-            {
-                "decile": d,
-                "net_income_change": round(change),
-                "pct_change": round(change / inc * 100, 2) if inc > 0 else 0,
-            }
-        )
-
-    return {
-        "name": "Combined package",
-        "description": "EPG + flat transfer + CT rebate + expanded WFA",
-        "exchequer_cost_bn": round(total_cost / 1e9, 1),
-        "component_costs_bn": {
-            "epg": round(float(np.sum(epg * w)) / 1e9, 1),
-            "flat_transfer": round(float(np.sum(flat * w)) / 1e9, 1),
-            "ct_rebate": round(float(np.sum(ct * w)) / 1e9, 1),
-            "extra_wfa": round(
-                (float(np.sum(wfa * w)) - float(np.sum(wfa_baseline * w))) / 1e9, 1
-            ),
-        },
-        "avg_net_income_change": round(
-            float(np.average(net, weights=w)) - float(np.average(bl_net, weights=w))
-        ),
-        "deciles": deciles,
-    }
-
-
-# ── 10. Policy net position ─────────────────────────────────────────────
-
-
-def policy_net_position(data):
-    energy_by_dec = decile_means(data, "energy")
-    income_by_dec = decile_means(data, "income")
-    mean_energy = weighted_mean(data["energy"], data["weights"])
-    shock_pct = (SHOCK_CAP - CURRENT_CAP) / CURRENT_CAP
-    eps_hh = _epsilon_per_household(data)
-    behavioural_factor_hh = _behavioural_factor_hh(eps_hh, shock_pct)
-    behavioural_hit_hh = data["energy"] * (behavioural_factor_hh - 1)
-    mean_behavioural_hit = float(weighted_mean(behavioural_hit_hh, data["weights"]))
-    cmask = data.get("country_mask")
-    w = data["weights"]
-
-    policies_config = {
-        "epg": {
-            "name": "EPG subsidy",
-            "reform": {
-                "gov.ofgem.energy_price_cap": {"2026-01-01": SHOCK_CAP},
-                "gov.ofgem.energy_price_guarantee": {"2026-01-01": EPG_TARGET},
-            },
-            "variable": "epg_subsidy",
-        },
-        "flat_transfer": {
-            "name": "Flat transfer",
-            "reform": {
-                "gov.treasury.energy_bills_rebate.energy_bills_credit": {
-                    "2026-01-01": FLAT_TRANSFER
-                },
-            },
-            "variable": "ebr_energy_bills_credit",
-        },
-        "ct_rebate": {
-            "name": "CT band rebate",
-            "reform": {
-                "gov.treasury.energy_bills_rebate.council_tax_rebate.amount": {
-                    "2026-01-01": CT_REBATE
-                },
-            },
-            "variable": "ebr_council_tax_rebate",
-        },
-    }
-
-    results_dict = {}
-    for key, cfg in policies_config.items():
-        sim = build_reform_simulation(cfg["reform"])
-        benefit_arr = _hh_array(sim, cfg["variable"])
-        if cmask is not None:
-            benefit_arr = benefit_arr[cmask]
-        # England-only gate for the CT rebate (matches other call sites).
-        if key == "ct_rebate":
-            eng_mask = _england_mask_unfiltered(sim, cmask)
-            benefit_arr = np.where(eng_mask, benefit_arr, 0.0)
-        by_decile = _calc_decile_table(sim, cfg["variable"], cmask)
-
-        deciles = []
-        for d in range(1, 11):
-            mask = data["decile"] == d
-            e = energy_by_dec[d]
-            income_by_dec[d]
-            static_shock = e * shock_pct
-            behavioural_shock = float(weighted_mean(behavioural_hit_hh, w, mask))
-            policy_benefit = float(by_decile[d])
-            net_static = static_shock - policy_benefit
-            net_behavioural = behavioural_shock - policy_benefit
-            deciles.append(
-                {
-                    "decile": d,
-                    "baseline_energy": round(e),
-                    "shock_extra_static": round(static_shock),
-                    "shock_extra_behavioural": round(behavioural_shock),
-                    "policy_benefit": round(policy_benefit),
-                    "net_cost_static": round(max(net_static, 0)),
-                    "net_cost_behavioural": round(max(net_behavioural, 0)),
-                    "offset_pct_static": round(policy_benefit / static_shock * 100)
-                    if static_shock > 0
-                    else 0,
-                    "offset_pct_behavioural": round(
-                        policy_benefit / behavioural_shock * 100
-                    )
-                    if behavioural_shock > 0
-                    else 0,
-                }
-            )
-
-        avg_benefit = float(np.average(benefit_arr, weights=w))
-        results_dict[key] = {
-            "name": cfg["name"],
-            "exchequer_cost_bn": round(float(np.sum(benefit_arr * w)) / 1e9, 1),
-            "avg_benefit": round(avg_benefit),
-            "avg_shock_static": round(mean_energy * shock_pct),
-            "avg_shock_behavioural": round(mean_behavioural_hit),
-            "avg_net_cost_static": round(mean_energy * shock_pct - avg_benefit),
-            "avg_net_cost_behavioural": round(mean_behavioural_hit - avg_benefit),
-            "deciles": deciles,
-        }
-    return results_dict
 
 
 def _grouped_post_policy(
