@@ -676,6 +676,10 @@ def policy_net_position(data):
         benefit_arr = _hh_array(sim, cfg["variable"])
         if cmask is not None:
             benefit_arr = benefit_arr[cmask]
+        # England-only gate for the CT rebate (matches other call sites).
+        if key == "ct_rebate":
+            eng_mask = _england_mask_unfiltered(sim, cmask)
+            benefit_arr = np.where(eng_mask, benefit_arr, 0.0)
         by_decile = _calc_decile_table(sim, cfg["variable"], cmask)
 
         deciles = []
