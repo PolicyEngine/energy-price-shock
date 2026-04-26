@@ -13,6 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: astral-sh/setup-uv@v8.1.0
+        with:
+          save-cache: false
       - name: Ruff format check
         run: uvx ruff format --check .
       - name: Ruff lint
@@ -28,6 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: astral-sh/setup-uv@v8.1.0
+        with:
+          save-cache: false
       - name: Create venv and install
         run: |
           uv venv --python ${{ matrix.python-version }} .venv
