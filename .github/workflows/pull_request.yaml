@@ -40,7 +40,7 @@ jobs:
         run: .venv/bin/pytest tests/ -v
 
   dashboard-build:
-    name: Dashboard build
+    name: Frontend build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -48,14 +48,12 @@ jobs:
         with:
           bun-version: latest
       - name: Install deps
-        working-directory: dashboard
         run: bun install --frozen-lockfile
       - name: Build
-        working-directory: dashboard
         run: bun run build
 
   dashboard-lint:
-    name: Dashboard lint
+    name: Frontend lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -63,8 +61,6 @@ jobs:
         with:
           bun-version: latest
       - name: Install deps
-        working-directory: dashboard
         run: bun install --frozen-lockfile
       - name: Lint
-        working-directory: dashboard
         run: bun run lint

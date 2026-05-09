@@ -8,12 +8,12 @@ build/
 
 # Node
 node_modules/
-dashboard/dist/
-dashboard/.vite/
-dashboard/.next/
-dashboard/out/
-dashboard/*.tsbuildinfo
-dashboard/next-env.d.ts
+dist/
+.vite/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
 
 # Environment
 .env

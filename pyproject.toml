@@ -55,9 +55,8 @@ Issues = "https://github.com/PolicyEngine/energy-price-shock/issues"
 packages = ["energy_shock"]
 
 # Keep the sdist lean: ship only the Python package, tests, README, LICENSE,
-# and pyproject.toml. The ``dashboard/`` subtree (bundled data, React app,
-# node artefacts) is a consumer of the package, not part of it, and would
-# otherwise inflate the source distribution by ~10 MB.
+# and pyproject.toml. The React frontend is a consumer of the package, not part
+# of it, and would otherwise inflate the source distribution.
 [tool.hatch.build.targets.sdist]
 include = [
     "energy_shock/**/*.py",

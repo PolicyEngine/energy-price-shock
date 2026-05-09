@@ -23,7 +23,7 @@ from .config import (
     YEAR,
 )
 
-OUTPUT_DIR = Path(__file__).parent.parent / "dashboard" / "src" / "data"
+OUTPUT_DIR = Path(__file__).parent.parent / "src" / "data"
 
 VALID_COUNTRIES = ["UK", "ENGLAND", "SCOTLAND", "WALES", "NORTHERN_IRELAND"]
 

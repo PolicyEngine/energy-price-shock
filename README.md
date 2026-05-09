@@ -35,16 +35,14 @@ energy-price-shock/
 │   ├── baseline.py         # Shared baseline simulation and helpers
 │   ├── sections.py         # All analysis sections (shocks, policies, breakdowns)
 │   └── generate.py         # Orchestrates analysis, outputs JSON
-├── dashboard/              # React frontend — reads and displays results
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Dashboard.jsx
-│   │   │   └── Dashboard.css
-│   │   ├── data/           # Generated JSON results (per country)
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── package.json
-│   └── vite.config.js
+├── src/                    # Next.js frontend — reads and displays results
+│   ├── app/
+│   ├── components/
+│   │   ├── Dashboard.jsx
+│   │   └── Dashboard.css
+│   └── data/               # Generated JSON results (per country)
+├── package.json
+├── next.config.ts
 ├── papers/                 # Reference PDFs
 └── pyproject.toml
 ```
@@ -62,7 +60,7 @@ python -m energy_shock                    # UK only
 python -m energy_shock --all-countries    # UK + England, Scotland, Wales, N. Ireland
 ```
 
-This runs the PolicyEngine UK microsimulation directly via [`policyengine-uk`](https://github.com/PolicyEngine/policyengine-uk) and outputs JSON files to `dashboard/src/data/`. Datasets are fetched lazily from HuggingFace on first run (the private FRS repo requires `HUGGING_FACE_TOKEN`).
+This runs the PolicyEngine UK microsimulation directly via [`policyengine-uk`](https://github.com/PolicyEngine/policyengine-uk) and outputs JSON files to `src/data/`. Datasets are fetched lazily from HuggingFace on first run (the private FRS repo requires `HUGGING_FACE_TOKEN`).
 
 Requirements: `policyengine-uk>=2.88.0`, `microdf-python>=1.2.0`, `pandas>=2.0`, `numpy>=1.26` (Python 3.13+).
 
@@ -76,12 +74,11 @@ pytest tests/
 ### Dashboard
 
 ```bash
-cd dashboard
 bun install
 bun run dev
 ```
 
-Opens at `http://localhost:5173`.
+Opens at `http://localhost:3000`.
 
 ## Shock scenarios
 
@@ -131,5 +128,5 @@ exposed to a true unit-rate shock than the combined-cap model implies.
 ## Tech stack
 
 - **Analysis**: Python 3.13, `policyengine-uk` >= 2.88.0, microdf
-- **Dashboard**: React 18, Vite 5
+- **Dashboard**: Next.js 16, React 19
 - **Charts**: CSS-based vertical column charts (no charting library)
