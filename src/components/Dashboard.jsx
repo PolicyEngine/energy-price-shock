@@ -1491,9 +1491,13 @@ export default function Dashboard() {
 
   return (
     <div className="app-shell">
-      <main className="main-content">
-        <h1 className="page-title">Energy price shock: Distributional impact & policy options</h1>
+      <header className="title-row">
+        <div className="title-row-inner">
+          <h1>Energy price shock: Distributional impact & policy options</h1>
+        </div>
+      </header>
 
+      <main className="main-content">
         <p className="intro-text">
           Since February 2026, military strikes on Iran have disrupted Strait of Hormuz shipping
           (~20% of global oil and gas), increasing UK wholesale gas prices over 90%.<a href="#fn-1"><sup>1</sup></a>
