@@ -61,11 +61,6 @@ a:hover {
   opacity: 0.8;
 }
 
-.policyengine-site-header a,
-.policyengine-site-header a:hover {
-  opacity: 1;
-}
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
